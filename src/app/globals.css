@@ -1,0 +1,127 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --font-lexend: 'Lexend Exa', sans-serif;
+    --font-outfit: 'Outfit', sans-serif;
+    
+    /* Basic colors */
+    --white: #FFFFFF;
+    --gray: #6B7280;
+    --primary-light: #E9D5FF;
+    --primary-text: #111827;
+    --seconday-text: #4B5563;
+    --colors-heading: #111827;
+    
+    /* Optional border radius for custom components */
+    --radius: 0.5rem;
+  }
+
+  html {
+    @apply scroll-smooth;
+  }
+
+  body {
+    @apply bg-white text-gray-900 antialiased;
+  }
+}
+
+@layer components {
+  .gradient-text {
+    @apply bg-gradient-to-r from-[rgba(4,15,88,1)] to-[rgba(189,5,221,0.62)] bg-clip-text text-transparent;
+  }
+  
+  .hover-shine {
+    @apply relative overflow-hidden;
+  }
+  
+  .hover-shine::after {
+    @apply absolute top-0 -left-full w-full h-full bg-gradient-to-r from-transparent via-white/20 to-transparent transform transition-all duration-500 ease-out;
+    content: "";
+  }
+  
+  .hover-shine:hover::after {
+    @apply left-full;
+  }
+
+  .gradient-border {
+    @apply relative rounded-md;
+    background: linear-gradient(white, white) padding-box,
+                linear-gradient(to right, rgba(4,15,88,1), rgba(189,5,221,0.62)) border-box;
+    border: 2px solid transparent;
+  }
+
+  .section-padding {
+    @apply px-4 md:px-8 lg:px-16 xl:px-24;
+  }
+
+  /* Custom Scrollbar */
+  .custom-scrollbar {
+    scrollbar-width: thin;
+    scrollbar-color: #D1D5DB #F3F4F6;
+  }
+
+  .custom-scrollbar::-webkit-scrollbar {
+    @apply w-2;
+  }
+
+  .custom-scrollbar::-webkit-scrollbar-track {
+    @apply bg-[#F3F4F6];
+  }
+
+  .custom-scrollbar::-webkit-scrollbar-thumb {
+    @apply bg-[#D1D5DB] rounded-full;
+  }
+
+  .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+    @apply bg-[#9CA3AF];
+  }
+}
+
+.blur-gradient {
+  animation: pulse 8s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+@keyframes pulse {
+  0%, 100% {
+    opacity: 0.8;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.4;
+    transform: scale(0.95);
+  }
+}
+
+.mouse-parallax {
+  transition: transform 0.2s cubic-bezier(0.33, 1, 0.68, 1);
+}
+
+/* Scroll Animations */
+.fade-up {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+}
+
+.fade-up.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Mobile Menu Animation */
+.menu-slide {
+  transform: translateX(100%);
+  transition: transform 0.3s ease-in-out;
+}
+
+.menu-slide.open {
+  transform: translateX(0);
+}
+
+/* Apply custom scrollbar to html and body */
+html, body {
+  @apply custom-scrollbar;
+}
