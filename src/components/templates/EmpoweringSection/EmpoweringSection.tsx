@@ -64,10 +64,10 @@ export const EmpoweringSection = () => {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.5, delay: 0.1 * (index + 1) }}
-                className="bg-white rounded-lg p-6 shadow-sm hover:shadow-md transition-shadow duration-200"
+                className="backdrop-blur-sm bg-white/40 rounded-lg p-6 shadow-sm hover:shadow-md transition-all duration-200 border border-white/20"
               >
                 <div className="flex gap-4">
-                  <div className="w-12 h-12 rounded-full bg-[#F3F4F6] flex items-center justify-center flex-shrink-0">
+                  <div className="w-12 h-12 rounded-full bg-[#F3F4F6]/40 backdrop-blur-sm flex items-center justify-center flex-shrink-0">
                     <img src={feature.icon} alt="" className="w-6 h-6" />
                   </div>
                   <div>
