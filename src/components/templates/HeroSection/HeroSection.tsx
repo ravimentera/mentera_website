@@ -49,31 +49,37 @@ export const HeroSection = () => {
   }, [mouseX, mouseY]);
 
   return (
-    <section className="relative w-full min-h-screen bg-transparent overflow-hidden">
+    <section className="relative w-full min-h-[90vh] sm:min-h-screen bg-transparent overflow-hidden">
       {/* Hero Content */}
-      <div className="flex flex-col justify-center items-center max-w-[1200px] mx-auto px-4 sm:px-8 lg:px-16 pt-32 md:pt-48 z-10 relative">
+      <div className="flex flex-col justify-center items-center max-w-[1200px] mx-auto px-4 sm:px-8 lg:px-16 pt-52 sm:pt-32 md:pt-48 z-10 relative">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
           className="max-w-[800px] flex flex-col justify-center items-center"
         >
-          <h1 className="text-4xl flex flex-col justify-center items-center sm:text-5xl md:text-6xl lg:text-[72px] leading-[1.1] tracking-[-0.02em] font-medium text-[#111827] mb-4 sm:mb-8">
-            <ShinyGradientText>Spend less time on admin, </ShinyGradientText>
-            <ShinyGradientText>more on patient care.</ShinyGradientText>
+          <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-[72px] leading-[1.2] sm:leading-[1.1] tracking-[-0.02em] font-medium text-[#111827] mb-4 sm:mb-6 md:mb-8 text-center">
+            <ShinyGradientText className="inline-block sm:block">
+              Spend less time on admin,{" "}
+            </ShinyGradientText>
+            <ShinyGradientText className="inline-block sm:block">
+              more on patient care.
+            </ShinyGradientText>
           </h1>
           <p className="text-lg sm:text-xl md:text-2xl text-center text-[#374151] leading-relaxed mb-8 sm:mb-12 max-w-[660px]">
               You shouldn't have to choose between growing your medspa and keeping your sanity.
               Mentera handles your overwhelming tasks, freeing you to deliver experiences your clients love.
           </p>
-
-          <div className="space-y-4">
-            <p className="text-[#6B7280]">
+          <div className="space-y-3 sm:space-y-4 w-full px-2 sm:px-0 flex flex-col items-center justify-center">
+            <p className="text-sm sm:text-base text-[#6B7280] text-center">
               Be among the first practices to experience the future of patient
               care.
             </p>
 
-            <EmailCaptureInput onSubmit={handleEmailSubmit} />
+            <EmailCaptureInput
+              onSubmit={handleEmailSubmit}
+              buttonText="Join Beta"
+            />
           </div>
         </motion.div>
       </div>

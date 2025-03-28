@@ -31,7 +31,9 @@ export const ScrollSection = ({
 }: ScrollSectionProps) => {
   // Define animation variants based on direction
   const getVariants = () => {
-    const distance = 50;
+    // Smaller distance on mobile for subtler animations
+    const distance =
+      typeof window !== "undefined" && window.innerWidth < 768 ? 30 : 50;
 
     switch (direction) {
       case "up":
@@ -79,12 +81,12 @@ export const ScrollSection = ({
     <section
       id={id}
       className={cn(
-        "py-16 md:py-24 px-4 sm:px-8 lg:px-16 overflow-hidden",
+        "py-12 md:py-16 lg:py-24 overflow-hidden",
         darkMode ? "bg-[#111827] text-white" : "bg-transparent text-[#111827]",
         className
       )}
     >
-      <div className="max-w-7xl mx-auto">
+      <div className="w-full max-w-7xl mx-auto">
         {staggerChildren ? (
           <motion.div
             initial="hidden"

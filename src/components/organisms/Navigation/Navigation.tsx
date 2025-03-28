@@ -38,17 +38,22 @@ export const Navigation = ({ className }: NavigationProps) => {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
+  // Close mobile menu when clicking a navigation link
+  const handleNavLinkClick = () => {
+    setIsMenuOpen(false);
+  };
+
   return (
     <header
       className={cn(
         "fixed top-0 left-0 right-0 z-50 w-full transition-all duration-300",
         scrolled
-          ? "py-4 bg-white/40 backdrop-blur-sm shadow-sm border-b border-white/20"
-          : "py-8 bg-transparent",
+          ? "py-3 sm:py-4 bg-white/40 backdrop-blur-sm shadow-sm border-b border-white/20"
+          : "py-5 sm:py-8 bg-transparent",
         className
       )}
     >
-      <div className="max-w-7xl mx-auto px-6 lg:px-8 flex items-center justify-between">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between">
         {/* Logo */}
         <Link href="/" className="z-50 relative">
           <img
@@ -56,7 +61,7 @@ export const Navigation = ({ className }: NavigationProps) => {
             alt="Mentera Logo"
             className={cn(
               "transition-all duration-300",
-              scrolled ? "w-[140px]" : "w-[180px]"
+              scrolled ? "w-[120px] sm:w-[140px]" : "w-[140px] sm:w-[180px]"
             )}
           />
         </Link>
@@ -72,13 +77,13 @@ export const Navigation = ({ className }: NavigationProps) => {
               {link.label}
             </Link>
           ))}
-          <Button className="ml-4 bg-[#111827] text-white px-6 py-2 rounded-md hover:bg-[#1F2937] transition-colors">
+          <button className="ml-4 bg-[#111827] text-white px-6 py-2 rounded-md hover:bg-[#1F2937] transition-colors">
             Join Beta
-          </Button>
+          </button>
         </nav> */}
 
         {/* Mobile Menu Button */}
-        <button
+        {/* <button
           className="lg:hidden z-50 relative"
           onClick={() => setIsMenuOpen(!isMenuOpen)}
           aria-label={isMenuOpen ? "Close menu" : "Open menu"}
@@ -103,7 +108,7 @@ export const Navigation = ({ className }: NavigationProps) => {
               )}
             />
           </div>
-        </button>
+        </button> */}
 
         {/* Mobile Menu */}
         {/* <AnimatePresence>
@@ -121,17 +126,17 @@ export const Navigation = ({ className }: NavigationProps) => {
                     key={link.href}
                     href={link.href}
                     className="text-[#111827] font-outfit text-2xl hover:text-[#4B5563] transition-colors"
-                    onClick={() => setIsMenuOpen(false)}
+                    onClick={handleNavLinkClick}
                   >
                     {link.label}
                   </Link>
                 ))}
-                <Button
+                <button
                   className="mt-8 bg-[#111827] text-white px-6 py-3 rounded-md hover:bg-[#1F2937] transition-colors w-full"
-                  onClick={() => setIsMenuOpen(false)}
+                  onClick={handleNavLinkClick}
                 >
                   Join Beta
-                </Button>
+                </button>
               </nav>
             </motion.div>
           )}
