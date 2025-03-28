@@ -35,20 +35,21 @@ export const EmailCaptureInput = ({
         type="email"
         name="email"
         placeholder={placeholder}
-        className={`w-full ${inputHeight} px-6 rounded-full bg-transparent placeholder-[#717172] text-gray-900 text-lg focus:outline-none focus:ring-2 focus:ring-primary/20 border border-[#111A53]`}
+        className={`w-full ${inputHeight} px-4 sm:px-6 pr-[125px] sm:pr-[170px] rounded-full bg-transparent placeholder-[#717172] text-gray-900 text-base sm:text-lg focus:outline-none focus:ring-2 focus:ring-primary/20 border border-[#111A53]`}
         required
       />
       <button
         type="submit"
-        className={`absolute right-0 top-0 ${buttonHeight} px-8 bg-[#111A53] hover:bg-[#1c2b85] text-white rounded-full flex items-center gap-2 transition-colors`}
+        className={`absolute right-0 top-0 ${buttonHeight} px-3 sm:px-8 text-sm sm:text-base bg-[#111A53] hover:bg-[#1c2b85] text-white rounded-full flex items-center gap-1 sm:gap-2 transition-colors`}
       >
-        {buttonText}
+        <span className="whitespace-nowrap">{buttonText}</span>
         <svg
           width="16"
           height="16"
           viewBox="0 0 16 16"
           fill="none"
           xmlns="http://www.w3.org/2000/svg"
+          className="hidden sm:block"
         >
           <path
             d="M1 8H15M15 8L8 1M15 8L8 15"

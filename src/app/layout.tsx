@@ -87,7 +87,6 @@ export default function RootLayout({
         {/* Particle Background */}
         <ParticleBackground />
 
-        {/* Navigation */}
         <Navigation />
 
         {/* Main Content */}
