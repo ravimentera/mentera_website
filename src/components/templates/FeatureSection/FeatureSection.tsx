@@ -70,11 +70,11 @@ export const FeatureSection = () => {
   return (
     <ScrollSection id="features" staggerChildren={true} staggerDelay={0.15}>
       <div className="flex flex-col items-center max-w-4xl mx-auto mb-16">
-        <h2 className="text-3xl md:text-4xl lg:text-5xl font-lexend font-semibold text-center mb-6 leading-tight">
+        <h2 className="text-3xl md:text-4xl lg:text-5xl font-semibold text-center mb-6 leading-tight">
           Built for practitioners, <br className="hidden sm:block" />
           by practitioners and <GradientText>AI experts</GradientText>.
         </h2>
-        <p className="text-lg md:text-xl lg:text-2xl font-outfit text-[#374151] text-center leading-relaxed">
+        <p className="text-lg md:text-xl lg:text-2xl text-[#374151] text-center leading-relaxed">
           We&apos;ve interviewed hundreds of practitioners and practice owners
           to deeply understand their day-to-day challenges. Together with AI
           experts, we&apos;ve crafted a purpose-built solution focused on

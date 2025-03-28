@@ -29,7 +29,7 @@ export default function NotFound() {
               stiffness: 200,
             }}
           >
-            <h1 className="text-8xl font-lexend font-bold mb-2">
+            <h1 className="text-8xl font-bold mb-2">
               <GradientText
                 gradientFrom="from-purple-600"
                 gradientTo="to-teal-500"
@@ -40,11 +40,11 @@ export default function NotFound() {
             </h1>
           </motion.div>
 
-          <h2 className="text-3xl font-lexend font-medium text-[#111827] mb-4">
+          <h2 className="text-3xl font-medium text-[#111827] mb-4">
             Page Not Found
           </h2>
 
-          <p className="text-[#4B5563] font-outfit text-lg mb-8">
+          <p className="text-[#4B5563] text-lg mb-8">
             The page you're looking for doesn't exist or has been moved. Let's
             get you back on track.
           </p>

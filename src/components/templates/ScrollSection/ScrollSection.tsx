@@ -80,7 +80,7 @@ export const ScrollSection = ({
       id={id}
       className={cn(
         "py-16 md:py-24 px-4 sm:px-8 lg:px-16 overflow-hidden",
-        darkMode ? "bg-[#111827] text-white" : "bg-white text-[#111827]",
+        darkMode ? "bg-[#111827] text-white" : "bg-transparent text-[#111827]",
         className
       )}
     >
