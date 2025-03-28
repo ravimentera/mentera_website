@@ -68,6 +68,8 @@ export const HeroSection = () => {
           </h1>
           <p className="text-lg sm:text-xl md:text-2xl text-center text-[#374151] leading-relaxed mb-8 sm:mb-12 max-w-[660px]">
               You shouldn't have to choose between growing your medspa and keeping your sanity.
+          </p>
+          <p className="text-lg sm:text-xl md:text-2xl text-center text-[#374151] leading-relaxed mb-8 sm:mb-12 max-w-[660px]">
               Mentera handles your overwhelming tasks, freeing you to deliver experiences your clients love.
           </p>
           <div className="space-y-3 sm:space-y-4 w-full px-2 sm:px-0 flex flex-col items-center justify-center">
