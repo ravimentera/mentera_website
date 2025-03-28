@@ -26,7 +26,7 @@ export const ShinyGradientText = ({
     <motion.div
       className={`relative inline-block ${className}`}
       style={fontSize ? { fontSize } : {}}
-      whileHover={hoverEffect ? { scale: 1.02 } : {}}
+      whileHover={hoverEffect ? { scale: 1.01 } : {}}
       transition={{ duration: 0.2 }}
     >
       {/* Base gradient text */}

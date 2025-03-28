@@ -4,14 +4,14 @@ import Link from "next/link";
 
 export const Footer = () => {
   return (
-    <footer className="p-12">
-      <div className="w-full bg-[#111A53] py-16 rounded-[36px]">
+    <footer className="px-0 sm:p-6 md:p-12">
+      <div className="w-full bg-[#111A53] py-10 sm:py-12 md:py-16 rounded-none sm:rounded-3xl md:rounded-[36px]">
         <div className="max-w-[1200px] mx-auto px-4 md:px-8">
           {/* CTA Section */}
-          <div className="mb-16 text-center">
-            <h2 className="text-3xl md:text-4xl lg:text-5xl font-medium mb-8 text-transparent bg-clip-text bg-gradient-to-r from-[#6EF1BB] to-[#AA72FF]">
+          <div className="mb-10 sm:mb-12 md:mb-16 text-center">
+            <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-medium mb-6 md:mb-8 text-transparent bg-clip-text bg-gradient-to-r from-[#6EF1BB] to-[#AA72FF]">
               Be among the first practices to
-              <br className="hidden md:block" /> experience the future of
+              <br className="hidden sm:block" /> experience the future of
               patient care.
             </h2>
 
@@ -20,16 +20,17 @@ export const Footer = () => {
                 <input
                   type="email"
                   placeholder="Enter your email"
-                  className="w-full h-12 px-6 rounded-full bg-transparent border border-[#ffffff] text-gray-900 text-lg focus:outline-none focus:ring-2 focus:ring-primary/20"
+                  className="w-full h-12 px-4 sm:px-6 pr-[125px] sm:pr-[170px] rounded-full bg-transparent border border-[#ffffff] text-white placeholder-white/50 text-base sm:text-lg focus:outline-none focus:ring-2 focus:ring-white/20"
                 />
-                <button className="absolute top-0 right-0 h-12 px-8 bg-[#ffffff] text-[#111A53] rounded-full flex items-center gap-2 transition-colors">
-                  Join the beta waitlist
+                <button className="absolute top-0 right-0 h-12 px-3 sm:px-8 text-sm sm:text-base bg-[#ffffff] text-[#111A53] rounded-full flex items-center gap-1 sm:gap-2 transition-colors">
+                  <span className="whitespace-nowrap">Join Beta</span>
                   <svg
                     width="16"
                     height="16"
                     viewBox="0 0 16 16"
                     fill="none"
                     xmlns="http://www.w3.org/2000/svg"
+                    className="hidden sm:block"
                   >
                     <path
                       d="M1 8H15M15 8L8 1M15 8L8 15"
@@ -45,13 +46,13 @@ export const Footer = () => {
           </div>
 
           {/* Logo and Links Section */}
-          <div className="flex flex-col md:flex-row justify-between items-center mb-12">
+          <div className="flex flex-col md:flex-row justify-between items-center mb-8 md:mb-12">
             <div className="mb-6 md:mb-0">
               <Link href="/">
                 <div className="flex items-center gap-3">
                   <svg
-                    width="42"
-                    height="44"
+                    width="38"
+                    height="40"
                     viewBox="0 0 51 54"
                     fill="none"
                     xmlns="http://www.w3.org/2000/svg"
@@ -89,12 +90,14 @@ export const Footer = () => {
                       </linearGradient>
                     </defs>
                   </svg>
-                  <span className="text-[#FFFFFF] text-2xl">Mentera</span>
+                  <span className="text-[#FFFFFF] text-xl sm:text-2xl">
+                    Mentera
+                  </span>
                 </div>
               </Link>
             </div>
 
-            <div className="flex gap-4 md:gap-8">
+            <div className="flex flex-wrap justify-center gap-4 md:gap-8">
               <Link
                 href="#"
                 className="text-[#FFFFFF]/60 hover:text-[#FFFFFF] transition-colors text-sm md:text-base"
@@ -117,11 +120,11 @@ export const Footer = () => {
           </div>
 
           {/* Separator */}
-          <div className="h-px w-full bg-[#FFFFFF]/10 mb-8"></div>
+          <div className="h-px w-full bg-[#FFFFFF]/10 mb-6 md:mb-8"></div>
 
           {/* Copyright and Social Media */}
           <div className="flex flex-col md:flex-row justify-between items-center">
-            <p className="text-[#FFFFFF]/60 text-sm mb-4 md:mb-0">
+            <p className="text-[#FFFFFF]/60 text-xs sm:text-sm mb-4 md:mb-0 text-center md:text-left">
               © 2025 Mentera Inc. All rights reserved.
             </p>
             <div className="flex gap-4">

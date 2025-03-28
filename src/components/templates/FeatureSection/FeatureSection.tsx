@@ -68,13 +68,18 @@ const features = [
 
 export const FeatureSection = () => {
   return (
-    <ScrollSection id="features" staggerChildren={true} staggerDelay={0.15}>
-      <div className="flex flex-col items-center max-w-4xl mx-auto mb-16">
-        <h2 className="text-3xl md:text-4xl lg:text-5xl font-semibold text-center mb-6 leading-tight">
+    <ScrollSection
+      id="features"
+      staggerChildren={true}
+      staggerDelay={0.15}
+      className="px-4 sm:px-6 md:px-8 py-12 md:py-16 lg:py-24"
+    >
+      <div className="flex flex-col items-center max-w-4xl mx-auto mb-10 md:mb-16">
+        <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-semibold text-center mb-4 sm:mb-6 leading-tight">
           Built for practitioners, <br className="hidden sm:block" />
           by practitioners and <GradientText>AI experts</GradientText>.
         </h2>
-        <p className="text-lg md:text-xl lg:text-2xl text-[#374151] text-center leading-relaxed">
+        <p className="text-base sm:text-lg md:text-xl lg:text-2xl text-[#374151] text-center leading-relaxed">
           We&apos;ve interviewed hundreds of practitioners and practice owners
           to deeply understand their day-to-day challenges. Together with AI
           experts, we&apos;ve crafted a purpose-built solution focused on
@@ -83,15 +88,24 @@ export const FeatureSection = () => {
         </p>
       </div>
 
-      {/* <div className="grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-8 mt-12">
+      {/* <div className="grid grid-cols-1 sm:grid-cols-2 gap-5 md:gap-6 lg:gap-8 mt-8 md:mt-12">
         {features.map((feature, index) => (
-          <FeatureCard
+          <div
             key={feature.title}
-            title={feature.title}
-            description={feature.description}
-            icon={feature.icon}
-            delay={index * 0.1}
-          />
+            className="bg-white/40 rounded-xl p-6 md:p-8 border border-gray-100 hover:border-purple-100 shadow-sm hover:shadow transition-all duration-300"
+          >
+            <div className="flex items-start mb-4">
+              <div className="bg-purple-100 rounded-lg p-3 mr-4">
+                {feature.icon}
+              </div>
+              <h3 className="text-xl md:text-2xl font-semibold text-[#111827]">
+                {feature.title}
+              </h3>
+            </div>
+            <p className="text-[#4B5563] text-sm md:text-base">
+              {feature.description}
+            </p>
+          </div>
         ))}
       </div> */}
     </ScrollSection>
