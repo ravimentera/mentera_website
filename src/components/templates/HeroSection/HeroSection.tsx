@@ -63,9 +63,8 @@ export const HeroSection = () => {
             <ShinyGradientText>more on patient care.</ShinyGradientText>
           </h1>
           <p className="text-lg sm:text-xl md:text-2xl text-center text-[#374151] leading-relaxed mb-8 sm:mb-12 max-w-[660px]">
-            Automate patient follow-ups, streamline reminders, and quickly
-            access detailed patient insights—all in one easy-to-use platform
-            built for med spas.
+              You shouldn't have to choose between growing your medspa and keeping your sanity.
+              Mentera handles your overwhelming tasks, freeing you to deliver experiences your clients love.
           </p>
 
           <div className="space-y-4">
