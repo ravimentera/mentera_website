@@ -13,7 +13,6 @@ export async function POST(request: Request) {
     
     const apiToken = process.env.PIPEDRIVE_API_TOKEN;
     const domain = process.env.PIPEDRIVE_DOMAIN || 'mentera';
-    const pipelineId = Number(process.env.PIPEDRIVE_PIPELINE_ID) || 1;
     
     // First, create a person
     const personResponse = await fetch(
@@ -50,16 +49,24 @@ export async function POST(request: Request) {
         body: JSON.stringify({
           title: `Beta Signup: ${email}`,
           person_id: personData.data.id,
-          organization_id: 1,
-          pipeline_id: pipelineId
+          organization_id: 1
         }),
       }
     );
     
     const leadData = await leadResponse.json();
     if (!leadData.success) {
+      console.error('Pipedrive Lead Creation Error:', {
+        status: leadResponse.status,
+        statusText: leadResponse.statusText,
+        response: leadData
+      });
       return NextResponse.json(
-        { success: false, error: 'Failed to create lead in Pipedrive' },
+        { 
+          success: false, 
+          error: 'Failed to create lead in Pipedrive',
+          details: leadData.error || 'Unknown error'
+        },
         { status: 500 }
       );
     }
