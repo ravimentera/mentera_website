@@ -4,19 +4,17 @@ import { isValidEmail } from '@/lib/utils';
 export async function POST(request: Request) {
   try {
     const { email } = await request.json();
-
     if (!isValidEmail(email)) {
       return NextResponse.json(
         { success: false, error: 'Invalid email format' },
         { status: 400 }
       );
     }
-
+    
     const apiToken = process.env.PIPEDRIVE_API_TOKEN;
     const domain = process.env.PIPEDRIVE_DOMAIN || 'mentera';
     const pipelineId = Number(process.env.PIPEDRIVE_PIPELINE_ID) || 1;
-    const stageId = Number(process.env.PIPEDRIVE_STAGE_ID) || 1;
-
+    
     // First, create a person
     const personResponse = await fetch(
       `https://${domain}.pipedrive.com/api/v1/persons?api_token=${apiToken}`,
@@ -32,19 +30,18 @@ export async function POST(request: Request) {
         }),
       }
     );
-
+    
     const personData = await personResponse.json();
-
     if (!personData.success) {
       return NextResponse.json(
         { success: false, error: 'Failed to create person in Pipedrive' },
         { status: 500 }
       );
     }
-
-    // Then create a deal
-    const dealResponse = await fetch(
-      `https://${domain}.pipedrive.com/api/v1/deals?api_token=${apiToken}`,
+    
+    // Create a lead instead of a deal
+    const leadResponse = await fetch(
+      `https://${domain}.pipedrive.com/api/v1/leads?api_token=${apiToken}`,
       {
         method: 'POST',
         headers: {
@@ -53,22 +50,25 @@ export async function POST(request: Request) {
         body: JSON.stringify({
           title: `Beta Signup: ${email}`,
           person_id: personData.data.id,
-          pipeline_id: pipelineId,
-          stage_id: stageId,
+          organization_id: 1,
+          pipeline_id: pipelineId
         }),
       }
     );
-
-    const dealData = await dealResponse.json();
-
-    if (!dealData.success) {
+    
+    const leadData = await leadResponse.json();
+    if (!leadData.success) {
       return NextResponse.json(
-        { success: false, error: 'Failed to create deal in Pipedrive' },
+        { success: false, error: 'Failed to create lead in Pipedrive' },
         { status: 500 }
       );
     }
-
-    return NextResponse.json({ success: true });
+    
+    return NextResponse.json({ 
+      success: true,
+      person: personData.data,
+      lead: leadData.data
+    });
   } catch (error) {
     console.error('Error in Pipedrive API route:', error);
     return NextResponse.json(
@@ -79,4 +79,4 @@ export async function POST(request: Request) {
       { status: 500 }
     );
   }
-} 
+}
