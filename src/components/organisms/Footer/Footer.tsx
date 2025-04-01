@@ -1,8 +1,13 @@
 "use client";
 
+import { EmailCaptureInput } from "@/components/molecules/EmailCaptureInput/EmailCaptureInput";
 import Link from "next/link";
 
 export const Footer = () => {
+  const handleEmailSubmit = (email: string) => {
+    console.log("Footer email submitted:", email);
+  };
+
   return (
     <footer className="px-0 sm:p-6 md:p-12">
       <div className="w-full bg-[#111A53] py-10 sm:py-12 md:py-16 rounded-none sm:rounded-3xl md:rounded-[36px]">
@@ -15,33 +20,13 @@ export const Footer = () => {
               patient care.
             </h2>
 
-            <div className="flex justify-center">
-              <div className="relative max-w-xl w-full">
-                <input
-                  type="email"
-                  placeholder="Enter your email"
-                  className="w-full h-12 px-4 sm:px-6 pr-[125px] sm:pr-[170px] rounded-full bg-transparent border border-[#ffffff] text-white placeholder-white/50 text-base sm:text-lg focus:outline-none focus:ring-2 focus:ring-white/20"
-                />
-                <button className="absolute top-0 right-0 h-12 px-3 sm:px-8 text-sm sm:text-base bg-[#ffffff] text-[#111A53] rounded-full flex items-center gap-1 sm:gap-2 transition-colors">
-                  <span className="whitespace-nowrap">Join Beta</span>
-                  <svg
-                    width="16"
-                    height="16"
-                    viewBox="0 0 16 16"
-                    fill="none"
-                    xmlns="http://www.w3.org/2000/svg"
-                    className="hidden sm:block"
-                  >
-                    <path
-                      d="M1 8H15M15 8L8 1M15 8L8 15"
-                      stroke="currentColor"
-                      strokeWidth="2"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                    />
-                  </svg>
-                </button>
-              </div>
+            <div className="flex flex-col gap-4">
+              <EmailCaptureInput
+                placeholder="Enter your email"
+                buttonText="Join Beta"
+                variant="dark"
+                className="w-full"
+              />
             </div>
           </div>
 
