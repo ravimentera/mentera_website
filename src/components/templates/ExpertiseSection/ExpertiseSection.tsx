@@ -43,10 +43,10 @@ export const ExpertiseSection: React.FC = () => {
   );
 
   return (
-    <section className="px-4 sm:px-8 md:px-16 lg:px-24 xl:px-32 py-12 md:py-16 lg:py-24 bg-gradient-to-b from-[#F3F0FF] to-[#FEF8FF]">
+    <section className="px-4 sm:px-8 md:px-16 lg:px-24 xl:px-32 py-12 md:py-16 lg:py-24">
       <div className="container mx-auto">
-        <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-center mb-8 md:mb-12 lg:mb-16 text-[#1E004F]">
-          Use Mentera's AI Assistant for
+        <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-center mb-8 md:mb-12 lg:mb-16">
+          <ShinyGradientText>Use Mentera's AI Assistant for</ShinyGradientText>
         </h2>
 
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 md:gap-8 items-start">
@@ -63,8 +63,8 @@ export const ExpertiseSection: React.FC = () => {
                 className={cn(
                   "rounded-lg p-4 md:p-6 transition-all duration-300 cursor-pointer border",
                   activeItem.id === item.id
-                    ? "bg-[#1E004F] text-white shadow-lg border-[#1E004F]" // Active item style - no hover change needed here
-                    : "bg-white text-gray-800 border-transparent hover:bg-[#E8E0FF] hover:border-[#C5AFFF]" // Inactive item style + hover effect only for inactive
+                    ? "bg-[#111A53] text-white shadow-lg border-[#111A53]" // Active item style - no hover change needed here
+                    : "text-gray-800 border-transparent hover:bg-[#E8E0FF] hover:border-[#C5AFFF]" // Inactive item style + hover effect only for inactive
                 )}
               >
                 <h3
@@ -72,7 +72,7 @@ export const ExpertiseSection: React.FC = () => {
                     "text-lg sm:text-xl md:text-2xl font-bold mb-2 transition-colors duration-300", // Added transition
                     activeItem.id === item.id
                       ? "text-white"
-                      : "text-[#1E004F] group-hover:text-[#1E004F]" // Keep color on hover for inactive
+                      : "text-[#111A53] group-hover:text-[#111A53]" // Keep color on hover for inactive
                   )}
                 >
                   {item.title}
@@ -81,8 +81,8 @@ export const ExpertiseSection: React.FC = () => {
                   className={cn(
                     "text-sm md:text-base transition-colors duration-300", // Added transition
                     activeItem.id === item.id
-                      ? "text-gray-200" // Description color for active
-                      : "text-gray-600 group-hover:text-black" // Change to black on hover for inactive
+                      ? "text-white" // Description color for active
+                      : "text-[#1D1D1D] group-hover:text-black" // Change to black on hover for inactive
                   )}
                 >
                   {item.description}

@@ -4,10 +4,10 @@ import CircleAnimate from "@/assets/icons/circle.svg";
 
 const DetailSection = () => {
   return (
-    <section className="py-16 md:py-24">
+    <section className="py-16 md:py-3">
       {" "}
       {/* Removed background gradient */}
-      <div className="container mx-auto px-4">
+      <div className="container mx-auto px-10">
         <div className="flex flex-col lg:flex-row items-start justify-center gap-12 lg:gap-16">
           {" "}
           {/* Changed items-center to items-start */}
