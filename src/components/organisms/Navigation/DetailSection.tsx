@@ -55,7 +55,7 @@ const DetailSection = () => {
               alt="AI Process Visualization"
               width={450} // Increased size
               height={450} // Increased size
-              className="max-w-sm md:max-w-md lg:max-w-lg" // Adjusted max-width
+              className="max-w-sm md:max-w-md lg:max-w-lg relative -top-48" // Adjusted max-width and added relative positioning
             />
           </div>
           {/* Right Column Text Block */}

@@ -10,9 +10,9 @@ export default function Home() {
     <main className="relative overflow-x-hidden will-change-transform">
       <HeroSection />
       <DetailSection />
-      <FeatureSection />
-      <AIFeaturesSection />
+      {/* <AIFeaturesSection /> */}
       <ExpertiseSection />
+      <FeatureSection />
       {/* <EmpoweringSection /> */}
       {/* <TeraAISection /> */}
       <Footer />

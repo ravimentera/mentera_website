@@ -3,102 +3,119 @@
 import { ShinyGradientText } from "@/components/atoms/ShinyGradientText/ShinyGradientText";
 import { motion } from "framer-motion";
 import Image from "next/image";
-import React from "react";
+import React, { useState } from "react";
+import { cn } from "@/lib/utils"; // Assuming you have a utility for classnames
+
+interface ExpertiseItem {
+  id: number;
+  title: string;
+  description: string;
+  imageSrc: string; // We'll use this later if different images are needed
+}
+
+const expertiseItems: ExpertiseItem[] = [
+  {
+    id: 1,
+    title: "Personalized Communication & Recommendations",
+    description:
+      "Personalized next-step recommendations. Know exactly when and how to reach out to each patient - including follow ups, upsell opportunities.",
+    imageSrc: "/experties.png",
+  },
+  {
+    id: 2,
+    title: "Intelligent Scheduling",
+    description:
+      "Automatically fill your calendar, managing waitlists, and optimizing provider availability without manual effort.",
+    imageSrc: "/experties.png", // Use the same image for now
+  },
+  {
+    id: 3,
+    title: "Bespoke Pre & Post Patient Care",
+    description:
+      "Personalized messages to prepare patients for appointments and essential post-care educational materials in your practitioners voice.",
+    imageSrc: "/experties.png", // Use the same image for now
+  },
+];
 
 export const ExpertiseSection: React.FC = () => {
+  const [activeItem, setActiveItem] = useState<ExpertiseItem>(
+    expertiseItems[0]
+  );
+
   return (
-    <section className="px-4 sm:px-8 md:px-16 lg:px-24 xl:px-32">
-      <div className="w-full py-12 md:py-16 lg:py-24 bg-transparent">
-        <div className="container mx-auto">
-          <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-center mb-8 md:mb-12 lg:mb-16">
-            <ShinyGradientText>
-              Unleash Your Expertise, Let AI Handle the Rest
-            </ShinyGradientText>
-          </h2>
+    <section className="px-4 sm:px-8 md:px-16 lg:px-24 xl:px-32 py-12 md:py-16 lg:py-24 bg-gradient-to-b from-[#F3F0FF] to-[#FEF8FF]">
+      <div className="container mx-auto">
+        <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-center mb-8 md:mb-12 lg:mb-16 text-[#1E004F]">
+          Use Mentera's AI Assistant for
+        </h2>
 
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 md:gap-8">
-            <div className="space-y-6 md:space-y-8 col-span-12 lg:col-span-7 order-2 lg:order-1">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 md:gap-8 items-start">
+          {/* Left Side - Clickable Items */}
+          <div className="space-y-4 md:space-y-6 col-span-12 lg:col-span-6 order-2 lg:order-1">
+            {expertiseItems.map((item, index) => (
               <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
+                key={item.id}
+                initial={{ opacity: 0, x: -20 }}
+                whileInView={{ opacity: 1, x: 0 }}
                 viewport={{ once: true }}
-                transition={{ duration: 0.5 }}
-                className="bg-[#ffffff63] border-2 border-[#BD05DD] backdrop-blur-sm rounded-lg p-4 md:p-5 transition-all duration-300 hover:shadow-lg relative group overflow-hidden"
+                transition={{ duration: 0.5, delay: index * 0.1 }}
+                onClick={() => setActiveItem(item)}
+                className={cn(
+                  "rounded-lg p-4 md:p-6 transition-all duration-300 cursor-pointer border",
+                  activeItem.id === item.id
+                    ? "bg-[#1E004F] text-white shadow-lg border-[#1E004F]" // Active item style - no hover change needed here
+                    : "bg-white text-gray-800 border-transparent hover:bg-[#E8E0FF] hover:border-[#C5AFFF]" // Inactive item style + hover effect only for inactive
+                )}
               >
-                <div className="relative z-10">
-                  <h3 className="text-xl sm:text-2xl md:text-3xl font-bold text-blue-900 mb-2 md:mb-4">
-                    <ShinyGradientText>
-                      Effortless Scheduling & Management
-                    </ShinyGradientText>
-                  </h3>
-                  <p className="text-sm md:text-base text-gray-700">
-                    Say goodbye to admin overload—our AI-powered assistant
-                    handles appointments, staff schedules, and customer
-                    inquiries so you can focus on delivering exceptional
-                    treatments.
-                  </p>
-                </div>
+                <h3
+                  className={cn(
+                    "text-lg sm:text-xl md:text-2xl font-bold mb-2 transition-colors duration-300", // Added transition
+                    activeItem.id === item.id
+                      ? "text-white"
+                      : "text-[#1E004F] group-hover:text-[#1E004F]" // Keep color on hover for inactive
+                  )}
+                >
+                  {item.title}
+                </h3>
+                <p
+                  className={cn(
+                    "text-sm md:text-base transition-colors duration-300", // Added transition
+                    activeItem.id === item.id
+                      ? "text-gray-200" // Description color for active
+                      : "text-gray-600 group-hover:text-black" // Change to black on hover for inactive
+                  )}
+                >
+                  {item.description}
+                </p>
               </motion.div>
+            ))}
+          </div>
 
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.5, delay: 0.1 }}
-                className="bg-[#ffffff63] border-2 border-[#BD05DD] backdrop-blur-sm rounded-lg p-4 md:p-5 transition-all duration-300 hover:shadow-lg relative group overflow-hidden"
-              >
-                <div className="relative z-10">
-                  <h3 className="text-xl sm:text-2xl md:text-3xl font-bold text-blue-900 mb-2 md:mb-4">
-                    <ShinyGradientText>
-                      Automated Marketing & Sales Growth
-                    </ShinyGradientText>
-                  </h3>
-                  <p className="text-sm md:text-base text-gray-700">
-                    Our intelligent platform runs targeted promotions, engages
-                    clients, and boosts bookings—all while you do what you love
-                    most.
-                  </p>
-                </div>
-              </motion.div>
-
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.5, delay: 0.2 }}
-                className="bg-[#ffffff63] border-2 border-[#BD05DD] backdrop-blur-sm rounded-lg p-4 md:p-5 transition-all duration-300 hover:shadow-lg relative group overflow-hidden"
-              >
-                <div className="relative z-10">
-                  <h3 className="text-xl sm:text-2xl md:text-3xl font-bold text-blue-900 mb-2 md:mb-4">
-                    <ShinyGradientText>
-                      AI-Powered Support & Personalization
-                    </ShinyGradientText>
-                  </h3>
-                  <p className="text-sm md:text-base text-gray-700">
-                    Provide personalized customer interactions 24/7 with
-                    AI-driven communication, ensuring every client feels valued.
-                  </p>
-                </div>
-              </motion.div>
-            </div>
-
+          {/* Right Side - Image */}
+          <motion.div
+            initial={{ opacity: 0, scale: 0.9 }}
+            whileInView={{ opacity: 1, scale: 1 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5 }}
+            className="relative col-span-12 lg:col-span-6 flex justify-center items-center order-1 lg:order-2 mb-8 lg:mb-0 min-h-[300px] md:min-h-[400px]" // Added min-height
+          >
             <motion.div
-              initial={{ opacity: 0, scale: 0.9 }}
-              whileInView={{ opacity: 1, scale: 1 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5 }}
-              className="relative col-span-12 lg:col-span-5 flex justify-center items-center order-1 lg:order-2 mb-8 lg:mb-0"
+              key={activeItem.id} // Add key to trigger animation on change
+              initial={{ opacity: 0.5, scale: 0.95 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 0.3 }}
+              className="w-full h-full flex justify-center items-center"
             >
               <Image
-                src="/experties.png"
-                alt="Expertise Section"
-                width={500}
-                height={500}
-                className="max-w-full h-auto"
+                src={activeItem.imageSrc} // Use image source from active item
+                alt={activeItem.title}
+                width={550} // Adjusted size slightly
+                height={400} // Adjusted size slightly
+                className="max-w-full h-auto object-contain rounded-lg shadow-md" // Added rounded corners and shadow
                 priority
               />
             </motion.div>
-          </div>
+          </motion.div>
         </div>
       </div>
     </section>
