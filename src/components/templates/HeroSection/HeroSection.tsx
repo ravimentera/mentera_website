@@ -6,7 +6,6 @@ import { FloatingCard } from "@/components/molecules/FloatingCard/FloatingCard";
 import { motion, useMotionValue, useSpring } from "framer-motion";
 import { useEffect, useState } from "react";
 
-import CircleAnimate from "@/assets/icons/circle.svg";
 import UpsellOpportunities from "@/assets/icons/Upsell Opportunities.svg";
 import StaffManagement from "@/assets/icons/Staff Management.svg";
 import SocialMediaManagement from "@/assets/icons/Social Media Management.svg";
@@ -337,33 +336,24 @@ export const HeroSection = () => {
         >
           <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-[72px] leading-[1.2] sm:leading-[1.1] tracking-[-0.02em] font-medium text-[#111827] mb-4 sm:mb-6 md:mb-8 text-center">
             <ShinyGradientText className="inline-block sm:block">
-              Spend less time on admin,{" "}
+              Patient care that goes
             </ShinyGradientText>
             <ShinyGradientText className="inline-block sm:block">
-              more on patient care.
+              beyond the chair.
             </ShinyGradientText>
           </h1>
-          <p className="text-lg sm:text-xl md:text-2xl text-center text-[#374151] leading-relaxed mb-8 sm:mb-12 max-w-[660px]">
-            You shouldn't have to choose between growing your medspa and keeping
-            your sanity. Mentera handles your overwhelming tasks, freeing you to
-            deliver experiences your clients love.
+          <p className="text-sm sm:text-base font-normal text-[#717172] text-center">
+            Be among the first med spas to experience the future of hyper{" "}
+            <br></br>
+            personalized patient care.
           </p>
-          <div className="space-y-3 sm:space-y-4 w-full px-2 sm:px-0 flex flex-col items-center justify-center">
-            <p className="text-sm sm:text-base text-[#6B7280] text-center">
-              Be among the first practices to experience the future of patient
-              care.
-            </p>
+          <div className="space-y-3 sm:space-y-4 w-full px-2 py-4 sm:px-0 flex flex-col items-center justify-center">
             <EmailCaptureInput
               onSubmit={handleEmailSubmit}
               buttonText="Join Beta"
             />
           </div>
         </motion.div>
-      </div>
-
-      {/* Circular target where all cards merge */}
-      <div className="flex justify-center items-center">
-        <Image priority src={CircleAnimate} alt="Follow us on Twitter" />
       </div>
     </section>
   );
