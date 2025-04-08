@@ -24,21 +24,20 @@ export const ShinyGradientText = ({
 }: ShinyGradientTextProps) => {
   return (
     <motion.div
-      className={`relative inline-block ${className}`}
+      className={`relative inline-block leading-8 ${className}`}
       style={fontSize ? { fontSize } : {}}
       whileHover={hoverEffect ? { scale: 1.01 } : {}}
       transition={{ duration: 0.2 }}
     >
       {/* Base gradient text */}
       <span
-        className="relative"
+        className="relative text-[40px] font-semibold"
         style={{
           backgroundImage: `linear-gradient(to right, ${gradientFrom}, ${gradientTo})`,
           WebkitBackgroundClip: "text",
           backgroundClip: "text",
           color: "transparent",
           WebkitTextFillColor: "transparent",
-          fontWeight: 600,
         }}
       >
         {children}

@@ -6,7 +6,6 @@ import { FloatingCard } from "@/components/molecules/FloatingCard/FloatingCard";
 import { motion, useMotionValue, useSpring } from "framer-motion";
 import { useEffect, useState } from "react";
 
-import CircleAnimate from "@/assets/icons/circle.svg";
 import UpsellOpportunities from "@/assets/icons/Upsell Opportunities.svg";
 import StaffManagement from "@/assets/icons/Staff Management.svg";
 import SocialMediaManagement from "@/assets/icons/Social Media Management.svg";
@@ -34,21 +33,21 @@ const PlaceholderSocialIcons = () => (
 
 // Card Data
 const cardData = [
-  {
-    id: "payroll",
-    icon: <Image src={PayrollManagement} alt="Payroll management icon" />,
-    title: "Payroll Management",
-    positionClasses: "top-[10%] left-[10%] w-48",
-    initialTop: "15%",
-    initialLeft: "5%",
-    animationDelay: 0.1,
-    yOffset: -6,
-  },
+  // {
+  //   id: "payroll",
+  //   icon: <Image src={PayrollManagement} alt="Payroll management icon" />,
+  //   title: "Payroll Management",
+  //   positionClasses: "top-[10%] left-[10%] w-48",
+  //   initialTop: "15%",
+  //   initialLeft: "5%",
+  //   animationDelay: 0.1,
+  //   yOffset: -6,
+  // },
   {
     id: "scheduling",
     icon: <Image src={NewPatientScheduling} alt="New Schedulin icon" />,
     title: "New Patient Scheduling",
-    positionClasses: "top-[5%] left-[30%] w-52",
+    positionClasses: "top-[12%] left-[20%] w-52 bg-white/90",
     initialTop: "10%",
     initialLeft: "30%",
     animationDelay: 0.5,
@@ -59,7 +58,7 @@ const cardData = [
     icon: <Image src={PromotionalStrat} alt="Promotional Strategies icon" />,
     title: "Promotional Strategies",
     subtitle: "Offers and Gift Cards",
-    positionClasses: "top-[20%] left-[8%] w-60",
+    positionClasses: "top-[30%] left-[5%] w-60 bg-white/80",
     initialTop: "30%",
     initialLeft: "8%",
     animationDelay: 0.3,
@@ -74,9 +73,9 @@ const cardData = [
   {
     id: "inquiries",
     icon: <Image src={QuickResponse} alt="Quick Response icon" />,
-    title: "Quick Respond to Patient Inquiries",
+    title: "Quick Respond to <br></br> Patient Inquiries",
     subtitle: "Live Chat, On Call",
-    positionClasses: "top-[34%] left-[5%] w-60",
+    positionClasses: "top-[48%] left-[12%] w-64 pr-8 bg-white/80",
     initialTop: "50%",
     initialLeft: "10%",
     animationDelay: 0.7,
@@ -86,30 +85,28 @@ const cardData = [
     id: "lead",
     icon: <Image src={LeadManagement} alt="Lead management icon" />,
     title: "Lead Management",
-    positionClasses: "top-[44%] left-[15%] w-48",
-    // For bottom-[25%], we assume initialTop = 75%
+    positionClasses: "top-[65%] left-[0%] w-60 bg-white/70",
     initialTop: "75%",
     initialLeft: "3%",
     animationDelay: 0.2,
     yOffset: -6,
   },
-  {
-    id: "payment",
-    icon: <Image src={PayrollManagement} alt="Payroll management icon" />,
-    title: "Payment Collection",
-    positionClasses: "top-[50%] left-[5%] w-48",
-    // bottom-[10%] => initialTop = 90%
-    initialTop: "90%",
-    initialLeft: "5%",
-    animationDelay: 0.6,
-    yOffset: 5,
-  },
+  // {
+  //   id: "payment",
+  //   icon: <Image src={PayrollManagement} alt="Payroll management icon" />,
+  //   title: "Payment Collection",
+  //   positionClasses: "top-[50%] left-[5%] w-48",
+  //   // bottom-[10%] => initialTop = 90%
+  //   initialTop: "90%",
+  //   initialLeft: "5%",
+  //   animationDelay: 0.6,
+  //   yOffset: 5,
+  // },
   {
     id: "staff",
     icon: <Image src={PayrollManagement} alt="Payroll management icon" />,
     title: "Staff Management",
-    positionClasses: "top-[55%] left-[25%] w-44",
-    // bottom-[20%] => initialTop = 80%
+    positionClasses: "top-[72%] left-[20%] w-60 bg-white/70",
     initialTop: "80%",
     initialLeft: "25%",
     animationDelay: 0.4,
@@ -120,7 +117,7 @@ const cardData = [
     id: "kpi",
     icon: <Image src={KpiReporting} alt="Payroll management icon" />,
     title: "KPIs and Reporting",
-    positionClasses: "top-[5%] right-[20%] w-48",
+    positionClasses: "top-[12%] right-[20%] w-48 bg-white/90",
     // For right-[20%], we compute left as 80%
     initialTop: "12%",
     initialLeft: "80%",
@@ -131,7 +128,7 @@ const cardData = [
     id: "upsell",
     icon: <Image src={UpsellOpportunities} alt="Payroll management icon" />,
     title: "Upsell Opportunities",
-    positionClasses: "top-[20%] right-[8%] w-52",
+    positionClasses: "top-[25%] right-[8%] w-52 bg-white/90",
     initialTop: "25%",
     initialLeft: "95%",
     animationDelay: 0.6,
@@ -140,9 +137,9 @@ const cardData = [
   {
     id: "social",
     icon: <Image src={SocialMediaManagement} alt="Payroll management icon" />,
-    title: "Social Media Management",
+    title: "Social Media <br></br> Management",
     subtitle: "Marketing Campaigns",
-    positionClasses: "top-[34%] right-[5%] w-60",
+    positionClasses: "top-[38%] right-[5%] w-40 bg-white/90",
     initialTop: "42%",
     initialLeft: "92%",
     animationDelay: 0.1,
@@ -160,7 +157,7 @@ const cardData = [
     id: "precharting",
     icon: <Image src={PreCharting} alt="Payroll management icon" />,
     title: "Pre-charting",
-    positionClasses: "top-[44%] right-[15%] w-40",
+    positionClasses: "top-[66%] right-[0%] w-40 bg-white/90",
     // bottom-[35%] => initialTop = 65%
     initialTop: "65%",
     initialLeft: "97%",
@@ -172,7 +169,7 @@ const cardData = [
     icon: <Image src={AdminTask} alt="Payroll management icon" />,
     title: "Administrative Tasks",
     subtitle: "Manage, Assign, Track",
-    positionClasses: "top-[50%] right-[5%] w-56",
+    positionClasses: "top-[68%] right-[20%] w-56 bg-neutral-50/60",
     // bottom-[20%] => initialTop = 80%
     initialTop: "80%",
     // right-[15%] => initialLeft = 85%
@@ -184,7 +181,7 @@ const cardData = [
     id: "postcare",
     icon: <Image src={PostPatientCare} alt="Payroll management icon" />,
     title: "Post patient care check in and follow up",
-    positionClasses: "top-[55%] right-[25%] w-64",
+    positionClasses: "top-[80%] right-[-1%] w-64 bg-neutral-50/20",
     // bottom-[5%] => initialTop = 95%
     initialTop: "95%",
     // right-[10%] => initialLeft = 90%
@@ -197,11 +194,9 @@ const cardData = [
 
 export const HeroSection = () => {
   // State for controlling animation via scroll:
-  // animateState can be "floating", "reversing", or "collapsed"
+  // animateState can be "floating" or "collapsed"
   const [animateState, setAnimateState] = useState("floating");
-  // Accumulate scroll delta from wheel events (0 to threshold)
-  const [scrollDelta, setScrollDelta] = useState(0);
-  const threshold = 100; // Adjust to control how much scrolling triggers a full collapse
+  const scrollThreshold = 50; // Pixels to scroll before collapsing
 
   // Existing mouse tracking (for background effects)
   const mouseX = useMotionValue(0);
@@ -213,24 +208,22 @@ export const HeroSection = () => {
     console.log("Email submitted:", email);
   };
 
-  // Listen for wheel events to accumulate scroll delta
-  const handleWheel = (e: React.WheelEvent) => {
-    setScrollDelta((prev) => {
-      const newDelta = Math.max(0, Math.min(prev + e.deltaY, threshold));
-      return newDelta;
-    });
-  };
-
-  // Update animateState based on scrollDelta
+  // Update animateState based on window scroll position
   useEffect(() => {
-    if (scrollDelta >= threshold) {
-      setAnimateState("collapsed");
-    } else if (scrollDelta > 0 && scrollDelta < threshold) {
-      setAnimateState("reversing");
-    } else {
-      setAnimateState("floating");
-    }
-  }, [scrollDelta]);
+    const handleScroll = () => {
+      if (window.scrollY > scrollThreshold) {
+        setAnimateState("collapsed");
+      } else {
+        setAnimateState("floating");
+      }
+    };
+
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    // Initial check in case the page loads already scrolled
+    handleScroll();
+
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, [scrollThreshold]); // Dependency array includes threshold
 
   // Existing mousemove event for background effects
   useEffect(() => {
@@ -268,51 +261,25 @@ export const HeroSection = () => {
       top: "90%",
       left: "50%",
       x: "-50%",
-      y: "-50%",
+      y: "150%",
       scale: 0.8,
       opacity: 0,
       transition: { delay, duration: 0.8, ease: "easeInOut" },
     },
   });
 
-  // Reverse animation: cards retrace the collapse path back to their original positions.
-  // We use the card's stored initialTop and initialLeft.
-  const reverseAnimation = (
-    delay = 0,
-    initialTop: string,
-    initialLeft: string
-  ) => ({
-    animate: {
-      top: initialTop,
-      left: initialLeft,
-      x: 0,
-      y: 0,
-      scale: 1,
-      opacity: 1,
-      transition: { delay, duration: 1.2, ease: "easeOut" },
-    },
-  });
-
   return (
     <section
-      onWheel={handleWheel}
-      className="relative w-full min-h-[110vh] sm:min-h-[120vh] md:min-h-screen bg-transparent overflow-hidden pt-24 sm:pt-0"
+      className="relative w-full min-h-[110vh] sm:min-h-[120vh] md:min-h-screen bg-transparent pt-24 sm:pt-0" // Removed overflow-hidden
     >
       {/* Render Floating Cards */}
       {cardData.map((card) => {
         // Choose animation props based on animateState.
-        let animationProps;
-        if (animateState === "collapsed") {
-          animationProps = collapsedAnimation(card.animationDelay);
-        } else if (animateState === "reversing") {
-          animationProps = reverseAnimation(
-            card.animationDelay,
-            card.initialTop,
-            card.initialLeft
-          );
-        } else {
-          animationProps = cardAnimation(card.animationDelay, card.yOffset);
-        }
+        const animationProps =
+          animateState === "collapsed"
+            ? collapsedAnimation(card.animationDelay)
+            : cardAnimation(card.animationDelay, card.yOffset);
+
         return (
           <FloatingCard
             key={card.id}
@@ -337,33 +304,24 @@ export const HeroSection = () => {
         >
           <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-[72px] leading-[1.2] sm:leading-[1.1] tracking-[-0.02em] font-medium text-[#111827] mb-4 sm:mb-6 md:mb-8 text-center">
             <ShinyGradientText className="inline-block sm:block">
-              Spend less time on admin,{" "}
+              Patient care that goes
             </ShinyGradientText>
             <ShinyGradientText className="inline-block sm:block">
-              more on patient care.
+              beyond the chair.
             </ShinyGradientText>
           </h1>
-          <p className="text-lg sm:text-xl md:text-2xl text-center text-[#374151] leading-relaxed mb-8 sm:mb-12 max-w-[660px]">
-            You shouldn't have to choose between growing your medspa and keeping
-            your sanity. Mentera handles your overwhelming tasks, freeing you to
-            deliver experiences your clients love.
+          <p className="text-sm sm:text-base font-normal text-[#717172] text-center">
+            Be among the first med spas to experience the future of hyper{" "}
+            <br></br>
+            personalized patient care.
           </p>
-          <div className="space-y-3 sm:space-y-4 w-full px-2 sm:px-0 flex flex-col items-center justify-center">
-            <p className="text-sm sm:text-base text-[#6B7280] text-center">
-              Be among the first practices to experience the future of patient
-              care.
-            </p>
+          <div className="space-y-3 sm:space-y-4 w-full px-2 py-4 sm:px-0 flex flex-col items-center justify-center">
             <EmailCaptureInput
               onSubmit={handleEmailSubmit}
               buttonText="Join Beta"
             />
           </div>
         </motion.div>
-      </div>
-
-      {/* Circular target where all cards merge */}
-      <div className="flex justify-center items-center">
-        <Image priority src={CircleAnimate} alt="Follow us on Twitter" />
       </div>
     </section>
   );
