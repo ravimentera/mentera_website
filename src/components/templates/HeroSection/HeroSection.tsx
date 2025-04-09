@@ -153,17 +153,17 @@ const cardData = [
       </div>
     ),
   },
-  {
-    id: "precharting",
-    icon: <Image src={PreCharting} alt="Payroll management icon" />,
-    title: "Pre-charting",
-    positionClasses: "top-[66%] right-[0%] w-40 bg-white/90",
-    // bottom-[35%] => initialTop = 65%
-    initialTop: "65%",
-    initialLeft: "97%",
-    animationDelay: 0.8,
-    yOffset: -7,
-  },
+  // {
+  //   id: "precharting",
+  //   icon: <Image src={PreCharting} alt="Payroll management icon" />,
+  //   title: "Pre-charting",
+  //   positionClasses: "top-[66%] right-[0%] w-40 bg-white/90",
+  //   // bottom-[35%] => initialTop = 65%
+  //   initialTop: "65%",
+  //   initialLeft: "97%",
+  //   animationDelay: 0.8,
+  //   yOffset: -7,
+  // },
   {
     id: "admin",
     icon: <Image src={AdminTask} alt="Payroll management icon" />,
@@ -261,7 +261,7 @@ export const HeroSection = () => {
       top: "90%",
       left: "50%",
       x: "-50%",
-      y: "150%",
+      y: "220%",
       scale: 0.8,
       opacity: 0,
       transition: { delay, duration: 0.8, ease: "easeInOut" },
@@ -270,7 +270,7 @@ export const HeroSection = () => {
 
   return (
     <section
-      className="relative w-full min-h-[110vh] sm:min-h-[120vh] md:min-h-screen bg-transparent pt-24 sm:pt-0" // Removed overflow-hidden
+      className="relative w-full min-h-[110vh] sm:min-h-[120vh] md:min-h-screen bg-transparent pt-24 sm:pt-0"
     >
       {/* Render Floating Cards */}
       {cardData.map((card) => {
