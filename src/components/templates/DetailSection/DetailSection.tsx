@@ -74,10 +74,10 @@ const AnimatedText = ({
       className="absolute inset-0 flex items-center justify-start"
     >
       <div className="text-left max-w-md">
-        <h2 className="text-xl md:text-base font-bold mb-1 text-gray-900">
+        <h2 className="heading-h5 text-black">
           {content.title}
         </h2>
-        <p className="text-black font-normal text-sm md:text-base">
+        <p className="text-body-1 text-text-secondary">
           {content.description}
         </p>
       </div>

@@ -75,16 +75,12 @@ export const FeatureSection = () => {
       className="px-4 sm:px-6 md:px-8 py-12 md:py-16 lg:py-24"
     >
       <div className="flex flex-col items-center max-w-4xl mx-auto mb-10 md:mb-16">
-        <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-semibold text-center mb-4 sm:mb-6 leading-tight">
+        <h2 className="heading-h2 text-center mb-4 sm:mb-6 gradient-text-2">
           Built for practitioners, <br className="hidden sm:block" />
-          by practitioners and <GradientText>AI experts</GradientText>.
+          by practitioners and AI experts.
         </h2>
-        <p className="text-base sm:text-lg md:text-xl lg:text-2xl text-[#374151] text-center leading-relaxed">
-          We&apos;ve interviewed hundreds of practitioners and practice owners
-          to deeply understand their day-to-day challenges. Together with AI
-          experts, we&apos;ve crafted a purpose-built solution focused on
-          delivering real value, eliminating unnecessary tasks, and empowering
-          you to do what you do best—care for your patients.
+        <p className="heading-h3 text-text-primary text-center">
+          We&apos;ve interviewed hundreds of practitioners and med spa owners to deeply understand their day-to-day challenges. Together with AI experts, we’ve created a purpose-built solution focused on delivering real value, eliminating unnecessary tasks, and empowering you to do what you do best - care for your patients.
         </p>
       </div>
 

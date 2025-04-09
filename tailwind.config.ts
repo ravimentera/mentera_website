@@ -33,6 +33,8 @@ const config: Config = {
           800: "#1F2937",
           900: "#111827",
         },
+        "gradient-2-start": "rgba(17, 26, 83, 1)",
+        "gradient-2-end": "rgba(38, 58, 185, 1)",
       },
       spacing: {
         "18": "4.5rem",
@@ -44,42 +46,7 @@ const config: Config = {
         inter: ["Inter", "sans-serif"],
         poppins: ["Poppins", "sans-serif"],
       },
-      fontSize: {
-        body: [
-          "16px",
-          { lineHeight: "160%", letterSpacing: "0px", fontWeight: "400" },
-        ],
-
-        h6: [
-          "16px",
-          { lineHeight: "normal", letterSpacing: "0px", fontWeight: "500" },
-        ],
-
-        h5: [
-          "20px",
-          { lineHeight: "normal", letterSpacing: "0px", fontWeight: "500" },
-        ],
-
-        h4: [
-          "24px",
-          { lineHeight: "normal", letterSpacing: "0px", fontWeight: "500" },
-        ],
-
-        h3: [
-          "32px",
-          { lineHeight: "130%", letterSpacing: "0px", fontWeight: "400" },
-        ],
-
-        h2: [
-          "48px",
-          { lineHeight: "normal", letterSpacing: "0px", fontWeight: "500" },
-        ],
-
-        h1: [
-          "58px",
-          { lineHeight: "normal", letterSpacing: "0px", fontWeight: "500" },
-        ],
-      },
+      
       animation: {
         "gradient-x": "gradient-x 15s ease infinite",
         float: "float 6s ease-in-out infinite",

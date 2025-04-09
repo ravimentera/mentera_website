@@ -35,7 +35,7 @@ export const FloatingCard: React.FC<FloatingCardProps> = ({
         </div>
         <div className="flex-grow">
           <h3
-            className="text-sm font-semibold text-gray-800 leading-3"
+            className="heading-h6 text-primary"
             dangerouslySetInnerHTML={{ __html: title }}
           ></h3>
           {subtitle && <p className="text-xs text-gray-700 mt-3">{subtitle}</p>}

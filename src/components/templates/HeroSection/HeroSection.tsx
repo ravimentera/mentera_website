@@ -287,7 +287,7 @@ export const HeroSection = () => {
             title={card.title}
             subtitle={card.subtitle}
             className={`${card.positionClasses} hidden md:flex`}
-            animationProps={animationProps}
+            // animationProps={animationProps}
           >
             {card.children}
           </FloatingCard>
@@ -302,7 +302,7 @@ export const HeroSection = () => {
           transition={{ duration: 0.6 }}
           className="max-w-[800px] flex flex-col justify-center items-center"
         >
-          <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-[72px] leading-[1.2] sm:leading-[1.1] tracking-[-0.02em] font-medium text-[#111827] mb-4 sm:mb-6 md:mb-8 text-center">
+          <h1 className="heading-h1 text-gray-900 mb-4 sm:mb-6 md:mb-8 text-center flex flex-col gap-11">
             <ShinyGradientText className="inline-block sm:block">
               Patient care that goes
             </ShinyGradientText>
@@ -310,7 +310,7 @@ export const HeroSection = () => {
               beyond the chair.
             </ShinyGradientText>
           </h1>
-          <p className="text-sm sm:text-base font-normal text-[#717172] text-center">
+          <p className="text-body-1 text-text-secondaryprimary text-center">
             Be among the first med spas to experience the future of hyper{" "}
             <br></br>
             personalized patient care.

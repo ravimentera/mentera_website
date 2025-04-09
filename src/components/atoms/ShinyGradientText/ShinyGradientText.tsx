@@ -31,7 +31,7 @@ export const ShinyGradientText = ({
     >
       {/* Base gradient text */}
       <span
-        className="relative text-[40px] font-semibold"
+        className={`relative`}
         style={{
           backgroundImage: `linear-gradient(to right, ${gradientFrom}, ${gradientTo})`,
           WebkitBackgroundClip: "text",
