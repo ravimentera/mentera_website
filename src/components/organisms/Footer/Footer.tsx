@@ -13,17 +13,17 @@ export const Footer = () => {
       <div className="w-full bg-[#111A53] py-10 sm:py-12 md:py-16 rounded-none sm:rounded-3xl md:rounded-[36px]">
         <div className="max-w-[1200px] mx-auto px-4 md:px-8">
           {/* CTA Section */}
-          <div className="mb-10 sm:mb-12 md:mb-16 text-center">
-            <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-medium mb-6 md:mb-8 text-transparent bg-clip-text bg-gradient-to-r from-[#6EF1BB] to-[#AA72FF]">
-              Be among the first practices to
-              <br className="hidden sm:block" /> experience the future of
-              patient care.
+          <div className="mb-10 sm:mb-12 md:mb-16 text-center flex flex-col items-center gap-12">
+            <h2 className="heading-h2 mb-6 md:mb-8 text-white">
+              Be among the first practices to experience{" "}
+              <br className="hidden sm:block" />
+              the future of patient care.
             </h2>
 
-            <div className="flex flex-col gap-4">
+            <div className="flex flex-col gap-4 lg:w-[618px]">
               <EmailCaptureInput
                 placeholder="Enter your email"
-                buttonText="Join Beta"
+                buttonText="Join the beta waitlist"
                 variant="dark"
                 className="w-full"
               />
@@ -85,19 +85,19 @@ export const Footer = () => {
             <div className="flex flex-wrap justify-center gap-4 md:gap-8">
               <Link
                 href="#"
-                className="text-[#FFFFFF]/60 hover:text-[#FFFFFF] transition-colors text-sm md:text-base"
+                className="text-body-1 text-[#FFFFFF]/60 hover:text-[#FFFFFF] transition-colors"
               >
                 Contact Us
               </Link>
               <Link
                 href="#"
-                className="text-[#FFFFFF]/60 hover:text-[#FFFFFF] transition-colors text-sm md:text-base"
+                className="text-body-1 text-[#FFFFFF]/60 hover:text-[#FFFFFF] transition-colors"
               >
                 Privacy Policy
               </Link>
               <Link
                 href="#"
-                className="text-[#FFFFFF]/60 hover:text-[#FFFFFF] transition-colors text-sm md:text-base"
+                className="text-body-1 text-[#FFFFFF]/60 hover:text-[#FFFFFF] transition-colors"
               >
                 Terms & Condition
               </Link>
@@ -109,7 +109,7 @@ export const Footer = () => {
 
           {/* Copyright and Social Media */}
           <div className="flex flex-col md:flex-row justify-between items-center">
-            <p className="text-[#FFFFFF]/60 text-xs sm:text-sm mb-4 md:mb-0 text-center md:text-left">
+            <p className="text-body-1 text-white text-xs mb-4 md:mb-0 text-center md:text-left">
               © 2025 Mentera Inc. All rights reserved.
             </p>
             <div className="flex gap-4">

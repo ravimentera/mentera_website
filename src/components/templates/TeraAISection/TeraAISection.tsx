@@ -13,7 +13,7 @@ export const TeraAISection = () => {
         viewport={{ once: true }}
         transition={{ duration: 0.6 }}
       >
-        <h2 className="w-full gradient-text font-lexend font-semibold text-5xl leading-[52px]">
+        <h2 className="w-full gradient-text heading-h2">
           <ShinyGradientText>Meet Tera AI Assistant</ShinyGradientText>
         </h2>
         <p className="max-w-[574px] font-outfit font-normal text-text-primary text-2xl leading-[31.9px]">

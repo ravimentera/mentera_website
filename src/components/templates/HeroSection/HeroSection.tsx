@@ -47,7 +47,7 @@ const cardData = [
     id: "scheduling",
     icon: <Image src={NewPatientScheduling} alt="New Schedulin icon" />,
     title: "New Patient Scheduling",
-    positionClasses: "top-[12%] left-[20%] w-52 bg-white/90",
+    positionClasses: "absolute top-[12%] left-[20%] xs:top-[10%] xs:left-[1%] w-52 bg-white/90",
     initialTop: "10%",
     initialLeft: "30%",
     animationDelay: 0.5,
@@ -58,7 +58,7 @@ const cardData = [
     icon: <Image src={PromotionalStrat} alt="Promotional Strategies icon" />,
     title: "Promotional Strategies",
     subtitle: "Offers and Gift Cards",
-    positionClasses: "top-[30%] left-[5%] w-60 bg-white/80",
+    positionClasses: "top-[30%] left-[5%] w-60 bg-white/80 hidden md:flex",
     initialTop: "30%",
     initialLeft: "8%",
     animationDelay: 0.3,
@@ -75,7 +75,7 @@ const cardData = [
     icon: <Image src={QuickResponse} alt="Quick Response icon" />,
     title: "Quick Respond to <br></br> Patient Inquiries",
     subtitle: "Live Chat, On Call",
-    positionClasses: "top-[48%] left-[12%] w-64 pr-8 bg-white/80",
+    positionClasses: "top-[48%] left-[12%] xs:top-[52%] xs:left-[2%] w-64 pr-8 bg-white/80",
     initialTop: "50%",
     initialLeft: "10%",
     animationDelay: 0.7,
@@ -85,7 +85,7 @@ const cardData = [
     id: "lead",
     icon: <Image src={LeadManagement} alt="Lead management icon" />,
     title: "Lead Management",
-    positionClasses: "top-[65%] left-[0%] w-60 bg-white/70",
+    positionClasses: "top-[65%] left-[0%] w-60 bg-white/70 hidden md:flex",
     initialTop: "75%",
     initialLeft: "3%",
     animationDelay: 0.2,
@@ -106,7 +106,7 @@ const cardData = [
     id: "staff",
     icon: <Image src={PayrollManagement} alt="Payroll management icon" />,
     title: "Staff Management",
-    positionClasses: "top-[72%] left-[20%] w-60 bg-white/70",
+    positionClasses: "top-[72%] left-[20%] xs:top-[80%] xs:left-[5%] w-60 bg-white/70",
     initialTop: "80%",
     initialLeft: "25%",
     animationDelay: 0.4,
@@ -117,7 +117,7 @@ const cardData = [
     id: "kpi",
     icon: <Image src={KpiReporting} alt="Payroll management icon" />,
     title: "KPIs and Reporting",
-    positionClasses: "top-[12%] right-[20%] w-48 bg-white/90",
+    positionClasses: "top-[12%] right-[20%] w-48 bg-white/90 hidden md:flex",
     // For right-[20%], we compute left as 80%
     initialTop: "12%",
     initialLeft: "80%",
@@ -128,7 +128,7 @@ const cardData = [
     id: "upsell",
     icon: <Image src={UpsellOpportunities} alt="Payroll management icon" />,
     title: "Upsell Opportunities",
-    positionClasses: "top-[25%] right-[8%] w-52 bg-white/90",
+    positionClasses: "top-[25%] right-[8%] xs:top-[22%] xs:right[0%] w-52 bg-white/90",
     initialTop: "25%",
     initialLeft: "95%",
     animationDelay: 0.6,
@@ -139,7 +139,7 @@ const cardData = [
     icon: <Image src={SocialMediaManagement} alt="Payroll management icon" />,
     title: "Social Media <br></br> Management",
     subtitle: "Marketing Campaigns",
-    positionClasses: "top-[38%] right-[5%] w-40 bg-white/90",
+    positionClasses: "top-[38%] right-[5%] w-40 bg-white/90 hidden md:flex",
     initialTop: "42%",
     initialLeft: "92%",
     animationDelay: 0.1,
@@ -153,23 +153,23 @@ const cardData = [
       </div>
     ),
   },
-  {
-    id: "precharting",
-    icon: <Image src={PreCharting} alt="Payroll management icon" />,
-    title: "Pre-charting",
-    positionClasses: "top-[66%] right-[0%] w-40 bg-white/90",
-    // bottom-[35%] => initialTop = 65%
-    initialTop: "65%",
-    initialLeft: "97%",
-    animationDelay: 0.8,
-    yOffset: -7,
-  },
+  // {
+  //   id: "precharting",
+  //   icon: <Image src={PreCharting} alt="Payroll management icon" />,
+  //   title: "Pre-charting",
+  //   positionClasses: "top-[66%] right-[0%] w-40 bg-white/90",
+  //   // bottom-[35%] => initialTop = 65%
+  //   initialTop: "65%",
+  //   initialLeft: "97%",
+  //   animationDelay: 0.8,
+  //   yOffset: -7,
+  // },
   {
     id: "admin",
     icon: <Image src={AdminTask} alt="Payroll management icon" />,
     title: "Administrative Tasks",
     subtitle: "Manage, Assign, Track",
-    positionClasses: "top-[68%] right-[20%] w-56 bg-neutral-50/60",
+    positionClasses: "top-[68%] right-[20%] xs:right-[0%] w-56 bg-neutral-50/60",
     // bottom-[20%] => initialTop = 80%
     initialTop: "80%",
     // right-[15%] => initialLeft = 85%
@@ -181,7 +181,7 @@ const cardData = [
     id: "postcare",
     icon: <Image src={PostPatientCare} alt="Payroll management icon" />,
     title: "Post patient care check in and follow up",
-    positionClasses: "top-[80%] right-[-1%] w-64 bg-neutral-50/20",
+    positionClasses: "top-[80%] right-[-1%] w-64 bg-neutral-50/20 hidden md:flex",
     // bottom-[5%] => initialTop = 95%
     initialTop: "95%",
     // right-[10%] => initialLeft = 90%
@@ -261,7 +261,7 @@ export const HeroSection = () => {
       top: "90%",
       left: "50%",
       x: "-50%",
-      y: "150%",
+      y: "220%",
       scale: 0.8,
       opacity: 0,
       transition: { delay, duration: 0.8, ease: "easeInOut" },
@@ -270,7 +270,7 @@ export const HeroSection = () => {
 
   return (
     <section
-      className="relative w-full min-h-[110vh] sm:min-h-[120vh] md:min-h-screen bg-transparent pt-24 sm:pt-0" // Removed overflow-hidden
+      className="relative w-full min-h-[110vh] sm:min-h-[120vh] md:min-h-screen bg-transparent pt-24 sm:pt-0"
     >
       {/* Render Floating Cards */}
       {cardData.map((card) => {
@@ -286,7 +286,7 @@ export const HeroSection = () => {
             icon={card.icon}
             title={card.title}
             subtitle={card.subtitle}
-            className={`${card.positionClasses} hidden md:flex`}
+            className={`${card.positionClasses}`}
             animationProps={animationProps}
           >
             {card.children}
@@ -302,7 +302,7 @@ export const HeroSection = () => {
           transition={{ duration: 0.6 }}
           className="max-w-[800px] flex flex-col justify-center items-center"
         >
-          <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-[72px] leading-[1.2] sm:leading-[1.1] tracking-[-0.02em] font-medium text-[#111827] mb-4 sm:mb-6 md:mb-8 text-center">
+          <h1 className="heading-h1 text-gray-900 mb-4 sm:mb-6 md:mb-8 text-center flex flex-col gap-11">
             <ShinyGradientText className="inline-block sm:block">
               Patient care that goes
             </ShinyGradientText>
@@ -310,7 +310,7 @@ export const HeroSection = () => {
               beyond the chair.
             </ShinyGradientText>
           </h1>
-          <p className="text-sm sm:text-base font-normal text-[#717172] text-center">
+          <p className="text-body-1 text-text-secondaryprimary text-center">
             Be among the first med spas to experience the future of hyper{" "}
             <br></br>
             personalized patient care.

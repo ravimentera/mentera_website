@@ -35,7 +35,7 @@ export const AIFeaturesSection = () => {
   return (
     <section className="w-full py-12 md:py-16 lg:py-24">
       <div className="mx-auto px-4 sm:px-8 md:px-12">
-        <h2 className="text-2xl md:text-3xl lg:text-5xl font-bold text-center mb-8 md:mb-12 lg:mb-16">
+        <h2 className="heading-h2 text-center mb-8 md:mb-12 lg:mb-16">
           <ShinyGradientText>Cutting-edge AI Features</ShinyGradientText>
         </h2>
         <div className="flex flex-col gap-5 md:gap-7">
