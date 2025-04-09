@@ -3,37 +3,37 @@
 import React from "react";
 import Image from "next/image";
 import { motion, useTransform, MotionValue } from "framer-motion";
-import CircleAnimate from "@/assets/icons/circle.svg"; // Corrected path
+import CircleAnimate from "@/assets/icons/circle.svg";
 
 // Define the structure for text content
 interface TextContent {
   id: number;
   title: string;
   description: string;
-  position: "left" | "right";
+  position: "left" | "right"; // Keep this for desktop logic, but mobile will combine
 }
 
-// Text content data - Reordered to match Left -> Right -> Left
+// Text content data
 const textContents: TextContent[] = [
   {
     id: 1,
     title: "Data-Driven Personalization",
     description:
-      "Ingest and analyze your practice's data, transforming it into actionable insights. This personalized approach creates a tailored AI assistant uniquely suited for your practice.",
+      "Ingest and analyze your practice’s data, transforming it into actionable insights. This personalized approach creates a tailored AI assistant uniquely suited for your practice.",
     position: "left",
   },
   {
-    id: 2, // Changed ID to reflect order
+    id: 2,
     title: "Intelligent Next Steps",
     description:
       "Using these data signals, we proactively recommend optimal strategies across your back-office operations, including patient communication, scheduling, marketing, and overall management.",
     position: "right",
   },
   {
-    id: 3, // Changed ID to reflect order
+    id: 3,
     title: "Continuous Learning & Optimization",
     description:
-      "Mentera continuously learns from every patient interaction. By quickly identifying and amplifying effective strategies in real-time, it evolves into your practice's smartest assistant, continuously enhancing efficiency and patient experiences.",
+      "Mentera continuously learns from every patient interaction. By quickly identifying and amplifying effective strategies in real-time, it evolves into your practice’s smartest assistant, continuously enhancing efficiency and patient experiences.",
     position: "left",
   },
 ];
@@ -46,15 +46,12 @@ const AnimatedText = ({
   content: TextContent;
   scrollYProgress: MotionValue<number>;
 }) => {
-  // Define scroll ranges based on ID and total items
   const numItems = textContents.length;
-  const sectionDuration = 1 / numItems; // Divide total progress (0 to 1) by number of items
-  const startRange = (content.id - 1) * sectionDuration; // Start appearing at the beginning of the item's segment
-  const peakRangeStart = startRange + sectionDuration * 0.35; // Fully visible shortly after start
-  const peakRangeEnd = startRange + sectionDuration * 0.65; // Start fading out before the next item starts
-  const endRange = startRange + sectionDuration; // Fully disappeared when the next item's segment begins
-
-  // Opacity: Fade in -> Stay visible -> Fade out
+  const sectionDuration = 1 / numItems;
+  const startRange = (content.id - 1) * sectionDuration;
+  const peakRangeStart = startRange + sectionDuration * 0.35;
+  const peakRangeEnd = startRange + sectionDuration * 0.65;
+  const endRange = startRange + sectionDuration;
   const opacity = useTransform(
     scrollYProgress,
     [startRange, peakRangeStart, peakRangeEnd, endRange],
@@ -64,22 +61,21 @@ const AnimatedText = ({
   const y = useTransform(
     scrollYProgress,
     [startRange, peakRangeStart, peakRangeEnd, endRange],
-    ["60px", "0px", "0px", "-30px"] // More visible lift
+    ["60px", "0px", "0px", "-30px"]
   );
 
   return (
+    // Changed from absolute to relative, centered text on mobile
     <motion.div
       style={{ opacity, y }}
       transition={{ duration: 1, ease: "easeOut" }}
-      className="absolute inset-0 flex items-center justify-start"
+      // Make this div relative and control its height to contain the text
+      // Center text content for mobile, align left for large screens
+      className="absolute flex h-[200px] w-full items-center justify-center lg:justify-start"
     >
-      <div className="text-left max-w-md">
-        <h2 className="heading-h5 text-black">
-          {content.title}
-        </h2>
-        <p className="text-body-1 text-text-secondary">
-          {content.description}
-        </p>
+      <div className="max-w-md text-center lg:text-left">
+        <h2 className="heading-h5 text-black">{content.title}</h2>
+        <p className="text-body-1 text-text-secondary">{content.description}</p>
       </div>
     </motion.div>
   );
@@ -91,19 +87,21 @@ const DetailSection = ({
 }: {
   scrollYProgress: MotionValue<number>;
 }) => {
-  // Filter text content for left and right positions
+  // Combine all texts for mobile rendering logic, keep separate for desktop logic
   const leftTexts = textContents.filter((t) => t.position === "left");
   const rightTexts = textContents.filter((t) => t.position === "right");
 
   return (
-    // Make the section itself sticky within the parent wrapper
-    <motion.section className="sticky top-0 h-screen flex items-center justify-center overflow-hidden">
-      {/* Use the container for padding and centering the overall layout */}
-      <div className="container mx-auto px-10 flex items-center justify-between w-full h-full">
-        {/* Left Column - Relative positioning needed for absolute children */}
-        <div className="w-full lg:w-1/3 flex flex-col justify-end relative h-1/2 pb-16">
-          {" "}
-          {/* Added relative, adjusted height */}
+    // Make the section sticky and relative for absolute positioning context
+    <motion.section className="sticky top-0 h-screen flex items-center justify-center overflow-hidden relative">
+      {/* Main container: Column layout on mobile, Row on large screens */}
+      <div className="container mx-auto px-4 sm:px-6 lg:px-10 flex flex-col lg:flex-row items-center justify-center lg:justify-between w-full h-full relative">
+
+        {/* Left Column (Visible on LG, part of stacked content on mobile) */}
+        {/* Order 1 on all screens, takes full width on mobile, 1/3 on LG */}
+        {/* Increased z-index to be above the image on mobile */}
+        <div className="w-full lg:w-1/3 flex flex-col items-center lg:items-start justify-center relative z-10 order-1 lg:order-1 h-auto lg:h-1/2">
+          {/* Render left texts */}
           {leftTexts.map((content) => (
             <AnimatedText
               key={content.id}
@@ -111,25 +109,30 @@ const DetailSection = ({
               scrollYProgress={scrollYProgress}
             />
           ))}
+          {/* Spacer for mobile layout to push content up if needed, hidden on lg */}
+           <div className="h-24 lg:hidden"></div>
         </div>
 
-        {/* Center Sticky Image - Removed relative positioning */}
-        <div className="w-full lg:w-auto flex justify-center items-center px-8">
+        {/* Center Sticky Image Container */}
+        {/* Takes full width behind content on mobile (absolute, z-0), specific width and relative on LG (z-auto) */}
+        {/* Order 3 on mobile (visually appears behind due to z-index), Order 2 on LG */}
+        <div className="absolute inset-0 flex justify-center items-center z-0 lg:relative lg:w-auto lg:z-auto order-3 lg:order-2 lg:px-8">
           <Image
             priority
             src={CircleAnimate}
             alt="AI Process Visualization"
             width={450}
             height={450}
-            // className="max-w-sm md:max-w-md lg:max-w-lg" // Removed relative -top-48
-            className="max-w-sm md:max-w-md lg:max-w-lg relative" // Adjusted max-width and added relative positioning
+            // Adjusted max-width for different screens
+            className="max-w-[300px] sm:max-w-sm md:max-w-md lg:max-w-lg"
           />
         </div>
 
-        {/* Right Column - Relative positioning needed for absolute children */}
-        <div className="w-full lg:w-1/3 flex flex-col justify-end relative h-1/2 pb-16">
-          {" "}
-          {/* Added relative, adjusted height */}
+        {/* Right Column (Visible on LG, part of stacked content on mobile) */}
+        {/* Order 2 on mobile, Order 3 on LG */}
+        {/* Increased z-index to be above the image on mobile */}
+        <div className="w-full lg:w-1/3 flex flex-col items-center lg:items-start justify-center relative z-10 order-2 lg:order-3 h-auto lg:h-1/2">
+          {/* Render right texts */}
           {rightTexts.map((content) => (
             <AnimatedText
               key={content.id}
@@ -137,6 +140,8 @@ const DetailSection = ({
               scrollYProgress={scrollYProgress}
             />
           ))}
+           {/* Spacer for mobile layout, hidden on lg */}
+           <div className="h-24 lg:hidden"></div>
         </div>
       </div>
     </motion.section>

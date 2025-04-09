@@ -121,7 +121,7 @@
 
   /* Body Text */
   .text-body-1 {
-    @apply text-base sm:text-lg md:text-xl font-inter;
+    @apply xs:text-sm sm:text-lg md:text-xl font-inter;
     font-weight: 400;
 
     @media (min-width: 1024px) {
@@ -133,7 +133,7 @@
 
   /* Heading H6 */
   .heading-h6 {
-    @apply text-sm sm:text-base md:text-lg font-inter;
+    @apply xs:text-sm sm:text-base md:text-lg font-inter;
     font-weight: 400;
 
     @media (min-width: 1024px) {
@@ -145,7 +145,7 @@
 
   /* Heading H5 */
   .heading-h5 {
-    @apply text-base sm:text-lg md:text-xl font-poppins;
+    @apply xs:text-base sm:text-lg md:text-xl font-poppins;
     font-weight: 400;
 
     @media (min-width: 1024px) {
@@ -157,7 +157,7 @@
 
   /* Heading H4 */
   .heading-h4 {
-    @apply text-lg sm:text-xl md:text-2xl font-poppins;
+    @apply xs:text-lg sm:text-xl md:text-2xl font-poppins;
     font-weight: 400;
 
     @media (min-width: 1024px) {
@@ -169,7 +169,7 @@
 
   /* Heading H3 */
   .heading-h3 {
-    @apply text-xl sm:text-2xl md:text-3xl font-inter;
+    @apply xs:text-xl sm:text-2xl md:text-3xl font-inter;
     font-weight: 400;
 
     @media (min-width: 1024px) {
@@ -181,7 +181,7 @@
 
   /* Heading H2 */
   .heading-h2 {
-    @apply text-2xl sm:text-3xl md:text-4xl font-poppins;
+    @apply xs:text-2xl sm:text-3xl md:text-4xl font-poppins;
     font-weight: 400;
 
     @media (min-width: 1024px) {
@@ -193,7 +193,7 @@
 
   /* Heading H1 */
   .heading-h1 {
-    @apply text-3xl sm:text-4xl md:text-5xl font-poppins;
+    @apply  md:text-5xl sm:text-4xl xs:text-3xl font-poppins;
     font-weight: 400;
 
     @media (min-width: 1024px) {

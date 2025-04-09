@@ -89,7 +89,8 @@ export const ExpertiseSection: React.FC = () => {
           </div>
 
           {/* Right Side - Image */}
-          <div className="relative col-span-12 lg:col-span-6 flex justify-center items-center order-1 lg:order-2 mb-8 lg:mb-0 min-h-[300px] md:min-h-[400px]">
+          {/* Increased bottom margin on mobile (mb-12) and kept no margin on large screens (lg:mb-0) */}
+          <div className="relative col-span-12 lg:col-span-6 flex justify-center items-center order-1 lg:order-2 mb-12 lg:mb-0 min-h-[300px] md:min-h-[400px]">
             <AnimatePresence mode="wait">
               <motion.div
                 key={activeItem.id}
@@ -104,7 +105,7 @@ export const ExpertiseSection: React.FC = () => {
                   alt={activeItem.title}
                   width={550}
                   height={400}
-                  className="max-w-full h-auto object-contain rounded-lg shadow-md mt-24"
+                  className="max-w-full h-auto object-contain rounded-lg shadow-md"
                   priority
                 />
               </motion.div>
