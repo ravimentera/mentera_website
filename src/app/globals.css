@@ -1,3 +1,5 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500&family=Poppins:wght@400;500&display=swap");
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -111,6 +113,36 @@
   
   .responsive-gap {
     @apply gap-4 sm:gap-6 md:gap-8;
+  }
+
+  /* Body Text */
+  .text-body {
+    @apply text-base sm:text-lg md:text-xl lg:text-body font-inter;
+  }
+
+  /* Headings (responsive until lg, custom sizes after) */
+  .heading-h6 {
+    @apply text-sm sm:text-base md:text-lg lg:text-h6 font-inter;
+  }
+
+  .heading-h5 {
+    @apply text-base sm:text-lg md:text-xl lg:text-h5 font-poppins;
+  }
+
+  .heading-h4 {
+    @apply text-lg sm:text-xl md:text-2xl lg:text-h4 font-poppins;
+  }
+
+  .heading-h3 {
+    @apply text-xl sm:text-2xl md:text-3xl lg:text-h3 font-inter;
+  }
+
+  .heading-h2 {
+    @apply text-2xl sm:text-3xl md:text-4xl lg:text-h2 font-poppins;
+  }
+
+  .heading-h1 {
+    @apply text-3xl sm:text-4xl md:text-5xl lg:text-h1 font-poppins;
   }
 }
 

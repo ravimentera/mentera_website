@@ -40,16 +40,45 @@ const config: Config = {
         "100": "25rem",
         "120": "30rem",
       },
-      fontSize: {
-        display: ["4.5rem", { lineHeight: "1.1", letterSpacing: "-0.02em" }],
-        h1: ["3rem", { lineHeight: "1.2" }],
-        h2: ["2.25rem", { lineHeight: "1.3" }],
-        h3: ["1.875rem", { lineHeight: "1.4" }],
-        "body-lg": ["1.25rem", { lineHeight: "1.6" }],
-        body: ["1rem", { lineHeight: "1.5" }],
-      },
       fontFamily: {
-        sans: ["var(--font-poppins)"],
+        inter: ["Inter", "sans-serif"],
+        poppins: ["Poppins", "sans-serif"],
+      },
+      fontSize: {
+        body: [
+          "16px",
+          { lineHeight: "160%", letterSpacing: "0px", fontWeight: "400" },
+        ],
+
+        h6: [
+          "16px",
+          { lineHeight: "normal", letterSpacing: "0px", fontWeight: "500" },
+        ],
+
+        h5: [
+          "20px",
+          { lineHeight: "normal", letterSpacing: "0px", fontWeight: "500" },
+        ],
+
+        h4: [
+          "24px",
+          { lineHeight: "normal", letterSpacing: "0px", fontWeight: "500" },
+        ],
+
+        h3: [
+          "32px",
+          { lineHeight: "130%", letterSpacing: "0px", fontWeight: "400" },
+        ],
+
+        h2: [
+          "48px",
+          { lineHeight: "normal", letterSpacing: "0px", fontWeight: "500" },
+        ],
+
+        h1: [
+          "58px",
+          { lineHeight: "normal", letterSpacing: "0px", fontWeight: "500" },
+        ],
       },
       animation: {
         "gradient-x": "gradient-x 15s ease infinite",
