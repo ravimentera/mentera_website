@@ -37,7 +37,7 @@ const cardData = [
   //   id: "payroll",
   //   icon: <Image src={PayrollManagement} alt="Payroll management icon" />,
   //   title: "Payroll Management",
-  //   positionClasses: "top-[10%] left-[10%] w-48",
+  //   positionClasses: "md:top-[10%] md:left-[10%] w-48",
   //   initialTop: "15%",
   //   initialLeft: "5%",
   //   animationDelay: 0.1,
@@ -47,7 +47,8 @@ const cardData = [
     id: "scheduling",
     icon: <Image src={NewPatientScheduling} alt="New Schedulin icon" />,
     title: "New Patient Scheduling",
-    positionClasses: "absolute top-[12%] left-[20%] xs:top-[10%] xs:left-[1%] w-52 bg-white/90",
+    positionClasses:
+      "absolute md:top-[12%] md:left-[20%] xs:top-[55%] xs:left-[-5%] w-52 bg-white/90",
     initialTop: "10%",
     initialLeft: "30%",
     animationDelay: 0.5,
@@ -58,7 +59,8 @@ const cardData = [
     icon: <Image src={PromotionalStrat} alt="Promotional Strategies icon" />,
     title: "Promotional Strategies",
     subtitle: "Offers and Gift Cards",
-    positionClasses: "top-[30%] left-[5%] w-60 bg-white/80 hidden md:flex",
+    positionClasses:
+      "md:top-[30%] md:left-[5%] w-60 bg-white/80 hidden md:flex",
     initialTop: "30%",
     initialLeft: "8%",
     animationDelay: 0.3,
@@ -75,7 +77,8 @@ const cardData = [
     icon: <Image src={QuickResponse} alt="Quick Response icon" />,
     title: "Quick Respond to <br></br> Patient Inquiries",
     subtitle: "Live Chat, On Call",
-    positionClasses: "top-[48%] left-[12%] xs:top-[52%] xs:left-[2%] w-64 pr-8 bg-white/80",
+    positionClasses:
+      "md:top-[48%] md:left-[12%] xs:top-[78%] xs:left-[55%] w-64 md:pr-8 xs:pr-4 bg-white/80",
     initialTop: "50%",
     initialLeft: "10%",
     animationDelay: 0.7,
@@ -85,7 +88,8 @@ const cardData = [
     id: "lead",
     icon: <Image src={LeadManagement} alt="Lead management icon" />,
     title: "Lead Management",
-    positionClasses: "top-[65%] left-[0%] w-60 bg-white/70 hidden md:flex",
+    positionClasses:
+      "md:top-[65%] md:left-[0%] w-60 bg-white/70 hidden md:flex",
     initialTop: "75%",
     initialLeft: "3%",
     animationDelay: 0.2,
@@ -106,7 +110,8 @@ const cardData = [
     id: "staff",
     icon: <Image src={PayrollManagement} alt="Payroll management icon" />,
     title: "Staff Management",
-    positionClasses: "top-[72%] left-[20%] xs:top-[80%] xs:left-[5%] w-60 bg-white/70",
+    positionClasses:
+      "md:top-[72%] md:left-[20%] xs:top-[72%] xs:left-[2%] w-60 bg-white/70",
     initialTop: "80%",
     initialLeft: "25%",
     animationDelay: 0.4,
@@ -117,7 +122,8 @@ const cardData = [
     id: "kpi",
     icon: <Image src={KpiReporting} alt="Payroll management icon" />,
     title: "KPIs and Reporting",
-    positionClasses: "top-[12%] right-[20%] w-48 bg-white/90 hidden md:flex",
+    positionClasses:
+      "md:top-[12%] md:right-[20%] xs:top-[82%] xs:left-[1%] w-48 bg-white/90 ",
     // For right-[20%], we compute left as 80%
     initialTop: "12%",
     initialLeft: "80%",
@@ -128,7 +134,8 @@ const cardData = [
     id: "upsell",
     icon: <Image src={UpsellOpportunities} alt="Payroll management icon" />,
     title: "Upsell Opportunities",
-    positionClasses: "top-[25%] right-[8%] xs:top-[22%] xs:right[0%] w-52 bg-white/90",
+    positionClasses:
+      "md:top-[25%] md:right-[8%] xs:top-[45%] xs:right-[-3%] w-52 bg-white/90",
     initialTop: "25%",
     initialLeft: "95%",
     animationDelay: 0.6,
@@ -139,7 +146,8 @@ const cardData = [
     icon: <Image src={SocialMediaManagement} alt="Payroll management icon" />,
     title: "Social Media <br></br> Management",
     subtitle: "Marketing Campaigns",
-    positionClasses: "top-[38%] right-[5%] w-40 bg-white/90 hidden md:flex",
+    positionClasses:
+      "md:top-[38%] md:right-[5%] w-40 bg-white/90 hidden md:flex",
     initialTop: "42%",
     initialLeft: "92%",
     animationDelay: 0.1,
@@ -157,7 +165,7 @@ const cardData = [
   //   id: "precharting",
   //   icon: <Image src={PreCharting} alt="Payroll management icon" />,
   //   title: "Pre-charting",
-  //   positionClasses: "top-[66%] right-[0%] w-40 bg-white/90",
+  //   positionClasses: "md:top-[66%] md:right-[0%] w-40 bg-white/90",
   //   // bottom-[35%] => initialTop = 65%
   //   initialTop: "65%",
   //   initialLeft: "97%",
@@ -169,7 +177,8 @@ const cardData = [
     icon: <Image src={AdminTask} alt="Payroll management icon" />,
     title: "Administrative Tasks",
     subtitle: "Manage, Assign, Track",
-    positionClasses: "top-[68%] right-[20%] xs:right-[0%] w-56 bg-neutral-50/60",
+    positionClasses:
+      "md:top-[68%] md:right-[20%] xs:top-[64%] xs:right-[-3%] w-56 bg-neutral-50/60",
     // bottom-[20%] => initialTop = 80%
     initialTop: "80%",
     // right-[15%] => initialLeft = 85%
@@ -181,7 +190,8 @@ const cardData = [
     id: "postcare",
     icon: <Image src={PostPatientCare} alt="Payroll management icon" />,
     title: "Post patient care check in and follow up",
-    positionClasses: "top-[80%] right-[-1%] w-64 bg-neutral-50/20 hidden md:flex",
+    positionClasses:
+      "md:top-[80%] md:right-[-1%] w-64 bg-neutral-50/20 hidden md:flex",
     // bottom-[5%] => initialTop = 95%
     initialTop: "95%",
     // right-[10%] => initialLeft = 90%
@@ -269,9 +279,7 @@ export const HeroSection = () => {
   });
 
   return (
-    <section
-      className="relative w-full min-h-[110vh] sm:min-h-[120vh] md:min-h-screen bg-transparent pt-24 sm:pt-0"
-    >
+    <section className="relative w-full min-h-[110vh] sm:min-h-[120vh] md:min-h-screen bg-transparent pt-24 sm:pt-0">
       {/* Render Floating Cards */}
       {cardData.map((card) => {
         // Choose animation props based on animateState.
@@ -295,7 +303,7 @@ export const HeroSection = () => {
       })}
 
       {/* Hero Content - z-10 ensures it's above the cards */}
-      <div className="relative flex flex-col justify-center items-center max-w-[1200px] mx-auto px-4 sm:px-8 lg:px-16 h-full pt-16 pb-12 sm:pt-32 md:pt-48 z-10">
+      <div className="relative flex flex-col justify-center items-center max-w-[1200px] mx-auto px-4 sm:px-8 xs:pt-0 lg:px-16 h-full pt-16 pb-12 sm:pt-32 md:pt-48 z-10">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}

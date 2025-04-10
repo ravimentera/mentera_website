@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef } from "react"; 
+import { useEffect, useRef } from "react";
 import { useScroll } from "framer-motion";
 import { Footer } from "@/components/organisms/Footer";
 import DetailSection from "@/components/templates/DetailSection/DetailSection";
@@ -12,25 +12,34 @@ import { HeroSection } from "@/components/templates/HeroSection";
 export default function Home() {
   // scrollRef and useScroll logic
   const scrollRef = useRef<HTMLDivElement>(null);
+  const mainScrollRef = useRef<HTMLDivElement>(null);
   const { scrollYProgress } = useScroll({
     target: scrollRef,
     offset: ["start start", "end end"], // Animate from when top hits top to when bottom hits bottom
   });
 
-  return (
-    <main className="relative"> 
-    <HeroSection />
+  const { scrollYProgress: mainScrollYProgress } = useScroll({
+    target: mainScrollRef,
+    offset: ["start start", "end end"], // Animate from when top hits top to when bottom hits bottom
+  });
 
-      <div ref={scrollRef} className="relative h-[340vh]"> 
-        <DetailSection scrollYProgress={scrollYProgress} />
+  return (
+    <main className="relative" ref={mainScrollRef}>
+      <HeroSection />
+
+      <div ref={scrollRef} className="relative h-[340vh]">
+        <DetailSection
+          scrollYProgress={scrollYProgress}
+          mainScrollYProgress={mainScrollYProgress}
+        />
       </div>
 
       {/* <AIFeaturesSection /> */}
-      <ExpertiseSection /> 
-      <FeatureSection /> 
+      <ExpertiseSection />
+      <FeatureSection />
       {/* <EmpoweringSection /> */}
       {/* <TeraAISection /> */}
-      <Footer /> 
+      <Footer />
     </main>
   );
 }
