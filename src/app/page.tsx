@@ -27,7 +27,7 @@ export default function Home() {
     <main className="relative" ref={mainScrollRef}>
       <HeroSection />
 
-      <div ref={scrollRef} className="relative h-[340vh]">
+      <div ref={scrollRef} className="relative h-[340vh] xs:h-[220vh]">
         <DetailSection
           scrollYProgress={scrollYProgress}
           mainScrollYProgress={mainScrollYProgress}
