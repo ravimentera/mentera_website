@@ -171,10 +171,8 @@ const DetailSection = ({
               priority
               src={CircleAnimate}
               alt="AI Process Visualization"
-              width={450}
-              height={450}
               // Adjusted max-width for different screens
-              className="max-w-[300px] sm:max-w-sm md:max-w-md lg:max-w-lg"
+              className="max-w-md sm:max-w-sm md:max-w-md lg:max-w-4xl"
             />
           </motion.div>
         </div>
