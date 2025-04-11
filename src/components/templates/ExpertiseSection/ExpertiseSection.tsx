@@ -6,6 +6,7 @@ import Image from "next/image";
 import React, { useState, useRef } from "react";
 import { cn } from "@/lib/utils";
 import { useSyncedHeight } from "@/hooks/useSyncedHeight"; // <-- import hook
+import { useBreakpoint } from "@/hooks/useBreakpoint";
 
 interface ExpertiseItem {
   id: number;
@@ -22,7 +23,7 @@ const expertiseItems: ExpertiseItem[] = [
     description:
       "Personalized next-step recommendations. Know exactly when and how to reach out to each patient - including follow ups, upsell opportunities.",
     imageSrc: "/expert-1.png",
-    class: "scale-[1.10]",
+    // class: "scale-[1.10]",
   },
   {
     id: 2,
@@ -30,7 +31,7 @@ const expertiseItems: ExpertiseItem[] = [
     description:
       "Automatically fill your calendar, managing waitlists, and optimizing provider availability without manual effort.",
     imageSrc: "/expert-2.png",
-    class: "scale-125",
+    // class: "scale-125",
   },
   {
     id: 3,
@@ -38,7 +39,7 @@ const expertiseItems: ExpertiseItem[] = [
     description:
       "Personalized messages to prepare patients for appointments and essential post-care educational materials in your practitioners voice.",
     imageSrc: "/expert-3.png",
-    class: "scale-125",
+    // class: "scale-125",
   },
 ];
 
@@ -49,21 +50,20 @@ export const ExpertiseSection: React.FC = () => {
 
   const leftRef = useRef<HTMLDivElement>(null);
   const syncedHeight = useSyncedHeight(leftRef);
+  const breakpoint = useBreakpoint()
 
   return (
     <section className="px-4 sm:px-8 md:px-16 lg:px-24 xl:px-32 py-12 md:py-16 lg:py-24">
       <div className="container mx-auto">
-        <h2 className="heading-h2 text-center mb-8 md:mb-12 lg:mb-16">
-          <ShinyGradientText>
+        <h2 className="heading-h2 text-center mb-8 md:mb-12 lg:mb-16 gradient-text-2">
             Use Mentera&apos;s AI Assistant for
-          </ShinyGradientText>
         </h2>
 
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-start">
           {/* Left side (cards) */}
           <div
             ref={leftRef}
-            className="space-y-6 col-span-12 lg:col-span-6 order-2 lg:order-1"
+            className="space-y-6 col-span-12 xs:col-span-11 lg:col-span-6 order-2 lg:order-1 xs:w-11/12"
           >
             {expertiseItems.map((item, index) => (
               <motion.div
@@ -108,10 +108,10 @@ export const ExpertiseSection: React.FC = () => {
           {/* Right side (image) */}
           <div
             className={cn(
-              "relative col-span-12 lg:col-span-6 order-1 lg:order-2 mb-12 lg:mb-0 flex justify-center items-center"
+              "relative col-span-12 lg:col-span-6 order-1 lg:order-2 lg:mb-0 flex justify-center items-center xs:w-11/12"
             )}
             style={{
-              height: syncedHeight ? `${syncedHeight}px` : undefined,
+              height: ['xs', 'sm'].includes(breakpoint) ? syncedHeight/1.5 : syncedHeight ? `${syncedHeight}px` : undefined,
             }}
           >
             <AnimatePresence mode="wait">
@@ -123,12 +123,13 @@ export const ExpertiseSection: React.FC = () => {
                 transition={{ duration: 0.5 }}
                 className="relative w-full max-w-[520px] px-4 md:px-8 h-full"
               >
-                <div className="relative w-full h-full">
+                <div className="relative w-full xs:w-10/12 h-full">
                   <Image
                     src={activeItem.imageSrc}
                     alt={activeItem.title}
+                    
                     fill
-                    className={`object-contain lg:object-contain ${activeItem.class}`}
+                    className={`object-contain lg:object-contain w-full xs:w-10/12 ${activeItem.class}`}
                     priority
                   />
                 </div>

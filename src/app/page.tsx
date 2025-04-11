@@ -8,6 +8,7 @@ import { AIFeaturesSection } from "@/components/templates/AIFeaturesSection";
 import { ExpertiseSection } from "@/components/templates/ExpertiseSection";
 import { FeatureSection } from "@/components/templates/FeatureSection";
 import { HeroSection } from "@/components/templates/HeroSection";
+import IntelligentNextStepsSection from '@/components/templates/IntelligentNextStepsSection/IntelligentNextStepsSection';
 
 export default function Home() {
   // scrollRef and useScroll logic
@@ -33,6 +34,8 @@ export default function Home() {
           mainScrollYProgress={mainScrollYProgress}
         />
       </div>
+
+      <IntelligentNextStepsSection />
 
       {/* <AIFeaturesSection /> */}
       <ExpertiseSection />
