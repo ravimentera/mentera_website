@@ -25,16 +25,16 @@ const textContents: TextContent[] = [
   },
   {
     id: 2,
-    title: "Intelligent Next Steps",
+    title: "Continuous Learning & Optimization",
     description:
-      "Using these data signals, we proactively recommend optimal strategies across your back-office operations, including patient communication, scheduling, marketing, and overall management.",
+      "Mentera continuously learns from every patient interaction. By quickly identifying and amplifying effective strategies in real-time, it evolves into your practice’s smartest assistant, continuously enhancing efficiency and patient experiences.",
     position: "right",
   },
   {
     id: 3,
-    title: "Continuous Learning & Optimization",
+    title: "Intelligent Next Steps",
     description:
-      "Mentera continuously learns from every patient interaction. By quickly identifying and amplifying effective strategies in real-time, it evolves into your practice’s smartest assistant, continuously enhancing efficiency and patient experiences.",
+      "Using these data signals, we proactively recommend optimal strategies across your back-office operations, including patient communication, scheduling, marketing, and overall management.",
     position: "left",
   },
 ];
