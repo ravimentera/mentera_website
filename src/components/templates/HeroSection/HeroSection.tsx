@@ -295,7 +295,7 @@ export const HeroSection = () => {
             title={card.title}
             subtitle={card.subtitle}
             className={`${card.positionClasses}`}
-            // animationProps={animationProps}
+            animationProps={animationProps}
           >
             {card.children}
           </FloatingCard>
