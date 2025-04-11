@@ -279,7 +279,7 @@ export const HeroSection = () => {
   });
 
   return (
-    <section className="relative w-full min-h-[110vh] sm:min-h-[120vh] md:min-h-screen bg-transparent pt-24 sm:pt-0">
+    <section className="relative w-full min-h-[110vh] sm:min-h-[120vh] md:min-h-screen bg-transparent pt-24 sm:pt-0 overflow-x-hidden">
       {/* Render Floating Cards */}
       {cardData.map((card) => {
         // Choose animation props based on animateState.
@@ -295,7 +295,7 @@ export const HeroSection = () => {
             title={card.title}
             subtitle={card.subtitle}
             className={`${card.positionClasses}`}
-            animationProps={animationProps}
+            // animationProps={animationProps}
           >
             {card.children}
           </FloatingCard>

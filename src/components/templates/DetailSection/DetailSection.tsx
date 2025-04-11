@@ -30,13 +30,6 @@ const textContents: TextContent[] = [
       "Mentera continuously learns from every patient interaction. By quickly identifying and amplifying effective strategies in real-time, it evolves into your practice’s smartest assistant, continuously enhancing efficiency and patient experiences.",
     position: "right",
   },
-  {
-    id: 3,
-    title: "Intelligent Next Steps",
-    description:
-      "Using these data signals, we proactively recommend optimal strategies across your back-office operations, including patient communication, scheduling, marketing, and overall management.",
-    position: "left",
-  },
 ];
 
 // Component for individual text block animation
@@ -133,7 +126,7 @@ const DetailSection = ({
     // Make the section sticky and relative for absolute positioning context
     <motion.section className="sticky top-0 h-screen flex items-center justify-center">
       {/* Main container: Column layout on mobile, Row on large screens */}
-      <div className="container mx-auto px-4 sm:px-6 lg:px-10 flex flex-col lg:flex-row items-center justify-center lg:justify-between w-full h-full relative">
+      <div className="container mx-auto px-4 sm:px-6 lg:px-10 flex flex-col lg:flex-row items-center justify-end lg:justify-between w-full h-full relative">
         {/* Left Column (Visible on LG, part of stacked content on mobile) */}
         {/* Order 1 on all screens, takes full width on mobile, 1/3 on LG */}
         {/* Increased z-index to be above the image on mobile */}
@@ -189,7 +182,7 @@ const DetailSection = ({
         {/* Right Column (Visible on LG, part of stacked content on mobile) */}
         {/* Order 2 on mobile, Order 3 on LG */}
         {/* Increased z-index to be above the image on mobile */}
-        <div className="w-full lg:w-1/3 flex flex-col items-center lg:items-start justify-center relative z-10 order-2 lg:order-3 h-auto lg:h-1/2">
+        <div className="w-full lg:w-1/3 flex flex-col items-center lg:items-start justify-center relative z-10 order-2 lg:order-3 h-auto lg:h-1/2 xs:pb-32 md:p-0">
           {/* Render right texts */}
           {rightTexts.map((content) => (
             <AnimatedText
