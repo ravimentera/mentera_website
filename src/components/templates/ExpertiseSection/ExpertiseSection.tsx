@@ -6,7 +6,6 @@ import Image from "next/image";
 import React, { useState, useRef } from "react";
 import { cn } from "@/lib/utils";
 import { useSyncedHeight } from "@/hooks/useSyncedHeight"; // <-- import hook
-import { useBreakpoint } from "@/hooks/useBreakpoint";
 
 interface ExpertiseItem {
   id: number;
@@ -22,7 +21,7 @@ const expertiseItems: ExpertiseItem[] = [
     title: "Personalized Communication & Recommendations",
     description:
       "Personalized next-step recommendations. Know exactly when and how to reach out to each patient - including follow ups, upsell opportunities.",
-    imageSrc: "/expert-1.png",
+    imageSrc: "/Personalized_Communication.png",
     // class: "scale-[1.10]",
   },
   {
@@ -30,7 +29,7 @@ const expertiseItems: ExpertiseItem[] = [
     title: "Intelligent Scheduling",
     description:
       "Automatically fill your calendar, managing waitlists, and optimizing provider availability without manual effort.",
-    imageSrc: "/expert-2.png",
+    imageSrc: "/Intelligent_Scheduling.png",
     // class: "scale-125",
   },
   {
@@ -38,7 +37,7 @@ const expertiseItems: ExpertiseItem[] = [
     title: "Bespoke Pre & Post Patient Care",
     description:
       "Personalized messages to prepare patients for appointments and essential post-care educational materials in your practitioners voice.",
-    imageSrc: "/expert-3.png",
+    imageSrc: "/Pre_Post_Patient _Care.png",
     // class: "scale-125",
   },
 ];
@@ -50,7 +49,6 @@ export const ExpertiseSection: React.FC = () => {
 
   const leftRef = useRef<HTMLDivElement>(null);
   const syncedHeight = useSyncedHeight(leftRef);
-  const breakpoint = useBreakpoint()
 
   return (
     <section className="px-4 sm:px-8 md:px-16 lg:px-24 xl:px-32 py-12 md:py-16 lg:py-24">
@@ -59,11 +57,11 @@ export const ExpertiseSection: React.FC = () => {
             Use Mentera&apos;s AI Assistant for
         </h2>
 
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-start">
-          {/* Left side (cards) */}
+        <div className="flex flex-col lg:grid lg:grid-cols-12 gap-10 items-start">
+          {/* Left side (cards) / Accordion container */}
           <div
             ref={leftRef}
-            className="space-y-6 col-span-12 xs:col-span-11 lg:col-span-6 order-2 lg:order-1 xs:w-11/12"
+            className="space-y-6 col-span-12 lg:col-span-6 order-1 w-full"
           >
             {expertiseItems.map((item, index) => (
               <motion.div
@@ -72,46 +70,93 @@ export const ExpertiseSection: React.FC = () => {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, amount: 0.4 }}
                 transition={{ duration: 0.6, delay: index * 0.15 }}
+                className="overflow-hidden rounded-xl border"
+                style={{
+                  borderColor: activeItem.id === item.id ? 'var(--color-primary)' : '#e5e7eb',
+                }}
               >
+                {/* Clickable Header with Arrow (conditionally flex) */}
                 <div
-                  onClick={() => setActiveItem(item)}
+                  onClick={() => setActiveItem(item.id === activeItem.id ? expertiseItems[0] : item)}
                   className={cn(
-                    "rounded-xl p-5 transition-all duration-300 cursor-pointer border",
+                    "p-5 transition-colors duration-300 cursor-pointer",
+                    "flex items-center justify-between lg:block", // Flex for mobile, block for desktop
                     activeItem.id === item.id
-                      ? "bg-primary text-white shadow-lg border-primary"
-                      : "text-gray-800 border border-gray-200 hover:bg-gray-100 hover:border-primary/50"
+                      ? "bg-primary text-white"
+                      : "text-gray-800 hover:bg-gray-100"
                   )}
                 >
-                  <h4
-                    className={cn(
-                      "heading-h4 mb-2",
-                      activeItem.id === item.id ? "text-white" : "text-primary"
-                    )}
+                  {/* Title and Description Group (for layout) */}
+                  <div>
+                    <h4
+                      className={cn(
+                        "heading-h4",
+                        "mb-2", // Add margin back for desktop
+                        activeItem.id === item.id ? "text-white" : "text-primary"
+                      )}
+                    >
+                      {item.title}
+                    </h4>
+                    {/* Description (always visible in header block) */}
+                    <p
+                      className={cn(
+                        "text-body-1 hidden lg:block", // Hide on mobile, show on desktop
+                        activeItem.id === item.id
+                          ? "text-white"
+                          : "text-text-secondary"
+                      )}
+                    >
+                      {item.description}
+                    </p>
+                  </div>
+
+                  {/* Arrow Icon (Mobile Only) */}
+                  <motion.span
+                    animate={{ rotate: activeItem.id === item.id ? 180 : 0 }}
+                    transition={{ duration: 0.3 }}
+                    className="ml-4 lg:hidden" // Hide arrow on desktop
                   >
-                    {item.title}
-                  </h4>
-                  <p
-                    className={cn(
-                      "text-body-1",
-                      activeItem.id === item.id
-                        ? "text-white"
-                        : "text-text-secondary"
-                    )}
-                  >
-                    {item.description}
-                  </p>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={cn(activeItem.id === item.id ? "stroke-white" : "stroke-primary")}><polyline points="6 9 12 15 18 9"></polyline></svg>
+                  </motion.span>
                 </div>
+
+                {/* Accordion Content (Image Only for Mobile) */}
+                <AnimatePresence>
+                  {activeItem.id === item.id && (
+                    <motion.div
+                      initial={{ height: 0, opacity: 0 }}
+                      animate={{ height: "auto", opacity: 1 }}
+                      exit={{ height: 0, opacity: 0 }}
+                      transition={{ duration: 0.3 }}
+                      className="overflow-hidden lg:hidden bg-gray-50"
+                    >
+                      {/* Image Container */}
+                      <div className="relative w-full h-64 p-5"> {/* Adjusted padding */}
+                        <Image
+                          src={item.imageSrc}
+                          alt={item.title}
+                          fill
+                          sizes="(max-width: 1023px) 90vw, 1px"
+                          quality={100}
+                          className={`object-contain [image-rendering:-webkit-optimize-contrast] ${item.class || ''}`}
+                          priority={index === 0}
+                        />
+                      </div>
+                    </motion.div>
+                  )}
+                </AnimatePresence>
               </motion.div>
             ))}
           </div>
 
-          {/* Right side (image) */}
+          {/* Right side (image) - Desktop only */}
           <div
             className={cn(
-              "relative col-span-12 lg:col-span-6 order-1 lg:order-2 lg:mb-0 flex justify-center items-center xs:w-11/12"
+              "relative col-span-12 lg:col-span-6 order-2 lg:mb-0 justify-center items-center w-full",
+              "hidden lg:flex"
             )}
             style={{
-              height: ['xs', 'sm'].includes(breakpoint) ? syncedHeight/1.5 : syncedHeight ? `${syncedHeight}px` : undefined,
+              height: syncedHeight ? `${syncedHeight}px` : 'auto',
             }}
           >
             <AnimatePresence mode="wait">
@@ -121,18 +166,17 @@ export const ExpertiseSection: React.FC = () => {
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, y: -10 }}
                 transition={{ duration: 0.5 }}
-                className="relative w-full max-w-[520px] px-4 md:px-8 h-full"
+                className="relative w-full h-full px-4 md:px-8"
               >
-                <div className="relative w-full xs:w-10/12 h-full">
-                  <Image
-                    src={activeItem.imageSrc}
-                    alt={activeItem.title}
-                    
-                    fill
-                    className={`object-contain lg:object-contain w-full xs:w-10/12 ${activeItem.class}`}
-                    priority
-                  />
-                </div>
+                <Image
+                  src={activeItem.imageSrc}
+                  alt={activeItem.title}
+                  fill
+                  sizes="(min-width: 1024px) 50vw, 1px"
+                  quality={100}
+                  className={`object-contain [image-rendering:-webkit-optimize-contrast] ${activeItem.class || ''}`}
+                  priority
+                />
               </motion.div>
             </AnimatePresence>
           </div>
