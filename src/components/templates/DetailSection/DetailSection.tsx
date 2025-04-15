@@ -87,40 +87,44 @@ const DetailSection = ({
   const leftTexts = textContents.filter((t) => t.position === "left");
   const rightTexts = textContents.filter((t) => t.position === "right");
   const breakpoint = useBreakpoint();
-  const endTop = 0;
 
-  const [startTop, setStartTop] = useState<number | null>(null);
-  const [imageY, setImageY] = useState("0rem");
+const [startTop, setStartTop] = useState<number | null>(null);
+const [endTop, setEndTop] = useState<number | null>(null);
+const [imageY, setImageY] = useState("0rem");
 
-  // Wait until breakpoint is available
-  useEffect(() => {
-    if (!breakpoint) return;
+// Set startTop and endTop based on breakpoint
+useEffect(() => {
+  if (!breakpoint) return;
 
-    let value = -25; // Default for lg and up
+  let start = -20;
+  let end = 0;
 
-    if (["xs", "sm"].includes(breakpoint)) {
-      value = -15;
-    } else if (breakpoint === "md") {
-      value = -15;
-    }
+  if (["xs", "sm"].includes(breakpoint)) {
+    start = -15;
+    end = -5; // ← this is your desired limit
+  } else if (breakpoint === "md") {
+    start = -15;
+    end = 0;
+  }
 
-    setStartTop(value);
-    setImageY(`${value}rem`);
-  }, [breakpoint]);
+  setStartTop(start);
+  setEndTop(end);
+  setImageY(`${start}rem`);
+}, [breakpoint]);
 
-  // Animate only when startTop is set
-  useEffect(() => {
-    if (startTop === null) return;
+// Animate based on scroll only when both values are ready
+useEffect(() => {
+  if (startTop === null || endTop === null) return;
 
-    const unsubscribe = mainScrollYProgress.onChange((v) => {
-      const t = Math.min(Math.max(v * 10, 0), 1);
-      const interpolatedTop = startTop + (endTop - startTop) * t;
+  const unsubscribe = mainScrollYProgress.onChange((v) => {
+    const t = Math.min(Math.max(v * 10, 0), 1);
+    const interpolatedTop = startTop + (endTop - startTop) * t;
 
-      setImageY(`${interpolatedTop}rem`);
-    });
+    setImageY(`${interpolatedTop}rem`);
+  });
 
-    return () => unsubscribe();
-  }, [mainScrollYProgress, startTop]);
+  return () => unsubscribe();
+}, [mainScrollYProgress, startTop, endTop]);
 
   return (
     // Make the section sticky and relative for absolute positioning context
@@ -171,10 +175,8 @@ const DetailSection = ({
               priority
               src={CircleAnimate}
               alt="AI Process Visualization"
-              width={450}
-              height={450}
               // Adjusted max-width for different screens
-              className="max-w-[300px] sm:max-w-sm md:max-w-md lg:max-w-lg"
+              className="md:w-[52rem] xs:w-[28rem] "
             />
           </motion.div>
         </div>
