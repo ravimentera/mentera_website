@@ -46,7 +46,7 @@ const config: Config = {
         inter: ["Inter", "sans-serif"],
         poppins: ["Poppins", "sans-serif"],
       },
-      
+
       animation: {
         "gradient-x": "gradient-x 15s ease infinite",
         float: "float 6s ease-in-out infinite",
@@ -79,6 +79,7 @@ const config: Config = {
       },
       screens: {
         xs: "375px",
+        xsm: "410px",
         sm: "640px",
         md: "768px",
         lg: "1024px",

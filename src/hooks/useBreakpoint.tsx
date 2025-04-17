@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 
 export const useBreakpoint = () => {
   const [breakpoint, setBreakpoint] = useState<
-    "xs" | "sm" | "md" | "lg" | "xl" | "2xl"
+    "xs" | "sm" | "xsm" | "md" | "lg" | "xl" | "2xl"
   >("xs");
 
   useEffect(() => {
@@ -13,6 +13,7 @@ export const useBreakpoint = () => {
       else if (width >= 1024) setBreakpoint("lg");
       else if (width >= 768) setBreakpoint("md");
       else if (width >= 640) setBreakpoint("sm");
+      else if (width >= 430) setBreakpoint("xsm");
       else setBreakpoint("xs");
     };
 

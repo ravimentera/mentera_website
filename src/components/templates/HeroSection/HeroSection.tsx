@@ -48,7 +48,7 @@ const cardData = [
     icon: <Image src={NewPatientScheduling} alt="New Schedulin icon" />,
     title: "Scheduling",
     positionClasses:
-      "absolute md:top-[12%] md:left-[20%] xs:top-[64%] xs:right-[18%] w-52 bg-white/90",
+      "absolute md:top-[12%] md:left-[20%] xs:top-[72%] xs:right-[8%] xsm:top-[63%] xs:right-[8%] w-52 bg-white/90",
     initialTop: "10%",
     initialLeft: "30%",
     animationDelay: 0.5,
@@ -60,7 +60,7 @@ const cardData = [
     title: "Promotional Strategies",
     subtitle: "Offers and Gift Cards",
     positionClasses:
-      "md:top-[30%] md:left-[5%] xs:top-[76%] xs:right-[-6%] w-60 bg-white/80",
+      "md:top-[30%] md:left-[5%] xs:top-[85%] xs:right-[-6%] xsm:top-[72%] xsm:right-[18%] w-60 bg-white/80",
     initialTop: "30%",
     initialLeft: "8%",
     animationDelay: 0.3,
@@ -78,7 +78,7 @@ const cardData = [
     title: "Quick Respond to <br></br> Patient Inquiries",
     subtitle: "Live Chat, On Call",
     positionClasses:
-      "md:top-[48%] md:left-[12%] xs:top-[68%] xs:left-[1%] w-64 md:pr-8 xs:pr-4 bg-white/80",
+      "md:top-[48%] md:left-[12%] xs:top-[71%] xs:left-[1%] xsm:top-[60%] xsm:left-[1%] w-64 md:pr-8 xs:pr-4 bg-white/80",
     initialTop: "50%",
     initialLeft: "10%",
     animationDelay: 0.7,
@@ -108,10 +108,10 @@ const cardData = [
   // },
   {
     id: "staff",
-    icon: <Image src={PayrollManagement} alt="Payroll management icon" />,
+    icon: <Image src={StaffManagement} alt="Staff management icon" />,
     title: "Staff Management",
     positionClasses:
-      "md:top-[72%] md:left-[20%] xs:top-[58%] xs:left-[2%] w-60 bg-white/70",
+      "md:top-[72%] md:left-[20%] xs:top-[62%] xs:left-[-3%] xsm:top-[50%] xsm:left-[3%] w-60 bg-white/70",
     initialTop: "80%",
     initialLeft: "25%",
     animationDelay: 0.4,
@@ -120,10 +120,10 @@ const cardData = [
   //  Right Side Cards
   {
     id: "kpi",
-    icon: <Image src={KpiReporting} alt="Payroll management icon" />,
+    icon: <Image src={KpiReporting} alt="KPIs and Reporting icon" />,
     title: "KPIs and Reporting",
     positionClasses:
-      "md:top-[12%] md:right-[20%] xs:top-[38%] xs:left-[1%] w-48 bg-white/90 ",
+      "md:top-[12%] md:right-[20%] xs:top-[42%] xs:left-[1%] xsm:top-[32%] xsm:left-[5%] w-48 bg-white/90 ",
     // For right-[20%], we compute left as 80%
     initialTop: "12%",
     initialLeft: "80%",
@@ -135,7 +135,7 @@ const cardData = [
     icon: <Image src={UpsellOpportunities} alt="Payroll management icon" />,
     title: "Upsell Potential",
     positionClasses:
-      "md:top-[25%] md:right-[8%] xs:top-[40%] xs:right-[0%] w-52 bg-white/90",
+      "md:top-[25%] md:right-[8%] xs:top-[44%] xs:right-[0%] xsm:top-[35%] xsm:right-[4%] w-52 bg-white/90",
     initialTop: "25%",
     initialLeft: "95%",
     animationDelay: 0.6,
@@ -178,7 +178,7 @@ const cardData = [
     title: "Administrative Tasks",
     subtitle: "Manage, Assign, Track",
     positionClasses:
-      "md:top-[68%] md:right-[20%] xs:top-[56%] xs:right-[-3%] w-56 bg-neutral-50/60",
+      "md:top-[68%] md:right-[20%] xs:top-[62%] xs:right-[-3%] xsm:top-[52%] xsm:right-[1%] w-56 bg-neutral-50/60",
     // bottom-[20%] => initialTop = 80%
     initialTop: "80%",
     // right-[15%] => initialLeft = 85%
@@ -191,7 +191,7 @@ const cardData = [
     icon: <Image src={PostPatientCare} alt="Payroll management icon" />,
     title: "Post patient care check in and follow up",
     positionClasses:
-      "md:top-[80%] md:right-[-1%] xs:top-[48%] xs:right-[4%] w-64 bg-neutral-50/60",
+      "md:top-[80%] md:right-[-1%] xs:top-[53%] xs:right-[10%] xsm:top-[42%] xsm:right-14%] w-64 bg-neutral-50/60",
     // bottom-[5%] => initialTop = 95%
     initialTop: "95%",
     // right-[10%] => initialLeft = 90%
@@ -303,7 +303,7 @@ export const HeroSection = () => {
       })}
 
       {/* Hero Content - z-10 ensures it's above the cards */}
-      <div className="relative flex flex-col justify-center items-center max-w-[1200px] mx-auto px-4 sm:px-8 xs:pt-16 lg:px-16 h-full pt-16 pb-12 sm:pt-32 md:pt-48 z-10">
+      <div className="relative flex flex-col justify-center items-center max-w-[1200px] mx-auto px-4 sm:px-8 xs:pt-0 lg:px-16 h-full pt-16 pb-12 sm:pt-32 md:pt-48 z-10">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
