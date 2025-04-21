@@ -21,7 +21,7 @@ const SvgatorAnimation = () => {
       }
 
       // grab the real <svg> by its ID
-      const svgEl = svgDoc.getElementById("eS5U3aFYpZ81") as any;
+      const svgEl = svgDoc.getElementById("eNczs9ftLCx1") as any; // update ID if animation is SVG file is changed or updated
       if (!svgEl || !svgEl.svgatorPlayer) {
         console.warn("↻ SVG stub not injected yet, retrying…");
         setTimeout(initPlayer, 300);
