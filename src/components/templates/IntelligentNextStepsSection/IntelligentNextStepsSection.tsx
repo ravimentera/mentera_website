@@ -1,6 +1,6 @@
 import React, { useRef, useEffect } from "react";
-import SvgComponent from "@/components/atoms/SvgAnimations/IntelligentAnimation/IntelligentAnimation";
 import { useInView } from "framer-motion";
+import SvgatorAnimation from "@/components/animation/SvgatorAnimation";
 
 const IntelligentNextStepsSection: React.FC = () => {
   const ref = useRef(null);
@@ -23,9 +23,7 @@ const IntelligentNextStepsSection: React.FC = () => {
 
           {/* Image Content */}
           <div className="md:w-1/2 flex justify-center">
-            <div ref={ref} className="flex flex-col items-center">
-              <SvgComponent isActive={isInView} />
-            </div>
+            <SvgatorAnimation />
           </div>
         </div>
       </div>
