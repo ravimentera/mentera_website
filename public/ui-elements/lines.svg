@@ -1,0 +1,17 @@
+<svg preserveAspectRatio="none" width="100%" height="100%" overflow="visible" style="display: block;" viewBox="0 0 672 672" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g id="lines">
+<circle id="Ellipse 3" cx="237.39" cy="237.39" r="237.39" transform="matrix(-0.707107 0.707107 0.707107 0.707107 335.72 -0.000121474)" stroke="url(#paint0_linear_0_645)" stroke-opacity="0.5" stroke-width="2"/>
+<path id="Ellipse 4" d="M654.965 391.051C662.231 349.148 661.173 306.224 651.85 264.73C642.528 223.235 625.124 183.984 600.632 149.216C576.14 114.448 545.04 84.8444 509.107 62.0956C473.174 39.3468 433.113 23.8983 391.209 16.632C349.306 9.3658 306.382 10.4241 264.888 19.7466C223.394 29.0691 184.143 46.4732 149.375 70.9651C114.607 95.4571 85.0031 126.557 62.2543 162.49C39.5055 198.423 24.057 238.484 16.7908 280.387C9.5245 322.291 10.5828 365.215 19.9053 406.709C29.2278 448.203 46.6319 487.454 71.1238 522.222C95.6158 556.99 126.716 586.594 162.649 609.343C198.581 632.091 238.643 647.54 280.546 654.806C322.449 662.072 365.373 661.014 406.867 651.692C448.362 642.369 487.613 624.965 522.381 600.473C557.149 575.981 586.753 544.881 609.501 508.948C632.25 473.015 647.699 432.954 654.965 391.051L654.965 391.051Z" stroke="url(#paint1_linear_0_645)" stroke-opacity="0.5" stroke-width="2"/>
+</g>
+<defs>
+<linearGradient id="paint0_linear_0_645" x1="237.39" y1="0" x2="237.39" y2="474.779" gradientUnits="userSpaceOnUse">
+<stop stop-color="#BD05DD"/>
+<stop offset="1" stop-color="#6EF1BB"/>
+</linearGradient>
+<linearGradient id="paint1_linear_0_645" x1="335.878" y1="11.8702" x2="335.878" y2="659.568" gradientUnits="userSpaceOnUse">
+<stop stop-color="#0603AB"/>
+<stop offset="0.5" stop-color="#BD05DD"/>
+<stop offset="1" stop-color="#6EF1BB"/>
+</linearGradient>
+</defs>
+</svg>

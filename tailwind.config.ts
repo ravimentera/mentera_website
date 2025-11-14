@@ -17,6 +17,21 @@ const config: Config = {
           DEFAULT: "#BD05DD",
           light: "rgba(189, 5, 221, 0.62)",
         },
+        purple: {
+          DEFAULT: "#4d28df",
+          figma: "#4d28df",
+          variant: "#8f03a0",
+          50: "#F6F4FD",
+          100: "#E9D5FF",
+          200: "#D1AAFF",
+          300: "#B97FFF",
+          400: "#A155FF",
+          500: "#8F03A0",
+          600: "#7A0288",
+          700: "#650270",
+          800: "#500158",
+          900: "#3B0140",
+        },
         text: {
           primary: "#1D1D1D",
           secondary: "#717172",
@@ -43,10 +58,14 @@ const config: Config = {
         "120": "30rem",
       },
       fontFamily: {
-        inter: ["Inter", "sans-serif"],
-        poppins: ["Poppins", "sans-serif"],
+        inter: ["var(--font-inter)", "sans-serif"],
+        poppins: ["var(--font-poppins)", "sans-serif"],
+        satoshi: ["var(--font-satoshi)", "sans-serif"],
+        sans: ["var(--font-satoshi)", "sans-serif"],
       },
-
+      fontSize: {
+        "4.5xl": ["2.5rem", { lineHeight: "1.2" }],
+      },
       animation: {
         "gradient-x": "gradient-x 15s ease infinite",
         float: "float 6s ease-in-out infinite",

@@ -2,15 +2,7 @@ import { ParticleBackground } from "@/components/atoms/ParticleBackground/Partic
 import { Navigation } from "@/components/organisms/Navigation";
 import { Analytics } from "@vercel/analytics/react";
 import { Metadata } from "next";
-import { Poppins } from "next/font/google";
 import "./globals.css";
-
-const poppins = Poppins({
-  subsets: ["latin"],
-  weight: ["400", "500", "600", "700"],
-  variable: "--font-poppins",
-  display: "swap",
-});
 
 export const metadata: Metadata = {
   title: "Mentera",
@@ -59,8 +51,9 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" className={poppins.variable}>
+    <html lang="en">
       <head>
+        <link href="https://fonts.cdnfonts.com/css/satoshi" rel="stylesheet" />
         <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
         <link rel="apple-touch-icon" href="/favicon.svg" />
         {/* Structured data for better SEO */}
@@ -83,7 +76,7 @@ export default function RootLayout({
           }}
         />
       </head>
-      <body className="min-h-screen flex flex-col antialiased text-[#111827] bg-transparent overflow-x-hidden">
+      <body className="min-h-screen flex flex-col antialiased tw-bg-white text-gray-900 bg-transparent overflow-x-hidden font-satoshi">
         {/* Particle Background */}
         <ParticleBackground />
 
