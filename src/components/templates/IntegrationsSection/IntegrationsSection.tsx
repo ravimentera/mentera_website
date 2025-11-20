@@ -1,6 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
+import { useMemo } from "react";
 
 // App logos mapping
 const appLogos = [
@@ -27,54 +28,144 @@ const appLogos = [
 ];
 
 export const IntegrationsSection = () => {
+  // Split logos into 3 rows
+  const rows = useMemo(() => {
+    const row1: typeof appLogos = [];
+    const row2: typeof appLogos = [];
+    const row3: typeof appLogos = [];
+
+    appLogos.forEach((logo, index) => {
+      if (index % 3 === 0) {
+        row1.push(logo);
+      } else if (index % 3 === 1) {
+        row2.push(logo);
+      } else {
+        row3.push(logo);
+      }
+    });
+
+    return [row1, row2, row3];
+  }, []);
+
+  // Duplicate logos for seamless loop - 4 sets to ensure no visible reset
+  const duplicatedRows = useMemo(() => {
+    return rows.map((row) => [...row, ...row, ...row, ...row]);
+  }, [rows]);
+
   return (
-    <section className="relative w-full py-20 bg-transparent">
-      <div className="max-w-[1440px] mx-auto px-6 sm:px-8 lg:px-24">
-        <div className="grid lg:grid-cols-2 gap-12 items-center">
+    <section className="relative w-full pb-20 pt-28 bg-transparent px-24">
+      <div className="max-w-8xl mx-auto px-6">
+        <div className="grid lg:grid-cols-2 gap-16 items-center">
           {/* Left Side - Text Content */}
           <motion.div
             initial={{ opacity: 0, x: -20 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
-            className="space-y-6 max-w-[458px]"
+            className="space-y-8 max-w-[28rem]"
           >
-            <h2 className="heading-h2 text-text-primary">
+            <h2 className="text-4.5xl font-medium text-zinc-950">
               Mentera connects with 50+ apps
             </h2>
-            <p className="text-body-1 text-text-secondary">
-              Aliquet purus felis pulvinar fames venenatis tempor facilisis ac. Amet scelerisque facilisis odio pretium.
+            <p className="text-xl text-zinc-950">
+              Aliquet purus felis pulvinar fames venenatis tempor facilisis ac.
+              Amet scelerisque facilisis odio pretium.
             </p>
-            <p className="text-body-1 text-text-primary font-medium">
+            <p className="text-base text-gray-400 font-medium">
               If we don't have a current integration, we will build it.
             </p>
           </motion.div>
 
-          {/* Right Side - App Logos Grid */}
+          {/* Right Side - Animated Logo Rows with Faded Overlays */}
           <motion.div
             initial={{ opacity: 0, x: 20 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6, delay: 0.2 }}
-            className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-5 gap-6"
+            className="relative overflow-hidden"
           >
-            {appLogos.map((app, index) => (
+            <div className="space-y-6">
+              {/* Row 1 - Left to Right */}
               <div
-                key={index}
-                className="bg-gray-50 rounded-lg p-4 h-20 flex items-center justify-center border border-gray-200 hover:border-purple-300 hover:shadow-md transition-all"
+                className="relative overflow-hidden py-2"
+                style={{
+                  maskImage:
+                    "linear-gradient(to right, transparent 0%, black 10%, black 90%, transparent 100%)",
+                  WebkitMaskImage:
+                    "linear-gradient(to right, transparent 0%, black 10%, black 90%, transparent 100%)",
+                }}
               >
-                <img
-                  src={`/app-logos/${app.image}`}
-                  alt={app.name}
-                  className="max-w-full max-h-full object-contain"
-                />
+                <div className="flex gap-8 animate-scroll-left will-change-transform">
+                  {duplicatedRows[0].map((app, index) => (
+                    <div
+                      key={`row1-${index}`}
+                      className="flex-shrink-0 bg-gray-50 rounded-xl p-3 h-[2.875rem] w-[2.875rem] flex items-center justify-center border border-gray-200 shadow-md hover:border-purple-300 hover:shadow-lg transition-all"
+                    >
+                      <img
+                        src={`/app-logos/${app.image}`}
+                        alt={app.name}
+                        className="w-[2.625rem] h-[2.625rem] object-contain"
+                      />
+                    </div>
+                  ))}
+                </div>
               </div>
-            ))}
+
+              {/* Row 2 - Right to Left */}
+              <div
+                className="relative overflow-hidden py-2"
+                style={{
+                  maskImage:
+                    "linear-gradient(to right, transparent 0%, black 10%, black 90%, transparent 100%)",
+                  WebkitMaskImage:
+                    "linear-gradient(to right, transparent 0%, black 10%, black 90%, transparent 100%)",
+                }}
+              >
+                <div className="flex gap-8 animate-scroll-right will-change-transform">
+                  {duplicatedRows[1].map((app, index) => (
+                    <div
+                      key={`row2-${index}`}
+                      className="flex-shrink-0 bg-gray-50 rounded-xl p-3 h-[2.875rem] w-[2.875rem] flex items-center justify-center border border-gray-200 shadow-md hover:border-purple-300 hover:shadow-lg transition-all"
+                    >
+                      <img
+                        src={`/app-logos/${app.image}`}
+                        alt={app.name}
+                        className="w-[2.625rem] h-[2.625rem] object-contain"
+                      />
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              {/* Row 3 - Left to Right */}
+              <div
+                className="relative overflow-hidden py-2"
+                style={{
+                  maskImage:
+                    "linear-gradient(to right, transparent 0%, black 10%, black 90%, transparent 100%)",
+                  WebkitMaskImage:
+                    "linear-gradient(to right, transparent 0%, black 10%, black 90%, transparent 100%)",
+                }}
+              >
+                <div className="flex gap-8 animate-scroll-left will-change-transform">
+                  {duplicatedRows[2].map((app, index) => (
+                    <div
+                      key={`row3-${index}`}
+                      className="flex-shrink-0 bg-gray-50 rounded-xl p-3 h-[2.875rem] w-[2.875rem] flex items-center justify-center border border-gray-200 shadow-md hover:border-purple-300 hover:shadow-lg transition-all"
+                    >
+                      <img
+                        src={`/app-logos/${app.image}`}
+                        alt={app.name}
+                        className="w-[2.625rem] h-[2.625rem] object-contain"
+                      />
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </div>
           </motion.div>
         </div>
       </div>
     </section>
   );
 };
-
-

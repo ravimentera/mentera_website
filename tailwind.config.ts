@@ -51,6 +51,9 @@ const config: Config = {
         "gradient-2-start": "rgba(17, 26, 83, 1)",
         "gradient-2-end": "rgba(38, 58, 185, 1)",
       },
+      maxWidth: {
+        "8xl": "90rem",
+      },
       spacing: {
         "18": "4.5rem",
         "68": "17rem",
@@ -71,6 +74,8 @@ const config: Config = {
         float: "float 6s ease-in-out infinite",
         shine: "shine 1.5s ease-in-out infinite",
         shimmer: "shimmer 2s linear infinite",
+        "scroll-left": "scroll-left 10s linear infinite alternate",
+        "scroll-right": "scroll-right 10s linear infinite alternate",
       },
       keyframes: {
         "gradient-x": {
@@ -94,6 +99,14 @@ const config: Config = {
         shimmer: {
           "0%": { backgroundPosition: "0% 0%" },
           "100%": { backgroundPosition: "200% 0%" },
+        },
+        "scroll-left": {
+          "0%": { transform: "translateX(0)" },
+          "100%": { transform: "translateX(-25%)" },
+        },
+        "scroll-right": {
+          "0%": { transform: "translateX(-25%)" },
+          "100%": { transform: "translateX(0)" },
         },
       },
       screens: {

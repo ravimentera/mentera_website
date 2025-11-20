@@ -70,9 +70,9 @@ export const AccessibleAISection = () => {
   };
 
   return (
-    <section className="relative w-full bg-transparent">
+    <section className="relative w-full bg-transparent px-24">
       {/* Header Section */}
-      <div className="max-w-full mx-auto px-6 sm:px-8 lg:px-24 pt-20">
+      <div className="max-w-8xl mx-auto px-6 sm:px-8 lg:px-24 pt-20">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -128,7 +128,7 @@ export const AccessibleAISection = () => {
       </div>
 
       {/* Dynamic Content Section */}
-      <div className="relative mx-24 rounded-3xl bg-gradient-to-br from-purple-100/50 via-cyan-50/30 to-pink-100/40 backdrop-blur-sm border border-white/20">
+      <div className="relative mx-auto max-w-8xl rounded-3xl bg-gradient-to-br from-purple-100/50 via-cyan-50/30 to-pink-100/40 backdrop-blur-sm border border-white/20">
         {/* Different colored particle background for this section */}
         <CustomParticleBackground
           className="absolute inset-0 -z-10 rounded-3xl"
@@ -152,7 +152,7 @@ export const AccessibleAISection = () => {
           ]}
         />
 
-        <div className="max-w-full mx-auto relative overflow-hidden h-[634px]">
+        <div className="max-w-8xl mx-auto relative overflow-hidden h-[40rem]">
           {/* Bottom gradient fade to white */}
           <div className="absolute bottom-0 left-0 right-0 h-20 bg-gradient-to-t from-white to-transparent z-10 pointer-events-none rounded-b-2xl"></div>
           <motion.div

@@ -1,6 +1,5 @@
 "use client";
 
-import { EmailCaptureInput } from "@/components/molecules/EmailCaptureInput/EmailCaptureInput";
 import { motion } from "framer-motion";
 
 export const ContactCTASection = () => {
@@ -10,7 +9,7 @@ export const ContactCTASection = () => {
 
   return (
     <section className="relative w-full py-20 bg-transparent">
-      <div className="max-w-[1440px] mx-auto px-[48px]">
+      <div className="max-w-8xl mx-auto px-[48px]">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -29,9 +28,27 @@ export const ContactCTASection = () => {
             />
             <button className="absolute right-0 bg-white text-[#4d28df] px-6 py-5 rounded-[100px] text-[16px] leading-[20px] font-medium hover:bg-white/90 transition-colors flex items-center gap-2">
               Get a Demo
-              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" className="text-[#4d28df]">
-                <path d="M13.75 6.75L19.25 12L13.75 17.25" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-                <path d="M19 12H4.75" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+              <svg
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                fill="none"
+                className="text-[#4d28df]"
+              >
+                <path
+                  d="M13.75 6.75L19.25 12L13.75 17.25"
+                  stroke="currentColor"
+                  strokeWidth="2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                />
+                <path
+                  d="M19 12H4.75"
+                  stroke="currentColor"
+                  strokeWidth="2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                />
               </svg>
             </button>
           </div>
@@ -40,5 +57,3 @@ export const ContactCTASection = () => {
     </section>
   );
 };
-
-

@@ -11,6 +11,7 @@
 // import IntelligentNextStepsSection from '@/components/templates/IntelligentNextStepsSection/IntelligentNextStepsSection';
 
 // NEW DESIGN IMPLEMENTATION
+import { Footer } from "@/components/organisms/Footer/Footer";
 import { AccessibleAISection } from "@/components/templates/AccessibleAISection/AccessibleAISection";
 import { IntegrationsSection } from "@/components/templates/IntegrationsSection/IntegrationsSection";
 import { NewHeroSection } from "@/components/templates/NewHeroSection/NewHeroSection";
@@ -35,11 +36,11 @@ export default function Home() {
       {/* NEW DESIGN SECTIONS */}
       <NewHeroSection />
       <AccessibleAISection />
-      <ReimagineWorkSection />
       <IntegrationsSection />
+      <ReimagineWorkSection />
       <SavingsSection />
       {/* <ContactCTASection /> */}
-      {/* <Footer /> */}
+      <Footer />
 
       {/* OLD SECTIONS - COMMENTED OUT */}
       {/* <HeroSection /> */}

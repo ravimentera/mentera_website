@@ -12,7 +12,7 @@ export const NewHeroSection = () => {
   return (
     <section className="relative w-full min-h-screen flex items-center justify-center overflow-hidden">
       {/* Content */}
-      <div className="relative z-10 w-full mx-auto px-24 py-20">
+      <div className="max-w-8xl relative z-10 w-full mx-auto px-24 py-20">
         <div className="grid lg:grid-cols-2 gap-12 items-center">
           {/* Left Column - Text Content - Exact Figma styling */}
           <motion.div

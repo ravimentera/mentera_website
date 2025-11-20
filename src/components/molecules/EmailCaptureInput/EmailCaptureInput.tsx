@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useRef } from "react";
+import React, { useRef, useState } from "react";
 
 interface EmailCaptureInputProps {
   placeholder?: string;
@@ -9,7 +9,7 @@ interface EmailCaptureInputProps {
   className?: string;
   inputHeight?: string;
   buttonHeight?: string;
-  variant?: 'light' | 'dark';
+  variant?: "light" | "dark";
 }
 
 export const EmailCaptureInput: React.FC<EmailCaptureInputProps> = ({
@@ -19,7 +19,7 @@ export const EmailCaptureInput: React.FC<EmailCaptureInputProps> = ({
   className = "",
   inputHeight = "h-12",
   buttonHeight = "h-12",
-  variant = 'light',
+  variant = "light",
 }: EmailCaptureInputProps) => {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -36,16 +36,16 @@ export const EmailCaptureInput: React.FC<EmailCaptureInputProps> = ({
     const email = formData.get("email") as string;
 
     try {
-      const response = await fetch('/api/pipedrive', {
-        method: 'POST',
+      const response = await fetch("/api/pipedrive", {
+        method: "POST",
         headers: {
-          'Content-Type': 'application/json',
+          "Content-Type": "application/json",
         },
         body: JSON.stringify({ email }),
       });
 
       const result = await response.json();
-      
+
       if (result.success) {
         setSuccess(true);
         if (onSubmit) {
@@ -67,13 +67,15 @@ export const EmailCaptureInput: React.FC<EmailCaptureInputProps> = ({
     }
   };
 
-  const inputStyles = variant === 'light' 
-    ? "bg-transparent placeholder-[#717172] text-gray-900 border-[#111A53] focus:ring-primary/20"
-    : "bg-transparent placeholder-white/50 text-white border-white focus:ring-white/20";
+  const inputStyles =
+    variant === "light"
+      ? "bg-transparent placeholder-[#717172] text-gray-900 border-[#111A53] focus:ring-primary/20"
+      : "bg-transparent placeholder-white/50 text-white border-white focus:ring-white/20";
 
-  const buttonStyles = variant === 'light'
-    ? "bg-[#111A53] hover:bg-[#1c2b85] text-white"
-    : "bg-white hover:bg-gray-100 text-[#111A53]";
+  const buttonStyles =
+    variant === "light"
+      ? "bg-[#111A53] hover:bg-[#1c2b85] text-white"
+      : "bg-white hover:bg-gray-100 text-purple";
 
   return (
     <form
@@ -117,7 +119,11 @@ export const EmailCaptureInput: React.FC<EmailCaptureInputProps> = ({
         )}
       </button>
       {error && (
-        <p className={`mt-2 text-sm ${variant === 'light' ? 'text-red-500' : 'text-red-300'}`}>
+        <p
+          className={`mt-2 text-sm ${
+            variant === "light" ? "text-red-500" : "text-red-300"
+          }`}
+        >
           {error}
         </p>
       )}
