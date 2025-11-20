@@ -1,6 +1,7 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { motion, useInView } from "framer-motion";
+import React, { useEffect, useRef, useState } from "react";
 
 const stats = [
   {
@@ -20,6 +21,81 @@ const stats = [
     description: "minute in follow ups",
   },
 ];
+
+const useAnimatedNumber = (
+  targetValue: string,
+  duration: number = 2000
+): { displayValue: string; ref: React.RefObject<HTMLDivElement> } => {
+  const [displayValue, setDisplayValue] = useState("0");
+  const ref = useRef<HTMLDivElement>(null);
+  const isInView = useInView(ref, { once: true, amount: 0.5 });
+
+  useEffect(() => {
+    if (!isInView) return;
+
+    // Handle "Less than 1" case
+    if (targetValue === "Less than 1") {
+      setDisplayValue("Less than 1");
+      return;
+    }
+
+    // Extract numeric value and suffix
+    const numericMatch = targetValue.match(/(\d+(?:\.\d+)?)/);
+    if (!numericMatch) {
+      setDisplayValue(targetValue);
+      return;
+    }
+
+    const targetNum = parseFloat(numericMatch[1]);
+    const suffix = targetValue.replace(numericMatch[0], ""); // Get % or other suffix
+
+    const startTime = Date.now();
+    const startValue = 0;
+
+    const animate = () => {
+      const elapsed = Date.now() - startTime;
+      const progress = Math.min(elapsed / duration, 1);
+
+      // Easing function for smooth animation
+      const easeOutQuart = 1 - Math.pow(1 - progress, 4);
+      const currentValue = startValue + (targetNum - startValue) * easeOutQuart;
+
+      // Format the number (remove decimals if it's a whole number)
+      const formattedValue =
+        targetNum % 1 === 0
+          ? Math.floor(currentValue).toString()
+          : currentValue.toFixed(1);
+
+      setDisplayValue(formattedValue + suffix);
+
+      if (progress < 1) {
+        requestAnimationFrame(animate);
+      } else {
+        setDisplayValue(targetValue);
+      }
+    };
+
+    requestAnimationFrame(animate);
+  }, [isInView, targetValue, duration]);
+
+  return { displayValue, ref };
+};
+
+const AnimatedStatValue = ({
+  value,
+  delay = 0,
+}: {
+  value: string;
+  delay?: number;
+}) => {
+  const { displayValue, ref } = useAnimatedNumber(value);
+
+  return (
+    <div ref={ref} className="text-4.5xl font-bold text-purple-500 mb-3">
+      {displayValue}
+    </div>
+  );
+};
 
 export const SavingsSection = () => {
   return (
@@ -53,9 +129,7 @@ export const SavingsSection = () => {
                 transition={{ duration: 0.6, delay: index * 0.1 }}
                 className="bg-[#8F03A00A] rounded-2xl p-8 border border-purple-500 shadow-sm"
               >
-                <div className="text-4.5xl font-bold text-purple-500 mb-3">
-                  {stat.value}
-                </div>
+                <AnimatedStatValue value={stat.value} delay={index * 0.1} />
                 <p className="text-lg text-zinc-950">{stat.description}</p>
               </motion.div>
             ))}

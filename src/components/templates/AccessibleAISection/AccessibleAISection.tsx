@@ -31,7 +31,7 @@ export const AccessibleAISection = () => {
         const nextIndex = (currentIndex + 1) % tabs.length;
         return tabs[nextIndex];
       });
-    }, 3000);
+    }, 6000);
 
     return () => clearInterval(interval);
   }, [tabs]);
@@ -93,36 +93,59 @@ export const AccessibleAISection = () => {
           </div>
 
           <div className="flex justify-center gap-4 max-w-full mx-auto mb-14">
-            <Button
-              variant={
-                activeTab === "instant" ? "gradient-outline" : "outline-dark"
-              }
-              size="lg"
-              className="rounded-full font-medium"
-              onClick={() => setActiveTab("instant")}
+            <motion.div
+              animate={{
+                scale: activeTab === "instant" ? 1.05 : 1,
+              }}
+              transition={{ duration: 0.3, ease: "easeInOut" }}
             >
-              Instant Answers
-            </Button>
-            <Button
-              variant={
-                activeTab === "faster" ? "gradient-outline" : "outline-dark"
-              }
-              size="lg"
-              className="rounded-full font-medium"
-              onClick={() => setActiveTab("faster")}
+              <Button
+                variant={
+                  activeTab === "instant" ? "gradient-outline" : "outline-dark"
+                }
+                size="lg"
+                className="rounded-full font-medium transition-all duration-300"
+                onClick={() => setActiveTab("instant")}
+              >
+                Instant Answers
+              </Button>
+            </motion.div>
+            <motion.div
+              animate={{
+                scale: activeTab === "faster" ? 1.05 : 1,
+              }}
+              transition={{ duration: 0.3, ease: "easeInOut" }}
             >
-              Work Faster
-            </Button>
-            <Button
-              variant={
-                activeTab === "customers" ? "gradient-outline" : "outline-dark"
-              }
-              size="lg"
-              className="rounded-full font-medium"
-              onClick={() => setActiveTab("customers")}
+              <Button
+                variant={
+                  activeTab === "faster" ? "gradient-outline" : "outline-dark"
+                }
+                size="lg"
+                className="rounded-full font-medium transition-all duration-300"
+                onClick={() => setActiveTab("faster")}
+              >
+                Work Faster
+              </Button>
+            </motion.div>
+            <motion.div
+              animate={{
+                scale: activeTab === "customers" ? 1.05 : 1,
+              }}
+              transition={{ duration: 0.3, ease: "easeInOut" }}
             >
-              Handle More Customers
-            </Button>
+              <Button
+                variant={
+                  activeTab === "customers"
+                    ? "gradient-outline"
+                    : "outline-dark"
+                }
+                size="lg"
+                className="rounded-full font-medium transition-all duration-300"
+                onClick={() => setActiveTab("customers")}
+              >
+                Handle More Customers
+              </Button>
+            </motion.div>
           </div>
         </motion.div>
       </div>
@@ -157,13 +180,22 @@ export const AccessibleAISection = () => {
           <div className="absolute bottom-0 left-0 right-0 h-20 bg-gradient-to-t from-white to-transparent z-10 pointer-events-none rounded-b-2xl"></div>
           <motion.div
             key={activeTab}
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5 }}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.3 }}
             className="relative"
           >
             {/* Content Section */}
-            <div
+            <motion.div
+              initial={{
+                opacity: 0,
+                x: isEvenSlide ? 100 : -100,
+              }}
+              animate={{
+                opacity: 1,
+                x: 0,
+              }}
+              transition={{ duration: 0.6, ease: "easeOut" }}
               className={`space-y-6 p-14 ${
                 isEvenSlide
                   ? "absolute right-0 top-16 max-w-[600px]"
@@ -178,7 +210,17 @@ export const AccessibleAISection = () => {
               </p>
               <ul className="space-y-2">
                 {tabContent[activeTab].features.map((feature, index) => (
-                  <li key={index} className="flex items-start gap-3">
+                  <motion.li
+                    key={index}
+                    initial={{ opacity: 0, x: isEvenSlide ? 20 : -20 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    transition={{
+                      duration: 0.4,
+                      delay: 0.2 + index * 0.1,
+                      ease: "easeOut",
+                    }}
+                    className="flex items-start gap-3"
+                  >
                     <svg
                       className="w-6 h-6 text-purple-500 flex-shrink-0 mt-0.5"
                       fill="none"
@@ -193,16 +235,16 @@ export const AccessibleAISection = () => {
                       />
                     </svg>
                     <span className="text-lg text-zinc-700">{feature}</span>
-                  </li>
+                  </motion.li>
                 ))}
               </ul>
-            </div>
+            </motion.div>
 
             {/* Image Section */}
             <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.5, delay: 0.2 }}
+              initial={{ opacity: 0, y: 100 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, ease: "easeOut", delay: 0.2 }}
               className={`${
                 isEvenSlide
                   ? "absolute left-16 top-12 max-w-[600px]"
