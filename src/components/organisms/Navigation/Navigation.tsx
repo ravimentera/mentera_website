@@ -9,22 +9,6 @@ interface NavigationProps {
   className?: string;
 }
 
-// Navigation items - currently commented out as they will be implemented in future updates
-// Each link represents a section of the website
-// const navLinks = [
-//   // Features section - shows the key features of the Mentera.ai platform
-//   { label: "Features", href: "#features" },
-
-//   // AI Assistant section - highlights the AI capabilities of the platform
-//   { label: "AI Assistant", href: "#ai-assistant" },
-
-//   // Benefits section - demonstrates the value proposition for med spas
-//   { label: "Benefits", href: "#benefits" },
-
-//   // Pricing section - will show different pricing tiers when available
-//   { label: "Pricing", href: "#pricing" },
-// ];
-
 export const Navigation = ({ className }: NavigationProps) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);

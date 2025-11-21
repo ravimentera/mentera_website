@@ -70,36 +70,10 @@ const config: Config = {
         "4.5xl": ["2.5rem", { lineHeight: "1.2" }],
       },
       animation: {
-        "gradient-x": "gradient-x 15s ease infinite",
-        float: "float 6s ease-in-out infinite",
-        shine: "shine 1.5s ease-in-out infinite",
-        shimmer: "shimmer 2s linear infinite",
         "scroll-left": "scroll-left 10s linear infinite alternate",
         "scroll-right": "scroll-right 10s linear infinite alternate",
       },
       keyframes: {
-        "gradient-x": {
-          "0%, 100%": {
-            "background-size": "200% 200%",
-            "background-position": "left center",
-          },
-          "50%": {
-            "background-size": "200% 200%",
-            "background-position": "right center",
-          },
-        },
-        float: {
-          "0%, 100%": { transform: "translateY(0)" },
-          "50%": { transform: "translateY(-20px)" },
-        },
-        shine: {
-          "0%": { backgroundPosition: "200% center" },
-          "100%": { backgroundPosition: "-200% center" },
-        },
-        shimmer: {
-          "0%": { backgroundPosition: "0% 0%" },
-          "100%": { backgroundPosition: "200% 0%" },
-        },
         "scroll-left": {
           "0%": { transform: "translateX(0)" },
           "100%": { transform: "translateX(-25%)" },
