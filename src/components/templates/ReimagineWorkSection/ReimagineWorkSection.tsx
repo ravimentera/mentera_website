@@ -135,22 +135,22 @@ export const ReimagineWorkSection = memo(() => {
   }, []);
 
   return (
-    <section className="relative w-full py-20">
-      <div className="max-w-8xl mx-auto px-24 py-20">
+    <section className="relative w-full py-12 sm:py-16 md:py-20">
+      <div className="max-w-8xl mx-auto px-4 sm:px-6 md:px-12 lg:px-24 py-12 sm:py-16 md:py-20">
         <motion.div
           initial="hidden"
           whileInView="visible"
           viewport={viewportConfig.once}
           variants={fadeInUp}
           transition={transitions.default}
-          className="text-center mb-18"
+          className="text-center mb-6 sm:mb-18"
         >
-          <span className="text-4.5xl font-medium text-zinc-950 max-w-[28rem] mx-auto">
+          <span className="text-2xl sm:text-3xl md:text-4xl lg:text-4.5xl font-medium text-zinc-950 max-w-full sm:max-w-[28rem] mx-auto px-4">
             Reimagine your everyday work with AI
           </span>
         </motion.div>
 
-        <div className="grid md:grid-cols-3 gap-8 max-w-8xl mx-auto">
+        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8 max-w-8xl mx-auto">
           {features.map((feature, index) => (
             <motion.div
               key={`feature-${feature.title}-${index}`}

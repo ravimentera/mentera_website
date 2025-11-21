@@ -73,9 +73,9 @@ export const AccessibleAISection = () => {
   };
 
   return (
-    <section className="relative w-full bg-transparent px-24">
+    <section className="relative w-full bg-transparent px-4 sm:px-6 md:px-12 lg:px-24">
       {/* Header Section */}
-      <div className="max-w-8xl mx-auto px-6 sm:px-8 lg:px-24 pt-20">
+      <div className="max-w-8xl mx-auto px-2 sm:px-4 md:px-6 lg:px-24 pt-12 sm:pt-16 md:pt-20">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -83,31 +83,39 @@ export const AccessibleAISection = () => {
           transition={{ duration: 0.6 }}
         >
           <div className="max-w-full mx-auto text-center">
-            <div className="text-4.5xl leading-normal text-zinc-950">
+            <div className="text-2xl sm:text-3xl md:text-4xl lg:text-4.5xl leading-tight sm:leading-normal text-zinc-950">
               <p className="mb-0">
                 Your emails, documents
-                <span>, schedules, notes, EHR & CRM data</span>
+                <span className="hidden sm:inline">
+                  , schedules, notes, EHR & CRM data
+                </span>
+                <span className="sm:hidden">
+                  , schedules, notes,
+                  <br />
+                  EHR & CRM data
+                </span>
               </p>
               <p className="font-bold">Accessible in one secure AI</p>
             </div>
-            <p className="text-lg leading-normal opacity-80 text-zinc-950 mb-8 mt-6">
+            <p className="text-base sm:text-lg leading-normal opacity-80 text-zinc-950 mb-6 sm:mb-8 mt-4 sm:mt-6">
               One place to find what you need and trigger tasks.
             </p>
           </div>
 
-          <div className="flex justify-center gap-4 max-w-full mx-auto mb-14">
+          <div className="flex flex-nowrap items-center sm:flex-wrap overflow-x-auto sm:overflow-x-visible justify-start sm:justify-center gap-2 sm:gap-3 md:gap-4 max-w-full mx-auto mb-8 sm:mb-10 md:mb-14">
             <motion.div
               animate={{
                 scale: activeTab === "instant" ? 1.05 : 1,
               }}
               transition={{ duration: 0.3, ease: "easeInOut" }}
+              className="flex-shrink-0 m-2 sm:my-0"
             >
               <Button
                 variant={
                   activeTab === "instant" ? "gradient-outline" : "outline-dark"
                 }
-                size="lg"
-                className="rounded-full font-medium transition-all duration-300"
+                size="sm"
+                className="rounded-full font-medium transition-all duration-300 text-xs sm:text-sm md:text-base px-3 sm:px-4 md:px-6 py-2 sm:py-2.5 md:py-3"
                 onClick={() => setActiveTab("instant")}
               >
                 Instant Answers
@@ -118,13 +126,14 @@ export const AccessibleAISection = () => {
                 scale: activeTab === "faster" ? 1.05 : 1,
               }}
               transition={{ duration: 0.3, ease: "easeInOut" }}
+              className="flex-shrink-0"
             >
               <Button
                 variant={
                   activeTab === "faster" ? "gradient-outline" : "outline-dark"
                 }
-                size="lg"
-                className="rounded-full font-medium transition-all duration-300"
+                size="sm"
+                className="rounded-full font-medium transition-all duration-300 text-xs sm:text-sm md:text-base px-3 sm:px-4 md:px-6 py-2 sm:py-2.5 md:py-3"
                 onClick={() => setActiveTab("faster")}
               >
                 Work Faster
@@ -135,6 +144,7 @@ export const AccessibleAISection = () => {
                 scale: activeTab === "customers" ? 1.05 : 1,
               }}
               transition={{ duration: 0.3, ease: "easeInOut" }}
+              className="flex-shrink-0"
             >
               <Button
                 variant={
@@ -142,8 +152,8 @@ export const AccessibleAISection = () => {
                     ? "gradient-outline"
                     : "outline-dark"
                 }
-                size="lg"
-                className="rounded-full font-medium transition-all duration-300"
+                size="sm"
+                className="rounded-full font-medium transition-all duration-300 text-xs sm:text-sm md:text-base px-3 sm:px-4 md:px-6 py-2 sm:py-2.5 md:py-3"
                 onClick={() => setActiveTab("customers")}
               >
                 Handle More Customers
@@ -179,14 +189,14 @@ export const AccessibleAISection = () => {
         />
 
         <div
-          className={`max-w-8xl mx-auto relative overflow-hidden transition-all duration-500 ease-in-out ${tabContent[activeTab].height}`}
+          className={`max-w-8xl mx-auto relative overflow-hidden transition-all duration-500 ease-in-out ${tabContent[activeTab].height} min-h-[20rem] sm:min-h-[25rem] md:min-h-[28rem] lg:min-h-0`}
         >
           <motion.div
             key={activeTab}
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 0.3 }}
-            className="relative"
+            className="relative flex flex-col lg:block"
           >
             {/* Content Section */}
             <motion.div
@@ -199,19 +209,19 @@ export const AccessibleAISection = () => {
                 x: 0,
               }}
               transition={{ duration: 0.6, ease: "easeOut" }}
-              className={`space-y-6 p-14 ${
+              className={`space-y-4 sm:space-y-6 p-6 sm:p-10 md:p-14 ${
                 isEvenSlide
-                  ? "absolute right-0 top-16 max-w-[37.5rem]"
-                  : "max-w-[37.5rem]"
+                  ? "lg:absolute lg:right-0 lg:top-16 lg:max-w-[37.5rem]"
+                  : "lg:max-w-[37.5rem]"
               }`}
             >
-              <h3 className="text-3xl font-bold text-zinc-950">
+              <h3 className="text-2xl sm:text-3xl font-bold text-zinc-950">
                 {tabContent[activeTab].title}
               </h3>
-              <p className="text-xl text-zinc-700 leading-relaxed">
+              <p className="text-base sm:text-lg md:text-xl text-zinc-700 leading-relaxed">
                 {tabContent[activeTab].subtitle}
               </p>
-              <ul className="space-y-2">
+              <ul className="space-y-2 sm:space-y-3">
                 {tabContent[activeTab].features.map((feature, index) => (
                   <motion.li
                     key={index}
@@ -222,10 +232,10 @@ export const AccessibleAISection = () => {
                       delay: 0.2 + index * 0.1,
                       ease: "easeOut",
                     }}
-                    className="flex items-start gap-3"
+                    className="flex items-start gap-2 sm:gap-3"
                   >
                     <svg
-                      className="w-6 h-6 text-purple-500 flex-shrink-0 mt-0.5"
+                      className="w-5 h-5 sm:w-6 sm:h-6 text-purple-500 flex-shrink-0 mt-0.5"
                       fill="none"
                       viewBox="0 0 24 24"
                       stroke="currentColor"
@@ -237,7 +247,9 @@ export const AccessibleAISection = () => {
                         d="M5 13l4 4L19 7"
                       />
                     </svg>
-                    <span className="text-lg text-zinc-700">{feature}</span>
+                    <span className="text-sm sm:text-base md:text-lg text-zinc-700">
+                      {feature}
+                    </span>
                   </motion.li>
                 ))}
               </ul>
@@ -248,10 +260,10 @@ export const AccessibleAISection = () => {
               initial={{ opacity: 0, y: 100 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, ease: "easeOut", delay: 0.2 }}
-              className={`z-0 ${
+              className={`z-0 mt-6 sm:mt-8 ${
                 isEvenSlide
-                  ? "absolute left-16 top-12 max-w-[37.5rem]"
-                  : "absolute right-16 top-12 max-w-[37.5rem]"
+                  ? "lg:absolute lg:left-16 lg:top-12 lg:max-w-[37.5rem] lg:mt-0"
+                  : "lg:absolute lg:right-16 lg:top-12 lg:max-w-[37.5rem] lg:mt-0"
               }`}
             >
               <div className="relative rounded-[2rem] shadow-xl">

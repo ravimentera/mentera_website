@@ -5,11 +5,11 @@ import Link from "next/link";
 
 export const Footer = () => {
   return (
-    <footer className="p-12 relative overflow-hidden">
-      <div className="rounded-3xl max-w-8xl bg-purple mx-auto px-14 py-9">
+    <footer className="p-4 sm:p-6 md:p-8 lg:p-12 relative overflow-hidden">
+      <div className="rounded-2xl sm:rounded-3xl max-w-8xl bg-purple mx-auto px-6 sm:px-10 md:px-14 py-6 sm:py-8 md:py-9">
         {/* Main Heading and Email Input Section */}
-        <div className="text-center mb-12 pb-8">
-          <h2 className="text-5xl font-medium text-white mb-14">
+        <div className="text-center mb-8 sm:mb-10 md:mb-12 pb-6 sm:pb-7 md:pb-8">
+          <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-medium text-white mb-8 sm:mb-10 md:mb-14">
             Business AI that works.
           </h2>
           <div className="flex justify-center">
@@ -23,39 +23,39 @@ export const Footer = () => {
         </div>
 
         {/* Middle Section: Compliance Badges and Navigation Links */}
-        <div className="flex flex-col md:flex-row justify-between items-center mb-8 gap-6">
+        <div className="flex flex-col md:flex-row justify-between items-center mb-6 sm:mb-8 gap-4 sm:gap-6">
           <img
             src="/logos/mentera-light.svg"
             alt="Mentera logo"
-            className="h-9 w-auto"
+            className="h-9 mb-2 sm:mb-0 sm:h-8 md:h-9 w-auto"
           />
           {/* Compliance Badges */}
-          <div className="flex gap-8 items-center">
+          <div className="flex gap-6 md:gap-8 items-center">
             {/* HIPAA Badge */}
             <img
               src="/logos/hippa.svg"
               alt="HIPAA Compliant"
-              className="h-9 aspect-[110/37] w-auto"
+              className="h-7 sm:h-8 md:h-9 aspect-[110/37] w-auto"
             />
             {/* GDPR Badge */}
             <img
               src="/logos/gdpr.svg"
               alt="GDPR Compliant"
-              className="h-9 aspect-[115/36] w-auto"
+              className="h-7 sm:h-8 md:h-9 aspect-[115/36] w-auto"
             />
           </div>
 
           {/* Navigation Links */}
-          <div className="flex gap-8 items-center">
+          <div className="flex gap-6 md:gap-8 items-center flex-wrap justify-center">
             <Link
               href="#"
-              className="cursor-pointer text-base text-white hover:opacity-80 transition-opacity font-normal"
+              className="cursor-pointer text-sm sm:text-base text-white hover:opacity-80 transition-opacity font-normal"
             >
               Privacy Policy
             </Link>
             <Link
               href="#"
-              className="cursor-pointer text-base text-white hover:opacity-80 transition-opacity font-normal"
+              className="cursor-pointer text-sm sm:text-base text-white hover:opacity-80 transition-opacity font-normal"
             >
               Contact Us
             </Link>
@@ -66,10 +66,10 @@ export const Footer = () => {
         <div className="border-t border-white/20 mb-8"></div>
 
         {/* Bottom Section: Logo, Copyright, and Social Media */}
-        <div className="flex justify-between items-center gap-6 pb-6">
+        <div className="flex flex-col sm:flex-row justify-between items-center gap-4 sm:gap-6 pb-4 sm:pb-6">
           {/* Logo and Copyright */}
           <div className="flex items-center gap-3 md:gap-4">
-            <p className="text-white text-sm font-normal">
+            <p className="text-white text-xs sm:text-sm font-normal">
               © 2025 Mentera. All rights reserved.
             </p>
           </div>

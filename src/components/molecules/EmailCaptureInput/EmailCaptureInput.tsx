@@ -94,14 +94,14 @@ export const EmailCaptureInput: React.FC<EmailCaptureInputProps> = ({
         type="email"
         name="email"
         placeholder={placeholder}
-        className={`w-full ${inputHeight} px-4 sm:px-6 pr-[7.8125rem] sm:pr-[10.625rem] rounded-full ${inputStyles} text-base sm:text-lg focus:outline-none focus:ring-2 border`}
+        className={`w-full ${inputHeight} px-4 sm:px-6 pr-[7rem] sm:pr-[11.5rem] rounded-full ${inputStyles} text-sm sm:text-base md:text-lg focus:outline-none focus:ring-2 border`}
         required
         disabled={isSubmitting}
       />
       <button
         type="submit"
         disabled={isSubmitting}
-        className={`absolute right-0 top-0 ${buttonHeight} px-3 sm:px-8 text-sm sm:text-base ${buttonStyles} rounded-full flex items-center gap-1 sm:gap-2 transition-colors disabled:opacity-50 disabled:cursor-not-allowed`}
+        className={`absolute right-[1px] top-[1px] bottom-[1px] px-4 sm:px-6 md:px-8 text-xs sm:text-sm md:text-base font-medium sm:font-bold ${buttonStyles} rounded-full flex items-center justify-center gap-1 sm:gap-2 transition-colors disabled:opacity-50 disabled:cursor-not-allowed whitespace-nowrap`}
       >
         <span className="whitespace-nowrap">
           {isSubmitting ? "Submitting..." : success ? "Success!" : buttonText}

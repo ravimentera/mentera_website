@@ -65,6 +65,9 @@ const config: Config = {
           300: "#a1f1d0",
         },
       },
+      padding: {
+        3.75: "0.9375rem",
+      },
       maxWidth: {
         "8xl": "90rem",
       },

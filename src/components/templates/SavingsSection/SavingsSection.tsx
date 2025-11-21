@@ -93,7 +93,7 @@ const AnimatedStatValue = memo(({
   const { displayValue, ref } = useAnimatedNumber(value);
 
   return (
-    <div ref={ref} className="text-4.5xl font-bold text-purple-500 mb-3">
+    <div ref={ref} className="text-2xl sm:text-3xl md:text-4xl lg:text-4.5xl font-bold text-purple-500 mb-2 sm:mb-3">
       {displayValue}
     </div>
   );
@@ -103,28 +103,28 @@ AnimatedStatValue.displayName = "AnimatedStatValue";
 
 export const SavingsSection = memo(() => {
   return (
-    <section className="relative w-full py-20">
-      <div className="max-w-8xl mx-auto px-24">
-        <div className="max-w-8xl mx-auto items-center flex justify-between">
+    <section className="relative w-full py-12 sm:py-16 md:py-20">
+      <div className="max-w-8xl mx-auto px-4 sm:px-6 md:px-12 lg:px-24">
+        <div className="max-w-8xl mx-auto items-center flex flex-col lg:flex-row justify-between gap-8 lg:gap-0">
           <motion.div
             initial="hidden"
             whileInView="visible"
             viewport={viewportConfig.once}
             variants={fadeInUp}
             transition={transitions.default}
-            className="w-120 mr-20"
+            className="w-full lg:w-120 lg:mr-20"
           >
-            <h2 className="text-4.5xl font-medium text-zinc-950 mb-8">
+            <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-4.5xl font-medium text-zinc-950 mb-6 sm:mb-8">
               Saves up to 250 hours per user a year
             </h2>
-            <p className="text-xl text-zinc-950">
+            <p className="text-base sm:text-lg md:text-xl text-zinc-950">
               Tellus id tellus lectus leo elit posuere nunc velit tempor. Urna
               elit et et amet morbi vitae neque. Feugiat ut amet in nunc
               rhoncus. Sem pretium leo vitae ornare.
             </p>
           </motion.div>
 
-          <div className="grid grid-cols-2 gap-6">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6 w-full lg:w-auto">
             {stats.map((stat, index) => (
               <motion.div
                 key={`stat-${stat.value}-${index}`}
@@ -133,10 +133,10 @@ export const SavingsSection = memo(() => {
                 viewport={viewportConfig.once}
                 variants={fadeInUp}
                 transition={transitions.staggered(index, 0.1)}
-                className="bg-purple-500/4 rounded-2xl p-8 border border-purple-500 shadow-sm"
+                className="bg-purple-500/4 rounded-2xl p-6 sm:p-8 border border-purple-500 shadow-sm"
               >
                 <AnimatedStatValue value={stat.value} delay={index * 0.1} />
-                <p className="text-lg text-zinc-950">{stat.description}</p>
+                <p className="text-sm sm:text-base md:text-lg text-zinc-950">{stat.description}</p>
               </motion.div>
             ))}
           </div>

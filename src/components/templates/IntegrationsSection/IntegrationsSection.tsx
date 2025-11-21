@@ -71,9 +71,9 @@ export const IntegrationsSection = memo(() => {
   }, [rows]);
 
   return (
-    <section className="relative w-full pb-20 pt-28 bg-transparent px-24">
-      <div className="max-w-8xl mx-auto px-6">
-        <div className="grid lg:grid-cols-2 gap-16 items-center">
+    <section className="relative w-full pb-12 sm:pb-16 md:pb-20 pt-12 sm:pt-20 md:pt-28 bg-transparent px-4 sm:px-6 md:px-12 lg:px-24">
+      <div className="max-w-8xl mx-auto px-2 sm:px-4 md:px-6">
+        <div className="grid lg:grid-cols-2 gap-8 sm:gap-12 md:gap-16 items-center">
           {/* Left Side - Text Content */}
           <motion.div
             initial="hidden"
@@ -81,16 +81,16 @@ export const IntegrationsSection = memo(() => {
             viewport={viewportConfig.once}
             variants={fadeInLeft}
             transition={transitions.default}
-            className="space-y-8 max-w-[28rem]"
+            className="space-y-6 sm:space-y-8 max-w-full lg:max-w-[28rem]"
           >
-            <h2 className="text-4.5xl font-medium text-zinc-950">
+            <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-4.5xl font-medium text-zinc-950">
               Mentera connects with 50+ apps
             </h2>
-            <p className="text-xl text-zinc-950">
+            <p className="text-base sm:text-lg md:text-xl text-zinc-950">
               Aliquet purus felis pulvinar fames venenatis tempor facilisis ac.
               Amet scelerisque facilisis odio pretium.
             </p>
-            <p className="text-base text-gray-400 font-medium">
+            <p className="text-sm sm:text-base text-gray-400 font-medium">
               If we don't have a current integration, we will build it.
             </p>
           </motion.div>
