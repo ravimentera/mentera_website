@@ -16,7 +16,7 @@ export const Navigation = ({ className }: NavigationProps) => {
   // Handle scroll effect
   useEffect(() => {
     const handleScroll = () => {
-      setScrolled(window.scrollY > 50);
+      setScrolled(window.scrollY > 0);
     };
 
     window.addEventListener("scroll", handleScroll);
@@ -35,14 +35,10 @@ export const Navigation = ({ className }: NavigationProps) => {
         className
       )}
     >
-      <div className="px-24 flex items-center justify-between h-[90px] bg-white shadow-[0px_4px_16px_0px_rgba(0,0,0,0.05)]">
+      <div className="px-24 flex items-center justify-between h-24 bg-white shadow-[0_4px_16px_0_rgba(0,0,0,0.05)]">
         {/* Logo */}
         <Link href="/" className="z-50 relative">
-          <img
-            src="/flogo.svg"
-            alt="Mentera Logo"
-            className="h-12"
-          />
+          <img src="/flogo.svg" alt="Mentera Logo" className="h-12" />
         </Link>
 
         {/* Desktop Navigation - Exact Figma styling */}
@@ -66,10 +62,16 @@ export const Navigation = ({ className }: NavigationProps) => {
             About
           </Link>
           <div className="flex items-center gap-6">
-            <Button variant="outline" className="border border-[#4d28df] text-[#4d28df] px-6 py-3 rounded-[100px] text-base font-bold hover:bg-[#4d28df]/5 transition-colors">
+            <Button
+              variant="outline"
+              className="border border-purple text-purple px-6 py-3 rounded-full text-base font-bold hover:bg-purple/5 transition-colors"
+            >
               Log In
             </Button>
-            <Button variant="primary" className="bg-[#4d28df] text-white px-6 py-3 rounded-[100px] text-base font-bold hover:bg-[#4d28df]/90 transition-colors">
+            <Button
+              variant="primary"
+              className="bg-purple text-white px-6 py-3 rounded-full text-base font-bold hover:bg-purple/90 transition-colors"
+            >
               Get Started
             </Button>
           </div>
@@ -84,19 +86,19 @@ export const Navigation = ({ className }: NavigationProps) => {
           <div className="flex flex-col justify-center items-center w-7 h-7">
             <span
               className={cn(
-                "bg-[#111827] h-0.5 w-6 rounded-full transition-all duration-300",
+                "bg-gray-900 h-0.5 w-6 rounded-full transition-all duration-300",
                 isMenuOpen && "rotate-45 translate-y-1"
               )}
             />
             <span
               className={cn(
-                "bg-[#111827] h-0.5 w-6 rounded-full my-1 transition-all duration-300",
+                "bg-gray-900 h-0.5 w-6 rounded-full my-1 transition-all duration-300",
                 isMenuOpen && "opacity-0"
               )}
             />
             <span
               className={cn(
-                "bg-[#111827] h-0.5 w-6 rounded-full transition-all duration-300",
+                "bg-gray-900 h-0.5 w-6 rounded-full transition-all duration-300",
                 isMenuOpen && "-rotate-45 -translate-y-1"
               )}
             />
@@ -118,14 +120,14 @@ export const Navigation = ({ className }: NavigationProps) => {
                   <Link
                     key={link.href}
                     href={link.href}
-                    className="text-[#111827] font-outfit text-2xl hover:text-[#4B5563] transition-colors"
+                    className="text-gray-900 font-outfit text-2xl hover:text-gray-600 transition-colors"
                     onClick={handleNavLinkClick}
                   >
                     {link.label}
                   </Link>
                 ))}
                 <button
-                  className="mt-8 bg-[#111827] text-white px-6 py-3 rounded-md hover:bg-[#1F2937] transition-colors w-full"
+                  className="mt-8 bg-gray-900 text-white px-6 py-3 rounded-md hover:bg-gray-800 transition-colors w-full"
                   onClick={handleNavLinkClick}
                 >
                   Join Beta

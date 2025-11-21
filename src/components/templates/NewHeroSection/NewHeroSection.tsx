@@ -4,10 +4,6 @@ import { Button } from "@/components/atoms/Button/Button";
 import { motion } from "framer-motion";
 
 export const NewHeroSection = () => {
-  // const handleEmailSubmit = (email: string) => {
-  //   console.log("Email submitted:", email);
-  // };
-
   return (
     <section className="relative w-full min-h-screen flex items-center justify-center overflow-hidden">
       {/* Content */}
@@ -25,10 +21,7 @@ export const NewHeroSection = () => {
                 Your entire business,
               </p>
               <div className="flex gap-3 items-start text-5xl leading-normal font-bold">
-                <span
-                  className="bg-gradient-to-r from-purple-500 to-purple bg-clip-text text-transparent"
-                  style={{ WebkitTextFillColor: "transparent" }}
-                >
+                <span className="bg-gradient-to-r from-purple-500 to-purple bg-clip-text text-transparent [-webkit-text-fill-color:transparent]">
                   one search
                 </span>
                 <span className="text-zinc-950">away</span>
@@ -66,7 +59,7 @@ export const NewHeroSection = () => {
             transition={{ duration: 0.6, delay: 0.2 }}
             className="relative w-full flex items-center justify-center"
           >
-            <div className="relative w-[500px] h-[500px] flex items-center justify-center overflow-visible">
+            <div className="relative w-[31.25rem] h-[31.25rem] flex items-center justify-center overflow-visible">
               {/* Outer Ring - 500x500 - Rotates Clockwise */}
               <motion.div
                 className="absolute inset-0 w-full h-full"
@@ -90,10 +83,14 @@ export const NewHeroSection = () => {
                       x2="100%"
                       y2="100%"
                     >
-                      <stop offset="0%" stopColor="#a855f7" stopOpacity="0.3" />
+                      <stop
+                        offset="0%"
+                        stopColor="rgb(168, 85, 247)"
+                        stopOpacity="0.3"
+                      />
                       <stop
                         offset="100%"
-                        stopColor="#ec4899"
+                        stopColor="rgb(236, 72, 153)"
                         stopOpacity="0.3"
                       />
                     </linearGradient>
@@ -110,7 +107,7 @@ export const NewHeroSection = () => {
 
                 {/* 4 Icons on Outer Ring - positioned with CSS */}
                 <motion.div
-                  className="absolute w-[60px] h-[60px] top-[-30px] left-1/2 -translate-x-1/2"
+                  className="absolute w-[60px] h-[60px] -top-8 left-1/2 -translate-x-1/2"
                   animate={{ rotate: -360 }}
                   transition={{
                     duration: 40,
@@ -120,33 +117,15 @@ export const NewHeroSection = () => {
                 >
                   <div className="w-full h-full flex items-center justify-center bg-white rounded-xl p-2 border border-gray-200 shadow-md">
                     <img
-                      src="/app-logos/app-trello.png"
-                      alt="Trello"
+                      src="/app-logos/app-hubspot.png"
+                      alt="HubSpot"
                       className="w-full h-full object-contain"
                     />
                   </div>
                 </motion.div>
 
                 <motion.div
-                  className="absolute w-[60px] h-[60px] top-1/2 right-[-30px] -translate-y-1/2"
-                  animate={{ rotate: -360 }}
-                  transition={{
-                    duration: 40,
-                    repeat: Infinity,
-                    ease: "linear",
-                  }}
-                >
-                  <div className="w-full h-full flex items-center justify-center bg-white rounded-xl p-2 border border-gray-200 shadow-md">
-                    <img
-                      src="/app-logos/app-stripe.png"
-                      alt="Stripe"
-                      className="w-full h-full object-contain"
-                    />
-                  </div>
-                </motion.div>
-
-                <motion.div
-                  className="absolute w-[60px] h-[60px] bottom-[-30px] left-1/2 -translate-x-1/2"
+                  className="absolute w-[60px] h-[60px] top-1/2 -right-8 -translate-y-1/2"
                   animate={{ rotate: -360 }}
                   transition={{
                     duration: 40,
@@ -164,7 +143,25 @@ export const NewHeroSection = () => {
                 </motion.div>
 
                 <motion.div
-                  className="absolute w-[60px] h-[60px] top-1/2 left-[-30px] -translate-y-1/2"
+                  className="absolute w-[60px] h-[60px] -bottom-8 left-1/2 -translate-x-1/2"
+                  animate={{ rotate: -360 }}
+                  transition={{
+                    duration: 40,
+                    repeat: Infinity,
+                    ease: "linear",
+                  }}
+                >
+                  <div className="w-full h-full flex items-center justify-center bg-white rounded-xl p-2 border border-gray-200 shadow-md">
+                    <img
+                      src="/app-logos/app-salesforce.png"
+                      alt="Salesforce"
+                      className="w-full h-full object-contain"
+                    />
+                  </div>
+                </motion.div>
+
+                <motion.div
+                  className="absolute w-[60px] h-[60px] top-1/2 -left-8 -translate-y-1/2"
                   animate={{ rotate: -360 }}
                   transition={{
                     duration: 40,
@@ -205,10 +202,14 @@ export const NewHeroSection = () => {
                       x2="100%"
                       y2="100%"
                     >
-                      <stop offset="0%" stopColor="#a855f7" stopOpacity="0.4" />
+                      <stop
+                        offset="0%"
+                        stopColor="rgb(168, 85, 247)"
+                        stopOpacity="0.4"
+                      />
                       <stop
                         offset="100%"
-                        stopColor="#ec4899"
+                        stopColor="rgb(236, 72, 153)"
                         stopOpacity="0.4"
                       />
                     </linearGradient>
@@ -226,7 +227,7 @@ export const NewHeroSection = () => {
                 {/* 3 Icons on Inner Ring - positioned with CSS - 120° intervals */}
                 {/* Top icon at 270° (top of circle) */}
                 <motion.div
-                  className="absolute w-[60px] h-[60px] top-[50px] left-1/2 -translate-x-1/2"
+                  className="absolute w-[60px] h-[60px] top-12 left-1/2 -translate-x-1/2"
                   animate={{ rotate: 360 }}
                   transition={{
                     duration: 30,
@@ -236,8 +237,8 @@ export const NewHeroSection = () => {
                 >
                   <div className="w-full h-full flex items-center justify-center bg-white rounded-xl p-2 border border-gray-200 shadow-md">
                     <img
-                      src="/app-logos/app-zoom.png"
-                      alt="Zoom"
+                      src="/app-logos/app-teams.png"
+                      alt="Microsoft Teams"
                       className="w-full h-full object-contain"
                     />
                   </div>
@@ -245,7 +246,7 @@ export const NewHeroSection = () => {
 
                 {/* Bottom-left icon at 150° */}
                 <motion.div
-                  className="absolute w-[60px] h-[60px] bottom-[210px] left-[47px]"
+                  className="absolute w-[60px] h-[60px] bottom-52 left-12"
                   animate={{ rotate: 360 }}
                   transition={{
                     duration: 30,
@@ -255,8 +256,8 @@ export const NewHeroSection = () => {
                 >
                   <div className="w-full h-full flex items-center justify-center bg-white rounded-xl p-2 border border-gray-200 shadow-md">
                     <img
-                      src="/app-logos/app-asana.png"
-                      alt="Asana"
+                      src="/app-logos/app-google-drive.png"
+                      alt="Google Drive"
                       className="w-full h-full object-contain"
                     />
                   </div>
@@ -264,7 +265,7 @@ export const NewHeroSection = () => {
 
                 {/* Bottom-right icon at 30° */}
                 <motion.div
-                  className="absolute w-[60px] h-[60px] bottom-[210px] right-[47px]"
+                  className="absolute w-[60px] h-[60px] bottom-52 right-12"
                   animate={{ rotate: 360 }}
                   transition={{
                     duration: 30,
@@ -274,8 +275,8 @@ export const NewHeroSection = () => {
                 >
                   <div className="w-full h-full flex items-center justify-center bg-white rounded-xl p-2 border border-gray-200 shadow-md">
                     <img
-                      src="/app-logos/app-jira.png"
-                      alt="Jira"
+                      src="/app-logos/app-slack.png"
+                      alt="Slack"
                       className="w-full h-full object-contain"
                     />
                   </div>
@@ -324,14 +325,13 @@ export const NewHeroSection = () => {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: 1 }}
-                className="absolute bottom-[-70px] left-[-50px] z-20 w-[360px]"
+                className="absolute -bottom-18 -left-12 z-20 w-[22.5rem]"
               >
                 <div
-                  className="bg-white rounded-3xl shadow-[0_20px_60px_rgba(139,92,246,0.3)] p-6"
+                  className="bg-white rounded-3xl shadow-[0_20px_60px_rgba(139,92,246,0.3)] p-6 border-[3px] border-transparent bg-clip-padding"
                   style={{
                     background:
-                      "linear-gradient(white, white) padding-box, linear-gradient(to right, #dca8e0, #4D28DF) border-box",
-                    border: "3px solid transparent",
+                      "linear-gradient(white, white) padding-box, linear-gradient(to right, rgb(220, 168, 224), rgb(77, 40, 223)) border-box",
                   }}
                 >
                   {/* Header */}

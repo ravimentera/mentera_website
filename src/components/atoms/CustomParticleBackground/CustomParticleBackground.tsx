@@ -24,85 +24,85 @@ interface CustomParticleBackgroundProps {
   className?: string;
 }
 
+// Note: Colors are defined as hex strings for use in inline styles
+// These correspond to Tailwind config colors: secondary, purple-500, teal-200, purple-particleAlt, etc.
 const defaultParticles: ParticleConfig[] = [
   {
-    color: "#6EF1BB",
+    color: "#6EF1BB", // secondary.DEFAULT
     opacity: 0.2,
     size: 691,
     blur: 108,
     position: { top: "0", right: "0" },
-    transform: { x: 0, y: -0.3 }
+    transform: { x: 0, y: -0.3 },
   },
   {
-    color: "#8F03A0", 
+    color: "#8F03A0", // purple-500
     opacity: 0.2,
     size: 691,
     blur: 108,
-    position: { top: "389px", right: "0" },
-    transform: { x: 0.24, y: -0.15 }
+    position: { top: "24.3125rem", right: "0" },
+    transform: { x: 0.24, y: -0.15 },
   },
   {
-    color: "#abeed2",
+    color: "#abeed2", // teal-200
     opacity: 0.1,
     size: 691,
     blur: 100,
-    position: { top: "498px", left: "537px" },
-    transform: { x: -0.18, y: -0.24 }
+    position: { top: "31.125rem", left: "33.5625rem" },
+    transform: { x: -0.18, y: -0.24 },
   },
   {
-    color: "#bc5ac7",
+    color: "#bc5ac7", // purple-particleAlt
     opacity: 0.2,
     size: 500,
     blur: 108,
-    position: { top: "300px", right: "0" },
-    transform: { x: 0.12, y: -0.27 }
+    position: { top: "18.75rem", right: "0" },
+    transform: { x: 0.12, y: -0.27 },
   },
   {
-    color: "#6EF1BB",
+    color: "#6EF1BB", // secondary.DEFAULT
     opacity: 0.25,
     size: 500,
     blur: 108,
-    position: { top: "450px", right: "400px" },
-    transform: { x: -0.21, y: -0.18 }
+    position: { top: "28.125rem", right: "25rem" },
+    transform: { x: -0.21, y: -0.18 },
   },
   {
-    color: "#a1f1d0",
+    color: "#a1f1d0", // teal-300
     opacity: 0.15,
     size: 600,
     blur: 120,
-    position: { bottom: "100px", left: "100px" },
-    transform: { x: 0.27, y: 0.12 }
+    position: { bottom: "6.25rem", left: "6.25rem" },
+    transform: { x: 0.27, y: 0.12 },
   },
   {
-    color: "#aa3db6",
+    color: "#aa3db6", // purple-particleAlt2
     opacity: 0.15,
     size: 400,
     blur: 90,
-    position: { top: "150px", left: "200px" },
-    transform: { x: -0.24, y: 0.21 }
-  }
+    position: { top: "9.375rem", left: "12.5rem" },
+    transform: { x: -0.24, y: 0.21 },
+  },
 ];
 
-export const CustomParticleBackground = ({ 
-  particles = defaultParticles, 
-  className = "fixed inset-0 -z-10"
+export const CustomParticleBackground = ({
+  particles = defaultParticles,
+  className = "fixed inset-0 -z-10",
 }: CustomParticleBackgroundProps) => {
   const [scrollY, setScrollY] = useState(0);
   const requestRef = useRef<number>();
   const previousTimeRef = useRef<number>();
 
   useEffect(() => {
-    const handleScroll = () => {
-      if (Math.abs(window.scrollY - scrollY) > 5) {
-        setScrollY(window.scrollY);
-      }
-    };
-
     let ticking = false;
     const scrollListener = () => {
       if (!ticking) {
         window.requestAnimationFrame(() => {
-          handleScroll();
+          const newScrollY = window.scrollY;
+          // Only update if change is significant (throttle updates)
+          if (Math.abs(newScrollY - scrollY) > 5) {
+            setScrollY(newScrollY);
+          }
           ticking = false;
         });
         ticking = true;
@@ -126,7 +126,7 @@ export const CustomParticleBackground = ({
     return () => cancelAnimationFrame(requestRef.current!);
   }, []);
 
-  const getPositionStyles = (position: ParticleConfig['position']) => {
+  const getPositionStyles = (position: ParticleConfig["position"]) => {
     const styles: Record<string, string> = {};
     if (position.top) styles.top = position.top;
     if (position.bottom) styles.bottom = position.bottom;
@@ -147,8 +147,14 @@ export const CustomParticleBackground = ({
             background: `linear-gradient(to left, ${particle.color}, transparent)`,
             opacity: particle.opacity,
             filter: `blur(${particle.blur}px)`,
-            transform: `translate3d(${scrollY * particle.transform.x}px, ${scrollY * particle.transform.y}px, 0) ${index === 0 || index === 2 || index === 3 || index === 6 ? 'scale(-1, 1)' : ''}`,
-            ...getPositionStyles(particle.position)
+            transform: `translate3d(${scrollY * particle.transform.x}px, ${
+              scrollY * particle.transform.y
+            }px, 0) ${
+              index === 0 || index === 2 || index === 3 || index === 6
+                ? "scale(-1, 1)"
+                : ""
+            }`,
+            ...getPositionStyles(particle.position),
           }}
         />
       ))}

@@ -21,6 +21,9 @@ const config: Config = {
           DEFAULT: "#4d28df",
           figma: "#4d28df",
           variant: "#8f03a0",
+          particle: "#C754CF",
+          particleAlt: "#bc5ac7",
+          particleAlt2: "#aa3db6",
           50: "#F6F4FD",
           100: "#E9D5FF",
           200: "#D1AAFF",
@@ -50,6 +53,17 @@ const config: Config = {
         },
         "gradient-2-start": "rgba(17, 26, 83, 1)",
         "gradient-2-end": "rgba(38, 58, 185, 1)",
+        cyan: {
+          400: "#24EDFF",
+        },
+        pink: {
+          400: "#ec4899",
+          500: "#dca8e0",
+        },
+        teal: {
+          200: "#abeed2",
+          300: "#a1f1d0",
+        },
       },
       maxWidth: {
         "8xl": "90rem",
@@ -59,6 +73,9 @@ const config: Config = {
         "68": "17rem",
         "100": "25rem",
         "120": "30rem",
+      },
+      borderRadius: {
+        "2rem": "2rem",
       },
       fontFamily: {
         inter: ["var(--font-inter)", "sans-serif"],

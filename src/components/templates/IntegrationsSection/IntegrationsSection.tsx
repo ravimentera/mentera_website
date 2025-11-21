@@ -1,33 +1,51 @@
 "use client";
 
+import {
+  fadeInLeft,
+  fadeInRight,
+  transitions,
+  viewportConfig,
+} from "@/lib/animations";
 import { motion } from "framer-motion";
-import { useMemo } from "react";
+import { memo, useMemo } from "react";
 
-// App logos mapping
+// App logos mapping - all logos from /public/app-logos folder
 const appLogos = [
   { name: "Outlook", image: "app-outlook.png" },
-  { name: "Slack", image: "app-slack.png" },
-  { name: "Salesforce", image: "app-salesforce.png" },
-  { name: "Google Drive", image: "app-googledrive.png" },
+  { name: "Gmail", image: "app-gmail.png" },
+  { name: "Google Drive", image: "app-google-drive.png" },
+  { name: "OneDrive", image: "app-onedrive.png" },
   { name: "Dropbox", image: "app-dropbox.png" },
-  { name: "Zoom", image: "app-zoom.png" },
-  { name: "Asana", image: "app-asana.png" },
-  { name: "Jira", image: "app-jira.png" },
-  { name: "Trello", image: "app-trello.png" },
-  { name: "Notion", image: "app-notion.png" },
-  { name: "Monday.com", image: "app-monday.png" },
+  { name: "Slack", image: "app-slack.png" },
+  { name: "Microsoft Teams", image: "app-teams.png" },
+  { name: "WhatsApp Business", image: "app-whatsapp-bussiness.png" },
+  { name: "Salesforce", image: "app-salesforce.png" },
   { name: "HubSpot", image: "app-hubspot.png" },
+  { name: "HighLevel", image: "app-highlevel.png" },
   { name: "Mailchimp", image: "app-mailchimp.png" },
+  { name: "SendGrid", image: "app-sendgrid.png" },
+  { name: "Twilio", image: "app-twilio.png" },
   { name: "Stripe", image: "app-stripe.png" },
+  { name: "Square", image: "app-square.png" },
   { name: "PayPal", image: "app-paypal.png" },
   { name: "QuickBooks", image: "app-quickbooks.png" },
   { name: "Xero", image: "app-xero.png" },
-  { name: "Shopify", image: "app-shopify.png" },
-  { name: "WordPress", image: "app-wordpress.png" },
-  { name: "Squarespace", image: "app-squarespace.png" },
+  { name: "DrChrono", image: "app-drchrono.png" },
+  { name: "Dentrix", image: "app-dentrix.png" },
+  { name: "Denticon", image: "app-denticon.png" },
+  { name: "Nextech", image: "app-nextech.png" },
+  { name: "PatientNow", image: "app-patientnow.png" },
 ];
 
-export const IntegrationsSection = () => {
+// Mask gradient style - extracted as constant to avoid recreation
+const maskGradientStyle = {
+  maskImage:
+    "linear-gradient(to right, transparent 0%, black 10%, black 90%, transparent 100%)",
+  WebkitMaskImage:
+    "linear-gradient(to right, transparent 0%, black 10%, black 90%, transparent 100%)",
+} as const;
+
+export const IntegrationsSection = memo(() => {
   // Split logos into 3 rows
   const rows = useMemo(() => {
     const row1: typeof appLogos = [];
@@ -58,10 +76,11 @@ export const IntegrationsSection = () => {
         <div className="grid lg:grid-cols-2 gap-16 items-center">
           {/* Left Side - Text Content */}
           <motion.div
-            initial={{ opacity: 0, x: -20 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
+            initial="hidden"
+            whileInView="visible"
+            viewport={viewportConfig.once}
+            variants={fadeInLeft}
+            transition={transitions.default}
             className="space-y-8 max-w-[28rem]"
           >
             <h2 className="text-4.5xl font-medium text-zinc-950">
@@ -78,22 +97,18 @@ export const IntegrationsSection = () => {
 
           {/* Right Side - Animated Logo Rows with Faded Overlays */}
           <motion.div
-            initial={{ opacity: 0, x: 20 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6, delay: 0.2 }}
+            initial="hidden"
+            whileInView="visible"
+            viewport={viewportConfig.once}
+            variants={fadeInRight}
+            transition={transitions.withDelay(0.2)}
             className="relative overflow-hidden"
           >
             <div className="space-y-6">
               {/* Row 1 - Left to Right */}
               <div
                 className="relative overflow-hidden py-2"
-                style={{
-                  maskImage:
-                    "linear-gradient(to right, transparent 0%, black 10%, black 90%, transparent 100%)",
-                  WebkitMaskImage:
-                    "linear-gradient(to right, transparent 0%, black 10%, black 90%, transparent 100%)",
-                }}
+                style={maskGradientStyle}
               >
                 <div className="flex gap-8 animate-scroll-left will-change-transform">
                   {duplicatedRows[0].map((app, index) => (
@@ -114,12 +129,7 @@ export const IntegrationsSection = () => {
               {/* Row 2 - Right to Left */}
               <div
                 className="relative overflow-hidden py-2"
-                style={{
-                  maskImage:
-                    "linear-gradient(to right, transparent 0%, black 10%, black 90%, transparent 100%)",
-                  WebkitMaskImage:
-                    "linear-gradient(to right, transparent 0%, black 10%, black 90%, transparent 100%)",
-                }}
+                style={maskGradientStyle}
               >
                 <div className="flex gap-8 animate-scroll-right will-change-transform">
                   {duplicatedRows[1].map((app, index) => (
@@ -140,12 +150,7 @@ export const IntegrationsSection = () => {
               {/* Row 3 - Left to Right */}
               <div
                 className="relative overflow-hidden py-2"
-                style={{
-                  maskImage:
-                    "linear-gradient(to right, transparent 0%, black 10%, black 90%, transparent 100%)",
-                  WebkitMaskImage:
-                    "linear-gradient(to right, transparent 0%, black 10%, black 90%, transparent 100%)",
-                }}
+                style={maskGradientStyle}
               >
                 <div className="flex gap-8 animate-scroll-left will-change-transform">
                   {duplicatedRows[2].map((app, index) => (
@@ -168,4 +173,6 @@ export const IntegrationsSection = () => {
       </div>
     </section>
   );
-};
+});
+
+IntegrationsSection.displayName = "IntegrationsSection";

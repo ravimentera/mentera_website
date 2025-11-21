@@ -31,7 +31,7 @@
 
 @layer components {
   .gradient-text {
-    @apply bg-gradient-to-r from-[rgba(4,15,88,1)] to-[rgba(189,5,221,0.62)] bg-clip-text text-transparent;
+    @apply bg-gradient-to-r from-primary to-accent-light bg-clip-text text-transparent;
   }
 
   .gradient-text-2 {
@@ -41,7 +41,7 @@
   /* Custom Scrollbar */
   .custom-scrollbar {
     scrollbar-width: thin;
-    scrollbar-color: #D1D5DB #F3F4F6;
+    scrollbar-color: rgb(209, 213, 219) rgb(243, 244, 246);
   }
 
   .custom-scrollbar::-webkit-scrollbar {
@@ -49,15 +49,15 @@
   }
 
   .custom-scrollbar::-webkit-scrollbar-track {
-    @apply bg-[#F3F4F6];
+    @apply bg-gray-100;
   }
 
   .custom-scrollbar::-webkit-scrollbar-thumb {
-    @apply bg-[#D1D5DB] rounded-full;
+    @apply bg-gray-300 rounded-full;
   }
 
   .custom-scrollbar::-webkit-scrollbar-thumb:hover {
-    @apply bg-[#9CA3AF];
+    @apply bg-gray-400;
   }
 
   /* Body Text */

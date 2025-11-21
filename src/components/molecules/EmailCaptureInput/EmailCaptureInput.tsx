@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useRef, useState } from "react";
+import { useMemo, useRef, useState } from "react";
 
 interface EmailCaptureInputProps {
   placeholder?: string;
@@ -67,15 +67,22 @@ export const EmailCaptureInput: React.FC<EmailCaptureInputProps> = ({
     }
   };
 
-  const inputStyles =
-    variant === "light"
-      ? "bg-transparent placeholder-[#717172] text-gray-900 border-[#111A53] focus:ring-primary/20"
-      : "bg-transparent placeholder-white/50 text-white border-white focus:ring-white/20";
+  // Memoize styles to avoid recreation on each render
+  const inputStyles = useMemo(
+    () =>
+      variant === "light"
+        ? "bg-transparent placeholder-text-secondary text-gray-900 border-primary focus:ring-primary/20"
+        : "bg-transparent placeholder-white/50 text-white border-white focus:ring-white/20",
+    [variant]
+  );
 
-  const buttonStyles =
-    variant === "light"
-      ? "bg-[#111A53] hover:bg-[#1c2b85] text-white"
-      : "bg-white hover:bg-gray-100 text-purple";
+  const buttonStyles = useMemo(
+    () =>
+      variant === "light"
+        ? "bg-primary hover:bg-primary/90 text-white"
+        : "bg-white hover:bg-gray-100 text-purple",
+    [variant]
+  );
 
   return (
     <form
@@ -87,7 +94,7 @@ export const EmailCaptureInput: React.FC<EmailCaptureInputProps> = ({
         type="email"
         name="email"
         placeholder={placeholder}
-        className={`w-full ${inputHeight} px-4 sm:px-6 pr-[125px] sm:pr-[170px] rounded-full ${inputStyles} text-base sm:text-lg focus:outline-none focus:ring-2 border`}
+        className={`w-full ${inputHeight} px-4 sm:px-6 pr-[7.8125rem] sm:pr-[10.625rem] rounded-full ${inputStyles} text-base sm:text-lg focus:outline-none focus:ring-2 border`}
         required
         disabled={isSubmitting}
       />

@@ -1,8 +1,9 @@
 "use client";
 
 import { cn } from "@/lib/utils";
+import { fadeInUp, transitions, viewportConfig } from "@/lib/animations";
 import { motion } from "framer-motion";
-import React from "react";
+import React, { memo } from "react";
 
 interface FeatureCardProps {
   title: string;
@@ -13,7 +14,7 @@ interface FeatureCardProps {
   delay?: number;
 }
 
-export const FeatureCard = ({
+export const FeatureCard = memo(({
   title,
   description,
   icon,
@@ -23,12 +24,13 @@ export const FeatureCard = ({
 }: FeatureCardProps) => {
   return (
     <motion.div
-      initial={{ opacity: 0, y: 20 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.5, delay }}
-      viewport={{ once: true, margin: "-50px" }}
+      initial="hidden"
+      whileInView="visible"
+      viewport={viewportConfig.onceWithMargin}
+      variants={fadeInUp}
+      transition={transitions.withDelay(delay)}
       className={cn(
-        "p-6 rounded-2xl border border-[#E5E7EB] bg-white hover:shadow-lg transition-all duration-300 hover:-translate-y-1",
+        "p-6 rounded-2xl border border-gray-200 bg-white hover:shadow-lg transition-all duration-300 hover:-translate-y-1",
         className
       )}
     >
@@ -40,10 +42,12 @@ export const FeatureCard = ({
       >
         {icon}
       </div>
-      <h3 className="text-xl font-bold mb-2 font-lexend text-[#111827]">
+      <h3 className="text-xl font-bold mb-2 font-lexend text-gray-900">
         {title}
       </h3>
-      <p className="text-[#4B5563] font-outfit">{description}</p>
+      <p className="text-gray-600 font-outfit">{description}</p>
     </motion.div>
   );
-};
+});
+
+FeatureCard.displayName = "FeatureCard";

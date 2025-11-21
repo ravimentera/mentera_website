@@ -1,6 +1,8 @@
 "use client";
 
+import { fadeInUp, transitions, viewportConfig } from "@/lib/animations";
 import { motion } from "framer-motion";
+import { memo, useCallback } from "react";
 
 const features = [
   {
@@ -13,8 +15,8 @@ const features = [
       >
         <defs>
           <linearGradient id="gradient1" x1="0%" y1="0%" x2="100%" y2="100%">
-            <stop offset="0%" stopColor="#BD05DD" />
-            <stop offset="100%" stopColor="#4D28DF" />
+            <stop offset="0%" stopColor="rgb(189, 5, 221)" />
+            <stop offset="100%" stopColor="rgb(77, 40, 223)" />
           </linearGradient>
         </defs>
         <path
@@ -43,8 +45,8 @@ const features = [
       >
         <defs>
           <linearGradient id="gradient2" x1="0%" y1="0%" x2="100%" y2="100%">
-            <stop offset="0%" stopColor="#BD05DD" />
-            <stop offset="100%" stopColor="#4D28DF" />
+            <stop offset="0%" stopColor="rgb(189, 5, 221)" />
+            <stop offset="100%" stopColor="rgb(77, 40, 223)" />
           </linearGradient>
         </defs>
         <path
@@ -73,8 +75,8 @@ const features = [
       >
         <defs>
           <linearGradient id="gradient3" x1="0%" y1="0%" x2="100%" y2="100%">
-            <stop offset="0%" stopColor="#BD05DD" />
-            <stop offset="100%" stopColor="#4D28DF" />
+            <stop offset="0%" stopColor="rgb(189, 5, 221)" />
+            <stop offset="100%" stopColor="rgb(77, 40, 223)" />
           </linearGradient>
         </defs>
         <path
@@ -101,8 +103,27 @@ const features = [
   },
 ];
 
-export const ReimagineWorkSection = () => {
-  const getBoldText = (text: string) => {
+// Checkmark SVG component - memoized to avoid recreation
+const CheckmarkIcon = memo(() => (
+  <svg
+    className="w-6 h-6 text-zinc-950 flex-shrink-0 mt-0.5"
+    fill="none"
+    viewBox="0 0 24 24"
+    stroke="currentColor"
+  >
+    <path
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      strokeWidth={2}
+      d="M5 13l4 4L19 7"
+    />
+  </svg>
+));
+
+CheckmarkIcon.displayName = "CheckmarkIcon";
+
+export const ReimagineWorkSection = memo(() => {
+  const getBoldText = useCallback((text: string) => {
     const words = text.split(" ");
     const firstWord = words[0];
     const rest = words.slice(1).join(" ");
@@ -111,16 +132,17 @@ export const ReimagineWorkSection = () => {
         <span className="font-bold">{firstWord}</span> {rest}
       </div>
     );
-  };
+  }, []);
 
   return (
     <section className="relative w-full py-20">
       <div className="max-w-8xl mx-auto px-24 py-20">
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
+          initial="hidden"
+          whileInView="visible"
+          viewport={viewportConfig.once}
+          variants={fadeInUp}
+          transition={transitions.default}
           className="text-center mb-18"
         >
           <span className="text-4.5xl font-medium text-zinc-950 max-w-[28rem] mx-auto">
@@ -131,11 +153,12 @@ export const ReimagineWorkSection = () => {
         <div className="grid md:grid-cols-3 gap-8 max-w-8xl mx-auto">
           {features.map((feature, index) => (
             <motion.div
-              key={index}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6, delay: index * 0.1 }}
+              key={`feature-${feature.title}-${index}`}
+              initial="hidden"
+              whileInView="visible"
+              viewport={viewportConfig.once}
+              variants={fadeInUp}
+              transition={transitions.staggered(index, 0.1)}
               className="text-center space-y-6"
             >
               <div className="flex justify-center">
@@ -151,26 +174,14 @@ export const ReimagineWorkSection = () => {
                   {feature.subtitle}
                 </h3>
               </div>
-              <div className="bg-[#3428DF05] rounded-2xl p-5">
+              <div className="bg-purple/2 rounded-2xl p-5">
                 <ul className="space-y-4 text-left">
                   {feature.items.map((item, itemIndex) => (
                     <li
                       key={itemIndex}
                       className="flex items-start gap-3 text-body-1 text-text-secondary"
                     >
-                      <svg
-                        className="w-6 h-6 text-zinc-950 flex-shrink-0 mt-0.5"
-                        fill="none"
-                        viewBox="0 0 24 24"
-                        stroke="currentColor"
-                      >
-                        <path
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                          strokeWidth={2}
-                          d="M5 13l4 4L19 7"
-                        />
-                      </svg>
+                      <CheckmarkIcon />
                       <span>{getBoldText(item)}</span>
                     </li>
                   ))}
@@ -182,4 +193,6 @@ export const ReimagineWorkSection = () => {
       </div>
     </section>
   );
-};
+});
+
+ReimagineWorkSection.displayName = "ReimagineWorkSection";

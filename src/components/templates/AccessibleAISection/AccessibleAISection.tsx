@@ -160,7 +160,7 @@ export const AccessibleAISection = () => {
           className="absolute inset-0 -z-10 rounded-3xl"
           particles={[
             {
-              color: isEvenSlide ? "#24EDFF" : "#C754CF",
+              color: isEvenSlide ? "#24EDFF" : "#C754CF", // cyan-400 : purple-particle
               opacity: isEvenSlide ? 0.8 : 0.3,
               size: isEvenSlide ? 500 : 600,
               blur: isEvenSlide ? 100 : 120,
@@ -168,7 +168,7 @@ export const AccessibleAISection = () => {
               transform: { x: 0, y: 0 },
             },
             {
-              color: isEvenSlide ? "#C754CF" : "#24EDFF",
+              color: isEvenSlide ? "#C754CF" : "#24EDFF", // purple-particle : cyan-400
               opacity: isEvenSlide ? 0.3 : 0.8,
               size: isEvenSlide ? 600 : 500,
               blur: isEvenSlide ? 120 : 100,
@@ -201,8 +201,8 @@ export const AccessibleAISection = () => {
               transition={{ duration: 0.6, ease: "easeOut" }}
               className={`space-y-6 p-14 ${
                 isEvenSlide
-                  ? "absolute right-0 top-16 max-w-[600px]"
-                  : "max-w-[600px]"
+                  ? "absolute right-0 top-16 max-w-[37.5rem]"
+                  : "max-w-[37.5rem]"
               }`}
             >
               <h3 className="text-3xl font-bold text-zinc-950">
@@ -250,8 +250,8 @@ export const AccessibleAISection = () => {
               transition={{ duration: 0.6, ease: "easeOut", delay: 0.2 }}
               className={`z-0 ${
                 isEvenSlide
-                  ? "absolute left-16 top-12 max-w-[600px]"
-                  : "absolute right-16 top-12 max-w-[600px]"
+                  ? "absolute left-16 top-12 max-w-[37.5rem]"
+                  : "absolute right-16 top-12 max-w-[37.5rem]"
               }`}
             >
               <div className="relative rounded-[2rem] shadow-xl">

@@ -1,7 +1,7 @@
 "use client";
 
 import { cn } from "@/lib/utils";
-import React from "react";
+import React, { memo, useMemo } from "react";
 
 interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   className?: string;
@@ -11,7 +11,26 @@ interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   showArrow?: boolean;
 }
 
-export const Button = ({
+// Moved outside component to avoid recreation
+const variantClasses = {
+  primary:
+    "bg-primary text-white hover:bg-primary/90 active:bg-primary/80",
+  secondary:
+    "bg-white text-primary hover:bg-gray-50 active:bg-gray-100",
+  outline:
+    "bg-transparent border-2 border-primary text-primary hover:bg-primary/5",
+  purple: "bg-purple text-white hover:bg-purple/90 active:bg-purple/80",
+  "gradient-outline": "bg-gradient-to-r from-purple-500/10 to-purple/10 border-2 border-purple-500 text-zinc-950 hover:from-purple-500/20 hover:to-purple/20 hover:border-purple-600 active:from-purple-500/30 active:to-purple/30",
+  "outline-dark": "bg-transparent border border-zinc-950 text-zinc-950 hover:bg-zinc-100 hover:border-zinc-700 active:bg-zinc-200",
+} as const;
+
+const sizeClasses = {
+  sm: "py-2 px-4 text-sm",
+  md: "py-3 px-6 text-base",
+  lg: "py-4 px-8 text-lg",
+} as const;
+
+export const Button = memo(({
   className,
   variant = "primary",
   size = "md",
@@ -19,30 +38,15 @@ export const Button = ({
   showArrow = false,
   ...props
 }: ButtonProps) => {
-  const variantClasses = {
-    primary:
-      "bg-[#111A53] text-[#FFFFFF] hover:bg-[#1b2766] active:bg-[#0e1642]",
-    secondary:
-      "bg-[#FFFFFF] text-[#111A53] hover:bg-[#F5F5F5] active:bg-[#EEEEEE]",
-    outline:
-      "bg-transparent border-2 border-[#111A53] text-[#111A53] hover:bg-[#111A53]/5",
-    purple: "bg-purple text-white hover:bg-purple/90 active:bg-purple/80",
-    "gradient-outline": "bg-gradient-to-r from-[rgba(143,3,160,0.1)] to-[rgba(77,40,223,0.1)] border-2 border-[#8f03a0] text-zinc-950 hover:from-[rgba(143,3,160,0.2)] hover:to-[rgba(77,40,223,0.2)] hover:border-[#7a0288] active:from-[rgba(143,3,160,0.3)] active:to-[rgba(77,40,223,0.3)]",
-    "outline-dark": "bg-transparent border border-zinc-950 text-zinc-950 hover:bg-zinc-100 hover:border-zinc-700 active:bg-zinc-200",
-  };
-
-  const sizeClasses = {
-    sm: "py-2 px-4 text-sm",
-    md: "py-3 px-6 text-base",
-    lg: "py-4 px-8 text-lg",
-  };
+  const variantClass = useMemo(() => variantClasses[variant], [variant]);
+  const sizeClass = useMemo(() => sizeClasses[size], [size]);
 
   return (
     <button
       className={cn(
         "relative font-outfit font-medium rounded-lg transition-all duration-300 flex items-center justify-center",
-        variantClasses[variant],
-        sizeClasses[size],
+        variantClass,
+        sizeClass,
         className
       )}
       {...props}
@@ -77,4 +81,6 @@ export const Button = ({
       </span>
     </button>
   );
-};
+});
+
+Button.displayName = "Button";

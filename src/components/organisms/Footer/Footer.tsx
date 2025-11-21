@@ -35,15 +35,13 @@ export const Footer = () => {
             <img
               src="/logos/hippa.svg"
               alt="HIPAA Compliant"
-              className="h-9"
-              style={{ aspectRatio: "110/37", width: "auto" }}
+              className="h-9 aspect-[110/37] w-auto"
             />
             {/* GDPR Badge */}
             <img
               src="/logos/gdpr.svg"
               alt="GDPR Compliant"
-              className="h-9"
-              style={{ aspectRatio: "115/36", width: "auto" }}
+              className="h-9 aspect-[115/36] w-auto"
             />
           </div>
 

@@ -1,8 +1,9 @@
 "use client";
 
 import { cn } from "@/lib/utils";
+import { fadeInUp, transitions, viewportConfig } from "@/lib/animations";
 import { HTMLMotionProps, motion } from "framer-motion";
-import React from "react";
+import React, { memo, useMemo } from "react";
 
 interface CardProps
   extends Omit<HTMLMotionProps<"div">, "className" | "children"> {
@@ -13,7 +14,13 @@ interface CardProps
   delay?: number;
 }
 
-export const Card = ({
+const variantStyles = {
+  default: "bg-white",
+  outlined: "bg-white border border-gray-200",
+  elevated: "bg-white shadow-lg",
+} as const;
+
+export const Card = memo(({
   children,
   className,
   hoverEffect = true,
@@ -21,21 +28,18 @@ export const Card = ({
   delay = 0,
   ...props
 }: CardProps) => {
-  const variantStyles = {
-    default: "bg-white",
-    outlined: "bg-white border border-[#E5E7EB]",
-    elevated: "bg-white shadow-lg",
-  };
+  const variantClass = useMemo(() => variantStyles[variant], [variant]);
 
   return (
     <motion.div
-      initial={{ opacity: 0, y: 20 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.5, delay }}
-      viewport={{ once: true, margin: "-50px" }}
+      initial="hidden"
+      whileInView="visible"
+      viewport={viewportConfig.onceWithMargin}
+      variants={fadeInUp}
+      transition={transitions.withDelay(delay)}
       className={cn(
         "rounded-xl p-6 transition-all duration-300",
-        variantStyles[variant],
+        variantClass,
         hoverEffect && "hover:shadow-lg hover:-translate-y-1",
         className
       )}
@@ -44,4 +48,6 @@ export const Card = ({
       {children}
     </motion.div>
   );
-};
+});
+
+Card.displayName = "Card";

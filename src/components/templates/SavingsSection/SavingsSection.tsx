@@ -1,8 +1,10 @@
 "use client";
 
+import { fadeInUp, transitions, viewportConfig } from "@/lib/animations";
 import { motion, useInView } from "framer-motion";
-import React, { useEffect, useRef, useState } from "react";
+import { memo, useEffect, useMemo, useRef, useState } from "react";
 
+// Moved outside component to avoid recreation on each render
 const stats = [
   {
     value: "30%",
@@ -20,7 +22,7 @@ const stats = [
     value: "Less than 1",
     description: "minute in follow ups",
   },
-];
+] as const;
 
 const useAnimatedNumber = (
   targetValue: string,
@@ -81,7 +83,7 @@ const useAnimatedNumber = (
   return { displayValue, ref };
 };
 
-const AnimatedStatValue = ({
+const AnimatedStatValue = memo(({
   value,
   delay = 0,
 }: {
@@ -95,18 +97,21 @@ const AnimatedStatValue = ({
       {displayValue}
     </div>
   );
-};
+});
 
-export const SavingsSection = () => {
+AnimatedStatValue.displayName = "AnimatedStatValue";
+
+export const SavingsSection = memo(() => {
   return (
     <section className="relative w-full py-20">
       <div className="max-w-8xl mx-auto px-24">
         <div className="max-w-8xl mx-auto items-center flex justify-between">
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
+            initial="hidden"
+            whileInView="visible"
+            viewport={viewportConfig.once}
+            variants={fadeInUp}
+            transition={transitions.default}
             className="w-120 mr-20"
           >
             <h2 className="text-4.5xl font-medium text-zinc-950 mb-8">
@@ -122,12 +127,13 @@ export const SavingsSection = () => {
           <div className="grid grid-cols-2 gap-6">
             {stats.map((stat, index) => (
               <motion.div
-                key={index}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.6, delay: index * 0.1 }}
-                className="bg-[#8F03A00A] rounded-2xl p-8 border border-purple-500 shadow-sm"
+                key={`stat-${stat.value}-${index}`}
+                initial="hidden"
+                whileInView="visible"
+                viewport={viewportConfig.once}
+                variants={fadeInUp}
+                transition={transitions.staggered(index, 0.1)}
+                className="bg-purple-500/4 rounded-2xl p-8 border border-purple-500 shadow-sm"
               >
                 <AnimatedStatValue value={stat.value} delay={index * 0.1} />
                 <p className="text-lg text-zinc-950">{stat.description}</p>
@@ -138,4 +144,6 @@ export const SavingsSection = () => {
       </div>
     </section>
   );
-};
+});
+
+SavingsSection.displayName = "SavingsSection";
