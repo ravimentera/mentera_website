@@ -45,7 +45,8 @@ export const AccessibleAISection = () => {
         "Pull history for any job or appointment",
         "Get quick answers without digging",
       ],
-      image: "/images/image-15.png",
+      image: "/images/feature-01.png",
+      height: "h-[33.5rem]",
     },
     faster: {
       title: "Work smarter, not harder",
@@ -55,7 +56,8 @@ export const AccessibleAISection = () => {
         "Set up smart notifications and reminders",
         "Integrate with your existing tools seamlessly",
       ],
-      image: "/images/image-15.png",
+      image: "/images/feature-02.png",
+      height: "h-[33.5rem]",
     },
     customers: {
       title: "Scale your customer service",
@@ -65,7 +67,8 @@ export const AccessibleAISection = () => {
         "Automated follow-up sequences",
         "Smart routing and prioritization",
       ],
-      image: "/images/image-43.png",
+      image: "/images/feature-03.png",
+      height: "h-[28.5rem]",
     },
   };
 
@@ -175,9 +178,9 @@ export const AccessibleAISection = () => {
           ]}
         />
 
-        <div className="max-w-8xl mx-auto relative overflow-hidden h-[40rem]">
-          {/* Bottom gradient fade to white */}
-          <div className="absolute bottom-0 left-0 right-0 h-20 bg-gradient-to-t from-white to-transparent z-10 pointer-events-none rounded-b-2xl"></div>
+        <div
+          className={`max-w-8xl mx-auto relative overflow-hidden transition-all duration-500 ease-in-out ${tabContent[activeTab].height}`}
+        >
           <motion.div
             key={activeTab}
             initial={{ opacity: 0 }}
@@ -245,7 +248,7 @@ export const AccessibleAISection = () => {
               initial={{ opacity: 0, y: 100 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, ease: "easeOut", delay: 0.2 }}
-              className={`${
+              className={`z-0 ${
                 isEvenSlide
                   ? "absolute left-16 top-12 max-w-[600px]"
                   : "absolute right-16 top-12 max-w-[600px]"
@@ -253,10 +256,10 @@ export const AccessibleAISection = () => {
             >
               <div className="relative rounded-[2rem] shadow-xl">
                 {/* Gradient border */}
-                <div className="absolute inset-0 rounded-[2rem] bg-gradient-to-r from-[#E880FA] to-[#4D28DF] p-1">
-                  <div className="bg-white/90 backdrop-blur-sm rounded-[calc(2rem-4px)] h-full w-full"></div>
+                <div className="absolute inset-0">
+                  <div className="backdrop-blur-sm rounded-[calc(2rem-4px)] h-full w-full"></div>
                 </div>
-                <div className="relative z-10 p-4">
+                <div className="relative z-10">
                   <img
                     src={tabContent[activeTab].image}
                     alt={tabContent[activeTab].title}
@@ -266,6 +269,8 @@ export const AccessibleAISection = () => {
               </div>
             </motion.div>
           </motion.div>
+          {/* Bottom gradient fade to white - placed after content to ensure it's on top */}
+          <div className="absolute bottom-0 left-0 right-0 h-20 bg-gradient-to-t from-white to-transparent z-30 pointer-events-none rounded-b-2xl"></div>
         </div>
       </div>
     </section>

@@ -284,7 +284,7 @@ export const NewHeroSection = () => {
 
               {/* Hero Image */}
               <img
-                src="/images/hero-section.png"
+                src="/images/orb.gif"
                 alt="Hero Section"
                 className="relative z-10 w-64 h-64"
               />
