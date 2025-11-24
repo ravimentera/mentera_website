@@ -65,7 +65,7 @@ export const NewHeroSection = () => {
                 className="absolute inset-0 w-full h-full"
                 animate={{ rotate: 360 }}
                 transition={{
-                  duration: 40,
+                  duration: 60,
                   repeat: Infinity,
                   ease: "linear",
                 }}
@@ -110,7 +110,7 @@ export const NewHeroSection = () => {
                   className="absolute w-12 h-12 sm:w-14 sm:h-14 md:w-[60px] md:h-[60px] -top-6 sm:-top-7 md:-top-8 left-1/2 -translate-x-1/2"
                   animate={{ rotate: -360 }}
                   transition={{
-                    duration: 40,
+                    duration: 60,
                     repeat: Infinity,
                     ease: "linear",
                   }}
@@ -128,7 +128,7 @@ export const NewHeroSection = () => {
                   className="absolute w-12 h-12 sm:w-14 sm:h-14 md:w-[60px] md:h-[60px] top-1/2 -right-6 sm:-right-7 md:-right-8 -translate-y-1/2"
                   animate={{ rotate: -360 }}
                   transition={{
-                    duration: 40,
+                    duration: 60,
                     repeat: Infinity,
                     ease: "linear",
                   }}
@@ -146,7 +146,7 @@ export const NewHeroSection = () => {
                   className="absolute w-12 h-12 sm:w-14 sm:h-14 md:w-[60px] md:h-[60px] -bottom-6 sm:-bottom-7 md:-bottom-8 left-1/2 -translate-x-1/2"
                   animate={{ rotate: -360 }}
                   transition={{
-                    duration: 40,
+                    duration: 60,
                     repeat: Infinity,
                     ease: "linear",
                   }}
@@ -164,7 +164,7 @@ export const NewHeroSection = () => {
                   className="absolute w-12 h-12 sm:w-14 sm:h-14 md:w-[60px] md:h-[60px] top-1/2 -left-6 sm:-left-7 md:-left-8 -translate-y-1/2"
                   animate={{ rotate: -360 }}
                   transition={{
-                    duration: 40,
+                    duration: 60,
                     repeat: Infinity,
                     ease: "linear",
                   }}
@@ -184,7 +184,7 @@ export const NewHeroSection = () => {
                 className="absolute inset-0 w-full h-full"
                 animate={{ rotate: -360 }}
                 transition={{
-                  duration: 30,
+                  duration: 45,
                   repeat: Infinity,
                   ease: "linear",
                 }}
@@ -230,10 +230,11 @@ export const NewHeroSection = () => {
                   className="absolute w-12 h-12 sm:w-14 sm:h-14 md:w-[60px] md:h-[60px] top-8 sm:top-10 md:top-12 left-1/2 -translate-x-1/2"
                   animate={{ rotate: 360 }}
                   transition={{
-                    duration: 30,
+                    duration: 45,
                     repeat: Infinity,
                     ease: "linear",
                   }}
+                  style={{ transformOrigin: "center" }}
                 >
                   <div className="w-full h-full flex items-center justify-center bg-white rounded-xl p-2 border border-gray-200 shadow-md">
                     <img
@@ -249,10 +250,11 @@ export const NewHeroSection = () => {
                   className="absolute w-12 h-12 sm:w-14 sm:h-14 md:w-[60px] md:h-[60px] bottom-32 sm:bottom-40 md:bottom-52 left-6 sm:left-8 md:left-12"
                   animate={{ rotate: 360 }}
                   transition={{
-                    duration: 30,
+                    duration: 45,
                     repeat: Infinity,
                     ease: "linear",
                   }}
+                  style={{ transformOrigin: "center" }}
                 >
                   <div className="w-full h-full flex items-center justify-center bg-white rounded-xl p-2 border border-gray-200 shadow-md">
                     <img
@@ -268,10 +270,11 @@ export const NewHeroSection = () => {
                   className="absolute w-12 h-12 sm:w-14 sm:h-14 md:w-[60px] md:h-[60px] bottom-32 sm:bottom-40 md:bottom-52 right-6 sm:right-8 md:right-12"
                   animate={{ rotate: 360 }}
                   transition={{
-                    duration: 30,
+                    duration: 45,
                     repeat: Infinity,
                     ease: "linear",
                   }}
+                  style={{ transformOrigin: "center" }}
                 >
                   <div className="w-full h-full flex items-center justify-center bg-white rounded-xl p-2 border border-gray-200 shadow-md">
                     <img
