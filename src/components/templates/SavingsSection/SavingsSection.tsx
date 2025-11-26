@@ -2,7 +2,7 @@
 
 import { fadeInUp, transitions, viewportConfig } from "@/lib/animations";
 import { motion, useInView } from "framer-motion";
-import { memo, useEffect, useMemo, useRef, useState } from "react";
+import { memo, useEffect, useRef, useState } from "react";
 
 // Moved outside component to avoid recreation on each render
 const stats = [
@@ -83,21 +83,20 @@ const useAnimatedNumber = (
   return { displayValue, ref };
 };
 
-const AnimatedStatValue = memo(({
-  value,
-  delay = 0,
-}: {
-  value: string;
-  delay?: number;
-}) => {
-  const { displayValue, ref } = useAnimatedNumber(value);
+const AnimatedStatValue = memo(
+  ({ value, delay = 0 }: { value: string; delay?: number }) => {
+    const { displayValue, ref } = useAnimatedNumber(value);
 
-  return (
-    <div ref={ref} className="text-2xl sm:text-3xl md:text-4xl lg:text-4.5xl font-bold text-purple-500 mb-2 sm:mb-3">
-      {displayValue}
-    </div>
-  );
-});
+    return (
+      <span
+        ref={ref}
+        className="text-2xl sm:text-3xl md:text-4xl lg:text-4.5xl font-bold mb-2 sm:mb-3 block bg-gradient-to-r from-purple-500 to-purple bg-clip-text text-transparent [-webkit-text-fill-color:transparent]"
+      >
+        {displayValue}
+      </span>
+    );
+  }
+);
 
 AnimatedStatValue.displayName = "AnimatedStatValue";
 
@@ -133,10 +132,14 @@ export const SavingsSection = memo(() => {
                 viewport={viewportConfig.once}
                 variants={fadeInUp}
                 transition={transitions.staggered(index, 0.1)}
-                className="bg-purple-500/4 rounded-2xl p-6 sm:p-8 border border-purple-500 shadow-sm"
+                className="p-[1px] rounded-2xl bg-gradient-to-r from-purple-variant to-purple shadow-sm"
               >
-                <AnimatedStatValue value={stat.value} delay={index * 0.1} />
-                <p className="text-sm sm:text-base md:text-lg text-zinc-950">{stat.description}</p>
+                <div className="bg-[#fef7ff] rounded-[calc(1rem-2px)] p-6 sm:p-8 h-full">
+                  <AnimatedStatValue value={stat.value} delay={index * 0.1} />
+                  <p className="text-sm sm:text-base md:text-lg text-zinc-950">
+                    {stat.description}
+                  </p>
+                </div>
               </motion.div>
             ))}
           </div>

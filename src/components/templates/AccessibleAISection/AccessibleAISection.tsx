@@ -2,6 +2,7 @@
 
 import { Button } from "@/components/atoms/Button/Button";
 import { CustomParticleBackground } from "@/components/atoms/CustomParticleBackground";
+import { useScreenSize } from "@/hooks/useScreenSize";
 import { motion } from "framer-motion";
 import { useEffect, useState } from "react";
 
@@ -9,6 +10,7 @@ export const AccessibleAISection = () => {
   const [activeTab, setActiveTab] = useState<
     "instant" | "faster" | "customers"
   >("instant");
+  const { isDesktop } = useScreenSize();
 
   const tabs: ("instant" | "faster" | "customers")[] = [
     "instant",
@@ -31,7 +33,7 @@ export const AccessibleAISection = () => {
         const nextIndex = (currentIndex + 1) % tabs.length;
         return tabs[nextIndex];
       });
-    }, 6000);
+    }, 600000);
 
     return () => clearInterval(interval);
   }, [tabs]);
@@ -84,38 +86,29 @@ export const AccessibleAISection = () => {
         >
           <div className="max-w-full mx-auto text-center">
             <div className="text-2xl sm:text-3xl md:text-4xl lg:text-4.5xl leading-tight sm:leading-normal text-zinc-950">
-              <p className="mb-0">
-                Your emails, documents
-                <span className="hidden sm:inline">
-                  , schedules, notes, EHR & CRM data
-                </span>
-                <span className="sm:hidden">
-                  , schedules, notes,
-                  <br />
-                  EHR & CRM data
-                </span>
+              <p className="font-bold">
+                Everyday AI that works as hard as your clinic does.
               </p>
-              <p className="font-bold">Accessible in one secure AI</p>
             </div>
             <p className="text-base sm:text-lg leading-normal opacity-80 text-zinc-950 mb-6 sm:mb-8 mt-4 sm:mt-6">
               One place to find what you need and trigger tasks.
             </p>
           </div>
 
-          <div className="flex flex-nowrap items-center sm:flex-wrap overflow-x-auto sm:overflow-x-visible justify-start sm:justify-center gap-2 sm:gap-3 md:gap-4 max-w-full mx-auto mb-8 sm:mb-10 md:mb-14">
+          <div className="flex flex-col items-center sm:flex-row sm:flex-wrap sm:justify-center gap-3 sm:gap-3 md:gap-4 max-w-full mx-auto mb-8 sm:mb-10 md:mb-14">
             <motion.div
               animate={{
                 scale: activeTab === "instant" ? 1.05 : 1,
               }}
               transition={{ duration: 0.3, ease: "easeInOut" }}
-              className="flex-shrink-0 m-2 sm:my-0"
+              className="w-full sm:w-auto"
             >
               <Button
                 variant={
                   activeTab === "instant" ? "gradient-outline" : "outline-dark"
                 }
                 size="sm"
-                className="rounded-full font-medium transition-all duration-300 text-xs sm:text-sm md:text-base px-3 sm:px-4 md:px-6 py-2 sm:py-2.5 md:py-3"
+                className="rounded-full font-medium transition-all duration-300 text-xs sm:text-sm md:text-base px-3 sm:px-4 md:px-6 py-2 sm:py-2.5 md:py-3 w-full sm:min-w-[160px] md:w-64 text-center"
                 onClick={() => setActiveTab("instant")}
               >
                 Instant Answers
@@ -126,14 +119,14 @@ export const AccessibleAISection = () => {
                 scale: activeTab === "faster" ? 1.05 : 1,
               }}
               transition={{ duration: 0.3, ease: "easeInOut" }}
-              className="flex-shrink-0"
+              className="w-full sm:w-auto"
             >
               <Button
                 variant={
                   activeTab === "faster" ? "gradient-outline" : "outline-dark"
                 }
                 size="sm"
-                className="rounded-full font-medium transition-all duration-300 text-xs sm:text-sm md:text-base px-3 sm:px-4 md:px-6 py-2 sm:py-2.5 md:py-3"
+                className="rounded-full font-medium transition-all duration-300 text-xs sm:text-sm md:text-base px-3 sm:px-4 md:px-6 py-2 sm:py-2.5 md:py-3 w-full sm:min-w-[160px] md:w-64 text-center"
                 onClick={() => setActiveTab("faster")}
               >
                 Work Faster
@@ -144,7 +137,7 @@ export const AccessibleAISection = () => {
                 scale: activeTab === "customers" ? 1.05 : 1,
               }}
               transition={{ duration: 0.3, ease: "easeInOut" }}
-              className="flex-shrink-0"
+              className="w-full sm:w-auto"
             >
               <Button
                 variant={
@@ -153,7 +146,7 @@ export const AccessibleAISection = () => {
                     : "outline-dark"
                 }
                 size="sm"
-                className="rounded-full font-medium transition-all duration-300 text-xs sm:text-sm md:text-base px-3 sm:px-4 md:px-6 py-2 sm:py-2.5 md:py-3"
+                className="rounded-full font-medium transition-all duration-300 text-xs sm:text-sm md:text-base px-3 sm:px-4 md:px-6 py-2 sm:py-2.5 md:py-3 w-full sm:min-w-[160px] md:w-64 text-center"
                 onClick={() => setActiveTab("customers")}
               >
                 Handle More Customers
@@ -164,7 +157,7 @@ export const AccessibleAISection = () => {
       </div>
 
       {/* Dynamic Content Section */}
-      <div className="relative mx-auto max-w-8xl rounded-3xl bg-gradient-to-br from-purple-100/50 via-cyan-50/30 to-pink-100/40 backdrop-blur-sm border border-white/20">
+      <div className="relative mx-auto max-w-8xl rounded-3xl bg-gradient-to-br from-purple-100/50 via-cyan-50/30 to-pink-100/40 backdrop-blur-sm border border-white/20 overflow-hidden">
         {/* Different colored particle background for this section */}
         <CustomParticleBackground
           className="absolute inset-0 -z-10 rounded-3xl"
@@ -189,14 +182,14 @@ export const AccessibleAISection = () => {
         />
 
         <div
-          className={`max-w-8xl mx-auto relative overflow-hidden transition-all duration-500 ease-in-out ${tabContent[activeTab].height} min-h-[20rem] sm:min-h-[25rem] md:min-h-[28rem] lg:min-h-0`}
+          className={`max-w-8xl mx-auto relative overflow-hidden transition-all duration-500 ease-in-out ${tabContent[activeTab].height} min-h-[20rem] sm:min-h-[25rem] md:min-h-[28rem] lg:min-h-0 rounded-b-3xl`}
         >
           <motion.div
             key={activeTab}
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 0.3 }}
-            className="relative flex flex-col lg:block"
+            className="relative flex flex-col lg:block h-full"
           >
             {/* Content Section */}
             <motion.div
@@ -257,32 +250,32 @@ export const AccessibleAISection = () => {
 
             {/* Image Section */}
             <motion.div
-              initial={{ opacity: 0, y: 100 }}
+              initial={{ opacity: 0, y: isDesktop ? 100 : 0 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, ease: "easeOut", delay: 0.2 }}
-              className={`z-0 mt-6 sm:mt-8 ${
+              className={`z-0 mt-6 sm:mt-8 px-6 sm:px-0 pb-6 sm:pb-0 ${
                 isEvenSlide
-                  ? "lg:absolute lg:left-16 lg:top-12 lg:max-w-[37.5rem] lg:mt-0"
-                  : "lg:absolute lg:right-16 lg:top-12 lg:max-w-[37.5rem] lg:mt-0"
+                  ? "lg:absolute lg:left-16 lg:top-12 lg:max-w-[37.5rem] lg:mt-0 lg:px-0 lg:pb-0"
+                  : "lg:absolute lg:right-16 lg:top-12 lg:max-w-[37.5rem] lg:mt-0 lg:px-0 lg:pb-0"
               }`}
             >
-              <div className="relative rounded-[2rem] shadow-xl">
+              <div className="relative rounded-0 sm:rounded-[2rem] shadow-xl overflow-hidden w-full">
                 {/* Gradient border */}
-                <div className="absolute inset-0">
+                <div className="absolute inset-0 rounded-[2rem] overflow-hidden">
                   <div className="backdrop-blur-sm rounded-[calc(2rem-4px)] h-full w-full"></div>
                 </div>
-                <div className="relative z-10">
+                <div className="relative z-10 overflow-hidden rounded-0 sm:rounded-[calc(2rem-4px)]">
                   <img
                     src={tabContent[activeTab].image}
                     alt={tabContent[activeTab].title}
-                    className="w-full h-auto rounded-[calc(2rem-4px)]"
+                    className="w-full h-auto object-cover rounded-0 sm:rounded-[calc(2rem-4px)]"
                   />
                 </div>
               </div>
             </motion.div>
           </motion.div>
           {/* Bottom gradient fade to white - placed after content to ensure it's on top */}
-          <div className="absolute bottom-0 left-0 right-0 h-20 bg-gradient-to-t from-white to-transparent z-30 pointer-events-none rounded-b-2xl"></div>
+          <div className="absolute bottom-0 left-0 right-0 h-20 bg-gradient-to-t from-white to-transparent z-30 pointer-events-none overflow-hidden rounded-b-3xl"></div>
         </div>
       </div>
     </section>

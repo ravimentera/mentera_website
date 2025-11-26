@@ -81,14 +81,14 @@ export const IntegrationsSection = memo(() => {
             viewport={viewportConfig.once}
             variants={fadeInLeft}
             transition={transitions.default}
-            className="space-y-6 sm:space-y-8 max-w-full lg:max-w-[28rem]"
+            className="space-y-6 sm:space-y-8 max-w-full lg:max-w-md"
           >
             <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-4.5xl font-medium text-zinc-950">
               Mentera connects with 50+ apps
             </h2>
             <p className="text-base sm:text-lg md:text-xl text-zinc-950">
-              Aliquet purus felis pulvinar fames venenatis tempor facilisis ac.
-              Amet scelerisque facilisis odio pretium.
+              Connect every tool you use today into one platform. Mentera
+              becomes the control center for your entire practice.
             </p>
             <p className="text-sm sm:text-base text-gray-400 font-medium">
               If we don't have a current integration, we will build it.
@@ -104,13 +104,13 @@ export const IntegrationsSection = memo(() => {
             transition={transitions.withDelay(0.2)}
             className="relative overflow-hidden"
           >
-            <div className="space-y-6">
+            <div className="space-y-4">
               {/* Row 1 - Left to Right */}
               <div
                 className="relative overflow-hidden py-2"
                 style={maskGradientStyle}
               >
-                <div className="flex gap-8 animate-scroll-left will-change-transform">
+                <div className="flex gap-6 animate-scroll-left will-change-transform">
                   {duplicatedRows[0].map((app, index) => (
                     <div
                       key={`row1-${index}`}
@@ -152,7 +152,7 @@ export const IntegrationsSection = memo(() => {
                 className="relative overflow-hidden py-2"
                 style={maskGradientStyle}
               >
-                <div className="flex gap-8 animate-scroll-left will-change-transform">
+                <div className="flex gap-6 animate-scroll-left will-change-transform">
                   {duplicatedRows[2].map((app, index) => (
                     <div
                       key={`row3-${index}`}
