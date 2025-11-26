@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useRef } from "react";
+import { useMemo, useRef, useState } from "react";
 
 interface EmailCaptureInputProps {
   placeholder?: string;
@@ -9,7 +9,7 @@ interface EmailCaptureInputProps {
   className?: string;
   inputHeight?: string;
   buttonHeight?: string;
-  variant?: 'light' | 'dark';
+  variant?: "light" | "dark";
 }
 
 export const EmailCaptureInput: React.FC<EmailCaptureInputProps> = ({
@@ -19,7 +19,7 @@ export const EmailCaptureInput: React.FC<EmailCaptureInputProps> = ({
   className = "",
   inputHeight = "h-12",
   buttonHeight = "h-12",
-  variant = 'light',
+  variant = "light",
 }: EmailCaptureInputProps) => {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -36,16 +36,16 @@ export const EmailCaptureInput: React.FC<EmailCaptureInputProps> = ({
     const email = formData.get("email") as string;
 
     try {
-      const response = await fetch('/api/pipedrive', {
-        method: 'POST',
+      const response = await fetch("/api/pipedrive", {
+        method: "POST",
         headers: {
-          'Content-Type': 'application/json',
+          "Content-Type": "application/json",
         },
         body: JSON.stringify({ email }),
       });
 
       const result = await response.json();
-      
+
       if (result.success) {
         setSuccess(true);
         if (onSubmit) {
@@ -67,13 +67,22 @@ export const EmailCaptureInput: React.FC<EmailCaptureInputProps> = ({
     }
   };
 
-  const inputStyles = variant === 'light' 
-    ? "bg-transparent placeholder-[#717172] text-gray-900 border-[#111A53] focus:ring-primary/20"
-    : "bg-transparent placeholder-white/50 text-white border-white focus:ring-white/20";
+  // Memoize styles to avoid recreation on each render
+  const inputStyles = useMemo(
+    () =>
+      variant === "light"
+        ? "bg-transparent placeholder-text-secondary text-gray-900 border-primary focus:ring-primary/20"
+        : "bg-transparent placeholder-white/50 text-white border-white focus:ring-white/20",
+    [variant]
+  );
 
-  const buttonStyles = variant === 'light'
-    ? "bg-[#111A53] hover:bg-[#1c2b85] text-white"
-    : "bg-white hover:bg-gray-100 text-[#111A53]";
+  const buttonStyles = useMemo(
+    () =>
+      variant === "light"
+        ? "bg-primary hover:bg-primary/90 text-white"
+        : "bg-white hover:bg-gray-100 text-purple",
+    [variant]
+  );
 
   return (
     <form
@@ -85,14 +94,14 @@ export const EmailCaptureInput: React.FC<EmailCaptureInputProps> = ({
         type="email"
         name="email"
         placeholder={placeholder}
-        className={`w-full ${inputHeight} px-4 sm:px-6 pr-[125px] sm:pr-[170px] rounded-full ${inputStyles} text-base sm:text-lg focus:outline-none focus:ring-2 border`}
+        className={`w-full ${inputHeight} px-4 sm:px-6 pr-[7rem] sm:pr-[11.5rem] rounded-full ${inputStyles} text-sm sm:text-base md:text-lg focus:outline-none focus:ring-2 border`}
         required
         disabled={isSubmitting}
       />
       <button
         type="submit"
         disabled={isSubmitting}
-        className={`absolute right-0 top-0 ${buttonHeight} px-3 sm:px-8 text-sm sm:text-base ${buttonStyles} rounded-full flex items-center gap-1 sm:gap-2 transition-colors disabled:opacity-50 disabled:cursor-not-allowed`}
+        className={`absolute right-[1px] top-[1px] bottom-[1px] px-4 sm:px-6 md:px-8 text-xs sm:text-sm md:text-base font-medium sm:font-bold ${buttonStyles} rounded-full flex items-center justify-center gap-1 sm:gap-2 transition-colors disabled:opacity-50 disabled:cursor-not-allowed whitespace-nowrap`}
       >
         <span className="whitespace-nowrap">
           {isSubmitting ? "Submitting..." : success ? "Success!" : buttonText}
@@ -117,7 +126,11 @@ export const EmailCaptureInput: React.FC<EmailCaptureInputProps> = ({
         )}
       </button>
       {error && (
-        <p className={`mt-2 text-sm ${variant === 'light' ? 'text-red-500' : 'text-red-300'}`}>
+        <p
+          className={`mt-2 text-sm ${
+            variant === "light" ? "text-red-500" : "text-red-300"
+          }`}
+        >
           {error}
         </p>
       )}

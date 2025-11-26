@@ -1,0 +1,27 @@
+{
+    "name": "Mentera - AI-Powered Med Spa Management Platform",
+    "short_name": "Mentera",
+    "description": "Streamline your med spa operations with AI-powered patient care, automated follow-ups, and intelligent scheduling.",
+    "start_url": "/",
+    "display": "standalone",
+    "background_color": "#ffffff",
+    "theme_color": "#4d28df",
+    "orientation": "portrait-primary",
+    "icons": [
+        {
+            "src": "/favicon.svg",
+            "sizes": "any",
+            "type": "image/svg+xml",
+            "purpose": "any maskable"
+        }
+    ],
+    "categories": [
+        "healthcare",
+        "business",
+        "productivity"
+    ],
+    "lang": "en-US",
+    "dir": "ltr",
+    "scope": "/",
+    "screenshots": []
+}

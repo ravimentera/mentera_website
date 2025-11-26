@@ -7,10 +7,10 @@ import Link from "next/link";
 
 export default function NotFound() {
   return (
-    <div className="min-h-screen flex items-center justify-center bg-[#FFFFFF] relative overflow-hidden">
+    <div className="min-h-screen flex items-center justify-center bg-white relative overflow-hidden">
       {/* Background gradient blobs */}
-      <div className="absolute top-[-300px] right-[-300px] w-[600px] h-[600px] bg-gradient-to-br from-purple-500/20 to-transparent rounded-full blur-3xl" />
-      <div className="absolute bottom-[-300px] left-[-300px] w-[600px] h-[600px] bg-gradient-to-tr from-teal-500/20 to-transparent rounded-full blur-3xl" />
+      <div className="absolute -top-[18.75rem] -right-[18.75rem] w-[37.5rem] h-[37.5rem] bg-gradient-to-br from-purple-500/20 to-transparent rounded-full blur-3xl" />
+      <div className="absolute -bottom-[18.75rem] -left-[18.75rem] w-[37.5rem] h-[37.5rem] bg-gradient-to-tr from-teal-500/20 to-transparent rounded-full blur-3xl" />
 
       <div className="max-w-md text-center px-4 z-10 relative">
         <motion.div
@@ -40,11 +40,11 @@ export default function NotFound() {
             </h1>
           </motion.div>
 
-          <h2 className="text-3xl font-medium text-[#111827] mb-4">
+          <h2 className="text-3xl font-medium text-gray-900 mb-4">
             Page Not Found
           </h2>
 
-          <p className="text-[#4B5563] text-lg mb-8">
+          <p className="text-gray-600 text-lg mb-8">
             The page you're looking for doesn't exist or has been moved. Let's
             get you back on track.
           </p>
