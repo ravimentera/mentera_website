@@ -64,12 +64,33 @@ const config: Config = {
           200: "#abeed2",
           300: "#a1f1d0",
         },
+        blog: {
+          guides: {
+            bg: "#FEF9C3",
+            text: "#854D0E",
+          },
+          industry: {
+            bg: "#DCFCE7",
+            text: "#166534",
+          },
+          company: {
+            bg: "#DBEAFE",
+            text: "#1E40AF",
+          },
+          filter: {
+            active: {
+              bg: "#E9D5FF",
+              text: "#6B21A8",
+            },
+          },
+        },
       },
       padding: {
         3.75: "0.9375rem",
       },
       maxWidth: {
         "8xl": "90rem",
+        privacy: "44rem", // 704px
       },
       spacing: {
         "18": "4.5rem",
@@ -111,6 +132,23 @@ const config: Config = {
         lg: "1024px",
         xl: "1280px",
         "2xl": "1536px",
+      },
+      backgroundImage: {
+        "blog-hero-gradient":
+          "linear-gradient(to bottom right, #FFFFFF, #C7A0DE 49%, #41B4BC)",
+        "blog-blob-purple":
+          "linear-gradient(135deg, #8F03A0 0%, rgba(143, 3, 160, 0) 99.5%)",
+        "blog-blob-green":
+          "linear-gradient(135deg, #6EF1BB 0%, rgba(110, 241, 187, 0) 99.5%)",
+      },
+      blur: {
+        huge: "216px",
+      },
+      boxShadow: {
+        nav: "0 4px 16px 0 rgba(0,0,0,0.05)",
+      },
+      aspectRatio: {
+        blog: "16 / 10",
       },
     },
   },

@@ -48,17 +48,17 @@ export const Footer = () => {
           {/* Navigation Links */}
           <div className="flex gap-6 md:gap-8 items-center flex-wrap justify-center">
             <Link
-              href="#"
+              href="/privacy-policy"
               className="cursor-pointer text-sm sm:text-base text-white hover:opacity-80 transition-opacity font-normal"
             >
               Privacy Policy
             </Link>
-            <Link
-              href="#"
+            <a
+              href="mailto:support@mentera.ai"
               className="cursor-pointer text-sm sm:text-base text-white hover:opacity-80 transition-opacity font-normal"
             >
               Contact Us
-            </Link>
+            </a>
           </div>
         </div>
 
@@ -112,6 +112,26 @@ export const Footer = () => {
               >
                 <path
                   d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"
+                  fill="currentColor"
+                />
+              </svg>
+            </Link>
+            <Link
+              href="https://www.crunchbase.com/organization/mentera-62d4"
+              aria-label="Crunchbase"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-white hover:opacity-80 transition-opacity"
+            >
+              <svg
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M21.6 0H2.4A2.41 2.41 0 0 0 0 2.4v19.2A2.41 2.41 0 0 0 2.4 24h19.2a2.41 2.41 0 0 0 2.4-2.4V2.4A2.41 2.41 0 0 0 21.6 0zM7.045 14.465A2.11 2.11 0 0 0 9.84 13.42h1.66a3.69 3.69 0 1 1 0-1.75H9.84a2.11 2.11 0 1 0-2.795 2.795zm11.345.845a3.55 3.55 0 0 1-1.06.63 3.68 3.68 0 0 1-3.39-.38v.38h-1.51V5.37h1.5v4.11a3.74 3.74 0 0 1 1.8-.63H16a3.67 3.67 0 0 1 2.39 6.46zm-.223-2.766a2.104 2.104 0 1 1-4.207 0 2.104 2.104 0 0 1 4.207 0z"
                   fill="currentColor"
                 />
               </svg>

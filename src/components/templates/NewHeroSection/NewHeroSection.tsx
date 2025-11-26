@@ -1,9 +1,11 @@
 "use client";
 
 import { Button } from "@/components/atoms/Button/Button";
+import { useScreenSize } from "@/hooks/useScreenSize";
 import { motion } from "framer-motion";
 
 export const NewHeroSection = () => {
+  const { isMobile } = useScreenSize();
   return (
     <section className="relative w-full min-h-screen flex items-center justify-center overflow-hidden">
       {/* Content */}
@@ -17,7 +19,7 @@ export const NewHeroSection = () => {
             className="max-w-full lg:max-w-120"
           >
             <div className="flex flex-col">
-              <p className="text-3xl sm:text-4xl md:text-5xl -mb-2 sm:-mb-3 md:-mb-4 leading-tight sm:leading-normal font-bold text-zinc-950">
+              <p className="text-3xl sm:text-4xl md:text-5xl -mb-1 md:mb-1 leading-tight sm:leading-normal font-bold text-zinc-950">
                 Your entire business,
               </p>
               <div className="flex flex-wrap gap-2 sm:gap-3 items-start text-3xl sm:text-4xl md:text-5xl leading-tight sm:leading-normal font-bold">
@@ -117,8 +119,8 @@ export const NewHeroSection = () => {
                 >
                   <div className="w-full h-full flex items-center justify-center bg-white rounded-xl p-2 border border-gray-200 shadow-md">
                     <img
-                      src="/app-logos/app-hubspot.png"
-                      alt="HubSpot"
+                      src="/app-logos/app-drchrono.png"
+                      alt="DrChrono"
                       className="w-full h-full object-contain"
                     />
                   </div>
@@ -153,8 +155,8 @@ export const NewHeroSection = () => {
                 >
                   <div className="w-full h-full flex items-center justify-center bg-white rounded-xl p-2 border border-gray-200 shadow-md">
                     <img
-                      src="/app-logos/app-salesforce.png"
-                      alt="Salesforce"
+                      src="/app-logos/app-hubspot.png"
+                      alt="HubSpot"
                       className="w-full h-full object-contain"
                     />
                   </div>
@@ -171,8 +173,8 @@ export const NewHeroSection = () => {
                 >
                   <div className="w-full h-full flex items-center justify-center bg-white rounded-xl p-2 border border-gray-200 shadow-md">
                     <img
-                      src="/app-logos/app-dropbox.png"
-                      alt="Dropbox"
+                      src="/app-logos/app-athenahealth.png"
+                      alt="Athenahealth"
                       className="w-full h-full object-contain"
                     />
                   </div>
@@ -287,15 +289,36 @@ export const NewHeroSection = () => {
               </motion.div>
 
               {/* Hero Video */}
-              <video
-                src="/videos/orb.webm"
-                autoPlay
-                loop
-                muted
-                playsInline
-                className="relative z-10 w-48 h-48 sm:w-56 sm:h-56 md:w-64 md:h-64 object-contain"
-                aria-label="Hero Section"
-              />
+              <div className="relative z-10 w-48 h-48 sm:w-56 sm:h-56 md:w-72 md:h-72">
+                <div
+                  className="w-full h-full"
+                  style={
+                    isMobile
+                      ? {
+                          /* Mobile: Use CSS mask to create soft transparent edges */
+                          WebkitMaskImage:
+                            "radial-gradient(circle, rgba(0,0,0,1) 50%, rgba(0,0,0,0.8) 70%, rgba(0,0,0,0.4) 85%, rgba(0,0,0,0) 100%)",
+                          maskImage:
+                            "radial-gradient(circle, rgba(0,0,0,1) 50%, rgba(0,0,0,0.8) 70%, rgba(0,0,0,0.4) 85%, rgba(0,0,0,0) 100%)",
+                          WebkitMaskSize: "cover",
+                          maskSize: "cover",
+                          WebkitMaskPosition: "center",
+                          maskPosition: "center",
+                        }
+                      : {}
+                  }
+                >
+                  <video
+                    src="/videos/orb.webm"
+                    autoPlay
+                    loop
+                    muted
+                    playsInline
+                    className="w-full h-full object-contain"
+                    aria-label="Hero Section"
+                  />
+                </div>
+              </div>
 
               {/* Ask anything to Tera - Search bar on the orb */}
               <motion.div

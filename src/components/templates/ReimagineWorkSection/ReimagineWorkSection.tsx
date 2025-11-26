@@ -174,7 +174,7 @@ export const ReimagineWorkSection = memo(() => {
                   {feature.subtitle}
                 </h3>
               </div>
-              <div className="bg-purple/2 rounded-2xl p-5">
+              <div className="bg-purple/2 rounded-2xl p-5 bg-[#3428DF05]">
                 <ul className="space-y-4 text-left">
                   {feature.items.map((item, itemIndex) => (
                     <li
