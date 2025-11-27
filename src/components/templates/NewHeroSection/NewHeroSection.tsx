@@ -7,22 +7,22 @@ import { motion } from "framer-motion";
 export const NewHeroSection = () => {
   const { isMobile } = useScreenSize();
   return (
-    <section className="relative w-full min-h-screen flex items-center justify-center overflow-hidden">
+    <section className="relative w-full min-h-screen flex items-center justify-center overflow-visible sm:overflow-hidden mb-12 sm:mb-0">
       {/* Content */}
-      <div className="max-w-8xl relative z-10 w-full mx-auto px-6 sm:px-8 md:px-12 lg:px-24 py-12 sm:py-16 md:py-20">
+      <div className="max-w-8xl relative z-10 w-full mx-auto px-6 sm:px-8 md:px-12 lg:px-24 py-20 sm:py-16 md:py-20">
         <div className="grid lg:grid-cols-2 gap-8 sm:gap-10 md:gap-12 items-center">
           {/* Left Column - Text Content */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
-            className="max-w-full lg:max-w-120"
+            className="max-w-full lg:max-w-120 text-center sm:text-left"
           >
             <div className="flex flex-col">
               <p className="text-3xl sm:text-4xl md:text-5xl -mb-1 md:mb-1 leading-tight sm:leading-normal font-bold text-zinc-950">
                 Your entire business,
               </p>
-              <div className="flex flex-wrap gap-2 sm:gap-3 items-start text-3xl sm:text-4xl md:text-5xl leading-tight sm:leading-normal font-bold">
+              <div className="flex flex-wrap gap-2 sm:gap-3 items-start text-3xl sm:text-4xl md:text-5xl leading-tight sm:leading-normal font-bold justify-center sm:justify-start">
                 <span className="bg-gradient-to-r from-purple-500 to-purple bg-clip-text text-transparent [-webkit-text-fill-color:transparent]">
                   one search
                 </span>
@@ -289,34 +289,39 @@ export const NewHeroSection = () => {
               </motion.div>
 
               {/* Hero Video */}
-              <div className="relative z-10 w-48 h-48 sm:w-56 sm:h-56 md:w-72 md:h-72">
-                <div
-                  className="w-full h-full"
-                  style={
-                    isMobile
-                      ? {
-                          /* Mobile: Use CSS mask to create soft transparent edges */
-                          WebkitMaskImage:
-                            "radial-gradient(circle, rgba(0,0,0,1) 50%, rgba(0,0,0,0.8) 70%, rgba(0,0,0,0.4) 85%, rgba(0,0,0,0) 100%)",
-                          maskImage:
-                            "radial-gradient(circle, rgba(0,0,0,1) 50%, rgba(0,0,0,0.8) 70%, rgba(0,0,0,0.4) 85%, rgba(0,0,0,0) 100%)",
-                          WebkitMaskSize: "cover",
-                          maskSize: "cover",
-                          WebkitMaskPosition: "center",
-                          maskPosition: "center",
-                        }
-                      : {}
-                  }
-                >
+              <div className="relative z-10 w-40 h-40 sm:w-48 sm:h-48 md:w-64 md:h-64">
+                <div className="w-full h-full relative rounded-full overflow-hidden">
                   <video
                     src="/videos/orb.webm"
                     autoPlay
                     loop
                     muted
                     playsInline
-                    className="w-full h-full object-contain"
+                    className="w-full h-full object-cover rounded-full"
                     aria-label="Hero Section"
                   />
+                  {isMobile && (
+                    <>
+                      {/* Fading overlay to blend edges with background */}
+                      <div
+                        className="absolute inset-0 pointer-events-none rounded-full"
+                        style={{
+                          background:
+                            "radial-gradient(circle, transparent 55%, rgba(255,255,255,0.05) 70%, rgba(255,255,255,0.12) 80%, rgba(255,255,255,0.25) 90%, rgba(255,255,255,0.4) 97%, rgba(255,255,255,0.6) 100%)",
+                        }}
+                      />
+                      {/* Mask to ensure clean edges */}
+                      <div
+                        className="absolute inset-0 pointer-events-none rounded-full"
+                        style={{
+                          WebkitMaskImage:
+                            "radial-gradient(circle, rgba(0,0,0,1) 55%, rgba(0,0,0,0.9) 70%, rgba(0,0,0,0.75) 80%, rgba(0,0,0,0.5) 90%, rgba(0,0,0,0.2) 97%, rgba(0,0,0,0) 100%)",
+                          maskImage:
+                            "radial-gradient(circle, rgba(0,0,0,1) 55%, rgba(0,0,0,0.9) 70%, rgba(0,0,0,0.75) 80%, rgba(0,0,0,0.5) 90%, rgba(0,0,0,0.2) 97%, rgba(0,0,0,0) 100%)",
+                        }}
+                      />
+                    </>
+                  )}
                 </div>
               </div>
 

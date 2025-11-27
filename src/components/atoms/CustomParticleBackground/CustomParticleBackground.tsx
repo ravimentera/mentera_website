@@ -37,7 +37,7 @@ const defaultParticles: ParticleConfig[] = [
   },
   {
     color: "#8F03A0", // purple-500
-    opacity: 0.2,
+    opacity: 0.05,
     size: 691,
     blur: 108,
     position: { top: "24.3125rem", right: "0" },

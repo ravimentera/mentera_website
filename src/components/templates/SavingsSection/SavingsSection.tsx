@@ -113,13 +113,13 @@ export const SavingsSection = memo(() => {
             transition={transitions.default}
             className="w-full lg:w-120 lg:mr-20"
           >
-            <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-4.5xl font-medium text-zinc-950 mb-6 sm:mb-8">
+            <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-4.5xl font-medium text-zinc-950 mb-6 sm:mb-8 text-center sm:text-left">
               Saves up to 250 hours per user a year
             </h2>
-            <p className="text-base sm:text-lg md:text-xl text-zinc-950">
-              Tellus id tellus lectus leo elit posuere nunc velit tempor. Urna
-              elit et et amet morbi vitae neque. Feugiat ut amet in nunc
-              rhoncus. Sem pretium leo vitae ornare.
+            <p className="text-base sm:text-lg md:text-xl text-zinc-950 text-center sm:text-left">
+              What would change if your organization got only five percent more
+              efficient? That margin becomes the difference between maintaining
+              pace and pulling ahead.
             </p>
           </motion.div>
 
