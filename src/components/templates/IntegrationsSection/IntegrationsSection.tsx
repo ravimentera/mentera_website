@@ -11,7 +11,7 @@ import { memo, useMemo } from "react";
 
 // App logos mapping - all logos from /public/app-logos folder
 const appLogos = [
-  { name: "Outlook", image: "app-outlook.png" },
+  { name: "Outlook", image: "app-microsoft-outlook.png" },
   { name: "Gmail", image: "app-gmail.png" },
   { name: "Google Drive", image: "app-google-drive.png" },
   { name: "OneDrive", image: "app-onedrive.png" },
@@ -83,14 +83,14 @@ export const IntegrationsSection = memo(() => {
             transition={transitions.default}
             className="space-y-6 sm:space-y-8 max-w-full lg:max-w-md"
           >
-            <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-4.5xl font-medium text-zinc-950">
+            <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-4.5xl font-medium text-zinc-950 text-center sm:text-left">
               Mentera connects with 50+ apps
             </h2>
-            <p className="text-base sm:text-lg md:text-xl text-zinc-950">
+            <p className="text-base sm:text-lg md:text-xl text-zinc-950 text-center sm:text-left">
               Connect every tool you use today into one platform. Mentera
               becomes the control center for your entire practice.
             </p>
-            <p className="text-sm sm:text-base text-gray-400 font-medium">
+            <p className="text-sm sm:text-base text-gray-400 font-medium text-center sm:text-left">
               If we don't have a current integration, we will build it.
             </p>
           </motion.div>

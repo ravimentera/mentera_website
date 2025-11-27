@@ -33,7 +33,7 @@ export const AccessibleAISection = () => {
         const nextIndex = (currentIndex + 1) % tabs.length;
         return tabs[nextIndex];
       });
-    }, 600000);
+    }, 6000);
 
     return () => clearInterval(interval);
   }, [tabs]);
@@ -208,10 +208,10 @@ export const AccessibleAISection = () => {
                   : "lg:max-w-[37.5rem]"
               }`}
             >
-              <h3 className="text-2xl sm:text-3xl font-bold text-zinc-950">
+              <h3 className="text-2xl sm:text-3xl font-bold text-zinc-950 text-center sm:text-left">
                 {tabContent[activeTab].title}
               </h3>
-              <p className="text-base sm:text-lg md:text-xl text-zinc-700 leading-relaxed">
+              <p className="text-base sm:text-lg md:text-xl text-zinc-900 leading-relaxed text-center sm:text-left">
                 {tabContent[activeTab].subtitle}
               </p>
               <ul className="space-y-2 sm:space-y-3">
@@ -240,7 +240,7 @@ export const AccessibleAISection = () => {
                         d="M5 13l4 4L19 7"
                       />
                     </svg>
-                    <span className="text-sm sm:text-base md:text-lg text-zinc-700">
+                    <span className="text-sm sm:text-base md:text-lg text-zinc-900">
                       {feature}
                     </span>
                   </motion.li>
