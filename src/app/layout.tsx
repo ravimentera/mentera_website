@@ -6,7 +6,7 @@ import "./globals.css";
 
 export const metadata: Metadata = {
   title: {
-    default: "Mentera - AI-Powered Med Spa Management Platform",
+    default: "Mentera - AI Assistant for Private Practices",
     template: "%s | Mentera.ai",
   },
   description:
@@ -60,7 +60,7 @@ export const metadata: Metadata = {
     locale: "en_US",
     url: "https://mentera.ai",
     siteName: "Mentera.ai",
-    title: "Mentera - AI-Powered Med Spa Management Platform",
+    title: "Mentera - AI Assistant for Private Practices",
     description:
       "Transform your med spa operations with AI-powered patient care and automation. Streamline workflows, automate follow-ups, and scale your practice.",
     images: [
@@ -75,7 +75,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Mentera - AI-Powered Med Spa Management Platform",
+    title: "Mentera - AI Assistant for Private Practices",
     description:
       "Transform your med spa operations with AI-powered patient care and automation.",
     images: ["/og-image.jpg"],
@@ -167,7 +167,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
                   "@id": "https://mentera.ai/#website",
                   url: "https://mentera.ai",
                   name: "Mentera.ai",
-                  description: "AI-Powered Med Spa Management Platform",
+                  description: "AI Assistant for Private Practices",
                   publisher: {
                     "@id": "https://mentera.ai/#organization",
                   },

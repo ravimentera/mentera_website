@@ -1,11 +1,15 @@
 "use client";
 
 import { Button } from "@/components/atoms/Button/Button";
+import { HubSpotFormDialog } from "@/components/molecules/HubSpotFormDialog/HubSpotFormDialog";
 import { useScreenSize } from "@/hooks/useScreenSize";
 import { motion } from "framer-motion";
+import { useState } from "react";
 
 export const NewHeroSection = () => {
   const { isMobile } = useScreenSize();
+  const [isDialogOpen, setIsDialogOpen] = useState(false);
+
   return (
     <section className="relative w-full min-h-screen flex items-center justify-center overflow-visible sm:overflow-hidden mb-12 sm:mb-0">
       {/* Content */}
@@ -34,23 +38,16 @@ export const NewHeroSection = () => {
               <span className="font-bold">AI Assistant</span> that puts your
               company's knowledge to work.
             </p>
-            <div className="flex flex-col">
-              <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 items-stretch sm:items-start">
-                <div className="border border-purple flex-1 pl-4 sm:pl-6 rounded-full flex items-center min-h-12 sm:min-h-14">
-                  <input
-                    type="email"
-                    placeholder="Enter your email"
-                    className="w-full bg-transparent text-sm sm:text-base text-gray-800 placeholder:text-gray-500 outline-none px-2 sm:px-0"
-                  />
-                  <Button
-                    variant="purple"
-                    size="md"
-                    className="text-sm sm:text-base rounded-full font-bold whitespace-nowrap px-4 sm:px-6 py-3.5 sm:py-3.75"
-                  >
-                    Get a Demo
-                  </Button>
-                </div>
-              </div>
+            <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 items-stretch sm:items-start justify-center sm:justify-start">
+              <Button
+                variant="purple"
+                size="md"
+                showArrow
+                className="rounded-full font-bold"
+                onClick={() => setIsDialogOpen(true)}
+              >
+                Get a Demo
+              </Button>
             </div>
           </motion.div>
 
@@ -458,6 +455,12 @@ export const NewHeroSection = () => {
           </motion.div>
         </div>
       </div>
+
+      {/* HubSpot Form Dialog */}
+      <HubSpotFormDialog
+        isOpen={isDialogOpen}
+        onClose={() => setIsDialogOpen(false)}
+      />
     </section>
   );
 };

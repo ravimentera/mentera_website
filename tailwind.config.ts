@@ -101,6 +101,9 @@ const config: Config = {
       borderRadius: {
         "2rem": "2rem",
       },
+      height: {
+        "75": "18.75rem",
+      },
       fontFamily: {
         inter: ["var(--font-inter)", "sans-serif"],
         poppins: ["var(--font-poppins)", "sans-serif"],
