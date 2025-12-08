@@ -15,7 +15,7 @@ export default function PrivacyPolicy() {
         {/* Effective Date */}
         <div className="font-satoshi font-normal text-sm leading-normal text-zinc-600 mb-8">
           <p>Effective Date: March 12, 2025</p>
-          <p>Last Updated: November 25, 2025</p>
+          <p>Last Updated: December 5, 2025</p>
         </div>
 
         {/* Introduction */}
@@ -100,26 +100,38 @@ export default function PrivacyPolicy() {
                   promotional communications.
                 </li>
               </ul>
-              <p className="mt-2">
-                Note: We do not intend to collect sensitive data (e.g., medical
-                data, health data, biometric data) through the Site. If you
-                believe you have submitted sensitive data inadvertently, please
-                contact us so we can delete it.
-              </p>
             </div>
           </div>
 
           {/* 2.2 */}
-          <div>
+          <div className="mb-4">
             <h3 className="font-satoshi font-normal text-sm leading-normal text-zinc-900 mb-2">
-              2.2 Usage Data
+              2.2 Mobile and Web Application Usage Data
             </h3>
             <div className="font-satoshi font-normal text-sm leading-normal text-zinc-600 space-y-2">
               <p>
-                When you use our Site, we automatically collect certain
-                technical information about your visit ("Usage Data"), such as:
+                When you use the Mentera mobile applications (iOS and Android)
+                or our web application, we may collect limited additional
+                information necessary to provide core functionality. This
+                includes:
               </p>
               <ul className="list-none space-y-2">
+                <li>
+                  <span className="font-medium">
+                    Device and Technical Data:
+                  </span>{" "}
+                  device type, operating system, app version, crash logs, and
+                  performance metrics.
+                </li>
+                <li>
+                  <span className="font-medium">Interaction Data:</span>{" "}
+                  features used, time spent in the app, and navigation patterns.
+                </li>
+                <li>
+                  <span className="font-medium">Site Usage Details:</span> Pages
+                  visited, duration on pages, timestamps, referring/exit URLs,
+                  and clickstream data.
+                </li>
                 <li>
                   <span className="font-medium">
                     Device/Browser Information:
@@ -128,28 +140,106 @@ export default function PrivacyPolicy() {
                   system.
                 </li>
                 <li>
-                  <span className="font-medium">Site Usage Details:</span> Pages
-                  visited, duration on pages, timestamps, referring/exit URLs,
-                  and clickstream data.
+                  <span className="font-medium">Approximate Location:</span>{" "}
+                  derived from IP address for security and fraud prevention.
                 </li>
                 <li>
-                  <span className="font-medium">Location Information:</span>{" "}
-                  Approximate geolocation based on IP address, where permitted
-                  by law.
+                  <span className="font-medium">Media and File Uploads:</span>{" "}
+                  photos, videos, audio recordings, and documents you choose to
+                  upload to patient records or documentation workflows.
                 </li>
               </ul>
+              <p className="mt-2">
+                We do <strong>not</strong> access your camera, microphone, photo
+                library, files, or local storage unless you take an action that
+                requires it (for example, choosing to capture a photo or record
+                audio).
+              </p>
               <p className="mt-2">
                 We may collect this data using cookies, web beacons, and other
                 tracking technologies. (See Section 6 below.)
               </p>
             </div>
           </div>
-        </div>
 
-        {/* Placeholder for remaining sections to keep file concise for now, or full content if needed. 
-            Given the user request for "pixel perfect", I should probably include the rest if I had the full text. 
-            I have the full text from the previous file read, so I will migrate it over with the new styling.
-        */}
+          {/* 2.3 */}
+          <div className="mb-4">
+            <h3 className="font-satoshi font-normal text-sm leading-normal text-zinc-900 mb-2">
+              2.3 Device Permissions
+            </h3>
+            <div className="font-satoshi font-normal text-sm leading-normal text-zinc-600 space-y-2">
+              <p>
+                The Mentera mobile apps may request access to certain device
+                features to support clinical documentation and file uploads. You
+                may deny or revoke these permissions at any time in your device
+                settings.
+              </p>
+              <ul className="list-none space-y-2">
+                <li>
+                  <span className="font-medium">Camera:</span> Used only when
+                  you choose to capture photos or scan documents for patient
+                  records.
+                </li>
+                <li>
+                  <span className="font-medium">Microphone:</span> Used only
+                  when you choose to record audio or use speech-to-text
+                  features.
+                </li>
+                <li>
+                  <span className="font-medium">Photo Library / Files:</span>{" "}
+                  Used only when you choose to upload existing images, videos,
+                  or documents.
+                </li>
+                <li>
+                  <span className="font-medium">Storage (Android):</span> Used
+                  to save or upload documents or media files.
+                </li>
+                <li>
+                  <span className="font-medium">Network Access:</span> Required
+                  for secure uploading, syncing, and authentication.
+                </li>
+              </ul>
+              <p className="mt-2">
+                We do not access these features in the background or without
+                your explicit action.
+              </p>
+            </div>
+          </div>
+
+          {/* 2.4 */}
+          <div>
+            <h3 className="font-satoshi font-normal text-sm leading-normal text-zinc-900 mb-2">
+              2.4 SMS Communications
+            </h3>
+            <div className="font-satoshi font-normal text-sm leading-normal text-zinc-600 space-y-2">
+              <p>
+                If you choose to verify your account or enable notifications via
+                text message, you may opt in to receiving SMS communications
+                from Mentera. SMS messages are used solely for account-related
+                purposes, including identity verification, security alerts, or
+                workflow notifications, and other service-related updates.
+                Message frequency may vary.
+              </p>
+              <p>
+                By providing your mobile phone number and opting in, you consent
+                to receive these SMS messages. You may opt out at any time by
+                replying <strong>STOP</strong> to any message we send, or by
+                contacting us at support@mentera.ai. After opting out, you may
+                still receive important non-SMS communications (such as email)
+                necessary to operate your account.
+              </p>
+              <p>
+                You may also turn SMS notifications on or off at any time within
+                the settings of our mobile application.
+              </p>
+              <p>
+                We do not use SMS messages for marketing without your explicit
+                consent, and we do not sell or share your mobile number with
+                third parties for their marketing purposes.
+              </p>
+            </div>
+          </div>
+        </div>
 
         {/* Section 3 */}
         <div className="mb-8">
@@ -209,6 +299,14 @@ export default function PrivacyPolicy() {
                 <li>
                   Conduct research and diagnostics to develop or improve our
                   products and Services.
+                </li>
+                <li>
+                  For users of our mobile and web applications, we also use
+                  application data to enable photo/document uploads, voice
+                  transcription, secure data synchronization, crash diagnostics,
+                  and feature performance analysis. No protected health
+                  information is used for advertising, sold to third parties, or
+                  shared except as described in this Policy.
                 </li>
               </ul>
             </div>
@@ -383,6 +481,12 @@ export default function PrivacyPolicy() {
                 financial or security purposes)
               </li>
             </ul>
+            <p className="mt-2">
+              For mobile and web application users, photos, audio recordings,
+              and other clinical documentation you upload are retained only as
+              long as associated with active patient records or as required by
+              law. Crash logs and diagnostics may be retained for up to 90 days.
+            </p>
           </div>
         </div>
 
@@ -391,7 +495,7 @@ export default function PrivacyPolicy() {
           <h2 className="font-satoshi font-medium text-lg leading-normal text-zinc-900 mb-2">
             8. Data Security
           </h2>
-          <div className="font-satoshi font-normal text-sm leading-normal text-zinc-600">
+          <div className="font-satoshi font-normal text-sm leading-normal text-zinc-600 space-y-2">
             <p>
               We employ reasonable technical and organizational measures
               designed to protect your Personal Data from accidental or unlawful
@@ -399,6 +503,12 @@ export default function PrivacyPolicy() {
               However, no transmission or storage system is completely secure.
               You are responsible for keeping your account credentials
               confidential.
+            </p>
+            <p>
+              For users of our mobile and web applications, all protected health
+              information (PHI) is stored on HIPAA-eligible infrastructure,
+              encrypted in transit and at rest, and handled in accordance with
+              our Business Associate Agreements and internal access controls.
             </p>
           </div>
         </div>
@@ -496,7 +606,7 @@ export default function PrivacyPolicy() {
           </h2>
           <div className="font-satoshi font-normal text-sm leading-normal text-zinc-600">
             <p>
-              The Site is not directed to individuals under 18 (or another age
+              The Site is not directed to individuals under 13 (or another age
               as required by local law), and we do not knowingly collect
               Personal Data from children. If you become aware that a child has
               provided us with Personal Data, please contact us at{" "}
@@ -606,9 +716,30 @@ export default function PrivacyPolicy() {
         </div>
 
         {/* Section 16 */}
+        <div className="mb-8">
+          <h2 className="font-satoshi font-medium text-lg leading-normal text-zinc-900 mb-2">
+            16. Mobile and Web Application Addendum
+          </h2>
+          <div className="font-satoshi font-normal text-sm leading-normal text-zinc-600">
+            <p>
+              Our iOS, Android, and web applications may collect limited
+              additional information and use certain device permissions as
+              described in Sections 2.2 and 2.3 of this Policy.
+              Platform-specific disclosures required by Apple and Google, such
+              as camera, microphone, photo library, storage, and network
+              permissions, are provided within the app stores and in-app when
+              requesting permission. By using the applications, you acknowledge
+              that these features may be used solely to support core
+              functionality such as documentation, uploads, and secure
+              communication.
+            </p>
+          </div>
+        </div>
+
+        {/* Section 17 */}
         <div className="mb-12">
           <h2 className="font-satoshi font-medium text-lg leading-normal text-zinc-900 mb-2">
-            16. How to Contact Us
+            17. How to Contact Us
           </h2>
           <div className="font-satoshi font-normal text-sm leading-normal text-zinc-600">
             <p>

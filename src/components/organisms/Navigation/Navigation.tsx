@@ -11,6 +11,13 @@ interface NavigationProps {
   className?: string;
 }
 
+// Navigation links configuration
+const NAV_LINKS = [
+  { href: "/ai-scribe", label: "AI Scribe" },
+  { href: "/integrations", label: "Integrations" },
+  { href: "/blog", label: "Blogs" },
+] as const;
+
 export const Navigation = ({ className }: NavigationProps) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
@@ -37,6 +44,20 @@ export const Navigation = ({ className }: NavigationProps) => {
     return false;
   };
 
+  const getLinkClassName = (href: string, isMobile = false) => {
+    const baseSize = isMobile ? "text-xl" : "text-lg";
+    const basePadding = isMobile ? "py-2" : "";
+
+    return cn(
+      baseSize,
+      basePadding,
+      "hover:opacity-80 transition-opacity",
+      isActive(href)
+        ? "font-bold bg-gradient-to-r from-purple-variant to-purple bg-clip-text text-transparent [-webkit-text-fill-color:transparent]"
+        : "font-medium text-zinc-950"
+    );
+  };
+
   return (
     <header
       className={cn(
@@ -56,33 +77,15 @@ export const Navigation = ({ className }: NavigationProps) => {
 
         {/* Desktop Navigation */}
         <nav className="hidden lg:flex items-center gap-6 xl:gap-8">
-          <Link
-            href="#"
-            className={cn(
-              "text-base font-medium hover:opacity-80 transition-opacity",
-              isActive("/digital-coworkers") ? "text-purple" : "text-zinc-950"
-            )}
-          >
-            AI Scribe
-          </Link>
-          <Link
-            href="/integrations"
-            className={cn(
-              "text-base font-medium hover:opacity-80 transition-opacity",
-              isActive("/integrations") ? "text-purple" : "text-zinc-950"
-            )}
-          >
-            Integrations
-          </Link>
-          <Link
-            href="/blog"
-            className={cn(
-              "text-base font-medium hover:opacity-80 transition-opacity",
-              isActive("/blog") ? "text-purple" : "text-zinc-950"
-            )}
-          >
-            Blogs
-          </Link>
+          {NAV_LINKS.map((link) => (
+            <Link
+              key={link.href}
+              href={link.href}
+              className={getLinkClassName(link.href)}
+            >
+              {link.label}
+            </Link>
+          ))}
 
           <div className="flex items-center gap-4 xl:gap-6">
             <Link href="https://mentera-app.vercel.app/login">
@@ -172,40 +175,16 @@ export const Navigation = ({ className }: NavigationProps) => {
                   </svg>
                 </button>
                 <nav className="flex flex-col space-y-6">
-                  <Link
-                    href="#"
-                    className={cn(
-                      "text-lg font-medium hover:opacity-80 transition-opacity py-2",
-                      isActive("/digital-coworkers")
-                        ? "text-primary"
-                        : "text-zinc-950"
-                    )}
-                    onClick={handleNavLinkClick}
-                  >
-                    AI Scribe
-                  </Link>
-                  <Link
-                    href="/integrations"
-                    className={cn(
-                      "text-lg font-medium hover:opacity-80 transition-opacity py-2",
-                      isActive("/integrations")
-                        ? "text-primary"
-                        : "text-zinc-950"
-                    )}
-                    onClick={handleNavLinkClick}
-                  >
-                    Integrations
-                  </Link>
-                  <Link
-                    href="/blog"
-                    className={cn(
-                      "text-lg font-medium hover:opacity-80 transition-opacity py-2",
-                      isActive("/blog") ? "text-primary" : "text-zinc-950"
-                    )}
-                    onClick={handleNavLinkClick}
-                  >
-                    Blogs
-                  </Link>
+                  {NAV_LINKS.map((link) => (
+                    <Link
+                      key={link.href}
+                      href={link.href}
+                      className={getLinkClassName(link.href, true)}
+                      onClick={handleNavLinkClick}
+                    >
+                      {link.label}
+                    </Link>
+                  ))}
 
                   <div className="flex flex-col gap-4 mt-4 pt-6 border-t border-gray-200">
                     <Link

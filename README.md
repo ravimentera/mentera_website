@@ -1,6 +1,6 @@
 # Mentera.ai Landing Page
 
-This is the landing page for Mentera.ai, an AI-powered med spa management platform. The website is built using Next.js and follows atomic design principles for maintainable and scalable component architecture.
+This is the landing page for Mentera.ai, an AI Assistant for Private Practices. The website is built using Next.js and follows atomic design principles for maintainable and scalable component architecture.
 
 ## Tech Stack
 

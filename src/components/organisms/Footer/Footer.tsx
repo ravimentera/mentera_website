@@ -1,26 +1,44 @@
 "use client";
 
-import { EmailCaptureInput } from "@/components/molecules/EmailCaptureInput/EmailCaptureInput";
+import { HubSpotFormDialog } from "@/components/molecules/HubSpotFormDialog/HubSpotFormDialog";
 import Link from "next/link";
+import { useState } from "react";
 
 export const Footer = () => {
+  const [isDialogOpen, setIsDialogOpen] = useState(false);
+
   return (
-    <footer className="p-4 sm:p-6 md:p-8 lg:p-12 relative overflow-hidden">
+    <footer className="p-6 md:p-8 lg:p-12 relative overflow-hidden">
       <div className="rounded-2xl sm:rounded-3xl max-w-8xl bg-purple mx-auto px-6 sm:px-10 md:px-14 py-6 sm:py-8 md:py-9">
-        {/* Main Heading and Email Input Section */}
+        {/* Main Heading and CTA Button Section */}
         <div className="text-center mb-8 sm:mb-10 md:mb-12 pb-6 sm:pb-7 md:pb-8">
           <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-medium text-white mb-8 sm:mb-10 md:mb-14">
             Business AI that works.
           </h2>
           <div className="flex justify-center">
-            <EmailCaptureInput
-              placeholder="Enter your email"
-              buttonText="Get a Demo"
-              variant="dark"
-              className="max-w-lg"
-            />
+            <button
+              onClick={() => setIsDialogOpen(true)}
+              className="bg-white text-purple px-8 py-4 rounded-full font-bold hover:bg-white/90 transition-colors inline-flex items-center gap-2"
+            >
+              Get a Demo
+              <svg
+                className="w-5 h-5"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2"
+              >
+                <path d="M5 12h14M12 5l7 7-7 7" />
+              </svg>
+            </button>
           </div>
         </div>
+
+        {/* HubSpot Form Dialog */}
+        <HubSpotFormDialog
+          isOpen={isDialogOpen}
+          onClose={() => setIsDialogOpen(false)}
+        />
 
         {/* Middle Section: Compliance Badges and Navigation Links */}
         <div className="flex flex-col md:flex-row justify-between items-center mb-6 sm:mb-8 gap-4 sm:gap-6">

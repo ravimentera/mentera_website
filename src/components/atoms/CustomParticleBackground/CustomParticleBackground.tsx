@@ -27,6 +27,7 @@ interface CustomParticleBackgroundProps {
 // Note: Colors are defined as hex strings for use in inline styles
 // These correspond to Tailwind config colors: secondary, purple-500, teal-200, purple-particleAlt, etc.
 const defaultParticles: ParticleConfig[] = [
+  // Top section particles
   {
     color: "#6EF1BB", // secondary.DEFAULT
     opacity: 0.2,
@@ -72,7 +73,7 @@ const defaultParticles: ParticleConfig[] = [
     opacity: 0.15,
     size: 600,
     blur: 120,
-    position: { bottom: "6.25rem", left: "6.25rem" },
+    position: { top: "50rem", left: "6.25rem" },
     transform: { x: 0.27, y: 0.12 },
   },
   {
@@ -82,6 +83,74 @@ const defaultParticles: ParticleConfig[] = [
     blur: 90,
     position: { top: "9.375rem", left: "12.5rem" },
     transform: { x: -0.24, y: 0.21 },
+  },
+
+  // Middle section particles (for scrolling)
+  {
+    color: "#6EF1BB", // secondary.DEFAULT
+    opacity: 0.18,
+    size: 650,
+    blur: 110,
+    position: { top: "75rem", right: "10rem" },
+    transform: { x: -0.15, y: 0.2 },
+  },
+  {
+    color: "#8F03A0", // purple-500
+    opacity: 0.08,
+    size: 550,
+    blur: 95,
+    position: { top: "90rem", left: "15rem" },
+    transform: { x: 0.18, y: -0.22 },
+  },
+  {
+    color: "#abeed2", // teal-200
+    opacity: 0.12,
+    size: 600,
+    blur: 105,
+    position: { top: "110rem", right: "20rem" },
+    transform: { x: -0.2, y: 0.15 },
+  },
+  {
+    color: "#bc5ac7", // purple-particleAlt
+    opacity: 0.15,
+    size: 480,
+    blur: 100,
+    position: { top: "130rem", left: "5rem" },
+    transform: { x: 0.22, y: -0.18 },
+  },
+
+  // Lower section particles
+  {
+    color: "#a1f1d0", // teal-300
+    opacity: 0.2,
+    size: 700,
+    blur: 115,
+    position: { top: "150rem", right: "5rem" },
+    transform: { x: -0.25, y: 0.12 },
+  },
+  {
+    color: "#6EF1BB", // secondary.DEFAULT
+    opacity: 0.16,
+    size: 520,
+    blur: 98,
+    position: { top: "170rem", left: "10rem" },
+    transform: { x: 0.19, y: -0.16 },
+  },
+  {
+    color: "#8F03A0", // purple-500
+    opacity: 0.1,
+    size: 580,
+    blur: 102,
+    position: { top: "190rem", right: "15rem" },
+    transform: { x: -0.17, y: 0.19 },
+  },
+  {
+    color: "#aa3db6", // purple-particleAlt2
+    opacity: 0.14,
+    size: 450,
+    blur: 92,
+    position: { top: "210rem", left: "20rem" },
+    transform: { x: 0.21, y: -0.14 },
   },
 ];
 
@@ -149,11 +218,7 @@ export const CustomParticleBackground = ({
             filter: `blur(${particle.blur}px)`,
             transform: `translate3d(${scrollY * particle.transform.x}px, ${
               scrollY * particle.transform.y
-            }px, 0) ${
-              index === 0 || index === 2 || index === 3 || index === 6
-                ? "scale(-1, 1)"
-                : ""
-            }`,
+            }px, 0) ${index % 3 === 0 ? "scale(-1, 1)" : ""}`,
             ...getPositionStyles(particle.position),
           }}
         />
