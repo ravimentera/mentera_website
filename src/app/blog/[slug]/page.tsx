@@ -1,5 +1,5 @@
 import { BlogDetailsPage } from "@/components/templates/BlogDetailsPage/BlogDetailsPage";
-import { blogPosts } from "@/data/blogPosts";
+import { blogService } from "@/services/blogService";
 import { Metadata } from "next";
 import { notFound } from "next/navigation";
 
@@ -12,7 +12,7 @@ interface PageProps {
 export async function generateMetadata({
   params,
 }: PageProps): Promise<Metadata> {
-  const post = blogPosts.find((p) => p.slug === params.slug);
+  const post = await blogService.getPostBySlug(params.slug);
 
   if (!post) {
     return {
@@ -20,41 +20,40 @@ export async function generateMetadata({
     };
   }
 
+  const plainContent = (post.description as string) || "";
+
   return {
-    title: post.title,
-    description: post.content
-      ? post.content.substring(0, 160).replace(/<[^>]*>?/gm, "")
-      : `Read ${post.title} on Mentera Blog.`,
+    title: post.title as string,
+    description: plainContent,
     openGraph: {
-      title: post.title,
-      description: post.content
-        ? post.content.substring(0, 160).replace(/<[^>]*>?/gm, "")
-        : `Read ${post.title} on Mentera Blog.`,
+      title: post.title as string,
+      description: plainContent,
       images: [
         {
-          url: post.image,
+          url: post.image as string,
           width: 1200,
           height: 630,
-          alt: post.title,
+          alt: post.title as string,
         },
       ],
       type: "article",
-      publishedTime: post.date,
-      authors: [post.author],
+      publishedTime: post.date as string,
+      authors: [post.author as string],
     },
   };
 }
 
-export default function Page({ params }: PageProps) {
-  const post = blogPosts.find((p) => p.slug === params.slug);
+export default async function Page({ params }: PageProps) {
+  const post = await blogService.getPostBySlug(params.slug);
 
   if (!post) {
     notFound();
   }
 
-  // Get 3 random related posts (excluding current)
-  const relatedPosts = blogPosts
-    .filter((p) => p.id !== post.id)
+  // Get other posts for related section
+  const allPosts = await blogService.getAllPosts();
+  const relatedPosts = allPosts
+    .filter((p) => p.slug !== post.slug)
     .sort(() => 0.5 - Math.random())
     .slice(0, 3);
 
@@ -76,9 +75,7 @@ export default function Page({ params }: PageProps) {
         url: "https://mentera.ai/flogo.svg",
       },
     },
-    description: post.content
-      ? post.content.substring(0, 160).replace(/<[^>]*>?/gm, "")
-      : `Read ${post.title} on Mentera Blog.`,
+    description: post.description,
   };
 
   return (
@@ -87,7 +84,7 @@ export default function Page({ params }: PageProps) {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
-      <BlogDetailsPage post={post} relatedPosts={relatedPosts} />
+      <BlogDetailsPage post={post as any} relatedPosts={relatedPosts} />
     </>
   );
 }

@@ -10,7 +10,7 @@ export const metadata: Metadata = {
     template: "%s | Mentera.ai",
   },
   description:
-    "Streamline your med spa operations with AI-powered patient care, automated follow-ups, and intelligent scheduling. Join the future of medical aesthetics.",
+    "Streamline your practices operations with an AI Assistant that puts your company's knowledge to work. From AI-powered follow ups, scribe, and front desk.",
   keywords: [
     "med spa software",
     "AI healthcare",
@@ -62,14 +62,14 @@ export const metadata: Metadata = {
     siteName: "Mentera.ai",
     title: "Mentera - AI Assistant for Private Practices",
     description:
-      "Transform your med spa operations with AI-powered patient care and automation. Streamline workflows, automate follow-ups, and scale your practice.",
+      "Streamline your practices operations with an AI Assistant that puts your company's knowledge to work. From AI-powered follow ups, scribe, and front desk.",
     images: [
       {
-        url: "/og-image.jpg",
+        url: "/og-image.png",
         width: 1200,
         height: 630,
-        alt: "Mentera.ai Platform Preview",
-        type: "image/jpeg",
+        alt: "Mentera.ai Logo",
+        type: "image/png",
       },
     ],
   },
@@ -77,8 +77,8 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Mentera - AI Assistant for Private Practices",
     description:
-      "Transform your med spa operations with AI-powered patient care and automation.",
-    images: ["/og-image.jpg"],
+      "Streamline your practices operations with an AI Assistant that puts your company's knowledge to work. From AI-powered follow ups, scribe, and front desk.",
+    images: ["/og-image.png"],
     creator: "@mentera_ai",
     site: "@mentera_ai",
   },
@@ -96,11 +96,20 @@ export const metadata: Metadata = {
     "apple-mobile-web-app-title": "Mentera",
     "format-detection": "telephone=no",
   },
-  viewport: {
-    width: "device-width",
-    initialScale: 1,
-    maximumScale: 5,
+  icons: {
+    icon: [
+      { url: "/favicon.png", type: "image/png" },
+      { url: "/favicon.svg", type: "image/svg+xml" },
+    ],
+    apple: [{ url: "/apple-touch-icon.png", type: "image/png" }],
   },
+};
+
+export const viewport = {
+  width: "device-width",
+  initialScale: 1,
+  maximumScale: 5,
+  themeColor: "#4d28df",
 };
 
 export default function RootLayout({
@@ -122,11 +131,8 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
           }}
         />
         {/* End Google Tag Manager */}
-        <meta name="theme-color" content="#4d28df" />
         <link rel="manifest" href="/manifest.json" />
         <link href="https://fonts.cdnfonts.com/css/satoshi" rel="stylesheet" />
-        <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
-        <link rel="apple-touch-icon" href="/favicon.svg" />
         <link
           rel="alternate"
           type="application/rss+xml"
@@ -167,7 +173,8 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
                   "@id": "https://mentera.ai/#website",
                   url: "https://mentera.ai",
                   name: "Mentera.ai",
-                  description: "AI Assistant for Private Practices",
+                  description:
+                    "Streamline your practices operations with an AI Assistant that puts your company's knowledge to work. From AI-powered follow ups, scribe, and front desk.",
                   publisher: {
                     "@id": "https://mentera.ai/#organization",
                   },
