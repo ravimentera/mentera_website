@@ -1,7 +1,7 @@
 {
     "name": "Mentera - AI Assistant for Private Practices",
     "short_name": "Mentera",
-    "description": "Streamline your med spa operations with AI-powered patient care, automated follow-ups, and intelligent scheduling.",
+    "description": "Streamline your practices operations with an AI Assistant that puts your company's knowledge to work. From AI-powered follow ups, scribe, and front desk.",
     "start_url": "/",
     "display": "standalone",
     "background_color": "#ffffff",
@@ -9,10 +9,16 @@
     "orientation": "portrait-primary",
     "icons": [
         {
+            "src": "/favicon.png",
+            "sizes": "192x192 512x512",
+            "type": "image/png",
+            "purpose": "any"
+        },
+        {
             "src": "/favicon.svg",
             "sizes": "any",
             "type": "image/svg+xml",
-            "purpose": "any maskable"
+            "purpose": "maskable"
         }
     ],
     "categories": [

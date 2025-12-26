@@ -103,7 +103,16 @@ export const HubSpotFormDialog: React.FC<HubSpotFormDialogProps> = ({
         }
 
         .hs-form-frame .hs-form .hs-form-field {
-          margin-bottom: 0.5rem !important;
+          margin-bottom: 0.25rem !important;
+        }
+
+        .hs-form-frame .hsfc-TextareaField,
+        .hs-form-frame .hsfc-TextField,
+        .hs-form-frame .hsfc-Field,
+        .hsfc-TextareaField,
+        .hsfc-TextField,
+        .hsfc-Field {
+          margin-bottom: 0.25rem !important;
         }
 
         .hs-form-frame .hs-form label {
@@ -134,11 +143,21 @@ export const HubSpotFormDialog: React.FC<HubSpotFormDialogProps> = ({
         .hs-form-frame .hsfc-Step__Content,
         .hsfc-Step__Content {
           margin-bottom: 0 !important;
+          padding: 0 !important;
+        }
+
+        .hs-form-frame .hsfc-Form,
+        .hsfc-Form,
+        .hs-form-frame .hsfc-Step,
+        .hs-form-frame .hs-form-container,
+        .hs-form-frame .hs-form {
+          padding: 0 !important;
+          margin: 0 !important;
         }
 
         .hs-form-frame .hsfc-Row,
         .hsfc-Row {
-          margin-bottom: 0.375rem !important;
+          margin-bottom: 0.25rem !important;
         }
 
         .hs-form-frame .hs-form input:focus,
@@ -159,7 +178,7 @@ export const HubSpotFormDialog: React.FC<HubSpotFormDialogProps> = ({
           cursor: pointer !important;
           transition: opacity 0.2s !important;
           width: 100% !important;
-          margin-top: 0.25rem !important;
+          margin-top: 0.125rem !important;
           font-size: 0.875rem !important;
         }
 
@@ -179,8 +198,8 @@ export const HubSpotFormDialog: React.FC<HubSpotFormDialogProps> = ({
         }
 
         .hs-form-frame .hs-form .legal-consent-container {
-          margin-top: 0.375rem !important;
-          margin-bottom: 0.25rem !important;
+          margin-top: 0.25rem !important;
+          margin-bottom: 0.125rem !important;
           font-size: 0.6875rem !important;
           line-height: 1.3 !important;
         }
@@ -218,34 +237,34 @@ export const HubSpotFormDialog: React.FC<HubSpotFormDialogProps> = ({
       >
         <div
           ref={dialogRef}
-          className="relative w-full max-w-xl bg-white rounded-3xl shadow-2xl my-8 max-h-[90vh] flex flex-col animate-in fade-in zoom-in-95 duration-200"
+          className="relative w-full max-w-xl bg-white rounded-3xl shadow-2xl my-8 max-h-[95vh] flex flex-col animate-in fade-in zoom-in-95 duration-200"
           role="dialog"
           aria-modal="true"
         >
           {/* Close button */}
           <button
             onClick={onClose}
-            className="absolute top-5 right-5 z-10 w-9 h-9 flex items-center justify-center rounded-full bg-gray-100 hover:bg-gray-200 transition-colors"
+            className="absolute top-4 right-4 z-10 w-8 h-8 flex items-center justify-center rounded-full bg-gray-100 hover:bg-gray-200 transition-colors"
             aria-label="Close dialog"
           >
             <svg
-              className="w-5 h-5 text-gray-600"
+              className="w-4 h-4 text-gray-600"
               viewBox="0 0 24 24"
               fill="none"
               stroke="currentColor"
-              strokeWidth="2"
+              strokeWidth="2.5"
             >
               <path d="M6 18L18 6M6 6l12 12" />
             </svg>
           </button>
 
           {/* Dialog content - scrollable with custom scrollbar */}
-          <div className="overflow-y-auto flex-1 p-5 pr-3 scrollbar-thin scrollbar-thumb-gray-300 scrollbar-track-transparent hover:scrollbar-thumb-gray-400">
-            <div className="pr-8">
-              <h2 className="text-2xl font-semibold text-zinc-950 mb-1">
+          <div className="overflow-y-auto flex-1 p-6 pr-4 scrollbar-thin scrollbar-thumb-gray-300 scrollbar-track-transparent hover:scrollbar-thumb-gray-400">
+            <div className="pr-2">
+              <h2 className="text-2xl font-semibold text-zinc-950 mb-0.5">
                 Get a Demo
               </h2>
-              <p className="text-xs text-zinc-600 mb-3">
+              <p className="text-xs text-zinc-600 mb-2.5">
                 Fill out the form below and we'll get back to you shortly.
               </p>
 

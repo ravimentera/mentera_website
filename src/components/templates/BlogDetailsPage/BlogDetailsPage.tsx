@@ -2,6 +2,8 @@
 
 import { Footer } from "@/components/organisms/Footer/Footer";
 import { BlogPost } from "@/data/blogPosts";
+import { documentToReactComponents } from "@contentful/rich-text-react-renderer";
+import { Document } from "@contentful/rich-text-types";
 import { motion } from "framer-motion";
 import Link from "next/link";
 
@@ -19,7 +21,8 @@ export const BlogDetailsPage = ({
       <article className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 mb-20 sm:mb-24">
         {/* Header */}
         <div className="mb-12 sm:mb-16">
-          <div className="mb-6 sm:mb-8">
+          {/* Category Tag - Hidden for now */}
+          {/* <div className="mb-6 sm:mb-8">
             <span
               className={`inline-block px-3 py-1 rounded-md text-xs font-bold tracking-wide uppercase ${
                 post.category === "Guides"
@@ -31,7 +34,7 @@ export const BlogDetailsPage = ({
             >
               {post.category}
             </span>
-          </div>
+          </div> */}
 
           <h1 className="text-3xl sm:text-4xl md:text-5xl font-medium text-zinc-900 mb-6 leading-tight">
             {post.title}
@@ -45,10 +48,13 @@ export const BlogDetailsPage = ({
         </div>
 
         {/* Content */}
-        <div
-          className="prose prose-lg max-w-none text-zinc-600 prose-headings:font-medium prose-headings:text-zinc-900 prose-p:leading-relaxed prose-li:marker:text-zinc-400"
-          dangerouslySetInnerHTML={{ __html: post.content || "" }}
-        />
+        <div className="prose prose-lg max-w-none text-zinc-600 prose-headings:font-medium prose-headings:text-zinc-900 prose-p:leading-relaxed prose-li:marker:text-zinc-400">
+          {post.content && typeof post.content !== "string"
+            ? documentToReactComponents(post.content as Document)
+            : post.content && (
+                <div dangerouslySetInnerHTML={{ __html: post.content }} />
+              )}
+        </div>
       </article>
 
       {/* Keep Reading Section */}
@@ -81,7 +87,8 @@ export const BlogDetailsPage = ({
                   </div>
 
                   <div className="flex flex-col flex-grow">
-                    <div className="mb-4">
+                    {/* Category Tag - Hidden for now */}
+                    {/* <div className="mb-4">
                       <span
                         className={`inline-block px-3 py-1 rounded-md text-xs font-bold tracking-wide uppercase ${
                           relatedPost.category === "Guides"
@@ -93,7 +100,7 @@ export const BlogDetailsPage = ({
                       >
                         {relatedPost.category}
                       </span>
-                    </div>
+                    </div> */}
 
                     <h3 className="text-xl font-medium text-zinc-900 mb-3 line-clamp-2 group-hover:text-purple transition-colors">
                       {relatedPost.title}
