@@ -111,7 +111,7 @@ export const HowItWorksSection = () => {
                   }}
                   className={`lg:col-span-${
                     stepConfig.colSpan
-                  } bg-[#3428DF0F] border border-gray-200 rounded-3xl ${
+                  } bg-[#3428DF0F] rounded-3xl ${
                     stepConfig.customPadding || "p-6 md:p-10"
                   } flex flex-col`}
                 >
@@ -160,7 +160,7 @@ export const HowItWorksSection = () => {
               transition={{ ...transitions.default, delay: 0.5 }}
               className={`lg:col-span-${
                 STEPS[4].colSpan
-              } bg-[#3428DF0F] border border-gray-200 rounded-3xl ${
+              } bg-[#3428DF0F] rounded-3xl ${
                 STEPS[4].customPadding || "p-6 md:p-10"
               } flex flex-col`}
             >
@@ -202,7 +202,7 @@ export const HowItWorksSection = () => {
               viewport={{ once: true }}
               variants={fadeInUp}
               transition={{ ...transitions.default, delay: 0.6 }}
-              className="lg:col-span-2 bg-[#3428DF0F] border border-gray-200 rounded-3xl p-6 py-16 md:p-10 md:py-10 flex flex-col justify-center items-start text-left"
+              className="lg:col-span-2 bg-[#3428DF0F] rounded-3xl p-6 py-16 md:p-10 md:py-10 flex flex-col justify-center items-start text-left"
             >
               <h3 className="text-2xl md:text-3xl font-medium text-zinc-950 mb-8">
                 Ready to take the next step?

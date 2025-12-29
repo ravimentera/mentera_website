@@ -5,17 +5,21 @@ import { motion } from "framer-motion";
 import Link from "next/link";
 import { useState } from "react";
 
-import { blogPosts } from "@/data/blogPosts";
+import { BlogPost } from "@/data/blogPosts";
 
-const categories = ["All", "Guides", "Industry", "Company"];
+// const categories = ["All", "Guides", "Industry", "Company"];
 
-export const BlogPage = () => {
+interface BlogPageProps {
+  posts: BlogPost[];
+}
+
+export const BlogPage = ({ posts }: BlogPageProps) => {
   const [activeCategory, setActiveCategory] = useState("All");
 
   const filteredPosts =
     activeCategory === "All"
-      ? blogPosts
-      : blogPosts.filter((post) => post.category === activeCategory);
+      ? posts
+      : posts.filter((post) => post.category === activeCategory);
 
   return (
     <main className="relative bg-white min-h-screen pt-14 sm:pt-16 md:pt-20 lg:pt-24 font-satoshi">
@@ -49,8 +53,8 @@ export const BlogPage = () => {
             patient care.
           </motion.p>
 
-          {/* Filters */}
-          <motion.div
+          {/* Filters - Hidden for now */}
+          {/* <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.2 }}
@@ -69,7 +73,7 @@ export const BlogPage = () => {
                 {category}
               </button>
             ))}
-          </motion.div>
+          </motion.div> */}
         </div>
 
         {/* Blog Grid */}
@@ -98,8 +102,8 @@ export const BlogPage = () => {
 
                 {/* Content */}
                 <div className="flex flex-col flex-grow">
-                  {/* Category Tag */}
-                  <div className="mb-4">
+                  {/* Category Tag - Hidden for now */}
+                  {/* <div className="mb-4">
                     <span
                       className={`inline-block px-3 py-1 rounded-md text-xs font-bold tracking-wide uppercase ${
                         post.category === "Guides"
@@ -111,7 +115,7 @@ export const BlogPage = () => {
                     >
                       {post.category}
                     </span>
-                  </div>
+                  </div> */}
 
                   {/* Title */}
                   <h3 className="text-xl font-medium text-zinc-900 mb-3 line-clamp-2 group-hover:text-purple transition-colors">

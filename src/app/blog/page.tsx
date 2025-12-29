@@ -1,4 +1,5 @@
 import { BlogPage } from "@/components/templates/BlogPage/BlogPage";
+import { blogService } from "@/services/blogService";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
@@ -12,7 +13,9 @@ export const metadata: Metadata = {
   },
 };
 
-export default function Page() {
+export default async function Page() {
+  const posts = await blogService.getAllPosts();
+
   const jsonLd = {
     "@context": "https://schema.org",
     "@type": "Blog",
@@ -28,7 +31,7 @@ export default function Page() {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
-      <BlogPage />
+      <BlogPage posts={posts} />
     </>
   );
 }
