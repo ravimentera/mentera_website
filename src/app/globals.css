@@ -4,18 +4,18 @@
 
 @layer base {
   :root {
-    --font-inter: 'Inter', sans-serif;
-    --font-poppins: 'Poppins', sans-serif;
-    --font-satoshi: 'Satoshi', sans-serif;
-    
+    --font-inter: "Inter", sans-serif;
+    --font-poppins: "Poppins", sans-serif;
+    --font-satoshi: "Satoshi", sans-serif;
+
     /* Basic colors */
-    --white: #FFFFFF;
-    --gray: #6B7280;
-    --primary-light: #E9D5FF;
+    --white: #ffffff;
+    --gray: #6b7280;
+    --primary-light: #e9d5ff;
     --primary-text: #111827;
-    --seconday-text: #4B5563;
+    --seconday-text: #4b5563;
     --colors-heading: #111827;
-    
+
     /* Optional border radius for custom components */
     --radius: 0.5rem;
   }
@@ -134,7 +134,7 @@
 
   /* Heading H1 */
   .heading-h1 {
-    @apply  md:text-5xl sm:text-4xl xs:text-3xl font-poppins;
+    @apply md:text-5xl sm:text-4xl xs:text-3xl font-poppins;
     font-weight: 400;
 
     @media (min-width: 1024px) {
@@ -146,6 +146,29 @@
 }
 
 /* Apply custom scrollbar to html and body */
-html, body {
+html,
+body {
   @apply custom-scrollbar;
 }
+
+/* Blog Typography - matches Contentful starter */
+@layer base {
+  .blog-content h1 {
+    @apply text-xl leading-tight font-semibold md:text-4xl;
+  }
+  .blog-content h2 {
+    @apply text-xl leading-tight font-semibold md:text-3xl;
+  }
+  .blog-content h3 {
+    @apply text-base font-semibold md:text-xl;
+  }
+  .blog-content p {
+    @apply text-gray-600 font-normal;
+  }
+}
+
+/* Blog prose content - style first h1 as subtitle since page title is shown separately */
+.prose > h1:first-child {
+  @apply text-xl md:text-2xl font-normal text-zinc-500 mt-0;
+}
+
