@@ -2,10 +2,56 @@
 
 import { Footer } from "@/components/organisms/Footer/Footer";
 import { BlogPost } from "@/data/blogPosts";
-import { documentToReactComponents } from "@contentful/rich-text-react-renderer";
-import { Document } from "@contentful/rich-text-types";
+import {
+  documentToReactComponents,
+  Options,
+} from "@contentful/rich-text-react-renderer";
+import { Document, INLINES } from "@contentful/rich-text-types";
 import { motion } from "framer-motion";
 import Link from "next/link";
+
+// Helper to ensure URLs have proper protocol
+const ensureAbsoluteUrl = (url: string): string => {
+  if (!url) return url;
+  // If URL starts with www., add https://
+  if (url.startsWith("www.")) {
+    return `https://${url}`;
+  }
+  // If URL doesn't have a protocol and looks like a domain, add https://
+  if (
+    !url.startsWith("http://") &&
+    !url.startsWith("https://") &&
+    !url.startsWith("/") &&
+    !url.startsWith("#")
+  ) {
+    // Check if it looks like a domain (has a dot)
+    if (url.includes(".") && !url.includes(" ")) {
+      return `https://${url}`;
+    }
+  }
+  return url;
+};
+
+// Rich text rendering options with custom hyperlink handler
+const richTextOptions: Options = {
+  renderNode: {
+    [INLINES.HYPERLINK]: (node, children) => {
+      const url = ensureAbsoluteUrl(node.data.uri);
+      const isExternal =
+        url.startsWith("http://") || url.startsWith("https://");
+      return (
+        <a
+          href={url}
+          target={isExternal ? "_blank" : undefined}
+          rel={isExternal ? "noopener noreferrer" : undefined}
+          className="text-purple-600 hover:text-purple-800 underline"
+        >
+          {children}
+        </a>
+      );
+    },
+  },
+};
 
 interface BlogDetailsPageProps {
   post: BlogPost;
@@ -50,7 +96,10 @@ export const BlogDetailsPage = ({
         {/* Content */}
         <div className="prose prose-lg max-w-none text-zinc-600 prose-headings:font-medium prose-headings:text-zinc-900 prose-p:leading-relaxed prose-li:marker:text-zinc-400">
           {post.content && typeof post.content !== "string"
-            ? documentToReactComponents(post.content as Document)
+            ? documentToReactComponents(
+                post.content as Document,
+                richTextOptions
+              )
             : post.content && (
                 <div dangerouslySetInnerHTML={{ __html: post.content }} />
               )}
