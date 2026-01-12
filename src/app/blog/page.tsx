@@ -2,6 +2,8 @@ import { BlogPage } from "@/components/templates/BlogPage/BlogPage";
 import { blogService } from "@/services/blogService";
 import { Metadata } from "next";
 
+export const revalidate = 60; // Revalidate every 60 seconds
+
 export const metadata: Metadata = {
   title: "Blog - Insights & Updates | Mentera",
   description:

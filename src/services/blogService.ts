@@ -50,7 +50,7 @@ const normalizeSlug = (slug: string) => {
  * even as new posts are added and indices change.
  */
 const getStableImage = (id: string) => {
-  if (!id) return "/images/blog-post-01.jpg";
+  if (!id) return "/images/blog-medspa-01.jpg";
 
   // Simple deterministic hash of the ID string
   let hash = 0;
@@ -60,9 +60,9 @@ const getStableImage = (id: string) => {
     hash |= 0; // Convert to 32bit integer
   }
 
-  // Map hash to 1, 2, or 3
-  const imageIndex = (Math.abs(hash) % 3) + 1;
-  return `/images/blog-post-0${imageIndex}.jpg`;
+  // Map hash to 1-10 for our med spa themed placeholder images
+  const imageIndex = (Math.abs(hash) % 10) + 1;
+  return `/images/blog-medspa-${imageIndex.toString().padStart(2, "0")}.jpg`;
 };
 
 export const blogService = {
@@ -79,7 +79,28 @@ export const blogService = {
         include: 2,
       });
 
-      return response.items.map((item: any) => {
+      return response.items.map((item: any, index: number) => {
+        // Try to get image from Contentful first
+        let imageUrl = null;
+
+        if (item.fields.featuredImage) {
+          const imageField = item.fields.featuredImage as any;
+          // Handle both localized and non-localized field formats
+          if (imageField?.fields?.file?.url) {
+            imageUrl = `https:${imageField.fields.file.url}`;
+          } else if (imageField?.["en-US"]?.fields?.file?.url) {
+            imageUrl = `https:${imageField["en-US"].fields.file.url}`;
+          }
+        }
+
+        // Fallback to placeholder images if no Contentful image (cycle through 10 images)
+        if (!imageUrl) {
+          const placeholderIndex = (index % 10) + 1;
+          imageUrl = `/images/blog-medspa-${placeholderIndex
+            .toString()
+            .padStart(2, "0")}.jpg`;
+        }
+
         return {
           id: item.sys.id,
           title: item.fields.title as any,
@@ -94,7 +115,7 @@ export const blogService = {
             }
           ),
           author: (item.fields.author as any)?.fields?.name || "Mentera Team",
-          image: getStableImage(item.sys.id), // Tied to unique Contentful ID
+          image: imageUrl,
           description: (item.fields.shortDescription as any) || "",
         };
       });
@@ -125,6 +146,25 @@ export const blogService = {
 
       if (!item) return null;
 
+      // Try to get image from Contentful first
+      let imageUrl = null;
+
+      if (item.fields.featuredImage) {
+        const imageField = item.fields.featuredImage as any;
+        // Handle both localized and non-localized field formats
+        if (imageField?.fields?.file?.url) {
+          imageUrl = `https:${imageField.fields.file.url}`;
+        } else if (imageField?.["en-US"]?.fields?.file?.url) {
+          imageUrl = `https:${imageField["en-US"].fields.file.url}`;
+        }
+      }
+
+      // Fallback to a placeholder image if no Contentful image
+      if (!imageUrl) {
+        // Use a stable hash-based approach for single posts
+        imageUrl = getStableImage(item.sys.id);
+      }
+
       return {
         id: item.sys.id,
         title: item.fields.title as any,
@@ -139,7 +179,7 @@ export const blogService = {
           }
         ),
         author: (item.fields.author as any)?.fields?.name || "Mentera Team",
-        image: getStableImage(item.sys.id), // Tied to unique Contentful ID
+        image: imageUrl,
         description: (item.fields.shortDescription as any) || "",
         content: item.fields.content as any,
       };
