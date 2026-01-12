@@ -3,6 +3,8 @@ import { blogService } from "@/services/blogService";
 import { Metadata } from "next";
 import { notFound } from "next/navigation";
 
+export const revalidate = 60; // Revalidate every 60 seconds
+
 interface PageProps {
   params: {
     slug: string;
