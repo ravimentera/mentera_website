@@ -375,19 +375,6 @@ export const AIChatSection = () => {
                       </button>
                     </form>
 
-                    {/* Expanded Quick Actions */}
-                    {/* <div className="flex flex-wrap gap-2 mt-4 justify-start">
-                    {quickActions.map((action, index) => (
-                      <button
-                        key={index}
-                        onClick={() => handleQuickAction(action)}
-                        className="px-3 py-1.5 bg-gray-50 border border-gray-200 rounded-full text-xs font-medium text-zinc-600 hover:border-purple-400 hover:text-purple-600 transition-all shadow-sm"
-                      >
-                        {action}
-                      </button>
-                    ))}
-                  </div> */}
-
                     <div className="flex items-center justify-center gap-4 mt-4 md:flex-row flex-col text-center">
                       <button
                         onClick={handleStartNewChat}
