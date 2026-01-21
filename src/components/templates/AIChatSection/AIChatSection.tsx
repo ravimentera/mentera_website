@@ -17,6 +17,8 @@ const quickActions = [
   "Pre / post visit instructions",
 ];
 
+const MAX_FREE_MESSAGES = 5;
+
 export const AIChatSection = () => {
   const [isExpanded, setIsExpanded] = useState(false);
   const [inputValue, setInputValue] = useState("");
@@ -24,16 +26,19 @@ export const AIChatSection = () => {
   const [isStreaming, setIsStreaming] = useState(false);
   const [isLoggedIn, setIsLoggedIn] = useState(false); // Mock login state
   const [isDemoDialogOpen, setIsDemoDialogOpen] = useState(false);
-  const messagesEndRef = useRef<HTMLDivElement>(null);
+
   const scrollContainerRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
   const [shouldAutoScroll, setShouldAutoScroll] = useState(true);
 
   const scrollToBottom = (force = false) => {
-    if (force || shouldAutoScroll) {
-      messagesEndRef.current?.scrollIntoView({
+    if ((force || shouldAutoScroll) && scrollContainerRef.current) {
+      const { scrollHeight, clientHeight } = scrollContainerRef.current;
+      const maxScrollTop = scrollHeight - clientHeight;
+
+      scrollContainerRef.current.scrollTo({
+        top: maxScrollTop,
         behavior: force ? "auto" : "smooth",
-        block: "end",
       });
     }
   };
@@ -61,7 +66,7 @@ export const AIChatSection = () => {
     }, 300);
   };
 
-  const isLimitReached = !isLoggedIn && messages.filter((m) => m.role === "user").length >= 2;
+  const isLimitReached = !isLoggedIn && messages.filter((m) => m.role === "user").length >= MAX_FREE_MESSAGES;
 
   const sendMessage = async (messageText?: string) => {
     if (isLimitReached) return;
@@ -171,7 +176,7 @@ export const AIChatSection = () => {
 
   return (
     <>
-      <section className="relative w-full py-16 sm:py-20 md:py-24 ">
+      <section className="relative w-full py-16 sm:py-20 md:py-12 ">
         <div className="max-w-9xl mx-auto px-6 sm:px-8 md:px-12 lg:px-24">
           {/* Header content omitted for brevity or keep as is */}
           <motion.div
@@ -268,7 +273,7 @@ export const AIChatSection = () => {
                   <div
                     ref={scrollContainerRef}
                     onScroll={handleScroll}
-                    className="h-[400px] overflow-y-auto p-6 space-y-4 bg-white"
+                    className="h-[60vh] overflow-y-auto p-6 space-y-4 bg-white"
                   >
                     {messages.length === 0 ? (
                       <div className="h-full flex items-center justify-center">
@@ -322,28 +327,27 @@ export const AIChatSection = () => {
                         </div>
                       </div>
                     )}
-                    <div ref={messagesEndRef} />
+
                   </div>
 
                   {/* Usage Limit Notice */}
-                  {!isLoggedIn &&
-                    messages.filter((m) => m.role === "user").length >= 2 && (
-                      <div className="mx-6 mb-4 p-6 bg-usage-limit-gradient rounded-3xl flex flex-col sm:flex-row items-center justify-between gap-4">
-                        <div className="flex flex-col gap-0.5 text-center sm:text-left">
-                          <h4 className="text-zinc-950 font-bold text-lg leading-tight text-zinc-950">
-                            Free usage limit reached
-                          </h4>
-                        </div>
-                        <div className="flex items-center gap-8">
-                          <button
-                            onClick={() => setIsDemoDialogOpen(true)}
-                            className="px-10 py-3.5 bg-brand-purple-button text-white rounded-full font-bold hover:opacity-90 transition-all shadow-md"
-                          >
-                            Book a demo
-                          </button>
-                        </div>
+                  {isLimitReached && (
+                    <div className="mx-6 mb-4 p-6 bg-usage-limit-gradient rounded-3xl flex flex-col sm:flex-row items-center justify-between gap-4">
+                      <div className="flex flex-col gap-0.5 text-center sm:text-left">
+                        <h4 className="text-zinc-950 font-bold text-lg leading-tight text-zinc-950">
+                          Free usage limit reached
+                        </h4>
                       </div>
-                    )}
+                      <div className="flex items-center gap-8">
+                        <button
+                          onClick={() => setIsDemoDialogOpen(true)}
+                          className="px-10 py-3.5 bg-brand-purple-button text-white rounded-full font-bold hover:opacity-90 transition-all shadow-md"
+                        >
+                          Book a demo
+                        </button>
+                      </div>
+                    </div>
+                  )}
 
                   {/* Input Area */}
                   <div className="px-6 py-4 bg-white ">
