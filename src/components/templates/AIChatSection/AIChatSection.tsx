@@ -273,7 +273,7 @@ export const AIChatSection = () => {
                   <div
                     ref={scrollContainerRef}
                     onScroll={handleScroll}
-                    className="h-[60vh] overflow-y-auto p-6 space-y-4 bg-white"
+                    className="overflow-y-auto p-6 space-y-4 bg-white md:h-[calc(100vh-30rem)] h-[calc(100vh-18rem)]"
                   >
                     {messages.length === 0 ? (
                       <div className="h-full flex items-center justify-center">
