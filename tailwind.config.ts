@@ -5,6 +5,12 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
+        "brand-blue": "#4F9BED",
+        "brand-indigo": "#200F8A",
+        "brand-purple-button": "#4F39F6",
+        "brand-purple": "#4F39F6",
+        "brand-purple-light": "#F6F4FD",
+        "brand-purple-dark": "#3B0140",
         primary: {
           DEFAULT: "#111A53",
           light: "#F6F4FD",
@@ -90,6 +96,7 @@ const config: Config = {
       },
       maxWidth: {
         "8xl": "90rem",
+        "9xl": "120rem",
         privacy: "44rem", // 704px
       },
       spacing: {
@@ -137,6 +144,8 @@ const config: Config = {
         "2xl": "1536px",
       },
       backgroundImage: {
+        "usage-limit-gradient":
+          "linear-gradient(90deg, rgba(143, 3, 160, 0.05) 0%, rgba(77, 40, 223, 0.05) 100%)",
         "blog-hero-gradient":
           "linear-gradient(to bottom right, #FFFFFF, #C7A0DE 49%, #41B4BC)",
         "blog-blob-purple":

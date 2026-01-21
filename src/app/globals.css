@@ -143,6 +143,12 @@
       font-weight: 500;
     }
   }
+
+  .gradient-border-input {
+    border: 2px solid transparent;
+    background: linear-gradient(white, white) padding-box,
+      linear-gradient(275.72deg, #4f9bed 26.75%, #200f8a 95.66%) border-box;
+  }
 }
 
 /* Apply custom scrollbar to html and body */

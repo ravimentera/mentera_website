@@ -2,6 +2,7 @@
 
 import { Footer } from "@/components/organisms/Footer/Footer";
 import { AccessibleAISection } from "@/components/templates/AccessibleAISection/AccessibleAISection";
+import { AIChatSection } from "@/components/templates/AIChatSection/AIChatSection";
 import { IntegrationsSection } from "@/components/templates/IntegrationsSection/IntegrationsSection";
 import { NewHeroSection } from "@/components/templates/NewHeroSection/NewHeroSection";
 import { ReimagineWorkSection } from "@/components/templates/ReimagineWorkSection/ReimagineWorkSection";
@@ -11,6 +12,7 @@ export default function Home() {
   return (
     <main className="relative">
       <NewHeroSection />
+      <AIChatSection />
       <AccessibleAISection />
       <IntegrationsSection />
       <ReimagineWorkSection />
