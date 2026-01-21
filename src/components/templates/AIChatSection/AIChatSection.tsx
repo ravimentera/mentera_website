@@ -1,10 +1,9 @@
 "use client";
 
-import { Button } from "@/components/atoms/Button/Button";
-import { motion, AnimatePresence } from "framer-motion";
-import { useState, useRef, useEffect } from "react";
-import ReactMarkdown from "react-markdown";
 import { HubSpotFormDialog } from "@/components/molecules/HubSpotFormDialog/HubSpotFormDialog";
+import { AnimatePresence, motion } from "framer-motion";
+import { useEffect, useRef, useState } from "react";
+import ReactMarkdown from "react-markdown";
 
 interface Message {
   role: "user" | "assistant";
@@ -66,7 +65,9 @@ export const AIChatSection = () => {
     }, 300);
   };
 
-  const isLimitReached = !isLoggedIn && messages.filter((m) => m.role === "user").length >= MAX_FREE_MESSAGES;
+  const isLimitReached =
+    !isLoggedIn &&
+    messages.filter((m) => m.role === "user").length >= MAX_FREE_MESSAGES;
 
   const sendMessage = async (messageText?: string) => {
     if (isLimitReached) return;
@@ -82,19 +83,16 @@ export const AIChatSection = () => {
     setTimeout(() => scrollToBottom(true), 50);
 
     try {
-      const response = await fetch(
-        "http://34.204.48.222:3010/api/chat/stream",
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({
-            message: textToSend,
-            conversationHistory: messages,
-          }),
+      const response = await fetch("/api/chat/stream", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
         },
-      );
+        body: JSON.stringify({
+          message: textToSend,
+          conversationHistory: messages,
+        }),
+      });
 
       if (!response.ok) {
         throw new Error("Failed to get response");
@@ -225,7 +223,11 @@ export const AIChatSection = () => {
                             handleSubmit(e as any);
                           }
                         }}
-                        placeholder={isLimitReached ? "Usage limit reached. Please log in to continue." : "Ask any question..."}
+                        placeholder={
+                          isLimitReached
+                            ? "Usage limit reached. Please log in to continue."
+                            : "Ask any question..."
+                        }
                         disabled={isLimitReached}
                         className="w-full px-6 py-5 pr-16 min-h-[140px] text-base sm:text-lg rounded-2xl focus:outline-none transition-colors bg-white shadow-lg resize-none gradient-border-input disabled:opacity-70 disabled:cursor-not-allowed"
                       ></textarea>
@@ -239,7 +241,6 @@ export const AIChatSection = () => {
                           alt="Microsoft Teams"
                           className="w-full h-full object-contain"
                         />
-
                       </button>
                     </div>
                   </form>
@@ -267,8 +268,6 @@ export const AIChatSection = () => {
                   transition={{ duration: 0.4, ease: "easeInOut" }}
                   className="border-4 border-gray-200 rounded-3xl bg-white shadow-2xl overflow-hidden"
                 >
-
-
                   {/* Messages Area */}
                   <div
                     ref={scrollContainerRef}
@@ -278,24 +277,26 @@ export const AIChatSection = () => {
                     {messages.length === 0 ? (
                       <div className="h-full flex items-center justify-center">
                         <p className="text-gray-400 text-center">
-                          Start a conversation by typing a message or selecting a
-                          quick action
+                          Start a conversation by typing a message or selecting
+                          a quick action
                         </p>
                       </div>
                     ) : (
                       messages.map((message, index) => (
                         <div
                           key={index}
-                          className={`flex ${message.role === "user"
-                            ? "justify-end"
-                            : "justify-start"
-                            }`}
+                          className={`flex ${
+                            message.role === "user"
+                              ? "justify-end"
+                              : "justify-start"
+                          }`}
                         >
                           <div
-                            className={`max-w-[80%] rounded-2xl px-5 py-3 ${message.role === "user"
-                              ? "bg-brand-purple text-white"
-                              : "bg-white text-zinc-900"
-                              }`}
+                            className={`max-w-[80%] rounded-2xl px-5 py-3 ${
+                              message.role === "user"
+                                ? "bg-brand-purple text-white"
+                                : "bg-white text-zinc-900"
+                            }`}
                           >
                             {message.role === "assistant" ? (
                               <div className="prose prose-sm max-w-none prose-p:leading-relaxed prose-headings:mb-2 prose-ul:list-disc prose-ul:ml-4">
@@ -327,7 +328,6 @@ export const AIChatSection = () => {
                         </div>
                       </div>
                     )}
-
                   </div>
 
                   {/* Usage Limit Notice */}
@@ -361,13 +361,19 @@ export const AIChatSection = () => {
                             handleSubmit(e as any);
                           }
                         }}
-                        placeholder={isLimitReached ? "Usage limit reached. Please log in to continue." : "Ask anything..."}
+                        placeholder={
+                          isLimitReached
+                            ? "Usage limit reached. Please log in to continue."
+                            : "Ask anything..."
+                        }
                         disabled={isStreaming || isLimitReached}
                         className="w-full px-5 py-3 pr-14 min-h-[100px] text-base rounded-xl focus:outline-none transition-colors disabled:bg-gray-50 disabled:cursor-not-allowed shadow-inner resize-none gradient-border-input"
                       ></textarea>
                       <button
                         type="submit"
-                        disabled={isStreaming || !inputValue.trim() || isLimitReached}
+                        disabled={
+                          isStreaming || !inputValue.trim() || isLimitReached
+                        }
                         className="absolute right-4 bottom-4 w-10 h-10 flex items-center justify-center rounded-full hover:shadow-lg transition-shadow disabled:opacity-50 disabled:cursor-not-allowed"
                       >
                         <img
@@ -375,7 +381,6 @@ export const AIChatSection = () => {
                           alt="Microsoft Teams"
                           className="w-full h-full object-contain"
                         />
-
                       </button>
                     </form>
 
