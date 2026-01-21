@@ -388,7 +388,7 @@ export const AIChatSection = () => {
                     ))}
                   </div> */}
 
-                    <div className="flex items-center justify-center gap-4 mt-4">
+                    <div className="flex items-center justify-center gap-4 mt-4 md:flex-row flex-col text-center">
                       <button
                         onClick={handleStartNewChat}
                         className="text-sm text-zinc-600 transition-colors underline font-bold"
