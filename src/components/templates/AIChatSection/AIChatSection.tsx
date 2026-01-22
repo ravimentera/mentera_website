@@ -77,6 +77,17 @@ export const AIChatSection = () => {
     }
   };
 
+  // Auto-focus input when chat expands
+  useEffect(() => {
+    if (isExpanded && inputRef.current) {
+      // Small delay to allow expansion animation to complete
+      const timer = setTimeout(() => {
+        inputRef.current?.focus();
+      }, 400);
+      return () => clearTimeout(timer);
+    }
+  }, [isExpanded]);
+
   const handleQuickAction = async (action: string) => {
     setInputValue(action);
     setIsExpanded(true);
@@ -267,7 +278,7 @@ export const AIChatSection = () => {
                         className="absolute right-4 bottom-4 w-10 h-10 flex items-center justify-center rounded-full hover:shadow-lg transition-shadow disabled:opacity-50 disabled:cursor-not-allowed"
                       >
                         <img
-                          src="/logos/IconButtonSkyBlueArrow.svg"
+                          src="/logos/send-button-blue.svg"
                           alt="Microsoft Teams"
                           className="w-full h-full object-contain"
                         />
@@ -375,6 +386,7 @@ export const AIChatSection = () => {
                   <div className="px-6 py-4 bg-white ">
                     <form onSubmit={handleSubmit} className="relative">
                       <textarea
+                        ref={inputRef as any}
                         value={inputValue}
                         onChange={(e) => setInputValue(e.target.value)}
                         onKeyDown={(e) => {
@@ -388,7 +400,7 @@ export const AIChatSection = () => {
                             ? "Usage limit reached. Please log in to continue."
                             : "Ask anything..."
                         }
-                        disabled={isStreaming || isLimitReached}
+                        disabled={isLimitReached}
                         className="w-full px-5 py-3 pr-14 min-h-[100px] text-base rounded-xl focus:outline-none transition-colors disabled:bg-gray-50 disabled:cursor-not-allowed shadow-inner resize-none gradient-border-input"
                       ></textarea>
                       <button
@@ -399,7 +411,7 @@ export const AIChatSection = () => {
                         className="absolute right-4 bottom-4 w-10 h-10 flex items-center justify-center rounded-full hover:shadow-lg transition-shadow disabled:opacity-50 disabled:cursor-not-allowed"
                       >
                         <img
-                          src="/logos/IconButtonSkyBlueArrow.svg"
+                          src="/logos/send-button-blue.svg"
                           alt="Microsoft Teams"
                           className="w-full h-full object-contain"
                         />
