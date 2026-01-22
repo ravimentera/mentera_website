@@ -17,11 +17,25 @@ const quickActions = [
 ];
 
 const MAX_FREE_MESSAGES = 5;
+const STORAGE_KEY = "mentera_chat_messages";
 
 export const AIChatSection = () => {
   const [isExpanded, setIsExpanded] = useState(false);
   const [inputValue, setInputValue] = useState("");
-  const [messages, setMessages] = useState<Message[]>([]);
+  const [messages, setMessages] = useState<Message[]>(() => {
+    // Initialize from localStorage for logged-out users
+    if (typeof window !== "undefined") {
+      const stored = localStorage.getItem(STORAGE_KEY);
+      if (stored) {
+        try {
+          return JSON.parse(stored);
+        } catch (e) {
+          console.error("Failed to parse stored messages:", e);
+        }
+      }
+    }
+    return [];
+  });
   const [isStreaming, setIsStreaming] = useState(false);
   const [isLoggedIn, setIsLoggedIn] = useState(false); // Mock login state
   const [isDemoDialogOpen, setIsDemoDialogOpen] = useState(false);
@@ -45,6 +59,13 @@ export const AIChatSection = () => {
   useEffect(() => {
     scrollToBottom();
   }, [messages]);
+
+  // Persist messages to localStorage for logged-out users
+  useEffect(() => {
+    if (!isLoggedIn && typeof window !== "undefined") {
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(messages));
+    }
+  }, [messages, isLoggedIn]);
 
   const handleScroll = () => {
     if (scrollContainerRef.current) {
@@ -159,17 +180,27 @@ export const AIChatSection = () => {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
+    if (!inputValue.trim()) return;
+
     if (!isExpanded) {
       setIsExpanded(true);
-      return;
+      // Wait for expansion animation, then send
+      setTimeout(() => {
+        sendMessage();
+      }, 300);
+    } else {
+      sendMessage();
     }
-    sendMessage();
   };
 
   const handleStartNewChat = () => {
     setMessages([]);
     setInputValue("");
     setIsExpanded(false);
+    // Clear localStorage when starting new chat
+    if (typeof window !== "undefined") {
+      localStorage.removeItem(STORAGE_KEY);
+    }
   };
 
   return (
@@ -216,7 +247,6 @@ export const AIChatSection = () => {
                         ref={inputRef as any}
                         value={inputValue}
                         onChange={(e) => setInputValue(e.target.value)}
-                        onFocus={() => setIsExpanded(true)}
                         onKeyDown={(e) => {
                           if (e.key === "Enter" && !e.shiftKey) {
                             e.preventDefault();
@@ -274,43 +304,35 @@ export const AIChatSection = () => {
                     onScroll={handleScroll}
                     className="overflow-y-auto p-6 space-y-4 bg-white md:h-[calc(100vh-30rem)] h-[calc(100vh-18rem)]"
                   >
-                    {messages.length === 0 ? (
-                      <div className="h-full flex items-center justify-center">
-                        <p className="text-gray-400 text-center">
-                          Start a conversation by typing a message or selecting
-                          a quick action
-                        </p>
-                      </div>
-                    ) : (
-                      messages.map((message, index) => (
-                        <div
-                          key={index}
-                          className={`flex ${
-                            message.role === "user"
-                              ? "justify-end"
-                              : "justify-start"
+
+                    {messages.map((message, index) => (
+                      <div
+                        key={index}
+                        className={`flex ${message.role === "user"
+                          ? "justify-end"
+                          : "justify-start"
                           }`}
-                        >
-                          <div
-                            className={`max-w-[80%] rounded-2xl px-5 py-3 ${
-                              message.role === "user"
-                                ? "bg-brand-purple text-white"
-                                : "bg-white text-zinc-900"
+                      >
+                        <div
+                          className={`max-w-[80%] rounded-2xl px-5 py-3 ${message.role === "user"
+                            ? "bg-brand-purple text-white"
+                            : "bg-white text-zinc-900"
                             }`}
-                          >
-                            {message.role === "assistant" ? (
-                              <div className="prose prose-sm max-w-none prose-p:leading-relaxed prose-headings:mb-2 prose-ul:list-disc prose-ul:ml-4">
-                                <ReactMarkdown>{message.content}</ReactMarkdown>
-                              </div>
-                            ) : (
-                              <p className="text-sm leading-relaxed whitespace-pre-wrap">
-                                {message.content}
-                              </p>
-                            )}
-                          </div>
+                        >
+                          {message.role === "assistant" ? (
+                            <div className="prose prose-sm max-w-none prose-p:leading-relaxed prose-headings:mb-2 prose-ul:list-disc prose-ul:ml-4">
+                              <ReactMarkdown>{message.content}</ReactMarkdown>
+                            </div>
+                          ) : (
+                            <p className="text-sm leading-relaxed whitespace-pre-wrap">
+                              {message.content}
+                            </p>
+                          )}
                         </div>
-                      ))
-                    )}
+
+                      </div>
+                    ))}
+
                     {isStreaming && (
                       <div className="flex justify-start">
                         <div className="bg-white border border-gray-200 rounded-2xl px-5 py-3 shadow-sm">
@@ -383,7 +405,18 @@ export const AIChatSection = () => {
                         />
                       </button>
                     </form>
-
+                    {/* Quick Actions */}
+                    <div className="flex flex-wrap gap-3 justify-center pt-2">
+                      {quickActions.map((action, index) => (
+                        <button
+                          key={index}
+                          onClick={() => handleQuickAction(action)}
+                          className="px-4 py-2 bg-white border border-gray-200 rounded-full text-sm font-medium text-zinc-700 hover:border-brand-purple hover:text-brand-purple transition-all shadow-sm hover:shadow-md"
+                        >
+                          {action}
+                        </button>
+                      ))}
+                    </div>
                     <div className="flex items-center justify-center gap-4 mt-4 md:flex-row flex-col text-center">
                       <button
                         onClick={handleStartNewChat}
@@ -396,6 +429,7 @@ export const AIChatSection = () => {
                         secure draft.
                       </p>
                     </div>
+
                   </div>
                 </motion.div>
               )}
