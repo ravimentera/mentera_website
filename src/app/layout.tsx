@@ -3,6 +3,7 @@ import { Navigation } from "@/components/organisms/Navigation";
 import { Analytics } from "@vercel/analytics/react";
 import { Metadata } from "next";
 import "./globals.css";
+import "@crayonai/react-ui/styles/index.css";
 
 export const metadata: Metadata = {
   title: {

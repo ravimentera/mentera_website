@@ -12,6 +12,8 @@
     "@contentful/live-preview": "^4.9.0",
     "@contentful/rich-text-react-renderer": "^16.1.6",
     "@contentful/rich-text-types": "^17.2.5",
+    "@crayonai/react-ui": "^0.9.14",
+    "@thesysai/genui-sdk": "^0.8.0",
     "@vercel/analytics": "^1.1.2",
     "clsx": "^2.1.0",
     "contentful": "^11.10.1",

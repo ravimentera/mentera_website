@@ -4,10 +4,15 @@ import { HubSpotFormDialog } from "@/components/molecules/HubSpotFormDialog/HubS
 import { AnimatePresence, motion } from "framer-motion";
 import { useEffect, useRef, useState } from "react";
 import ReactMarkdown from "react-markdown";
+import { C1Component, ThemeProvider } from "@thesysai/genui-sdk";
+
+import { TERA_DEMO_SYSTEM_PROMPT } from "@/data/system-prompt";
 
 interface Message {
   role: "user" | "assistant";
   content: string;
+  c1Response?: string;
+  source?: "thesys" | "legacy";
 }
 
 const quickActions = [
@@ -18,6 +23,7 @@ const quickActions = [
 
 const MAX_FREE_MESSAGES = 5;
 const STORAGE_KEY = "mentera_chat_messages";
+const TOKEN_STORAGE_KEY = "mentera_token_count";
 
 export const AIChatSection = () => {
   const [isExpanded, setIsExpanded] = useState(false);
@@ -39,6 +45,19 @@ export const AIChatSection = () => {
   const [isStreaming, setIsStreaming] = useState(false);
   const [isLoggedIn, setIsLoggedIn] = useState(false); // Mock login state
   const [isDemoDialogOpen, setIsDemoDialogOpen] = useState(false);
+  const [tokenCount, setTokenCount] = useState(() => {
+    if (typeof window !== "undefined") {
+      const stored = localStorage.getItem(TOKEN_STORAGE_KEY);
+      return stored ? parseFloat(stored) : 0;
+    }
+    return 0;
+  });
+
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      localStorage.setItem(TOKEN_STORAGE_KEY, tokenCount.toString());
+    }
+  }, [tokenCount]);
 
   const scrollContainerRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
@@ -113,7 +132,99 @@ export const AIChatSection = () => {
     setIsStreaming(true);
     setShouldAutoScroll(true);
     setTimeout(() => scrollToBottom(true), 50);
+    console.log("Token Count:", tokenCount);
+    // Token limit check for TheSys
+    if (tokenCount < 1000) {
+      setTokenCount((prev) => prev + 50);
+      try {
+        setMessages((prev) => [
+          ...prev,
+          { role: "assistant", content: "", c1Response: "", source: "thesys" }
+        ]);
 
+        // Sanitize messages to only include supported fields
+        const validMessages = messages.map(({ role, content }) => ({ role, content }));
+        const validUserMessage = { role: "user" as const, content: userMessage.content };
+
+        const payload = {
+          messages: [
+            { role: "system", content: TERA_DEMO_SYSTEM_PROMPT },
+            ...validMessages,
+            validUserMessage
+          ],
+          stream: true,
+          model: "c1-exp/openai/gpt-4.1/v-20250617"
+        };
+        console.log("TheSys Payload:", JSON.stringify(payload, null, 2));
+
+        const response = await fetch("https://api.thesys.dev/v1/embed/chat/completions", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            "Authorization": `Bearer ${process.env.THESYS_API_KEY}`,
+          },
+          body: JSON.stringify(payload),
+        });
+
+        if (!response.ok) {
+          const errorText = await response.text();
+          console.error("TheSys API Error Details:", errorText);
+          throw new Error(`TheSys API error: ${response.status} ${errorText}`);
+        }
+        if (!response.body) throw new Error("No response body");
+
+        const reader = response.body.getReader();
+        const decoder = new TextDecoder();
+        let accumulatedResponse = "";
+        let buffer = "";
+
+        while (true) {
+          const { done, value } = await reader.read();
+          if (done) break;
+          buffer += decoder.decode(value, { stream: true });
+
+          const lines = buffer.split("\n");
+          // Keep the last line in buffer as it might be incomplete
+          buffer = lines.pop() || "";
+
+          for (const line of lines) {
+            const trimmedLine = line.trim();
+            if (!trimmedLine) continue;
+
+            if (trimmedLine.startsWith("data: ")) {
+              const data = trimmedLine.slice(6);
+              if (data === "[DONE]") continue;
+              try {
+                const json = JSON.parse(data);
+                const content = json.choices?.[0]?.delta?.content || "";
+                accumulatedResponse += content;
+
+                setMessages((prev) => {
+                  const newMessages = [...prev];
+                  const lastMsg = newMessages[newMessages.length - 1];
+                  if (lastMsg.role === "assistant") {
+                    lastMsg.c1Response = accumulatedResponse;
+                    lastMsg.content = accumulatedResponse;
+                  }
+                  return newMessages;
+                });
+              } catch (e) {
+                // ignore partial json or errors
+              }
+            }
+          }
+        }
+
+      } catch (error) {
+        console.error("TheSys Error", error);
+        // Fallback or error handling? For now just log.
+      } finally {
+        setIsStreaming(false);
+      }
+      return;
+    }
+
+    // Legacy Streaming API Fallback
     try {
       const response = await fetch("/api/chat/stream", {
         method: "POST",
@@ -138,7 +249,7 @@ export const AIChatSection = () => {
       }
 
       // Create assistant message placeholder
-      setMessages((prev) => [...prev, { role: "assistant", content: "" }]);
+      setMessages((prev) => [...prev, { role: "assistant", content: "", source: "legacy" }]);
 
       let accumulatedContent = "";
 
@@ -165,6 +276,7 @@ export const AIChatSection = () => {
                   newMessages[newMessages.length - 1] = {
                     role: "assistant",
                     content: accumulatedContent,
+                    source: "legacy"
                   };
                   return newMessages;
                 });
@@ -331,9 +443,18 @@ export const AIChatSection = () => {
                             }`}
                         >
                           {message.role === "assistant" ? (
-                            <div className="prose prose-sm max-w-none prose-p:leading-relaxed prose-headings:mb-2 prose-ul:list-disc prose-ul:ml-4">
-                              <ReactMarkdown>{message.content}</ReactMarkdown>
-                            </div>
+                            message.source === "thesys" && message.c1Response ? (
+                              <ThemeProvider>
+                                <C1Component
+                                  c1Response={message.c1Response}
+                                  isStreaming={isStreaming && index === messages.length - 1}
+                                />
+                              </ThemeProvider>
+                            ) : (
+                              <div className="prose prose-sm max-w-none prose-p:leading-relaxed prose-headings:mb-2 prose-ul:list-disc prose-ul:ml-4">
+                                <ReactMarkdown>{message.content}</ReactMarkdown>
+                              </div>
+                            )
                           ) : (
                             <p className="text-sm leading-relaxed whitespace-pre-wrap">
                               {message.content}

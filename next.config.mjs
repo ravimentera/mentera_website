@@ -8,6 +8,9 @@ const nextConfig = {
             },
         ];
     },
+    env: {
+        THESYS_API_KEY: process.env.THESYS_API_KEY,
+    },
 };
 
 export default nextConfig;
