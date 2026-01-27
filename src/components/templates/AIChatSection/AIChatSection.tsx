@@ -25,6 +25,70 @@ const MAX_FREE_MESSAGES = 5;
 const STORAGE_KEY = "mentera_chat_messages";
 const TOKEN_STORAGE_KEY = "mentera_token_count";
 
+// Custom theme matching website design system
+const customTheme = {
+  colors: {
+    primary: "#4F39F6",        // brand-purple
+    secondary: "#6EF1BB",      // secondary green
+    accent: "#BD05DD",         // accent purple
+    text: "#1D1D1D",           // text-primary
+    background: "#FFFFFF",     // white
+    muted: "#F6F4FD",          // brand-purple-light
+    border: "#E5E7EB",         // gray-200
+
+    // Extended color scales for charts and visualizations
+    // Using brand-aligned colors instead of defaults
+    purple: ["#F6F4FD", "#E9D5FF", "#D1AAFF", "#B97FFF", "#A155FF", "#8F03A0", "#7A0288", "#650270", "#500158", "#3B0140"],
+    blue: ["#EBF5FF", "#DBEAFE", "#BFDBFE", "#93C5FD", "#60A5FA", "#4F9BED", "#2563EB", "#1D4ED8", "#1E40AF", "#200F8A"],
+    green: ["#D1FAE5", "#A7F3D0", "#6EE7B7", "#6EF1BB", "#34D399", "#10B981", "#059669", "#047857", "#065F46", "#064E3B"],
+    pink: ["#FCE7F3", "#FBCFE8", "#F9A8D4", "#F472B6", "#EC4899", "#DB2777", "#BE185D", "#9D174D", "#831843", "#500724"],
+    teal: ["#CCFBF1", "#99F6E4", "#5EEAD4", "#2DD4BF", "#14B8A6", "#0D9488", "#0F766E", "#115E59", "#134E4A", "#042F2E"],
+
+    // Chart color palette using brand colors
+    chart: {
+      primary: "#4F39F6",      // brand-purple
+      secondary: "#6EF1BB",    // secondary green
+      tertiary: "#4F9BED",     // brand-blue
+      quaternary: "#BD05DD",   // accent purple
+      quinary: "#24EDFF",      // cyan
+      senary: "#F9A8D4",       // pink
+    },
+  },
+  fonts: {
+    body: "var(--font-satoshi), sans-serif",
+    heading: "var(--font-poppins), sans-serif",
+    monospace: "monospace",
+  },
+  fontSizes: [
+    "0.875rem",  // 14px
+    "1rem",      // 16px
+    "1.125rem",  // 18px
+    "1.25rem",   // 20px
+    "1.5rem",    // 24px
+    "2rem",      // 32px
+    "2.5rem",    // 40px
+    "3rem",      // 48px
+  ],
+  fontWeights: {
+    body: 400,
+    heading: 500,
+    bold: 700,
+  },
+  lineHeights: {
+    body: 1.6,
+    heading: 1.2,
+  },
+  radii: {
+    none: "0",
+    sm: "0.25rem",
+    default: "0.5rem",
+    md: "0.75rem",
+    lg: "1rem",
+    xl: "1.5rem",
+    full: "9999px",
+  },
+};
+
 export const AIChatSection = () => {
   const [isExpanded, setIsExpanded] = useState(false);
   const [inputValue, setInputValue] = useState("");
@@ -425,7 +489,7 @@ export const AIChatSection = () => {
                   <div
                     ref={scrollContainerRef}
                     onScroll={handleScroll}
-                    className="overflow-y-auto p-6 space-y-4 bg-white md:h-[calc(100vh-30rem)] h-[calc(100vh-18rem)]"
+                    className="overflow-y-auto p-6 space-y-4 bg-white md:h-[calc(100vh-21rem)] h-[calc(100vh-18rem)]"
                   >
 
                     {messages.map((message, index) => (
@@ -443,8 +507,8 @@ export const AIChatSection = () => {
                             }`}
                         >
                           {message.role === "assistant" ? (
-                            message.source === "thesys" && message.c1Response ? (
-                              <ThemeProvider>
+                            message.source === "thesys" && message.c1Response && message.c1Response.trim() !== "" ? (
+                              <ThemeProvider theme={customTheme}>
                                 <C1Component
                                   c1Response={message.c1Response}
                                   isStreaming={isStreaming && index === messages.length - 1}
