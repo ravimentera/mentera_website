@@ -4,10 +4,15 @@ import { HubSpotFormDialog } from "@/components/molecules/HubSpotFormDialog/HubS
 import { AnimatePresence, motion } from "framer-motion";
 import { useEffect, useRef, useState } from "react";
 import ReactMarkdown from "react-markdown";
+import { C1Component, ThemeProvider } from "@thesysai/genui-sdk";
+
+import { TERA_DEMO_SYSTEM_PROMPT } from "@/data/system-prompt";
 
 interface Message {
   role: "user" | "assistant";
   content: string;
+  c1Response?: string;
+  source?: "thesys" | "legacy";
 }
 
 const quickActions = [
@@ -18,6 +23,71 @@ const quickActions = [
 
 const MAX_FREE_MESSAGES = 5;
 const STORAGE_KEY = "mentera_chat_messages";
+const TOKEN_STORAGE_KEY = "mentera_token_count";
+
+// Custom theme matching website design system
+const customTheme = {
+  colors: {
+    primary: "#4F39F6",        // brand-purple
+    secondary: "#6EF1BB",      // secondary green
+    accent: "#BD05DD",         // accent purple
+    text: "#1D1D1D",           // text-primary
+    background: "#FFFFFF",     // white
+    muted: "#F6F4FD",          // brand-purple-light
+    border: "#E5E7EB",         // gray-200
+
+    // Extended color scales for charts and visualizations
+    // Using brand-aligned colors instead of defaults
+    purple: ["#F6F4FD", "#E9D5FF", "#D1AAFF", "#B97FFF", "#A155FF", "#8F03A0", "#7A0288", "#650270", "#500158", "#3B0140"],
+    blue: ["#EBF5FF", "#DBEAFE", "#BFDBFE", "#93C5FD", "#60A5FA", "#4F9BED", "#2563EB", "#1D4ED8", "#1E40AF", "#200F8A"],
+    green: ["#D1FAE5", "#A7F3D0", "#6EE7B7", "#6EF1BB", "#34D399", "#10B981", "#059669", "#047857", "#065F46", "#064E3B"],
+    pink: ["#FCE7F3", "#FBCFE8", "#F9A8D4", "#F472B6", "#EC4899", "#DB2777", "#BE185D", "#9D174D", "#831843", "#500724"],
+    teal: ["#CCFBF1", "#99F6E4", "#5EEAD4", "#2DD4BF", "#14B8A6", "#0D9488", "#0F766E", "#115E59", "#134E4A", "#042F2E"],
+
+    // Chart color palette using brand colors
+    chart: {
+      primary: "#4F39F6",      // brand-purple
+      secondary: "#6EF1BB",    // secondary green
+      tertiary: "#4F9BED",     // brand-blue
+      quaternary: "#BD05DD",   // accent purple
+      quinary: "#24EDFF",      // cyan
+      senary: "#F9A8D4",       // pink
+    },
+  },
+  fonts: {
+    body: "var(--font-satoshi), sans-serif",
+    heading: "var(--font-poppins), sans-serif",
+    monospace: "monospace",
+  },
+  fontSizes: [
+    "0.875rem",  // 14px
+    "1rem",      // 16px
+    "1.125rem",  // 18px
+    "1.25rem",   // 20px
+    "1.5rem",    // 24px
+    "2rem",      // 32px
+    "2.5rem",    // 40px
+    "3rem",      // 48px
+  ],
+  fontWeights: {
+    body: 400,
+    heading: 500,
+    bold: 700,
+  },
+  lineHeights: {
+    body: 1.6,
+    heading: 1.2,
+  },
+  radii: {
+    none: "0",
+    sm: "0.25rem",
+    default: "0.5rem",
+    md: "0.75rem",
+    lg: "1rem",
+    xl: "1.5rem",
+    full: "9999px",
+  },
+};
 
 export const AIChatSection = () => {
   const [isExpanded, setIsExpanded] = useState(false);
@@ -39,6 +109,19 @@ export const AIChatSection = () => {
   const [isStreaming, setIsStreaming] = useState(false);
   const [isLoggedIn, setIsLoggedIn] = useState(false); // Mock login state
   const [isDemoDialogOpen, setIsDemoDialogOpen] = useState(false);
+  const [tokenCount, setTokenCount] = useState(() => {
+    if (typeof window !== "undefined") {
+      const stored = localStorage.getItem(TOKEN_STORAGE_KEY);
+      return stored ? parseFloat(stored) : 0;
+    }
+    return 0;
+  });
+
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      localStorage.setItem(TOKEN_STORAGE_KEY, tokenCount.toString());
+    }
+  }, [tokenCount]);
 
   const scrollContainerRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
@@ -114,6 +197,97 @@ export const AIChatSection = () => {
     setShouldAutoScroll(true);
     setTimeout(() => scrollToBottom(true), 50);
 
+    // Token limit check for TheSys
+    if (tokenCount < 1000) {
+      setTokenCount((prev) => prev + 50);
+      try {
+        setMessages((prev) => [
+          ...prev,
+          { role: "assistant", content: "", source: "thesys" }
+        ]);
+
+        // Sanitize messages to only include supported fields
+        const validMessages = messages.map(({ role, content }) => ({ role, content }));
+        const validUserMessage = { role: "user" as const, content: userMessage.content };
+
+        const payload = {
+          messages: [
+            { role: "system", content: TERA_DEMO_SYSTEM_PROMPT },
+            ...validMessages,
+            validUserMessage
+          ],
+          stream: true,
+          model: "c1-exp/openai/gpt-4.1/v-20250617"
+        };
+
+        const response = await fetch("https://api.thesys.dev/v1/embed/chat/completions", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            "Authorization": `Bearer ${process.env.NEXT_PUBLIC_THESYS_API_KEY}`,
+          },
+          body: JSON.stringify(payload),
+        });
+
+        if (!response.ok) {
+          const errorText = await response.text();
+          console.error("TheSys API Error Details:", errorText);
+          throw new Error(`TheSys API error: ${response.status} ${errorText}`);
+        }
+        if (!response.body) throw new Error("No response body");
+
+        const reader = response.body.getReader();
+        const decoder = new TextDecoder();
+        let accumulatedResponse = "";
+        let buffer = "";
+
+        while (true) {
+          const { done, value } = await reader.read();
+          if (done) break;
+          buffer += decoder.decode(value, { stream: true });
+
+          const lines = buffer.split("\n");
+          // Keep the last line in buffer as it might be incomplete
+          buffer = lines.pop() || "";
+
+          for (const line of lines) {
+            const trimmedLine = line.trim();
+            if (!trimmedLine) continue;
+
+            if (trimmedLine.startsWith("data: ")) {
+              const data = trimmedLine.slice(6);
+              if (data === "[DONE]") continue;
+              try {
+                const json = JSON.parse(data);
+                const content = json.choices?.[0]?.delta?.content || "";
+                accumulatedResponse += content;
+
+                setMessages((prev) => {
+                  const newMessages = [...prev];
+                  const lastMsg = newMessages[newMessages.length - 1];
+                  if (lastMsg.role === "assistant") {
+                    lastMsg.c1Response = accumulatedResponse;
+                    lastMsg.content = accumulatedResponse;
+                  }
+                  return newMessages;
+                });
+              } catch (e) {
+                // ignore partial json or errors
+              }
+            }
+          }
+        }
+
+      } catch (error) {
+        console.error("TheSys Error", error);
+        // Fallback or error handling? For now just log.
+      } finally {
+        setIsStreaming(false);
+      }
+      return;
+    }
+
+    // Legacy Streaming API Fallback
     try {
       const response = await fetch("/api/chat/stream", {
         method: "POST",
@@ -138,7 +312,7 @@ export const AIChatSection = () => {
       }
 
       // Create assistant message placeholder
-      setMessages((prev) => [...prev, { role: "assistant", content: "" }]);
+      setMessages((prev) => [...prev, { role: "assistant", content: "", source: "legacy" }]);
 
       let accumulatedContent = "";
 
@@ -165,6 +339,7 @@ export const AIChatSection = () => {
                   newMessages[newMessages.length - 1] = {
                     role: "assistant",
                     content: accumulatedContent,
+                    source: "legacy"
                   };
                   return newMessages;
                 });
@@ -313,7 +488,7 @@ export const AIChatSection = () => {
                   <div
                     ref={scrollContainerRef}
                     onScroll={handleScroll}
-                    className="overflow-y-auto p-6 space-y-4 bg-white md:h-[calc(100vh-30rem)] h-[calc(100vh-18rem)]"
+                    className="overflow-y-auto p-6 space-y-4 bg-white md:h-[calc(100vh-21rem)] h-[calc(100vh-18rem)]"
                   >
 
                     {messages.map((message, index) => (
@@ -331,9 +506,18 @@ export const AIChatSection = () => {
                             }`}
                         >
                           {message.role === "assistant" ? (
-                            <div className="prose prose-sm max-w-none prose-p:leading-relaxed prose-headings:mb-2 prose-ul:list-disc prose-ul:ml-4">
-                              <ReactMarkdown>{message.content}</ReactMarkdown>
-                            </div>
+                            message.source === "thesys" && message.c1Response && message.c1Response.trim().length > 10 ? (
+                              <ThemeProvider theme={customTheme}>
+                                <C1Component
+                                  c1Response={message.c1Response}
+                                  isStreaming={isStreaming && index === messages.length - 1}
+                                />
+                              </ThemeProvider>
+                            ) : message.content ? (
+                              <div className="prose prose-sm max-w-none prose-p:leading-relaxed prose-headings:mb-2 prose-ul:list-disc prose-ul:ml-4">
+                                <ReactMarkdown>{message.content}</ReactMarkdown>
+                              </div>
+                            ) : null
                           ) : (
                             <p className="text-sm leading-relaxed whitespace-pre-wrap">
                               {message.content}

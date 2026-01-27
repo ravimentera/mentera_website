@@ -1,7 +1,7 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap');
 @layer base {
   :root {
     --font-inter: "Inter", sans-serif;
@@ -18,6 +18,21 @@
 
     /* Optional border radius for custom components */
     --radius: 0.5rem;
+
+    /* GenUI SDK / Crayon UI chart color overrides */
+    --chart-color-1: #4F39F6;  /* brand-purple */
+    --chart-color-2: #6EF1BB;  /* secondary green */
+    --chart-color-3: #4F9BED;  /* brand-blue */
+    --chart-color-4: #BD05DD;  /* accent purple */
+    --chart-color-5: #24EDFF;  /* cyan */
+    --chart-color-6: #F9A8D4;  /* pink */
+    --chart-color-7: #8F03A0;  /* purple variant */
+    --chart-color-8: #200F8A;  /* brand-indigo */
+    
+    /* Primary chart colors */
+    --color-primary: #4F39F6;
+    --color-secondary: #6EF1BB;
+    --color-accent: #BD05DD;
   }
 
   html {
@@ -178,3 +193,65 @@ body {
   @apply text-xl md:text-2xl font-normal text-zinc-500 mt-0;
 }
 
+/* GenUI SDK / Crayon UI Chart Color Overrides */
+/* Override default Recharts colors with brand colors */
+[data-recharts-component="Area"] path,
+[data-recharts-component="Line"] path,
+[data-recharts-component="Bar"] path,
+[data-recharts-component="Pie"] path {
+  fill: var(--chart-color-1) !important;
+}
+
+/* Target specific chart elements by index for multi-series charts */
+.recharts-area:nth-child(1) path,
+.recharts-bar:nth-child(1) path,
+.recharts-line:nth-child(1) path {
+  fill: var(--chart-color-1) !important;
+  stroke: var(--chart-color-1) !important;
+}
+
+.recharts-area:nth-child(2) path,
+.recharts-bar:nth-child(2) path,
+.recharts-line:nth-child(2) path {
+  fill: var(--chart-color-2) !important;
+  stroke: var(--chart-color-2) !important;
+}
+
+.recharts-area:nth-child(3) path,
+.recharts-bar:nth-child(3) path,
+.recharts-line:nth-child(3) path {
+  fill: var(--chart-color-3) !important;
+  stroke: var(--chart-color-3) !important;
+}
+
+.recharts-area:nth-child(4) path,
+.recharts-bar:nth-child(4) path,
+.recharts-line:nth-child(4) path {
+  fill: var(--chart-color-4) !important;
+  stroke: var(--chart-color-4) !important;
+}
+
+.recharts-area:nth-child(5) path,
+.recharts-bar:nth-child(5) path,
+.recharts-line:nth-child(5) path {
+  fill: var(--chart-color-5) !important;
+  stroke: var(--chart-color-5) !important;
+}
+
+.recharts-area:nth-child(6) path,
+.recharts-bar:nth-child(6) path,
+.recharts-line:nth-child(6) path {
+  fill: var(--chart-color-6) !important;
+  stroke: var(--chart-color-6) !important;
+}
+
+/* Override any hardcoded pink/rose colors */
+[fill="#CC4678"],
+[fill="#cc4678"] {
+  fill: var(--chart-color-1) !important;
+}
+
+[stroke="#CC4678"],
+[stroke="#cc4678"] {
+  stroke: var(--chart-color-1) !important;
+}
