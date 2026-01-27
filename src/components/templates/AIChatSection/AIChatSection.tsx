@@ -196,14 +196,14 @@ export const AIChatSection = () => {
     setIsStreaming(true);
     setShouldAutoScroll(true);
     setTimeout(() => scrollToBottom(true), 50);
-    console.log("Token Count:", tokenCount);
+
     // Token limit check for TheSys
     if (tokenCount < 1000) {
       setTokenCount((prev) => prev + 50);
       try {
         setMessages((prev) => [
           ...prev,
-          { role: "assistant", content: "", c1Response: "", source: "thesys" }
+          { role: "assistant", content: "", source: "thesys" }
         ]);
 
         // Sanitize messages to only include supported fields
@@ -219,13 +219,12 @@ export const AIChatSection = () => {
           stream: true,
           model: "c1-exp/openai/gpt-4.1/v-20250617"
         };
-        console.log("TheSys Payload:", JSON.stringify(payload, null, 2));
 
         const response = await fetch("https://api.thesys.dev/v1/embed/chat/completions", {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
-            "Authorization": `Bearer ${process.env.THESYS_API_KEY}`,
+            "Authorization": `Bearer ${process.env.NEXT_PUBLIC_THESYS_API_KEY}`,
           },
           body: JSON.stringify(payload),
         });
@@ -507,18 +506,18 @@ export const AIChatSection = () => {
                             }`}
                         >
                           {message.role === "assistant" ? (
-                            message.source === "thesys" && message.c1Response && message.c1Response.trim() !== "" ? (
+                            message.source === "thesys" && message.c1Response && message.c1Response.trim().length > 10 ? (
                               <ThemeProvider theme={customTheme}>
                                 <C1Component
                                   c1Response={message.c1Response}
                                   isStreaming={isStreaming && index === messages.length - 1}
                                 />
                               </ThemeProvider>
-                            ) : (
+                            ) : message.content ? (
                               <div className="prose prose-sm max-w-none prose-p:leading-relaxed prose-headings:mb-2 prose-ul:list-disc prose-ul:ml-4">
                                 <ReactMarkdown>{message.content}</ReactMarkdown>
                               </div>
-                            )
+                            ) : null
                           ) : (
                             <p className="text-sm leading-relaxed whitespace-pre-wrap">
                               {message.content}
