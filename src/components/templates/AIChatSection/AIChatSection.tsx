@@ -488,7 +488,7 @@ export const AIChatSection = () => {
                   <div
                     ref={scrollContainerRef}
                     onScroll={handleScroll}
-                    className="overflow-y-auto p-6 space-y-4 bg-white md:h-[calc(100vh-21rem)] h-[calc(100vh-18rem)]"
+                    className="overflow-y-auto pl-0 pr-6 py-6 lg:p-6 space-y-4 bg-white md:h-[calc(100vh-21rem)] h-[calc(100vh-18rem)]"
                   >
 
                     {messages.map((message, index) => (
@@ -500,19 +500,21 @@ export const AIChatSection = () => {
                           }`}
                       >
                         <div
-                          className={`max-w-[80%] rounded-2xl px-5 py-3 ${message.role === "user"
+                          className={`max-w-[100%] lg:max-w-[80%] rounded-2xl px-5 py-3 ${message.role === "user"
                             ? "bg-brand-purple text-white"
                             : "bg-white text-zinc-900"
                             }`}
                         >
                           {message.role === "assistant" ? (
                             message.source === "thesys" && message.c1Response && message.c1Response.trim().length > 10 ? (
-                              <ThemeProvider theme={customTheme}>
-                                <C1Component
-                                  c1Response={message.c1Response}
-                                  isStreaming={isStreaming && index === messages.length - 1}
-                                />
-                              </ThemeProvider>
+                              <div className="mobile-thesys-font-fix">
+                                <ThemeProvider theme={customTheme}>
+                                  <C1Component
+                                    c1Response={message.c1Response}
+                                    isStreaming={isStreaming && index === messages.length - 1}
+                                  />
+                                </ThemeProvider>
+                              </div>
                             ) : message.content ? (
                               <div className="prose prose-sm max-w-none prose-p:leading-relaxed prose-headings:mb-2 prose-ul:list-disc prose-ul:ml-4">
                                 <ReactMarkdown>{message.content}</ReactMarkdown>
