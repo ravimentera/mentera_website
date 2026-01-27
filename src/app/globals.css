@@ -255,3 +255,23 @@ body {
 [stroke="#cc4678"] {
   stroke: var(--chart-color-1) !important;
 }
+
+/* Mobile font size fix for TheSys UI response */
+@media (max-width: 768px) {
+  .mobile-thesys-font-fix h1,
+  .mobile-thesys-font-fix h2,
+  .mobile-thesys-font-fix h3,
+  .mobile-thesys-font-fix h4,
+  .mobile-thesys-font-fix h5,
+  .mobile-thesys-font-fix h6,
+  .mobile-thesys-font-fix p,
+  .mobile-thesys-font-fix ul,
+  .mobile-thesys-font-fix ol,
+  .mobile-thesys-font-fix li,
+  .mobile-thesys-font-fix span,
+  .mobile-thesys-font-fix div,
+  .mobile-thesys-font-fix strong,
+  .mobile-thesys-font-fix b {
+    font-size: 14px !important;
+  }
+}
