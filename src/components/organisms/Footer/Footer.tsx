@@ -71,12 +71,12 @@ export const Footer = () => {
             >
               Privacy Policy
             </Link>
-            <a
-              href="mailto:support@mentera.ai"
+            <Link
+              href="/contact-support"
               className="cursor-pointer text-sm sm:text-base text-white hover:opacity-80 transition-opacity font-normal"
             >
-              Contact Us
-            </a>
+              Contact Support
+            </Link>
           </div>
         </div>
 
