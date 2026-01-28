@@ -124,6 +124,7 @@ export const AIChatSection = () => {
   }, [tokenCount]);
 
   const scrollContainerRef = useRef<HTMLDivElement>(null);
+  const chatContainerRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
   const [shouldAutoScroll, setShouldAutoScroll] = useState(true);
 
@@ -171,9 +172,37 @@ export const AIChatSection = () => {
     }
   }, [isExpanded]);
 
+  // Handle mobile repositioning on expansion
+  useEffect(() => {
+    if (isExpanded && typeof window !== "undefined" && window.innerWidth < 768) {
+      const performScroll = () => {
+        if (chatContainerRef.current) {
+          const offset = 60;
+          const rect = chatContainerRef.current.getBoundingClientRect();
+          const absoluteTop = rect.top + window.scrollY;
+
+          window.scrollTo({
+            top: absoluteTop - offset,
+            behavior: "smooth",
+          });
+        }
+      };
+
+      // Try scrolling shortly after expansion starts
+      const t1 = setTimeout(performScroll, 50);
+      // Try again after animation should be mostly complete
+      const t2 = setTimeout(performScroll, 400);
+      return () => {
+        clearTimeout(t1);
+        clearTimeout(t2);
+      };
+    }
+  }, [isExpanded]);
+
   const handleQuickAction = async (action: string) => {
     setInputValue(action);
     setIsExpanded(true);
+
     // Wait for expansion animation, then send
     setTimeout(() => {
       sendMessage(action);
@@ -412,6 +441,7 @@ export const AIChatSection = () => {
           {/* Chat Interface */}
           <motion.div
             layout
+            ref={chatContainerRef}
             className="relative max-w-4xl mx-auto"
             transition={{ duration: 0.4, ease: "easeInOut" }}
           >
