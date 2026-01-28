@@ -77,13 +77,13 @@ Submitted at: ${new Date().toISOString()}
     // For now, we'll use a simple SMTP approach or third-party service
 
     // Option 1: Using Resend (if configured)
-    const resendApiKey = process.env.RESEND_API_KEY;
+    const emailApiKey = process.env.EMAIL_API_KEY;
 
-    if (resendApiKey) {
+    if (emailApiKey) {
       const response = await fetch("https://api.resend.com/emails", {
         method: "POST",
         headers: {
-          Authorization: `Bearer ${resendApiKey}`,
+          Authorization: `Bearer ${emailApiKey}`,
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
