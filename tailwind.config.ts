@@ -98,6 +98,7 @@ const config: Config = {
         "8xl": "90rem",
         "9xl": "120rem",
         privacy: "44rem", // 704px
+        "screen": "100vw",
       },
       spacing: {
         "18": "4.5rem",

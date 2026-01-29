@@ -123,7 +123,12 @@ export const ContactSupportPage = () => {
   const handleInputChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
   ) => {
-    const { name, value } = e.target;
+    let { name, value } = e.target;
+
+    if (name === "phoneNumber") {
+      value = value.replace(/[^0-9+\-()\s]/g, "");
+    }
+
     setFormData((prev) => ({ ...prev, [name]: value }));
 
     // Re-validate field if it was already touched
@@ -317,11 +322,10 @@ export const ContactSupportPage = () => {
               {/* Submit Status Message */}
               {submitStatus !== "idle" && (
                 <div
-                  className={`p-4 rounded-lg text-sm font-satoshi ${
-                    submitStatus === "success"
+                  className={`p-4 rounded-lg text-sm font-satoshi ${submitStatus === "success"
                       ? "bg-secondary-light text-green-800"
                       : "bg-red-50 text-red-600"
-                  }`}
+                    }`}
                   role="alert"
                 >
                   {submitMessage}

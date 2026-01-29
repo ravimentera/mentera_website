@@ -11,10 +11,10 @@ export const NewHeroSection = () => {
   const [isDialogOpen, setIsDialogOpen] = useState(false);
 
   return (
-    <section className="relative w-full min-h-screen flex items-center justify-center overflow-visible sm:overflow-hidden mb-12 sm:mb-0">
+    <section className="relative w-full min-h-screen flex items-center justify-center overflow-visible sm:overflow-hidden mb-0">
       {/* Content */}
-      <div className="max-w-8xl relative z-10 w-full mx-auto px-6 sm:px-8 md:px-12 lg:px-24 py-20 sm:py-16 md:py-20">
-        <div className="grid lg:grid-cols-2 gap-8 sm:gap-10 md:gap-12 items-center">
+      <div className="max-w-8xl h-full relative z-10 w-full mx-auto px-6 sm:px-8 md:px-12 lg:px-24 pb-0 sm:pb-20 py-20 sm:py-16 md:py-20">
+        <div className="grid lg:grid-cols-2 gap-8 sm:gap-10 md:gap-12 items-center p-0 sm:p-6 max-w-screen h-full ">
           {/* Left Column - Text Content */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -56,9 +56,9 @@ export const NewHeroSection = () => {
             initial={{ opacity: 0, x: 20 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.6, delay: 0.2 }}
-            className="relative w-full flex items-center justify-center mt-8 lg:mt-0"
+            className="relative w-full flex items-start sm:items-center justify-center mt-8 lg:mt-0 max-w-screen overflow-hidden sm:overflow-visible sm:h-auto h-[56vh] p-5 sm:p-0"
           >
-            <div className="relative w-full max-w-[20rem] sm:max-w-[25rem] md:max-w-[28rem] lg:max-w-[31.25rem] aspect-square flex items-center justify-center overflow-visible">
+            <div className="relative w-full max-w-[20rem] sm:max-w-[25rem] md:max-w-[28rem] lg:max-w-[31.25rem] aspect-square flex items-center justify-center overflow-visible flex-wrap ">
               {/* Outer Ring - 500x500 - Rotates Clockwise */}
               <motion.div
                 className="absolute inset-0 w-full h-full"

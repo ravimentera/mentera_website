@@ -16,7 +16,7 @@ const STEPS = [
     mobileImage: "/images/ai-scribe/m-s1.png",
     imageAlt: "Select Template",
     colSpan: 3, // 60% of row 1
-    imageHeight: "!h-68",
+    imageHeight: "!h-52 lg:!h-68",
   },
   {
     step: 2,
@@ -59,7 +59,7 @@ const STEPS = [
     mobileImage: "/images/ai-scribe/m-s5.png",
     imageAlt: "Push to EHR",
     colSpan: 3, // 60% of row 3
-    imageHeight: "!h-48",
+    imageHeight: "!h-12 lg:!h-48",
   },
 ];
 
@@ -109,11 +109,9 @@ export const HowItWorksSection = () => {
                     ...transitions.default,
                     delay: 0.1 * (rowIndex * 2 + stepIndex + 1),
                   }}
-                  className={`lg:col-span-${
-                    stepConfig.colSpan
-                  } bg-[#3428DF0F] rounded-3xl ${
-                    stepConfig.customPadding || "p-6 md:p-10"
-                  } flex flex-col`}
+                  className={`lg:col-span-${stepConfig.colSpan
+                    } bg-[#3428DF0F] rounded-3xl ${stepConfig.customPadding || "p-6 md:p-10"
+                    } flex flex-col`}
                 >
                   <div className="mb-6">
                     <div className="inline-flex items-center gap-2 bg-gradient-to-r from-purple-variant/10 to-purple/10 rounded-full px-4 py-2 mb-4">
@@ -158,11 +156,9 @@ export const HowItWorksSection = () => {
               viewport={{ once: true }}
               variants={fadeInUp}
               transition={{ ...transitions.default, delay: 0.5 }}
-              className={`lg:col-span-${
-                STEPS[4].colSpan
-              } bg-[#3428DF0F] rounded-3xl ${
-                STEPS[4].customPadding || "p-6 md:p-10"
-              } flex flex-col`}
+              className={`lg:col-span-${STEPS[4].colSpan
+                } bg-[#3428DF0F] rounded-3xl ${STEPS[4].customPadding || "p-6 md:p-10"
+                } flex flex-col`}
             >
               <div className="mb-6">
                 <div className="inline-flex items-center gap-2 bg-gradient-to-r from-purple-variant/10 to-purple/10 rounded-full px-4 py-2 mb-4">

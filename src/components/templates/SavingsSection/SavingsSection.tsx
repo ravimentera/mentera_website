@@ -90,7 +90,12 @@ const AnimatedStatValue = memo(
     return (
       <span
         ref={ref}
-        className="text-2xl sm:text-3xl md:text-4xl lg:text-4.5xl font-bold mb-2 sm:mb-3 block bg-gradient-to-r from-purple-500 to-purple bg-clip-text text-transparent [-webkit-text-fill-color:transparent]"
+        className="text-2xl sm:text-3xl md:text-4xl lg:text-4.5xl font-bold mb-2 sm:mb-3 block
+bg-[linear-gradient(170deg,#4D28DF_0%,#8F03A0_100%)]
+bg-[length:200%_100%]
+bg-[position:0%_50%]
+bg-clip-text text-transparent
+[-webkit-text-fill-color:transparent]"
       >
         {displayValue}
       </span>

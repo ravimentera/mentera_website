@@ -101,7 +101,7 @@ export const AccessibleAISection = () => {
                 scale: activeTab === "instant" ? 1.05 : 1,
               }}
               transition={{ duration: 0.3, ease: "easeInOut" }}
-              className="w-full sm:w-auto"
+              className="w-auto sm:w-auto"
             >
               <Button
                 variant={
@@ -119,7 +119,7 @@ export const AccessibleAISection = () => {
                 scale: activeTab === "faster" ? 1.05 : 1,
               }}
               transition={{ duration: 0.3, ease: "easeInOut" }}
-              className="w-full sm:w-auto"
+              className="w-auto sm:w-auto"
             >
               <Button
                 variant={
@@ -137,7 +137,7 @@ export const AccessibleAISection = () => {
                 scale: activeTab === "customers" ? 1.05 : 1,
               }}
               transition={{ duration: 0.3, ease: "easeInOut" }}
-              className="w-full sm:w-auto"
+              className="w-auto sm:w-auto"
             >
               <Button
                 variant={
@@ -202,11 +202,10 @@ export const AccessibleAISection = () => {
                 x: 0,
               }}
               transition={{ duration: 0.6, ease: "easeOut" }}
-              className={`space-y-4 sm:space-y-6 p-6 sm:p-10 md:p-14 ${
-                isEvenSlide
-                  ? "lg:absolute lg:right-0 lg:top-16 lg:max-w-[37.5rem]"
-                  : "lg:max-w-[37.5rem]"
-              }`}
+              className={`space-y-4 sm:space-y-6 p-6 sm:p-10 md:p-14 ${isEvenSlide
+                ? "lg:absolute lg:right-0 lg:top-16 lg:max-w-[37.5rem]"
+                : "lg:max-w-[37.5rem]"
+                }`}
             >
               <h3 className="text-2xl sm:text-3xl font-bold text-zinc-950 text-center sm:text-left">
                 {tabContent[activeTab].title}
@@ -253,11 +252,10 @@ export const AccessibleAISection = () => {
               initial={{ opacity: 0, y: isDesktop ? 100 : 0 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, ease: "easeOut", delay: 0.2 }}
-              className={`z-0 mt-6 sm:mt-8 px-6 sm:px-0 pb-6 sm:pb-0 ${
-                isEvenSlide
-                  ? "lg:absolute lg:left-16 lg:top-12 lg:max-w-[37.5rem] lg:mt-0 lg:px-0 lg:pb-0"
-                  : "lg:absolute lg:right-16 lg:top-12 lg:max-w-[37.5rem] lg:mt-0 lg:px-0 lg:pb-0"
-              }`}
+              className={`z-0 mt-6 sm:mt-8 px-6 sm:px-0 pb-6 sm:pb-0 ${isEvenSlide
+                ? "lg:absolute lg:left-16 lg:top-12 lg:max-w-[37.5rem] lg:mt-0 lg:px-0 lg:pb-0"
+                : "lg:absolute lg:right-16 lg:top-12 lg:max-w-[37.5rem] lg:mt-0 lg:px-0 lg:pb-0"
+                }`}
             >
               <div className="relative rounded-0 sm:rounded-[2rem] shadow-xl overflow-hidden w-full">
                 {/* Gradient border */}
