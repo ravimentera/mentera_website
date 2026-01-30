@@ -97,12 +97,12 @@ export const BlogDetailsPage = ({
         <div className="prose prose-lg max-w-none text-zinc-600 prose-headings:font-medium prose-headings:text-zinc-900 prose-p:leading-relaxed prose-li:marker:text-zinc-400">
           {post.content && typeof post.content !== "string"
             ? documentToReactComponents(
-                post.content as Document,
-                richTextOptions
-              )
+              post.content as Document,
+              richTextOptions
+            )
             : post.content && (
-                <div dangerouslySetInnerHTML={{ __html: post.content }} />
-              )}
+              <div dangerouslySetInnerHTML={{ __html: post.content as string }} />
+            )}
         </div>
       </article>
 

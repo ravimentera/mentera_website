@@ -114,7 +114,7 @@ export const IntegrationsSection = memo(() => {
                   {duplicatedRows[0].map((app, index) => (
                     <div
                       key={`row1-${index}`}
-                      className="flex-shrink-0 bg-gray-50 rounded-xl p-3 h-[4rem] w-[4rem] flex items-center justify-center border border-gray-200 shadow-md hover:border-purple-300 hover:shadow-lg transition-all"
+                      className="flex-shrink-0 bg-white rounded-xl p-3 h-[4rem] w-[4rem] flex items-center justify-center shadow-[0px_0px_9.73px_0px_#DDDFFF] hover:border-purple-300 hover:shadow-lg transition-all"
                     >
                       <img
                         src={`/app-logos/${app.image}`}
@@ -135,7 +135,7 @@ export const IntegrationsSection = memo(() => {
                   {duplicatedRows[1].map((app, index) => (
                     <div
                       key={`row2-${index}`}
-                      className="flex-shrink-0 bg-gray-50 rounded-xl p-3 h-[4rem] w-[4rem] flex items-center justify-center border border-gray-200 shadow-md hover:border-purple-300 hover:shadow-lg transition-all"
+                      className="flex-shrink-0 bg-white rounded-xl p-3 h-[4rem] w-[4rem] flex items-center justify-center shadow-[0px_0px_9.73px_0px_#DDDFFF] hover:border-purple-300 hover:shadow-lg transition-all"
                     >
                       <img
                         src={`/app-logos/${app.image}`}
@@ -156,7 +156,7 @@ export const IntegrationsSection = memo(() => {
                   {duplicatedRows[2].map((app, index) => (
                     <div
                       key={`row3-${index}`}
-                      className="flex-shrink-0 bg-gray-50 rounded-xl p-3 h-[4rem] w-[4rem] flex items-center justify-center border border-gray-200 shadow-md hover:border-purple-300 hover:shadow-lg transition-all"
+                      className="flex-shrink-0 bg-white rounded-xl p-3 h-[4rem] w-[4rem] flex items-center justify-center shadow-[0px_0px_9.73px_0px_#DDDFFF] hover:border-purple-300 hover:shadow-lg transition-all"
                     >
                       <img
                         src={`/app-logos/${app.image}`}

@@ -24,7 +24,7 @@ export const AccessibleAISection = () => {
 
   // Auto-rotate tabs every 3 seconds
   useEffect(() => {
-    // Only start auto-rotation if there are multiple tabs
+
     if (tabs.length <= 1) return;
 
     const interval = setInterval(() => {
@@ -48,7 +48,7 @@ export const AccessibleAISection = () => {
         "Get quick answers without digging",
       ],
       image: "/images/feature-01.png",
-      height: "h-[33.5rem]",
+      height: "h-auto",
     },
     faster: {
       title: "Work Faster",
@@ -59,7 +59,7 @@ export const AccessibleAISection = () => {
         "Smart suggestions that cut steps out of your workflow",
       ],
       image: "/images/feature-02.png",
-      height: "h-[33.5rem]",
+      height: "h-auto",
     },
     customers: {
       title: "Handle more customers",
@@ -70,7 +70,7 @@ export const AccessibleAISection = () => {
         "Reduce bottlenecks so your team stays ahead",
       ],
       image: "/images/feature-03.png",
-      height: "h-[28.5rem]",
+      height: "h-auto",
     },
   };
 
@@ -95,7 +95,7 @@ export const AccessibleAISection = () => {
             </p>
           </div>
 
-          <div className="flex flex-col items-center sm:flex-row sm:flex-wrap sm:justify-center gap-3 sm:gap-3 md:gap-4 max-w-full mx-auto mb-8 sm:mb-10 md:mb-14">
+          <div className="flex flex-row items-center flex-wrap justify-center gap-3 sm:gap-3 md:gap-4 max-w-full mx-auto mb-8 sm:mb-10 md:mb-14">
             <motion.div
               animate={{
                 scale: activeTab === "instant" ? 1.05 : 1,
@@ -189,7 +189,7 @@ export const AccessibleAISection = () => {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 0.3 }}
-            className="relative flex flex-col lg:block h-full"
+            className="relative flex flex-col lg:flex-row h-full gap-6 md:gap-18 justify-between"
           >
             {/* Content Section */}
             <motion.div
@@ -202,10 +202,7 @@ export const AccessibleAISection = () => {
                 x: 0,
               }}
               transition={{ duration: 0.6, ease: "easeOut" }}
-              className={`space-y-4 sm:space-y-6 p-6 sm:p-10 md:p-14 ${isEvenSlide
-                ? "lg:absolute lg:right-0 lg:top-16 lg:max-w-[37.5rem]"
-                : "lg:max-w-[37.5rem]"
-                }`}
+              className={`space-y-4 sm:space-y-6 lg:w-1/2 p-6 sm:p-16 sm:pr-0 pb-0`}
             >
               <h3 className="text-2xl sm:text-3xl font-bold text-zinc-950 text-center sm:text-left">
                 {tabContent[activeTab].title}
@@ -252,21 +249,18 @@ export const AccessibleAISection = () => {
               initial={{ opacity: 0, y: isDesktop ? 100 : 0 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, ease: "easeOut", delay: 0.2 }}
-              className={`z-0 mt-6 sm:mt-8 px-6 sm:px-0 pb-6 sm:pb-0 ${isEvenSlide
-                ? "lg:absolute lg:left-16 lg:top-12 lg:max-w-[37.5rem] lg:mt-0 lg:px-0 lg:pb-0"
-                : "lg:absolute lg:right-16 lg:top-12 lg:max-w-[37.5rem] lg:mt-0 lg:px-0 lg:pb-0"
-                }`}
+              className={`z-0 mt-0  pb-0 p-6 sm:p-16 lg:pr-16 lg:pt-16  w-full self-end lg:w-2/3 h-full flex flex-col justify-end items-center`}
             >
-              <div className="relative rounded-0 sm:rounded-[2rem] shadow-xl overflow-hidden w-full">
+              <div className="relative shadow-xl overflow-hidden w-auto h-auto max-h-full">
                 {/* Gradient border */}
                 <div className="absolute inset-0 rounded-[2rem] overflow-hidden">
                   <div className="backdrop-blur-sm rounded-[calc(2rem-4px)] h-full w-full"></div>
                 </div>
-                <div className="relative z-10 overflow-hidden rounded-0 sm:rounded-[calc(2rem-4px)]">
+                <div className="relative z-10 overflow-hidden">
                   <img
                     src={tabContent[activeTab].image}
                     alt={tabContent[activeTab].title}
-                    className="w-full h-auto object-cover rounded-0 sm:rounded-[calc(2rem-4px)]"
+                    className="w-auto h-auto max-w-full max-h-full object-contain mx-auto"
                   />
                 </div>
               </div>
