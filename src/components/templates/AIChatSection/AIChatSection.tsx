@@ -260,8 +260,8 @@ export const AIChatSection = () => {
 
         if (!response.ok) {
           const errorText = await response.text();
-          console.error("TheSys API Error Details:", errorText);
-          throw new Error(`TheSys API error: ${response.status} ${errorText}`);
+          console.error("Thesys API Error Details:", errorText);
+          throw new Error(`Thesys API error: ${response.status} ${errorText}`);
         }
         if (!response.body) throw new Error("No response body");
 
