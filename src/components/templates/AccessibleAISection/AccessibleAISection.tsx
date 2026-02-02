@@ -204,10 +204,10 @@ export const AccessibleAISection = () => {
               transition={{ duration: 0.6, ease: "easeOut" }}
               className={`space-y-4 sm:space-y-6 lg:w-1/2 p-6 sm:p-16 sm:pr-0 pb-0`}
             >
-              <h3 className="text-2xl sm:text-3xl font-bold text-zinc-950 text-center sm:text-left">
+              <h3 className="text-2xl sm:text-3xl font-bold text-zinc-950 text-left">
                 {tabContent[activeTab].title}
               </h3>
-              <p className="text-base sm:text-lg md:text-xl text-zinc-900 leading-relaxed text-center sm:text-left">
+              <p className="text-base sm:text-lg md:text-xl text-zinc-900 leading-relaxed text-left">
                 {tabContent[activeTab].subtitle}
               </p>
               <ul className="space-y-2 sm:space-y-3">
