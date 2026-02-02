@@ -249,7 +249,7 @@ export const AccessibleAISection = () => {
               initial={{ opacity: 0, y: isDesktop ? 100 : 0 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, ease: "easeOut", delay: 0.2 }}
-              className={`z-0 mt-0  pb-0 p-6 sm:p-16 lg:pr-16 lg:pt-16  w-full self-end lg:w-2/3 h-full flex flex-col justify-end items-center`}
+              className={`z-0 mt-0  pb-0 p-6 sm:p-16 sm:pb-0 lg:pr-16 lg:pt-16  w-full self-end lg:w-2/3 h-full flex flex-col justify-end items-center`}
             >
               <div className="relative shadow-xl overflow-hidden w-auto h-auto max-h-full">
                 {/* Gradient border */}

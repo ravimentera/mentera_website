@@ -30,6 +30,8 @@ const config: Config = {
           particle: "#C754CF",
           particleAlt: "#bc5ac7",
           particleAlt2: "#aa3db6",
+          light: "#3428DF0F", // Light purple background with opacity
+          "card-bg": "#fef7ff", // Light purple card background
           50: "#F6F4FD",
           100: "#E9D5FF",
           200: "#D1AAFF",
@@ -153,12 +155,15 @@ const config: Config = {
           "linear-gradient(135deg, #8F03A0 0%, rgba(143, 3, 160, 0) 99.5%)",
         "blog-blob-green":
           "linear-gradient(135deg, #6EF1BB 0%, rgba(110, 241, 187, 0) 99.5%)",
+        "purple-gradient":
+          "linear-gradient(170deg, #4D28DF 0%, #8F03A0 100%)",
       },
       blur: {
         huge: "216px",
       },
       boxShadow: {
         nav: "0 4px 16px 0 rgba(0,0,0,0.05)",
+        "integration-card": "0px 0px 9.73px 0px #DDDFFF",
       },
       aspectRatio: {
         blog: "16 / 10",
