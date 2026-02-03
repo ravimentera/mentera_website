@@ -90,7 +90,12 @@ const AnimatedStatValue = memo(
     return (
       <span
         ref={ref}
-        className="text-2xl sm:text-3xl md:text-4xl lg:text-4.5xl font-bold mb-2 sm:mb-3 block bg-gradient-to-r from-purple-500 to-purple bg-clip-text text-transparent [-webkit-text-fill-color:transparent]"
+        className="text-2xl sm:text-3xl md:text-4xl lg:text-4.5xl font-bold mb-2 sm:mb-3 block
+bg-purple-gradient
+bg-[length:200%_100%]
+bg-[position:0%_50%]
+bg-clip-text text-transparent
+[-webkit-text-fill-color:transparent]"
       >
         {displayValue}
       </span>
@@ -134,7 +139,7 @@ export const SavingsSection = memo(() => {
                 transition={transitions.staggered(index, 0.1)}
                 className="p-[1px] rounded-2xl bg-gradient-to-r from-purple-variant to-purple shadow-sm"
               >
-                <div className="bg-[#fef7ff] rounded-[calc(1rem-2px)] p-6 sm:p-8 h-full">
+                <div className="bg-purple-card-bg rounded-[calc(1rem-2px)] p-6 sm:p-8 h-full">
                   <AnimatedStatValue value={stat.value} delay={index * 0.1} />
                   <p className="text-sm sm:text-base md:text-lg text-zinc-950">
                     {stat.description}
