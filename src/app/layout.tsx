@@ -1,9 +1,9 @@
 import { ParticleBackground } from "@/components/atoms/ParticleBackground/ParticleBackground";
 import { Navigation } from "@/components/organisms/Navigation";
+import "@crayonai/react-ui/styles/index.css";
 import { Analytics } from "@vercel/analytics/react";
 import { Metadata } from "next";
 import "./globals.css";
-import "@crayonai/react-ui/styles/index.css";
 
 export const metadata: Metadata = {
   title: {
@@ -11,7 +11,7 @@ export const metadata: Metadata = {
     template: "%s | Mentera.ai",
   },
   description:
-    "Streamline your practices operations with an AI Assistant that puts your company's knowledge to work. From AI-powered follow ups, scribe, and front desk.",
+    "Mentera is the AI assistant for private medical practices. Automate follow-ups, front desk tasks, and clinical documentation. HIPAA compliant. Book a demo.",
   keywords: [
     "med spa software",
     "AI healthcare",
@@ -51,10 +51,6 @@ export const metadata: Metadata = {
   metadataBase: new URL("https://mentera.ai"),
   alternates: {
     canonical: "/",
-    languages: {
-      "en-US": "/en-US",
-      en: "/en",
-    },
   },
   openGraph: {
     type: "website",
@@ -63,7 +59,7 @@ export const metadata: Metadata = {
     siteName: "Mentera.ai",
     title: "Mentera - AI Assistant for Private Practices",
     description:
-      "Streamline your practices operations with an AI Assistant that puts your company's knowledge to work. From AI-powered follow ups, scribe, and front desk.",
+      "Mentera is the AI assistant for private medical practices. Automate follow-ups, front desk tasks, and clinical documentation. HIPAA compliant. Book a demo.",
     images: [
       {
         url: "/og-image.png",
@@ -78,7 +74,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Mentera - AI Assistant for Private Practices",
     description:
-      "Streamline your practices operations with an AI Assistant that puts your company's knowledge to work. From AI-powered follow ups, scribe, and front desk.",
+      "Mentera is the AI assistant for private medical practices. Automate follow-ups, front desk tasks, and clinical documentation. HIPAA compliant. Book a demo.",
     images: ["/og-image.png"],
     creator: "@mentera_ai",
     site: "@mentera_ai",
@@ -220,7 +216,10 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
           }}
         />
       </head>
-      <body suppressHydrationWarning className="min-h-screen flex flex-col antialiased tw-bg-white text-gray-900 bg-transparent overflow-x-hidden font-satoshi">
+      <body
+        suppressHydrationWarning
+        className="min-h-screen flex flex-col antialiased tw-bg-white text-gray-900 bg-transparent overflow-x-hidden font-satoshi"
+      >
         {/* Google Tag Manager (noscript) */}
         <noscript>
           <iframe

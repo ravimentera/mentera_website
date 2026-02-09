@@ -27,6 +27,9 @@ export async function generateMetadata({
   return {
     title: post.title as string,
     description: plainContent,
+    alternates: {
+      canonical: `https://mentera.ai/blog/${params.slug}`,
+    },
     openGraph: {
       title: post.title as string,
       description: plainContent,
