@@ -22,17 +22,12 @@ export const NewHeroSection = () => {
             transition={{ duration: 0.6 }}
             className="max-w-full lg:max-w-120 text-center sm:text-left"
           >
-            <div className="flex flex-col">
-              <p className="text-3xl sm:text-4xl md:text-5xl -mb-1 md:mb-1 leading-tight sm:leading-normal font-bold text-zinc-950">
-                Your entire business,
-              </p>
-              <div className="flex flex-wrap gap-2 sm:gap-3 items-start text-3xl sm:text-4xl md:text-5xl leading-tight sm:leading-normal font-bold justify-center sm:justify-start">
-                <span className="bg-gradient-to-r from-purple-500 to-purple bg-clip-text text-transparent [-webkit-text-fill-color:transparent]">
-                  one search
-                </span>
-                <span className="text-zinc-950">away</span>
-              </div>
-            </div>
+            <h1 className="text-3xl sm:text-4xl md:text-5xl -mb-1 md:mb-1 leading-tight sm:leading-normal font-bold text-zinc-950">
+              <span className="bg-gradient-to-r from-purple-500 to-purple bg-clip-text text-transparent [-webkit-text-fill-color:transparent]">
+                AI Assistant
+              </span>{" "}
+              for Private Medical Practices
+            </h1>
             <p className="text-base sm:text-lg md:text-xl leading-[1.3] text-zinc-950 mt-4 sm:mt-5 md:mt-6 mb-6 sm:mb-7 md:mb-8">
               Give your employee an{" "}
               <span className="font-bold">AI Assistant</span> that puts your
