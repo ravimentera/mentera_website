@@ -10,6 +10,9 @@ export const metadata: Metadata = {
     description:
       "Mentera plugs into your healthcare tools like DrChrono, Athena Health, and more. Boost your workflow with seamless integrations.",
   },
+  alternates: {
+    canonical: "https://mentera.ai/integrations",
+  },
 };
 
 export default function Page() {

@@ -3,104 +3,107 @@ import { Navigation } from "@/components/organisms/Navigation";
 import "@crayonai/react-ui/styles/index.css";
 import { Analytics } from "@vercel/analytics/react";
 import { Metadata } from "next";
+import Script from "next/script";
 import "./globals.css";
 
-export const metadata: Metadata = {
-  title: {
-    default: "Mentera - AI Assistant for Private Practices",
-    template: "%s | Mentera.ai",
-  },
-  description:
-    "Mentera is the AI assistant for private medical practices. Automate follow-ups, front desk tasks, and clinical documentation. HIPAA compliant. Book a demo.",
-  keywords: [
-    "med spa software",
-    "AI healthcare",
-    "patient management",
-    "medical aesthetics",
-    "practice management",
-    "AI assistant",
-    "medical spa",
-    "clinic management",
-    "healthcare automation",
-    "med spa CRM",
-    "patient scheduling software",
-    "medical practice software",
-    "aesthetic practice management",
-    "AI medical assistant",
-    "healthcare AI",
-    "med spa technology",
-    "patient care automation",
-    "medical appointment scheduling",
-    "EHR integration",
-    "HIPAA compliant software",
-  ],
-  authors: [{ name: "Mentera.ai", url: "https://mentera.ai" }],
-  creator: "Mentera.ai",
-  publisher: "Mentera.ai",
-  robots: {
-    index: true,
-    follow: true,
-    googleBot: {
+import { headers } from "next/headers";
+
+export async function generateMetadata(): Promise<Metadata> {
+  const headersList = headers();
+  const pathname = headersList.get("x-pathname") || "/";
+  const baseUrl = "https://mentera.ai";
+
+  return {
+    title: {
+      default: "Mentera - AI Assistant for Private Practices",
+      template: "%s | Mentera.ai",
+    },
+    description:
+      "Mentera is the AI assistant for private medical practices. Automate follow-ups, front desk tasks, and clinical documentation. HIPAA compliant. Book a demo.",
+    keywords: [
+      "med spa software",
+      "AI healthcare",
+      "patient management",
+      "medical aesthetics",
+      "practice management",
+      "AI assistant",
+      "medical spa",
+      "clinic management",
+      "healthcare automation",
+      "med spa CRM",
+      "patient scheduling software",
+      "medical practice software",
+      "aesthetic practice management",
+      "AI medical assistant",
+      "healthcare AI",
+      "med spa technology",
+      "patient care automation",
+      "medical appointment scheduling",
+      "EHR integration",
+      "HIPAA compliant software",
+    ],
+    authors: [{ name: "Mentera.ai", url: "https://mentera.ai" }],
+    creator: "Mentera.ai",
+    publisher: "Mentera.ai",
+    robots: {
       index: true,
       follow: true,
-      "max-video-preview": -1,
-      "max-image-preview": "large",
-      "max-snippet": -1,
-    },
-  },
-  metadataBase: new URL("https://mentera.ai"),
-  alternates: {
-    canonical: "/",
-  },
-  openGraph: {
-    type: "website",
-    locale: "en_US",
-    url: "https://mentera.ai",
-    siteName: "Mentera.ai",
-    title: "Mentera - AI Assistant for Private Practices",
-    description:
-      "Mentera is the AI assistant for private medical practices. Automate follow-ups, front desk tasks, and clinical documentation. HIPAA compliant. Book a demo.",
-    images: [
-      {
-        url: "/og-image.png",
-        width: 1200,
-        height: 630,
-        alt: "Mentera.ai Logo",
-        type: "image/png",
+      googleBot: {
+        index: true,
+        follow: true,
+        "max-video-preview": -1,
+        "max-image-preview": "large",
+        "max-snippet": -1,
       },
-    ],
-  },
-  twitter: {
-    card: "summary_large_image",
-    title: "Mentera - AI Assistant for Private Practices",
-    description:
-      "Mentera is the AI assistant for private medical practices. Automate follow-ups, front desk tasks, and clinical documentation. HIPAA compliant. Book a demo.",
-    images: ["/og-image.png"],
-    creator: "@mentera_ai",
-    site: "@mentera_ai",
-  },
-  verification: {
-    // Add verification codes when available
-    // google: "your-google-verification-code",
-    // yandex: "your-yandex-verification-code",
-    // yahoo: "your-yahoo-verification-code",
-  },
-  category: "Healthcare Technology",
-  classification: "Business Software",
-  other: {
-    "apple-mobile-web-app-capable": "yes",
-    "apple-mobile-web-app-status-bar-style": "default",
-    "apple-mobile-web-app-title": "Mentera",
-    "format-detection": "telephone=no",
-  },
-  icons: {
-    icon: [
-      { url: "/favicon.png", type: "image/png" },
-      { url: "/favicon.svg", type: "image/svg+xml" },
-    ],
-    apple: [{ url: "/apple-touch-icon.png", type: "image/png" }],
-  },
-};
+    },
+    metadataBase: new URL(baseUrl),
+    alternates: {
+      canonical: pathname,
+    },
+    openGraph: {
+      type: "website",
+      locale: "en_US",
+      url: baseUrl,
+      siteName: "Mentera.ai",
+      title: "Mentera - AI Assistant for Private Practices",
+      description:
+        "Mentera is the AI assistant for private medical practices. Automate follow-ups, front desk tasks, and clinical documentation. HIPAA compliant. Book a demo.",
+      images: [
+        {
+          url: "/og-image.png",
+          width: 1200,
+          height: 630,
+          alt: "Mentera.ai Logo",
+          type: "image/png",
+        },
+      ],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: "Mentera - AI Assistant for Private Practices",
+      description:
+        "Mentera is the AI assistant for private medical practices. Automate follow-ups, front desk tasks, and clinical documentation. HIPAA compliant. Book a demo.",
+      images: ["/og-image.png"],
+      creator: "@mentera_ai",
+      site: "@mentera_ai",
+    },
+    category: "Healthcare Technology",
+    classification: "Business Software",
+    other: {
+      "apple-mobile-web-app-capable": "yes",
+      "apple-mobile-web-app-status-bar-style": "default",
+      "apple-mobile-web-app-title": "Mentera",
+      "format-detection": "telephone=no",
+    },
+    icons: {
+      icon: [
+        { url: "/favicon.png", type: "image/png" },
+        { url: "/favicon.svg", type: "image/svg+xml" },
+      ],
+      apple: [{ url: "/apple-touch-icon.png", type: "image/png" }],
+    },
+  };
+}
 
 export const viewport = {
   width: "device-width",
@@ -118,7 +121,9 @@ export default function RootLayout({
     <html lang="en">
       <head>
         {/* Google Tag Manager */}
-        <script
+        <Script
+          id="gtm-head"
+          strategy="afterInteractive"
           dangerouslySetInnerHTML={{
             __html: `(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
 new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],

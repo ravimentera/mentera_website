@@ -10,6 +10,9 @@ export const metadata: Metadata = {
     description:
       "Need assistance? Contact Mentera's friendly support team. We're here to help you resolve any issues with your AI-powered healthcare assistant.",
   },
+  alternates: {
+    canonical: "https://mentera.ai/contact-support",
+  },
 };
 
 export default function Page() {
