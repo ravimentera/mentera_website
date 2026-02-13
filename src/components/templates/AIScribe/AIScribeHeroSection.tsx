@@ -30,7 +30,7 @@ export const AIScribeHeroSection = () => {
             transition={transitions.default}
             className="lg:col-span-5 max-w-lg mx-auto lg:mx-0 text-left"
           >
-            <div className="flex flex-col items-start gap-0">
+            <h1 className="flex flex-col items-start gap-0">
               <div className="flex flex-wrap gap-2 sm:gap-3 items-center justify-start text-[32px] sm:text-3xl md:text-4xl lg:text-5xl leading-[1.2] font-bold">
                 <span className="text-zinc-950">The</span>
                 <span className="bg-gradient-to-r from-purple-variant to-purple bg-clip-text text-transparent [-webkit-text-fill-color:transparent]">
@@ -40,7 +40,7 @@ export const AIScribeHeroSection = () => {
               <p className="text-[32px] sm:text-3xl md:text-4xl lg:text-5xl leading-[1.2] font-bold text-zinc-950">
                 for every clinician
               </p>
-            </div>
+            </h1>
 
             <p className="text-[15px] sm:text-lg md:text-xl lg:text-2xl leading-[1.6] text-zinc-950 mt-6 sm:mt-6 mb-7 sm:mb-8">
               Mentera captures your patient encounters in real time and quickly

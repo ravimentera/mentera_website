@@ -58,3 +58,6 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
 
   return [...staticPages, ...blogPostPages];
 }
+
+// Revalidate sitemap every hour so new Contentful posts appear without redeploy
+export const revalidate = 3600;

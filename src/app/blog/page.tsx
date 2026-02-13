@@ -13,6 +13,9 @@ export const metadata: Metadata = {
     description:
       "Stories, insights, and updates from the Mentera team shaping the future of patient care and med spa management.",
   },
+  alternates: {
+    canonical: "https://mentera.ai/blog",
+  },
 };
 
 export default async function Page() {
