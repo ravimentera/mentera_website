@@ -1,10 +1,9 @@
 "use client";
 
 import { Button } from "@/components/atoms/Button/Button";
-import { HubSpotFormDialog } from "@/components/molecules/HubSpotFormDialog/HubSpotFormDialog";
 import { fadeInUp, transitions } from "@/lib/animations";
 import { motion } from "framer-motion";
-import { useState } from "react";
+import Link from "next/link";
 
 // Steps configuration
 const STEPS = [
@@ -64,8 +63,6 @@ const STEPS = [
 ];
 
 export const HowItWorksSection = () => {
-  const [isDialogOpen, setIsDialogOpen] = useState(false);
-
   // Group steps into rows of 2
   const rows = [
     STEPS.slice(0, 2), // Row 1: Steps 1-2
@@ -109,9 +106,11 @@ export const HowItWorksSection = () => {
                     ...transitions.default,
                     delay: 0.1 * (rowIndex * 2 + stepIndex + 1),
                   }}
-                  className={`lg:col-span-${stepConfig.colSpan
-                    } bg-purple-light rounded-3xl ${stepConfig.customPadding || "p-6 md:p-10"
-                    } flex flex-col`}
+                  className={`lg:col-span-${
+                    stepConfig.colSpan
+                  } bg-purple-light rounded-3xl ${
+                    stepConfig.customPadding || "p-6 md:p-10"
+                  } flex flex-col`}
                 >
                   <div className="mb-6">
                     <div className="inline-flex items-center gap-2 bg-gradient-to-r from-purple-variant/10 to-purple/10 rounded-full px-4 py-2 mb-4">
@@ -156,9 +155,11 @@ export const HowItWorksSection = () => {
               viewport={{ once: true }}
               variants={fadeInUp}
               transition={{ ...transitions.default, delay: 0.5 }}
-              className={`lg:col-span-${STEPS[4].colSpan
-                } bg-purple-light rounded-3xl ${STEPS[4].customPadding || "p-6 md:p-10"
-                } flex flex-col`}
+              className={`lg:col-span-${
+                STEPS[4].colSpan
+              } bg-purple-light rounded-3xl ${
+                STEPS[4].customPadding || "p-6 md:p-10"
+              } flex flex-col`}
             >
               <div className="mb-6">
                 <div className="inline-flex items-center gap-2 bg-gradient-to-r from-purple-variant/10 to-purple/10 rounded-full px-4 py-2 mb-4">
@@ -207,25 +208,20 @@ export const HowItWorksSection = () => {
                 Book a demo to see how Mentera's AI Scribe can streamline your
                 workflow and enhance patient care.
               </p>
-              <Button
-                variant="purple"
-                size="md"
-                showArrow
-                className="rounded-full font-bold"
-                onClick={() => setIsDialogOpen(true)}
-              >
-                Get a Demo
-              </Button>
+              <Link href="/demo">
+                <Button
+                  variant="purple"
+                  size="md"
+                  showArrow
+                  className="rounded-full font-bold"
+                >
+                  Get a Demo
+                </Button>
+              </Link>
             </motion.div>
           </div>
         </div>
       </div>
-
-      {/* HubSpot Form Dialog */}
-      <HubSpotFormDialog
-        isOpen={isDialogOpen}
-        onClose={() => setIsDialogOpen(false)}
-      />
     </section>
   );
 };

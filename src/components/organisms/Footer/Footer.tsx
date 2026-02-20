@@ -1,12 +1,8 @@
 "use client";
 
-import { HubSpotFormDialog } from "@/components/molecules/HubSpotFormDialog/HubSpotFormDialog";
 import Link from "next/link";
-import { useState } from "react";
 
 export const Footer = () => {
-  const [isDialogOpen, setIsDialogOpen] = useState(false);
-
   return (
     <footer className="p-6 md:p-8 lg:p-12 relative overflow-hidden">
       <div className="rounded-2xl sm:rounded-3xl max-w-8xl bg-purple mx-auto px-6 sm:px-10 md:px-14 py-6 sm:py-8 md:py-9">
@@ -16,8 +12,8 @@ export const Footer = () => {
             Business AI that works.
           </h2>
           <div className="flex justify-center">
-            <button
-              onClick={() => setIsDialogOpen(true)}
+            <Link
+              href="/demo"
               className="bg-white text-purple px-8 py-4 rounded-full font-bold hover:bg-white/90 transition-colors inline-flex items-center gap-2"
             >
               Get a Demo
@@ -30,15 +26,9 @@ export const Footer = () => {
               >
                 <path d="M5 12h14M12 5l7 7-7 7" />
               </svg>
-            </button>
+            </Link>
           </div>
         </div>
-
-        {/* HubSpot Form Dialog */}
-        <HubSpotFormDialog
-          isOpen={isDialogOpen}
-          onClose={() => setIsDialogOpen(false)}
-        />
 
         {/* Middle Section: Compliance Badges and Navigation Links */}
         <div className="flex flex-col md:flex-row justify-between items-center mb-6 sm:mb-8 gap-4 sm:gap-6">

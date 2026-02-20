@@ -54,7 +54,7 @@ export const Navigation = ({ className }: NavigationProps) => {
       "hover:opacity-80 transition-opacity",
       isActive(href)
         ? "font-bold bg-gradient-to-r from-purple-variant to-purple bg-clip-text text-transparent [-webkit-text-fill-color:transparent]"
-        : "font-medium text-zinc-950"
+        : "font-medium text-zinc-950",
     );
   };
 
@@ -62,7 +62,7 @@ export const Navigation = ({ className }: NavigationProps) => {
     <header
       className={cn(
         "fixed top-0 left-0 right-0 z-50 w-full bg-white transition-all duration-300",
-        className
+        className,
       )}
     >
       <div className="px-4 sm:px-6 md:px-12 lg:px-24 flex items-center justify-between h-14 sm:h-16 md:h-20 lg:h-24 bg-white shadow-nav">
@@ -96,12 +96,12 @@ export const Navigation = ({ className }: NavigationProps) => {
                 Log In
               </Button>
             </Link>
-            <Link href="https://mentera-app.vercel.app/login">
+            <Link href="/demo">
               <Button
                 variant="primary"
                 className="bg-purple text-white px-4 xl:px-6 py-2 xl:py-3 rounded-full text-sm xl:text-base font-bold hover:bg-purple/90 transition-colors"
               >
-                Get Started
+                Book a Demo
               </Button>
             </Link>
           </div>
@@ -116,19 +116,19 @@ export const Navigation = ({ className }: NavigationProps) => {
           <span
             className={cn(
               "bg-zinc-950 h-0.5 w-6 rounded-full transition-all duration-300",
-              isMenuOpen && "rotate-45 translate-y-1.5"
+              isMenuOpen && "rotate-45 translate-y-1.5",
             )}
           />
           <span
             className={cn(
               "bg-zinc-950 h-0.5 w-6 rounded-full my-1 transition-all duration-300",
-              isMenuOpen && "opacity-0"
+              isMenuOpen && "opacity-0",
             )}
           />
           <span
             className={cn(
               "bg-zinc-950 h-0.5 w-6 rounded-full transition-all duration-300",
-              isMenuOpen && "-rotate-45 -translate-y-1.5"
+              isMenuOpen && "-rotate-45 -translate-y-1.5",
             )}
           />
         </button>
@@ -199,16 +199,13 @@ export const Navigation = ({ className }: NavigationProps) => {
                         Log In
                       </Button>
                     </Link>
-                    <Link
-                      href="https://mentera-app.vercel.app/login"
-                      className="w-full"
-                    >
+                    <Link href="/demo" className="w-full">
                       <Button
                         variant="primary"
                         className="bg-purple text-white rounded-full font-bold w-full"
                         onClick={handleNavLinkClick}
                       >
-                        Get Started
+                        Book a Demo
                       </Button>
                     </Link>
                   </div>

@@ -1,14 +1,11 @@
 "use client";
 
 import { Button } from "@/components/atoms/Button/Button";
-import { HubSpotFormDialog } from "@/components/molecules/HubSpotFormDialog/HubSpotFormDialog";
 import { fadeInRight, fadeInUp, transitions } from "@/lib/animations";
 import { motion } from "framer-motion";
-import { useState } from "react";
+import Link from "next/link";
 
 export const AIScribeHeroSection = () => {
-  const [isDialogOpen, setIsDialogOpen] = useState(false);
-
   return (
     <section className="relative w-full min-h-screen flex items-center justify-center overflow-hidden pt-20 lg:pt-24">
       {/* Background gradient blobs */}
@@ -48,15 +45,16 @@ export const AIScribeHeroSection = () => {
             </p>
 
             <div className="flex flex-col sm:flex-row gap-4 items-start sm:items-start justify-start">
-              <Button
-                variant="purple"
-                size="md"
-                showArrow
-                className="rounded-full font-bold px-7 py-3 text-[15px] sm:w-auto"
-                onClick={() => setIsDialogOpen(true)}
-              >
-                Get a Demo
-              </Button>
+              <Link href="/demo">
+                <Button
+                  variant="purple"
+                  size="md"
+                  showArrow
+                  className="rounded-full font-bold px-7 py-3 text-[15px] sm:w-auto"
+                >
+                  Get a Demo
+                </Button>
+              </Link>
             </div>
           </motion.div>
 
@@ -85,12 +83,6 @@ export const AIScribeHeroSection = () => {
           </motion.div>
         </div>
       </div>
-
-      {/* HubSpot Form Dialog */}
-      <HubSpotFormDialog
-        isOpen={isDialogOpen}
-        onClose={() => setIsDialogOpen(false)}
-      />
     </section>
   );
 };
