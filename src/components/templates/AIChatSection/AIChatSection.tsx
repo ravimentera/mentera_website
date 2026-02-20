@@ -1,6 +1,6 @@
 "use client";
 
-import { HubSpotFormDialog } from "@/components/molecules/HubSpotFormDialog/HubSpotFormDialog";
+import Link from "next/link";
 import { AnimatePresence, motion } from "framer-motion";
 import { useEffect, useRef, useState } from "react";
 import ReactMarkdown from "react-markdown";
@@ -108,7 +108,6 @@ export const AIChatSection = () => {
   });
   const [isStreaming, setIsStreaming] = useState(false);
   const [isLoggedIn, setIsLoggedIn] = useState(false); // Mock login state
-  const [isDemoDialogOpen, setIsDemoDialogOpen] = useState(false);
   const [tokenCount, setTokenCount] = useState(() => {
     if (typeof window !== "undefined") {
       const stored = localStorage.getItem(TOKEN_STORAGE_KEY);
@@ -588,12 +587,12 @@ export const AIChatSection = () => {
                         </h4>
                       </div>
                       <div className="flex items-center gap-8">
-                        <button
-                          onClick={() => setIsDemoDialogOpen(true)}
+                        <Link
+                          href="/demo"
                           className="px-10 py-3.5 bg-brand-purple-button text-white rounded-full font-bold hover:opacity-90 transition-all shadow-md"
                         >
                           Book a demo
-                        </button>
+                        </Link>
                       </div>
                     </div>
                   )}
@@ -665,10 +664,6 @@ export const AIChatSection = () => {
           </motion.div>
         </div>
       </section>
-      <HubSpotFormDialog
-        isOpen={isDemoDialogOpen}
-        onClose={() => setIsDemoDialogOpen(false)}
-      />
     </>
   );
 };

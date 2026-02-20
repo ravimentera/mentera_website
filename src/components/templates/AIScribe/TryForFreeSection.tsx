@@ -1,14 +1,11 @@
 "use client";
 
 import { Button } from "@/components/atoms/Button/Button";
-import { HubSpotFormDialog } from "@/components/molecules/HubSpotFormDialog/HubSpotFormDialog";
 import { fadeInUp, transitions } from "@/lib/animations";
 import { motion } from "framer-motion";
-import { useState } from "react";
+import Link from "next/link";
 
 export const TryForFreeSection = () => {
-  const [isDialogOpen, setIsDialogOpen] = useState(false);
-
   return (
     <section className="relative w-full pb-6 sm:p-12">
       <div className="max-w-8xl mx-auto px-6 sm:px-8 md:px-12 lg:px-0">
@@ -28,24 +25,19 @@ export const TryForFreeSection = () => {
               We know once you try Mentera, you won't want to work without it.
               So give it a go!
             </p>
-            <Button
-              variant="purple"
-              size="md"
-              showArrow
-              className="rounded-full"
-              onClick={() => setIsDialogOpen(true)}
-            >
-              Get a Demo
-            </Button>
+            <Link href="/demo">
+              <Button
+                variant="purple"
+                size="md"
+                showArrow
+                className="rounded-full"
+              >
+                Get a Demo
+              </Button>
+            </Link>
           </div>
         </motion.div>
       </div>
-
-      {/* HubSpot Form Dialog */}
-      <HubSpotFormDialog
-        isOpen={isDialogOpen}
-        onClose={() => setIsDialogOpen(false)}
-      />
     </section>
   );
 };
