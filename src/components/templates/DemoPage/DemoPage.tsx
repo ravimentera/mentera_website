@@ -228,52 +228,36 @@ export const DemoPage = () => {
         <div className="grid lg:grid-cols-2 gap-12 lg:gap-24">
           {/* Left Column - Header Content */}
           <div className="flex flex-col justify-start pt-4">
-            <h1 className="font-satoshi font-medium text-3xl sm:text-4xl lg:text-4.5xl text-zinc-900 mb-4">
-              Book a Demo
+            <h1 className="font-satoshi font-medium text-3xl sm:text-4xl lg:text-4.5xl text-zinc-900 mb-6">
+              See Mentera In Action
             </h1>
-            <p className="font-satoshi font-medium text-lg text-zinc-900 mb-6">
-              Tell Us a Bit About You & Your Needs
-            </p>
-            <p className="font-satoshi font-normal text-base text-text-secondary max-w-md mb-8">
-              Experience Business AI that actually delivers results - tailored
-              to your team, compliant, and ready to scale.
+            <p className="font-satoshi font-normal text-base text-text-secondary max-w-lg mb-10">
+              Curious to discover how Mentera can help your practice? Get in
+              touch with our team to learn more.
             </p>
 
-            <div className="space-y-4">
-              <p className="font-satoshi font-normal text-base text-text-secondary max-w-md">
-                Get a personalized walkthrough designed for decision-makers like
-                you:
+            <div className="space-y-6 max-w-lg">
+              <div>
+                <p className="font-satoshi font-bold text-base text-zinc-900 mb-2">
+                  What to expect on the call:
+                </p>
+                <p className="font-satoshi font-normal text-base text-text-secondary">
+                  In 15 minutes, we&apos;ll walk through how your practice
+                  currently handles scheduling, patient communication, and
+                  follow-ups, then show you exactly where Mentera&apos;s AI can
+                  save your team time and recover lost revenue.
+                </p>
+              </div>
+
+              <p className="font-satoshi font-normal text-base text-text-secondary">
+                No pressure, no generic demo. Just a focused conversation about
+                your practice.
               </p>
-              <ul className="space-y-3 text-text-secondary font-satoshi text-sm max-w-md">
-                <li className="flex items-start gap-2">
-                  <span className="w-1.5 h-1.5 rounded-full bg-zinc-900 mt-2 flex-shrink-0" />
-                  <span>
-                    Live 1:1 session tailored to your industry, use case, and
-                    challenges
-                  </span>
-                </li>
-                <li className="flex items-start gap-2">
-                  <span className="w-1.5 h-1.5 rounded-full bg-zinc-900 mt-2 flex-shrink-0" />
-                  <span>
-                    How Mentera automates workflows, boosts efficiency, and
-                    drives measurable ROI
-                  </span>
-                </li>
-                <li className="flex items-start gap-2">
-                  <span className="w-1.5 h-1.5 rounded-full bg-zinc-900 mt-2 flex-shrink-0" />
-                  <span>
-                    Answers to all your questions: integration, pricing,
-                    deployment, and team onboarding
-                  </span>
-                </li>
-                <li className="flex items-start gap-2">
-                  <span className="w-1.5 h-1.5 rounded-full bg-zinc-900 mt-2 flex-shrink-0" />
-                  <span>
-                    No pressure — just clarity on how we can help your business
-                    work smarter
-                  </span>
-                </li>
-              </ul>
+
+              <p className="font-satoshi font-semibold text-base text-purple">
+                Trusted by dental, med spa, and wellness practices across the
+                U.S.
+              </p>
             </div>
           </div>
 
