@@ -2,13 +2,13 @@ import { DemoPage } from "@/components/templates/DemoPage/DemoPage";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Book a Demo - See Mentera AI in Action",
+  title: "See Mentera In Action - Book a Demo",
   description:
-    "Schedule a personalized demo of Mentera's AI assistant for private medical practices. See how we automate workflows, boost efficiency, and deliver measurable ROI.",
+    "Curious to discover how Mentera can help your practice? Get in touch with our team. In 15 minutes, we'll show you where Mentera's AI can save your team time and recover lost revenue.",
   openGraph: {
-    title: "Book a Demo - See Mentera AI in Action",
+    title: "See Mentera In Action - Book a Demo",
     description:
-      "Schedule a personalized demo of Mentera's AI assistant for private medical practices. See how we automate workflows, boost efficiency, and deliver measurable ROI.",
+      "Curious to discover how Mentera can help your practice? Get in touch with our team. In 15 minutes, we'll show you where Mentera's AI can save your team time and recover lost revenue.",
   },
   alternates: {
     canonical: "https://mentera.ai/demo",
