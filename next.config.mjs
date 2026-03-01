@@ -8,6 +8,21 @@ const nextConfig = {
             },
         ];
     },
+    async redirects () {
+        return [
+            {
+                source: '/:path*',
+                has: [
+                    {
+                        type: 'host',
+                        value: 'www.mentera.ai',
+                    },
+                ],
+                destination: 'https://mentera.ai/:path*',
+                permanent: true,
+            },
+        ];
+    },
     env: {
         THESYS_API_KEY: process.env.THESYS_API_KEY,
     },
