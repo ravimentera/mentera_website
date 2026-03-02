@@ -15,7 +15,7 @@ export function PrivacyPolicyContent() {
         {/* Effective Date */}
         <div className="font-satoshi font-normal text-sm leading-normal text-zinc-600 mb-8">
           <p>Effective Date: March 12, 2025</p>
-          <p>Last Updated: December 5, 2025</p>
+          <p>Last Updated: March 1, 2026</p>
         </div>
 
         {/* Introduction */}

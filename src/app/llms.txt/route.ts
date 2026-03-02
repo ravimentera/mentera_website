@@ -1,4 +1,13 @@
+import { blogService } from "@/services/blogService";
+
 export async function GET() {
+  const baseUrl = "https://mentera.ai";
+  const blogPosts = await blogService.getAllPosts();
+
+  const blogPostLinks = blogPosts
+    .map((post) => `- ${post.title}: ${baseUrl}/blog/${post.slug}`)
+    .join("\n");
+
   const content = `# Mentera.ai
 ## AI Assistant for Private Medical Practices
 
@@ -12,18 +21,14 @@ export async function GET() {
 - Founded for private practices (not hospitals or enterprise health systems)
 
 ## Key Pages
-- Homepage: https://mentera.ai
-- AI Scribe: https://mentera.ai/ai-scribe
-- Integrations: https://mentera.ai/integrations
-- Blog: https://mentera.ai/blog
-- Privacy Policy: https://mentera.ai/privacy-policy
+- Homepage: ${baseUrl}
+- AI Scribe: ${baseUrl}/ai-scribe
+- Integrations: ${baseUrl}/integrations
+- Blog: ${baseUrl}/blog
+- Privacy Policy: ${baseUrl}/privacy-policy
 
 ## Blog Posts
-- Your Med Spa Doesn't Have a Staffing Problem: https://mentera.ai/blog/why-your-med-spa-is-losing-patients-and-revenue
-- Top AI Scribe Tools for Med Spas 2026: https://mentera.ai/blog/top-ai-scribe-tools-med-spas-2026
-- Top 3 AI Courses to Automate Your Private Practice: https://mentera.ai/blog/top-3-ai-courses-to-automate-your-private-practice
-- Top AI Scribe Tools for Dentists 2026: https://mentera.ai/blog/top-ai-scribe-tools-dentists-2026
-- 5 Ways AI Can Streamline Patient Communication: https://mentera.ai/blog/5-ways-ai-can-streamline-patient-communication-and-boost-satisfaction
+${blogPostLinks}
 
 ## Contact
 - Website: https://mentera.ai
@@ -32,7 +37,7 @@ export async function GET() {
 
   return new Response(content, {
     headers: {
-      "Content-Type": "text/plain",
+      "Content-Type": "text/plain; charset=utf-8",
     },
   });
 }

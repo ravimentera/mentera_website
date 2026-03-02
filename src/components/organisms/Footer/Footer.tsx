@@ -78,7 +78,7 @@ export const Footer = () => {
           {/* Logo and Copyright */}
           <div className="flex items-center gap-3 md:gap-4">
             <p className="text-white text-xs sm:text-sm font-normal">
-              © 2025 Mentera. All rights reserved.
+              © 2026 Mentera. All rights reserved.
             </p>
           </div>
 
