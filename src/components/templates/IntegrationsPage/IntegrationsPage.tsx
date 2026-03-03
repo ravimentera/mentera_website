@@ -39,6 +39,27 @@ const integrations: Integration[] = [
     category: "EHR",
   },
   {
+    name: "Dentrix",
+    description:
+      "Practice management and clinical software designed for dental offices.",
+    image: "/app-logos/app-dentrix.png",
+    category: "EHR",
+  },
+  {
+    name: "PatientNow",
+    description:
+      "Medical aesthetics platform for patient engagement and practice operations.",
+    image: "/app-logos/app-patientnow.png",
+    category: "EHR",
+  },
+  {
+    name: "Denticon",
+    description:
+      "Cloud-based dental practice management software for clinical and office workflows.",
+    image: "/app-logos/app-denticon.png",
+    category: "EHR",
+  },
+  {
     name: "Jane App",
     description:
       "Practice management software for health and wellness professionals.",
@@ -50,6 +71,27 @@ const integrations: Integration[] = [
     description:
       "Cloud-based platform for SMS, voice, and patient communication APIs.",
     image: "/app-logos/app-twilio.png",
+    category: "Communication",
+  },
+  {
+    name: "Gmail",
+    description:
+      "Email service for communication, inbox management, and business messaging.",
+    image: "/app-logos/app-gmail.png",
+    category: "Communication",
+  },
+  {
+    name: "Microsoft Outlook",
+    description:
+      "Email and calendar platform for communication, scheduling, and collaboration.",
+    image: "/app-logos/app-microsoft-outlook.png",
+    category: "Communication",
+  },
+  {
+    name: "WhatsApp Business",
+    description:
+      "Business messaging app for customer support, notifications, and engagement.",
+    image: "/app-logos/app-whatsapp-business.png",
     category: "Communication",
   },
   {
@@ -65,6 +107,27 @@ const integrations: Integration[] = [
       "All-in-one marketing automation platform for email campaigns.",
     image: "/app-logos/app-mailchimp.png",
     category: "Marketing",
+  },
+  {
+    name: "Salesforce",
+    description:
+      "Customer relationship management platform for sales and support workflows.",
+    image: "/app-logos/app-salesforce.png",
+    category: "CRM",
+  },
+  {
+    name: "HubSpot",
+    description:
+      "CRM platform for marketing automation, sales pipelines, and customer service.",
+    image: "/app-logos/app-hubspot.png",
+    category: "CRM",
+  },
+  {
+    name: "GoHighLevel",
+    description:
+      "CRM and marketing automation platform for sales funnels and communications.",
+    image: "/app-logos/app-gohighlevel.png",
+    category: "CRM",
   },
   {
     name: "Stripe",
@@ -84,6 +147,13 @@ const integrations: Integration[] = [
     description:
       "Point-of-sale and payment platform for physical and online commerce.",
     image: "/app-logos/app-clover.png",
+    category: "Payments",
+  },
+  {
+    name: "PayPal",
+    description:
+      "Digital payments platform for online checkout and money transfers.",
+    image: "/app-logos/app-paypal.png",
     category: "Payments",
   },
   {
@@ -128,6 +198,20 @@ const integrations: Integration[] = [
     category: "File Storage",
   },
   {
+    name: "Dropbox",
+    description:
+      "Cloud storage and file sync platform for team collaboration.",
+    image: "/app-logos/app-dropbox.png",
+    category: "File Storage",
+  },
+  {
+    name: "Google Drive",
+    description:
+      "Cloud file storage and document collaboration platform.",
+    image: "/app-logos/app-google-drive.png",
+    category: "File Storage",
+  },
+  {
     name: "Microsoft Teams",
     description:
       "Team communication platform for chat, meetings, and collaboration.",
@@ -153,6 +237,13 @@ const integrations: Integration[] = [
     description:
       "Accounting software for invoicing, bookkeeping, and financial tracking.",
     image: "/app-logos/app-quickbooks.png",
+    category: "Finance",
+  },
+  {
+    name: "Xero",
+    description:
+      "Cloud accounting software for invoicing, reconciliation, and bookkeeping.",
+    image: "/app-logos/app-xero.png",
     category: "Finance",
   },
   {
@@ -256,7 +347,11 @@ export const IntegrationsPage = () => {
                   <button
                     key={category}
                     type="button"
-                    onClick={() => setSelectedCategory(category)}
+                    onClick={() =>
+                      setSelectedCategory((currentCategory) =>
+                        currentCategory === category ? "All" : category
+                      )
+                    }
                     className={`whitespace-nowrap rounded-full border px-4 py-2 text-sm font-medium transition ${
                       isActive
                         ? "border-zinc-900 bg-zinc-900 text-white"
