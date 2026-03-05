@@ -11,6 +11,16 @@ type Integration = {
   category: string;
 };
 
+const groupedCategoryByRaw: Record<string, string> = {
+  "Social Media": "Marketing",
+  "File Storage": "Productivity",
+  Scheduling: "Productivity",
+  Finance: "Payments",
+};
+
+const getGroupedCategory = (category: string) =>
+  groupedCategoryByRaw[category] ?? category;
+
 const integrations: Integration[] = [
   {
     name: "DrChrono",
@@ -260,7 +270,12 @@ export const IntegrationsPage = () => {
   const [selectedCategory, setSelectedCategory] = useState("All");
 
   const categories = useMemo(
-    () => ["All", ...Array.from(new Set(integrations.map((item) => item.category)))],
+    () => [
+      "All",
+      ...Array.from(
+        new Set(integrations.map((item) => getGroupedCategory(item.category)))
+      ),
+    ],
     []
   );
 
@@ -272,10 +287,12 @@ export const IntegrationsPage = () => {
         !normalizedQuery ||
         integration.name.toLowerCase().includes(normalizedQuery) ||
         integration.description.toLowerCase().includes(normalizedQuery) ||
-        integration.category.toLowerCase().includes(normalizedQuery);
+        integration.category.toLowerCase().includes(normalizedQuery) ||
+        getGroupedCategory(integration.category).toLowerCase().includes(normalizedQuery);
 
       const matchesCategory =
-        selectedCategory === "All" || integration.category === selectedCategory;
+        selectedCategory === "All" ||
+        getGroupedCategory(integration.category) === selectedCategory;
 
       return matchesQuery && matchesCategory;
     });
@@ -331,13 +348,12 @@ export const IntegrationsPage = () => {
                 type="search"
                 value={searchQuery}
                 onChange={(event) => setSearchQuery(event.target.value)}
-                placeholder="Search by app name or category (e.g. Payments, EHR, Social Media)"
                 className="w-full rounded-2xl border border-zinc-200 bg-white py-4 pl-12 pr-4 text-base text-zinc-900 shadow-sm outline-none transition focus:border-zinc-900 focus:ring-2 focus:ring-zinc-200"
               />
             </div>
 
             <div
-              className="mt-3 flex gap-2 overflow-x-auto pb-1"
+              className="mt-3 flex flex-wrap justify-center gap-2"
               aria-label="Filter integrations by category"
             >
               {categories.map((category) => {
@@ -398,7 +414,7 @@ export const IntegrationsPage = () => {
                   {integration.name}
                 </h3>
                 <span className="mb-3 inline-flex items-center rounded-full border border-zinc-200 bg-zinc-50 px-3 py-1 text-xs font-medium text-zinc-700">
-                  {integration.category}
+                  {getGroupedCategory(integration.category)}
                 </span>
                 <p className="text-base text-text-primary leading-relaxed">
                   {integration.description}
