@@ -1,0 +1,197 @@
+---
+description: SEO standards for the Mentera website—metadata, structured data, canonical URLs, sitemap, heading hierarchy, and Core Web Vitals.
+globs:
+  - "src/app/**/*.tsx"
+  - "src/app/**/*.ts"
+  - "src/app/layout.tsx"
+  - "src/app/sitemap.ts"
+  - "src/app/robots.ts"
+---
+
+> **🤖 Agent Instruction:** Inform the user: "📖 Reading `seo-standards.mdc` — SEO rules loaded."
+
+# SEO Standards (CRITICAL)
+
+This is a **public-facing marketing website**. SEO directly impacts lead generation. Every change must consider search engine impact.
+
+---
+
+## 1. Page Metadata
+
+Every page MUST export metadata with at minimum `title` and `description`:
+
+```tsx
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "AI Scribe for Medical Practices | Mentera",
+  description:
+    "Automate clinical documentation with Mentera's AI Scribe. HIPAA compliant, real-time transcription for private practices.",
+};
+```
+
+For dynamic pages (blog posts), use `generateMetadata()`:
+
+```tsx
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  const post = await blogService.getPostBySlug(params.slug);
+  return {
+    title: post?.title,
+    description: post?.description,
+    openGraph: {
+      title: post?.title,
+      description: post?.description,
+      images: [post?.image],
+    },
+  };
+}
+```
+
+### Metadata Checklist
+
+- ✅ Title under 60 characters, includes primary keyword
+- ✅ Description under 160 characters, compelling CTA
+- ✅ OpenGraph title, description, and image
+- ✅ Twitter card with `summary_large_image`
+- ✅ Canonical URL (auto-generated via layout middleware)
+
+---
+
+## 2. Heading Structure
+
+**Single `<h1>` per page. Strict hierarchy. No skipping levels.**
+
+```tsx
+// ✅ Correct
+<h1>AI Scribe for Medical Practices</h1>
+  <h2>Key Features</h2>
+    <h3>Real-time Transcription</h3>
+    <h3>HIPAA Compliance</h3>
+  <h2>Pricing</h2>
+
+// ❌ Wrong — skipping h2
+<h1>AI Scribe</h1>
+  <h3>Features</h3>      // BAD: skipped h2!
+```
+
+### Rules
+
+- Only ONE `<h1>` per page (enforced)
+- `<h2>` for major page sections
+- `<h3>` for subsections within an `<h2>`
+- Use semantic HTML: `<main>`, `<section>`, `<article>`, `<nav>`, `<header>`, `<footer>`
+
+---
+
+## 3. Canonical URLs
+
+The middleware (`src/middleware.ts`) injects `x-pathname` into headers, which the root layout uses to generate canonical URLs dynamically via `alternates.canonical`.
+
+- **Never** hardcode canonical URLs in individual pages
+- The root layout handles it automatically
+- Base URL: `https://mentera.ai`
+
+---
+
+## 4. Structured Data (JSON-LD)
+
+Root layout includes Organization, WebSite, and SoftwareApplication schema.
+
+When adding new page types, add appropriate schema:
+
+- **Blog posts** → `Article` or `BlogPosting` schema
+- **Product pages** → `SoftwareApplication` or `Product` schema
+- **FAQ sections** → `FAQPage` schema
+
+```tsx
+<script
+  type="application/ld+json"
+  dangerouslySetInnerHTML={{
+    __html: JSON.stringify({
+      "@context": "https://schema.org",
+      "@type": "Article",
+      headline: post.title,
+      datePublished: post.date,
+      author: { "@type": "Person", name: post.author },
+    }),
+  }}
+/>
+```
+
+---
+
+## 5. Sitemap (`src/app/sitemap.ts`)
+
+**Every public page must be in the sitemap.**
+
+When adding a new page:
+
+1. Add entry to `staticPages` array in `sitemap.ts`
+2. Set appropriate `changeFrequency` and `priority`
+3. Blog posts are auto-included from Contentful
+
+### Priority Guide
+
+| Page Type                               | Priority | Change Frequency |
+| :-------------------------------------- | :------- | :--------------- |
+| Homepage                                | 1.0      | weekly           |
+| Product pages (AI Scribe, Integrations) | 0.9      | monthly          |
+| Demo / Contact                          | 0.9      | monthly          |
+| Blog listing                            | 0.9      | weekly           |
+| Blog posts                              | 0.8      | monthly          |
+| Legal pages                             | 0.5      | yearly           |
+
+---
+
+## 6. Robots
+
+`src/app/robots.ts` controls crawler access:
+
+- Allow: `/` (everything public)
+- Disallow: `/api/`, `/admin/`
+- Sitemap reference: `https://mentera.ai/sitemap.xml`
+
+---
+
+## 7. Images
+
+- Always use `next/image` `<Image>` for automatic optimization, lazy loading, and responsive sizing
+- Set `alt` text on every image (accessibility + SEO)
+- Use `priority` prop for the first visible image (LCP optimization)
+- OG image: `/og-image.png` (1200x630)
+- Blog images: served from Contentful CDN or `/images/blog-medspa-*.jpg` placeholders
+
+---
+
+## 8. Core Web Vitals
+
+| Metric                                  | Target  | How to Maintain                                                           |
+| :-------------------------------------- | :------ | :------------------------------------------------------------------------ |
+| **LCP** (Largest Contentful Paint)      | < 2.5s  | Optimize hero image, use `priority` prop                                  |
+| **CLS** (Cumulative Layout Shift)       | < 0.1   | Set explicit `width`/`height` on images, avoid dynamic content above fold |
+| **FID/INP** (Interaction to Next Paint) | < 200ms | Minimize client-side JS, defer non-critical scripts                       |
+
+### Script Loading
+
+- GTM: `strategy="afterInteractive"` (not blocking)
+- GTM init (dataLayer): `strategy="beforeInteractive"` (required for tracking)
+- Vercel Analytics: loaded as component (already optimized)
+
+---
+
+## 9. LLMs.txt
+
+The site serves `/llms.txt` for AI model discoverability. Update this file when adding significant new content or product features.
+
+---
+
+## Anti-Patterns (SEO)
+
+- ❌ Pages without `metadata` export
+- ❌ Multiple `<h1>` tags on a page
+- ❌ Skipping heading levels (h1 → h3)
+- ❌ Missing `alt` text on images
+- ❌ New pages not added to `sitemap.ts`
+- ❌ Using `<img>` instead of `next/image`
+- ❌ Blocking scripts loaded with `beforeInteractive` unnecessarily
+- ❌ Content loaded client-side that should be server-rendered for indexability

@@ -1,0 +1,161 @@
+---
+description: Mentera website engineering standards—architecture, TypeScript, Tailwind CSS, Framer Motion, Contentful, and clean code patterns.
+globs:
+  - "src/**/*.tsx"
+  - "src/**/*.ts"
+---
+
+> **🤖 Agent Instruction:** Inform the user: "📖 Reading `coding-guidelines.mdc` — website coding standards."
+
+# Mentera Website — Coding & Engineering Standards
+
+## 1. Architectural Patterns
+
+### Component Architecture (Atomic Design)
+
+Each component lives in its own directory with co-located files (component, styles, types).
+
+- **Atoms**: Smallest units — Button, Input, GradientText, ParticleBackground, FormInput, FormTextarea
+- **Molecules**: Composed atoms — Card, FeatureCard, EmailCaptureInput
+- **Organisms**: Complex sections — Navigation, Footer
+- **Templates**: Full page-level sections — NewHeroSection, SavingsSection, BlogPage, DemoPage, AIScribe, etc.
+
+### Server vs Client Components
+
+- **Default to Server Components** — they ship zero JS to the client (critical for SEO)
+- Only add `"use client"` for interactive components (animations, forms, state)
+- Keep `"use client"` as low as possible in the component tree
+
+---
+
+## 2. TypeScript Standards
+
+- Use `interface` for props and data shapes
+- Type page metadata properly:
+  ```tsx
+  import type { Metadata } from "next";
+  export const metadata: Metadata = { title: "...", description: "..." };
+  ```
+- Avoid `any` — every prop and function should be typed
+
+---
+
+## 3. Styling & UI (Tailwind CSS)
+
+### Tailwind Only
+
+- Use `className` with utility classes for all styling
+- **`cn()` utility** from `@/lib/utils` for conditional class merging:
+  ```tsx
+  className={cn("base-classes", isActive && "active-classes")}
+  ```
+- Font: `font-satoshi` (loaded via CDN in layout)
+
+### ⛔ Zero Hardcoded Hex Colors
+
+All colors MUST come from `tailwind.config.ts` theme:
+
+- ✅ `text-primary`, `bg-accent`, `text-gray-600`, `bg-brand-purple`
+- ❌ `text-[#4d28df]`, `bg-[#F4F4F5]`, `style={{ color: "#1E3A8A" }}`
+
+If a color isn't in the config, **add it to `tailwind.config.ts` first**, then use the class.
+
+### ⛔ Zero Hardcoded Pixel Values
+
+All spacing/sizing MUST use Tailwind utility classes:
+
+- ✅ `p-6`, `gap-8`, `w-full`, `max-w-6xl`, `rounded-2xl`, `text-lg`
+- ❌ `p-[13px]`, `w-[347px]`, `rounded-[14px]`
+- ❌ `style={{ padding: 13 }}`, `style={{ fontSize: "15px" }}`
+
+If a value doesn't exist in Tailwind's default scale, **extend the theme in `tailwind.config.ts`**.
+
+**Exception**: Inline `style` for truly dynamic runtime values only (e.g., `style={{ width: \`\${pct}%\` }}`).
+
+---
+
+## 4. Animations (Framer Motion)
+
+Use the **centralized animation system** in `@/lib/animations.ts`:
+
+```tsx
+import { motionProps, transitions } from "@/lib/animations";
+import { motion } from "framer-motion";
+
+<motion.div {...motionProps.fadeInUp}>
+  <h2>Content</h2>
+</motion.div>;
+```
+
+### Available Presets
+
+| Preset                    | Effect             |
+| :------------------------ | :----------------- |
+| `motionProps.fadeInUp`    | Fade in from below |
+| `motionProps.fadeInLeft`  | Fade in from left  |
+| `motionProps.fadeInRight` | Fade in from right |
+| `motionProps.fadeIn`      | Simple fade in     |
+
+### Available Variants
+
+`fadeInUp`, `fadeInDown`, `fadeInLeft`, `fadeInRight`, `fadeIn`, `scaleIn`
+
+### Transitions
+
+`transitions.default` (0.6s), `transitions.fast` (0.3s), `transitions.slow` (0.8s), `transitions.spring`
+
+### Rules
+
+- Always use `viewport: { once: true }` — animations should only play once
+- Use `transitions.staggered(index)` for list animations
+- Never animate layout-shifting properties without `layout` prop
+
+---
+
+## 5. Content & CMS (Contentful)
+
+- Blog content managed in **Contentful CMS**
+- Fetched via `@/services/blogService.ts` using `@/lib/contentful.ts` client
+- Rich text rendered with `@contentful/rich-text-react-renderer`
+- Preview client available for draft content when `CONTENTFUL_PREVIEW_TOKEN` is set
+- Revalidation: sitemap revalidates hourly (`revalidate = 3600`)
+- On-demand revalidation available via `/api/revalidate` route
+
+---
+
+## 6. Naming & Clean Code
+
+- **Path Alias**: `@/*` resolves to `src/*`
+- **Component directories**: `PascalCase/` containing `PascalCase.tsx`
+- **Variables/Functions**: `camelCase`
+- **Constants**: `UPPER_SNAKE_CASE`
+- **Import Order**:
+  1. External libraries (React, Next.js, Framer Motion)
+  2. Components (atoms → molecules → organisms → templates)
+  3. Lib (utils, animations, contentful)
+  4. Services
+  5. Data/Types
+- **Decomposition**: If a template exceeds 400 lines, break into smaller sections
+
+---
+
+## 7. Performance
+
+- Prefer **Server Components** for SEO content (blog pages, static sections)
+- Use `next/image` `<Image>` for all images (automatic optimization)
+- Lazy load below-the-fold sections with `dynamic()` if heavy
+- Keep Third-party scripts loading with `strategy="afterInteractive"` (GTM, analytics)
+- Minimize client-side JS — every KB matters for Core Web Vitals
+
+---
+
+## 8. Anti-Patterns
+
+- ❌ Using `<img>` instead of Next.js `<Image>`
+- ❌ Hardcoded hex colors or pixel values
+- ❌ Missing `metadata` export on page components
+- ❌ Creating new animation variants inline instead of using `@/lib/animations`
+- ❌ Skipping heading hierarchy (`<h1>` → `<h3>` without `<h2>`)
+- ❌ Adding heavy client-side libraries to Server Components
+- ❌ Forgetting to update `sitemap.ts` when adding new pages
+- ❌ Using `console.log` in production code

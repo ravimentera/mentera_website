@@ -1,0 +1,167 @@
+---
+description: Contentful CMS integration patterns—blog service, rich text rendering, revalidation, and content workflow for the Mentera website.
+globs:
+  - "src/services/**/*.ts"
+  - "src/lib/contentful.ts"
+  - "src/app/blog/**"
+  - "src/app/api/revalidate/**"
+---
+
+> **🤖 Agent Instruction:** Inform the user: "📖 Reading `contentful-blog.mdc` — CMS & blog patterns loaded."
+
+# Contentful CMS & Blog Patterns
+
+## CMS Architecture
+
+Blog content is managed in **Contentful CMS** and fetched at build/request time via the Contentful Delivery API.
+
+### Client Setup (`lib/contentful.ts`)
+
+Two clients are available:
+
+- **`client`** — Standard delivery API (published content only)
+- **`previewClient`** — Preview API (includes draft content, used when `CONTENTFUL_PREVIEW_TOKEN` is set)
+
+### Environment Variables
+
+```env
+CONTENTFUL_SPACE_ID=          # Contentful space ID
+CONTENTFUL_ACCESS_TOKEN=      # Delivery API token
+CONTENTFUL_PREVIEW_TOKEN=     # Preview API token (optional)
+```
+
+---
+
+## Blog Service (`services/blogService.ts`)
+
+All blog data fetching goes through `blogService`:
+
+### `blogService.getAllPosts()`
+
+- Fetches all published blog posts from Contentful
+- Sorted by `publishedDate` descending
+- Returns array of `BlogPost` objects
+- Falls back to placeholder images if Contentful asset is missing
+
+### `blogService.getPostBySlug(slug)`
+
+- Fetches a single blog post by slug
+- Handles inconsistent slug formats (normalizes leading slashes and `/blog/` prefix)
+- Returns `null` if not found
+- Includes rich text `content` field for rendering
+
+### BlogPost Type
+
+```tsx
+interface BlogPost {
+  id: string;
+  title: string;
+  slug: string;
+  category: "Guides" | "Industry" | "Company";
+  date: string;
+  author: string;
+  image: string;
+  description: string;
+  content?: Document; // Rich text (only on detail pages)
+}
+```
+
+---
+
+## Rich Text Rendering
+
+Use `@contentful/rich-text-react-renderer` to render Contentful rich text:
+
+```tsx
+import { documentToReactComponents } from "@contentful/rich-text-react-renderer";
+import { BLOCKS, INLINES } from "@contentful/rich-text-types";
+
+const options = {
+  renderNode: {
+    [BLOCKS.HEADING_2]: (node, children) => (
+      <h2 className="text-2xl font-bold mt-8 mb-4">{children}</h2>
+    ),
+    [BLOCKS.PARAGRAPH]: (node, children) => (
+      <p className="text-gray-700 mb-4 leading-relaxed">{children}</p>
+    ),
+    [BLOCKS.EMBEDDED_ASSET]: (node) => {
+      const { url } = node.data.target.fields.file;
+      return (
+        <Image
+          src={`https:${url}`}
+          alt=""
+          width={800}
+          height={400}
+          className="rounded-xl my-6"
+        />
+      );
+    },
+  },
+};
+
+documentToReactComponents(post.content, options);
+```
+
+---
+
+## Blog Images
+
+The blog service handles images with a fallback system:
+
+1. **Contentful asset** — If the post has a `featuredImage` in Contentful, use its CDN URL
+2. **Deterministic placeholder** — If no asset, use `getStableImage(id)` which maps the entry ID to one of 10 placeholder images (`/images/blog-medspa-01.jpg` through `blog-medspa-10.jpg`)
+
+This ensures:
+
+- Same post always gets the same placeholder
+- Adding new posts doesn't shuffle existing placeholder assignments
+
+---
+
+## Revalidation
+
+### Automatic (ISR)
+
+- Sitemap revalidates every hour (`revalidate = 3600`)
+- Blog pages use Next.js default caching
+
+### On-Demand
+
+- `/api/revalidate` route allows triggering revalidation programmatically
+- Use this to refresh content immediately after Contentful publishes
+
+### Contentful Webhooks
+
+Configure a Contentful webhook to call `/api/revalidate` when content is published/updated. This ensures new blog posts appear without manual redeploys.
+
+---
+
+## Adding a New Blog Post (Contentful)
+
+1. Create entry in Contentful with content type `pageBlogPost`
+2. Fill in: `title`, `slug`, `publishedDate`, `author`, `shortDescription`, `content`, `featuredImage`
+3. Publish the entry
+4. The sitemap auto-includes the new post (revalidates hourly)
+5. For immediate appearance: trigger `/api/revalidate`
+
+---
+
+## Adding a New Content Type
+
+If Contentful is extended with new content types:
+
+1. Create a new service in `services/` (e.g., `caseStudyService.ts`)
+2. Define the Contentful field interface
+3. Create the fetching functions
+4. Add pages in `app/` with proper metadata and sitemap entries
+5. Consider revalidation strategy (ISR interval)
+
+---
+
+## Anti-Patterns
+
+- ❌ Fetching Contentful data directly in components — always use `blogService`
+- ❌ Hardcoding blog post data — all content comes from Contentful
+- ❌ Missing image fallbacks — always handle missing Contentful assets
+- ❌ Forgetting to normalize slugs — use `normalizeSlug()` for consistent matching
+- ❌ Using `any` for Contentful types — define proper interfaces
