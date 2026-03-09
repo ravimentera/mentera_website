@@ -35,8 +35,10 @@ const groupedCategoryByRaw: Record<string, string> = {
 const getGroupedCategory = (category: string) =>
   groupedCategoryByRaw[category] ?? category;
 
-const HUBSPOT_PORTAL_ID = "244277082";
-const HUBSPOT_FORM_ID = "d5d0eebd-bacf-4ab5-b1b9-8211b19435d5";
+const HUBSPOT_PORTAL_ID =
+  process.env.NEXT_PUBLIC_HUBSPOT_PORTAL_ID || "244277082";
+const HUBSPOT_INTEGRATION_REQUEST_FORM_ID =
+  process.env.NEXT_PUBLIC_HUBSPOT_INTEGRATION_REQUEST_FORM_ID || "";
 
 const initialIntegrationRequestFormData: IntegrationRequestFormData = {
   email: "",
@@ -404,12 +406,20 @@ export const IntegrationsPage = () => {
       return;
     }
 
+    if (!HUBSPOT_INTEGRATION_REQUEST_FORM_ID) {
+      setRequestSubmitStatus("error");
+      setRequestSubmitMessage(
+        "Integration request form is not configured yet.",
+      );
+      return;
+    }
+
     setIsRequestSubmitting(true);
     setRequestSubmitStatus("idle");
 
     try {
       const response = await fetch(
-        `https://api.hsforms.com/submissions/v3/integration/submit/${HUBSPOT_PORTAL_ID}/${HUBSPOT_FORM_ID}`,
+        `https://api.hsforms.com/submissions/v3/integration/submit/${HUBSPOT_PORTAL_ID}/${HUBSPOT_INTEGRATION_REQUEST_FORM_ID}`,
         {
           method: "POST",
           headers: {
@@ -421,12 +431,12 @@ export const IntegrationsPage = () => {
               { name: "company", value: requestFormData.integrationName },
               {
                 name: "message",
-                value: `Requested integration: ${requestFormData.integrationName}`,
+                value: `Integration request: ${requestFormData.integrationName}`,
               },
             ],
             context: {
               pageUri: window.location.href,
-              pageName: "Integrations",
+              pageName: "Integration Request",
             },
           }),
         },
