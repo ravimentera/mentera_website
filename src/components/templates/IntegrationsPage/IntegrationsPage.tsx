@@ -1,5 +1,7 @@
 "use client";
 
+import { Button } from "@/components/atoms/Button/Button";
+import { FormInput } from "@/components/atoms/FormInput/FormInput";
 import { Footer } from "@/components/organisms/Footer/Footer";
 import { motion } from "framer-motion";
 import { useMemo, useState } from "react";
@@ -11,6 +13,18 @@ type Integration = {
   category: string;
 };
 
+interface IntegrationRequestFormData {
+  email: string;
+  integrationName: string;
+}
+
+interface IntegrationRequestFormErrors {
+  email?: string;
+  integrationName?: string;
+}
+
+type IntegrationRequestField = keyof IntegrationRequestFormData;
+
 const groupedCategoryByRaw: Record<string, string> = {
   "Social Media": "Marketing",
   "File Storage": "Productivity",
@@ -20,6 +34,14 @@ const groupedCategoryByRaw: Record<string, string> = {
 
 const getGroupedCategory = (category: string) =>
   groupedCategoryByRaw[category] ?? category;
+
+const HUBSPOT_PORTAL_ID = "244277082";
+const HUBSPOT_FORM_ID = "d5d0eebd-bacf-4ab5-b1b9-8211b19435d5";
+
+const initialIntegrationRequestFormData: IntegrationRequestFormData = {
+  email: "",
+  integrationName: "",
+};
 
 const integrations: Integration[] = [
   {
@@ -268,6 +290,21 @@ const integrations: Integration[] = [
 export const IntegrationsPage = () => {
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedCategory, setSelectedCategory] = useState("All");
+  const [requestFormData, setRequestFormData] =
+    useState<IntegrationRequestFormData>(initialIntegrationRequestFormData);
+  const [requestFormErrors, setRequestFormErrors] =
+    useState<IntegrationRequestFormErrors>({});
+  const [requestFormTouched, setRequestFormTouched] = useState<
+    Record<IntegrationRequestField, boolean>
+  >({
+    email: false,
+    integrationName: false,
+  });
+  const [isRequestSubmitting, setIsRequestSubmitting] = useState(false);
+  const [requestSubmitStatus, setRequestSubmitStatus] = useState<
+    "idle" | "success" | "error"
+  >("idle");
+  const [requestSubmitMessage, setRequestSubmitMessage] = useState("");
 
   const categories = useMemo(
     () => [
@@ -297,6 +334,125 @@ export const IntegrationsPage = () => {
       return matchesQuery && matchesCategory;
     });
   }, [searchQuery, selectedCategory]);
+
+  const validateRequestField = (
+    name: IntegrationRequestField,
+    value: string,
+  ): string | undefined => {
+    switch (name) {
+      case "email":
+        if (!value.trim()) return "Work email is required";
+        if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value)) {
+          return "Please enter a valid email address";
+        }
+        return undefined;
+      case "integrationName":
+        if (!value.trim()) return "Requested integration is required";
+        return undefined;
+      default:
+        return undefined;
+    }
+  };
+
+  const validateRequestForm = (): boolean => {
+    const newErrors: IntegrationRequestFormErrors = {};
+
+    (Object.keys(requestFormData) as IntegrationRequestField[]).forEach(
+      (field) => {
+        const error = validateRequestField(field, requestFormData[field]);
+        if (error) {
+          newErrors[field] = error;
+        }
+      },
+    );
+
+    setRequestFormErrors(newErrors);
+    setRequestFormTouched({
+      email: true,
+      integrationName: true,
+    });
+
+    return Object.keys(newErrors).length === 0;
+  };
+
+  const handleRequestInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = e.target;
+    const fieldName = name as IntegrationRequestField;
+
+    setRequestFormData((prev) => ({ ...prev, [fieldName]: value }));
+
+    if (requestFormTouched[fieldName]) {
+      const error = validateRequestField(fieldName, value);
+      setRequestFormErrors((prev) => ({ ...prev, [fieldName]: error }));
+    }
+  };
+
+  const handleRequestInputBlur = (e: React.FocusEvent<HTMLInputElement>) => {
+    const { name, value } = e.target;
+    const fieldName = name as IntegrationRequestField;
+
+    setRequestFormTouched((prev) => ({ ...prev, [fieldName]: true }));
+
+    const error = validateRequestField(fieldName, value);
+    setRequestFormErrors((prev) => ({ ...prev, [fieldName]: error }));
+  };
+
+  const handleRequestSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+
+    if (!validateRequestForm()) {
+      return;
+    }
+
+    setIsRequestSubmitting(true);
+    setRequestSubmitStatus("idle");
+
+    try {
+      const response = await fetch(
+        `https://api.hsforms.com/submissions/v3/integration/submit/${HUBSPOT_PORTAL_ID}/${HUBSPOT_FORM_ID}`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            fields: [
+              { name: "email", value: requestFormData.email },
+              { name: "company", value: requestFormData.integrationName },
+              {
+                name: "message",
+                value: `Requested integration: ${requestFormData.integrationName}`,
+              },
+            ],
+            context: {
+              pageUri: window.location.href,
+              pageName: "Integrations",
+            },
+          }),
+        },
+      );
+
+      if (response.ok) {
+        setRequestSubmitStatus("success");
+        setRequestSubmitMessage(
+          "Thanks! We received your integration request.",
+        );
+        setRequestFormData(initialIntegrationRequestFormData);
+        setRequestFormTouched({
+          email: false,
+          integrationName: false,
+        });
+      } else {
+        setRequestSubmitStatus("error");
+        setRequestSubmitMessage("Something went wrong. Please try again.");
+      }
+    } catch {
+      setRequestSubmitStatus("error");
+      setRequestSubmitMessage("Failed to submit. Please try again later.");
+    } finally {
+      setIsRequestSubmitting(false);
+    }
+  };
 
   return (
     <main className="relative bg-white min-h-screen pt-14 sm:pt-16 md:pt-20 lg:pt-24 font-satoshi">
@@ -433,6 +589,68 @@ export const IntegrationsPage = () => {
             </div>
           )}
         </div>
+
+        <section className="mt-16 sm:mt-20 md:mt-24 rounded-2xl border border-zinc-200 bg-white p-6 sm:p-8 md:p-10 shadow-sm">
+          <div className="max-w-3xl mx-auto">
+            <h2 className="text-2xl sm:text-3xl font-medium text-zinc-900 text-center">
+              Don&apos;t see your integration?
+            </h2>
+            <p className="mt-3 text-zinc-600 text-center">
+              Tell us what tool you want connected and our team will follow up.
+            </p>
+
+            <form
+              onSubmit={handleRequestSubmit}
+              className="mt-8 grid grid-cols-1 md:grid-cols-2 gap-4"
+            >
+              <FormInput
+                label="Email"
+                name="email"
+                type="email"
+                placeholder="Enter your business email"
+                value={requestFormData.email}
+                onChange={handleRequestInputChange}
+                onBlur={handleRequestInputBlur}
+                error={requestFormErrors.email}
+                required
+              />
+              <FormInput
+                label="Requested Integration"
+                name="integrationName"
+                placeholder="Type the tool you want integrated"
+                value={requestFormData.integrationName}
+                onChange={handleRequestInputChange}
+                onBlur={handleRequestInputBlur}
+                error={requestFormErrors.integrationName}
+                required
+              />
+
+              {requestSubmitStatus !== "idle" && (
+                <div
+                  className={`md:col-span-2 rounded-lg px-4 py-3 text-sm font-satoshi ${
+                    requestSubmitStatus === "success"
+                      ? "bg-secondary-light text-green-800"
+                      : "bg-red-50 text-red-600"
+                  }`}
+                  role="alert"
+                >
+                  {requestSubmitMessage}
+                </div>
+              )}
+
+              <div className="md:col-span-2 flex justify-center md:justify-start">
+                <Button
+                  type="submit"
+                  variant="primary"
+                  disabled={isRequestSubmitting}
+                  className="bg-purple text-white px-8 py-3 rounded-lg font-bold hover:bg-purple/90 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+                >
+                  {isRequestSubmitting ? "Submitting..." : "Submit"}
+                </Button>
+              </div>
+            </form>
+          </div>
+        </section>
       </div>
 
       <Footer />
