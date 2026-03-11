@@ -292,6 +292,7 @@ const integrations: Integration[] = [
 export const IntegrationsPage = () => {
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedCategory, setSelectedCategory] = useState("All");
+  const [showRequestModal, setShowRequestModal] = useState(false);
   const [requestFormData, setRequestFormData] =
     useState<IntegrationRequestFormData>(initialIntegrationRequestFormData);
   const [requestFormErrors, setRequestFormErrors] =
@@ -600,67 +601,118 @@ export const IntegrationsPage = () => {
           )}
         </div>
 
-        <section className="mt-16 sm:mt-20 md:mt-24 rounded-2xl border border-zinc-200 bg-white p-6 sm:p-8 md:p-10 shadow-sm">
-          <div className="max-w-3xl mx-auto">
-            <h2 className="text-2xl sm:text-3xl font-medium text-zinc-900 text-center">
-              Don&apos;t see your integration?
-            </h2>
-            <p className="mt-3 text-zinc-600 text-center">
-              Tell us what tool you want connected and our team will follow up.
-            </p>
+        <div className="mt-16 sm:mt-20 md:mt-24 flex items-center justify-center">
+          <button
+            type="button"
+            onClick={() => setShowRequestModal(true)}
+            className="group inline-flex items-center gap-2 text-lg text-zinc-500 hover:text-zinc-900 transition-colors"
+          >
+            Don&apos;t see what you need?
+            <span className="text-indigo-600 group-hover:text-indigo-700 font-medium inline-flex items-center gap-1">
+              Let us know
+              <svg
+                className="w-4 h-4 transition-transform group-hover:translate-x-0.5"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+                strokeWidth={2}
+              >
+                <path strokeLinecap="round" strokeLinejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+              </svg>
+            </span>
+          </button>
+        </div>
 
-            <form
-              onSubmit={handleRequestSubmit}
-              className="mt-8 grid grid-cols-1 md:grid-cols-2 gap-4"
+        {showRequestModal && (
+          <div
+            className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 backdrop-blur-sm p-4"
+            onClick={(e) => {
+              if (e.target === e.currentTarget) {
+                setShowRequestModal(false);
+                setRequestSubmitStatus("idle");
+              }
+            }}
+          >
+            <motion.div
+              initial={{ opacity: 0, scale: 0.95, y: 10 }}
+              animate={{ opacity: 1, scale: 1, y: 0 }}
+              transition={{ duration: 0.2 }}
+              className="relative w-full max-w-2xl rounded-2xl bg-white p-6 sm:p-8 md:p-10 shadow-2xl"
             >
-              <FormInput
-                label="Email"
-                name="email"
-                type="email"
-                placeholder="Enter your business email"
-                value={requestFormData.email}
-                onChange={handleRequestInputChange}
-                onBlur={handleRequestInputBlur}
-                error={requestFormErrors.email}
-                required
-              />
-              <FormInput
-                label="Requested Integration"
-                name="integrationName"
-                placeholder="Type the tool you want integrated"
-                value={requestFormData.integrationName}
-                onChange={handleRequestInputChange}
-                onBlur={handleRequestInputBlur}
-                error={requestFormErrors.integrationName}
-                required
-              />
+              <button
+                type="button"
+                onClick={() => {
+                  setShowRequestModal(false);
+                  setRequestSubmitStatus("idle");
+                }}
+                className="absolute top-4 right-4 text-zinc-400 hover:text-zinc-700 transition-colors"
+                aria-label="Close"
+              >
+                <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
+                </svg>
+              </button>
 
-              {requestSubmitStatus !== "idle" && (
-                <div
-                  className={`md:col-span-2 rounded-lg px-4 py-3 text-sm font-satoshi ${
-                    requestSubmitStatus === "success"
-                      ? "bg-secondary-light text-green-800"
-                      : "bg-red-50 text-red-600"
-                  }`}
-                  role="alert"
-                >
-                  {requestSubmitMessage}
+              <h2 className="text-2xl sm:text-3xl font-medium text-zinc-900 text-center">
+                Don&apos;t see your integration?
+              </h2>
+              <p className="mt-3 text-zinc-600 text-center">
+                Tell us what tool you want connected and our team will follow up.
+              </p>
+
+              <form
+                onSubmit={handleRequestSubmit}
+                className="mt-8 grid grid-cols-1 md:grid-cols-2 gap-4"
+              >
+                <FormInput
+                  label="Email"
+                  name="email"
+                  type="email"
+                  placeholder="Enter your business email"
+                  value={requestFormData.email}
+                  onChange={handleRequestInputChange}
+                  onBlur={handleRequestInputBlur}
+                  error={requestFormErrors.email}
+                  required
+                />
+                <FormInput
+                  label="Requested Integration"
+                  name="integrationName"
+                  placeholder="Type the tool you want integrated"
+                  value={requestFormData.integrationName}
+                  onChange={handleRequestInputChange}
+                  onBlur={handleRequestInputBlur}
+                  error={requestFormErrors.integrationName}
+                  required
+                />
+
+                {requestSubmitStatus !== "idle" && (
+                  <div
+                    className={`md:col-span-2 rounded-lg px-4 py-3 text-sm font-satoshi ${
+                      requestSubmitStatus === "success"
+                        ? "bg-secondary-light text-green-800"
+                        : "bg-red-50 text-red-600"
+                    }`}
+                    role="alert"
+                  >
+                    {requestSubmitMessage}
+                  </div>
+                )}
+
+                <div className="md:col-span-2 flex justify-center md:justify-start">
+                  <Button
+                    type="submit"
+                    variant="primary"
+                    disabled={isRequestSubmitting}
+                    className="bg-purple text-white px-8 py-3 rounded-lg font-bold hover:bg-purple/90 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+                  >
+                    {isRequestSubmitting ? "Submitting..." : "Submit"}
+                  </Button>
                 </div>
-              )}
-
-              <div className="md:col-span-2 flex justify-center md:justify-start">
-                <Button
-                  type="submit"
-                  variant="primary"
-                  disabled={isRequestSubmitting}
-                  className="bg-purple text-white px-8 py-3 rounded-lg font-bold hover:bg-purple/90 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
-                >
-                  {isRequestSubmitting ? "Submitting..." : "Submit"}
-                </Button>
-              </div>
-            </form>
+              </form>
+            </motion.div>
           </div>
-        </section>
+        )}
       </div>
 
       <Footer />
