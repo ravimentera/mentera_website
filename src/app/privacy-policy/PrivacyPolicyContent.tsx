@@ -15,7 +15,7 @@ export function PrivacyPolicyContent() {
         {/* Effective Date */}
         <div className="font-satoshi font-normal text-sm leading-normal text-zinc-600 mb-8">
           <p>Effective Date: March 12, 2025</p>
-          <p>Last Updated: March 1, 2026</p>
+          <p>Last Updated: March 16, 2026</p>
         </div>
 
         {/* Introduction */}
@@ -253,7 +253,7 @@ export function PrivacyPolicyContent() {
             </p>
 
             <div className="space-y-2">
-              <p className="font-medium">To Provide and Operate the Site</p>
+              <p className="font-medium">1. To Provide and Operate the Site</p>
               <ul className="list-disc pl-5">
                 <li>
                   Ensure the Site functions properly, enable you to access
@@ -263,7 +263,7 @@ export function PrivacyPolicyContent() {
             </div>
 
             <div className="space-y-2">
-              <p className="font-medium">To Communicate With You</p>
+              <p className="font-medium">2. To Communicate With You</p>
               <ul className="list-disc pl-5">
                 <li>Respond to your comments or questions.</li>
                 <li>
@@ -274,7 +274,9 @@ export function PrivacyPolicyContent() {
             </div>
 
             <div className="space-y-2">
-              <p className="font-medium">To Market and Promote Our Services</p>
+              <p className="font-medium">
+                3. To Market and Promote Our Services
+              </p>
               <ul className="list-disc pl-5">
                 <li>
                   Send marketing or promotional communications if you have opted
@@ -289,7 +291,7 @@ export function PrivacyPolicyContent() {
 
             <div className="space-y-2">
               <p className="font-medium">
-                To Improve and Develop Our Offerings
+                4. To Improve and Develop Our Offerings
               </p>
               <ul className="list-disc pl-5">
                 <li>
@@ -308,12 +310,23 @@ export function PrivacyPolicyContent() {
                   information is used for advertising, sold to third parties, or
                   shared except as described in this Policy.
                 </li>
+                <li>
+                  We may use artificial intelligence and machine learning
+                  technologies, including third-party AI services, to power
+                  features within our products and Services, such as automated
+                  documentation, clinical workflow assistance, and communication
+                  tools. When AI processes data on our behalf, it does so under
+                  our instructions and is subject to the same confidentiality
+                  and security obligations described in this Policy. We do not
+                  use your data to train third-party AI models unless explicitly
+                  disclosed and consented to.
+                </li>
               </ul>
             </div>
 
             <div className="space-y-2">
               <p className="font-medium">
-                To Comply With Legal Obligations and Enforce Our Rights
+                5. To Comply With Legal Obligations and Enforce Our Rights
               </p>
               <ul className="list-disc pl-5">
                 <li>
@@ -378,7 +391,7 @@ export function PrivacyPolicyContent() {
             </p>
 
             <div className="space-y-1">
-              <p className="font-medium">Service Providers</p>
+              <p className="font-medium">1. Service Providers</p>
               <p>
                 With third-party vendors and service providers who help us
                 operate and maintain the Site, perform analytics, send
@@ -390,7 +403,25 @@ export function PrivacyPolicyContent() {
             </div>
 
             <div className="space-y-1">
-              <p className="font-medium">Business Transfers</p>
+              <p className="font-medium">
+                2. AI and Machine Learning Providers
+              </p>
+              <p>
+                We use third-party artificial intelligence and machine learning
+                service providers to deliver certain product features, including
+                but not limited to natural language processing, transcription,
+                and workflow automation. These providers act as subprocessors,
+                processing data solely on our behalf and under contractual
+                obligations that require them to maintain confidentiality,
+                security, and compliance with applicable privacy and data
+                protection laws. Where protected health information (PHI) is
+                involved, these providers operate under Business Associate
+                Agreements.
+              </p>
+            </div>
+
+            <div className="space-y-1">
+              <p className="font-medium">3. Business Transfers</p>
               <p>
                 If we engage in a merger, acquisition, asset sale, financing, or
                 bankruptcy, your information may be disclosed or transferred to
@@ -400,7 +431,7 @@ export function PrivacyPolicyContent() {
             </div>
 
             <div className="space-y-1">
-              <p className="font-medium">Legal and Compliance</p>
+              <p className="font-medium">4. Legal and Compliance</p>
               <p>
                 To comply with legal obligations, respond to lawful requests
                 (e.g., subpoenas, court orders), or protect our rights,
@@ -409,12 +440,34 @@ export function PrivacyPolicyContent() {
             </div>
 
             <div className="space-y-1">
-              <p className="font-medium">With Your Consent</p>
+              <p className="font-medium">5. With Your Consent</p>
               <p>
                 If you explicitly consent or direct us to share information with
                 third parties (e.g., for co-marketing or partnerships).
               </p>
             </div>
+
+            <p className="mt-4">
+              A current list of subprocessors we use to deliver our products and
+              services is available{" "}
+              <a
+                href="https://docs.google.com/document/d/1qeYiD5k29HTAJCiI2qcRD9ny5ctF55QWF2SP73Q1nmc/edit?usp=sharing"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-purple-600 hover:underline"
+              >
+                here
+              </a>
+              . We update this list as our service providers change. If you have
+              questions about our subprocessors, contact us at{" "}
+              <a
+                href="mailto:support@mentera.ai"
+                className="text-purple-600 hover:underline"
+              >
+                support@mentera.ai
+              </a>
+              .
+            </p>
           </div>
         </div>
 
