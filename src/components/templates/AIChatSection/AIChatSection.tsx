@@ -1,10 +1,10 @@
 "use client";
 
-import Link from "next/link";
+import { C1Component, ThemeProvider } from "@thesysai/genui-sdk";
 import { AnimatePresence, motion } from "framer-motion";
+import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
 import ReactMarkdown from "react-markdown";
-import { C1Component, ThemeProvider } from "@thesysai/genui-sdk";
 
 import { TERA_DEMO_SYSTEM_PROMPT } from "@/data/system-prompt";
 
@@ -28,30 +28,85 @@ const TOKEN_STORAGE_KEY = "mentera_token_count";
 // Custom theme matching website design system
 const customTheme = {
   colors: {
-    primary: "#4F39F6",        // brand-purple
-    secondary: "#6EF1BB",      // secondary green
-    accent: "#BD05DD",         // accent purple
-    text: "#1D1D1D",           // text-primary
-    background: "#FFFFFF",     // white
-    muted: "#F6F4FD",          // brand-purple-light
-    border: "#E5E7EB",         // gray-200
+    primary: "#4F39F6", // brand-purple
+    secondary: "#6EF1BB", // secondary green
+    accent: "#BD05DD", // accent purple
+    text: "#1D1D1D", // text-primary
+    background: "#FFFFFF", // white
+    muted: "#F6F4FD", // brand-purple-light
+    border: "#E5E7EB", // gray-200
 
     // Extended color scales for charts and visualizations
     // Using brand-aligned colors instead of defaults
-    purple: ["#F6F4FD", "#E9D5FF", "#D1AAFF", "#B97FFF", "#A155FF", "#8F03A0", "#7A0288", "#650270", "#500158", "#3B0140"],
-    blue: ["#EBF5FF", "#DBEAFE", "#BFDBFE", "#93C5FD", "#60A5FA", "#4F9BED", "#2563EB", "#1D4ED8", "#1E40AF", "#200F8A"],
-    green: ["#D1FAE5", "#A7F3D0", "#6EE7B7", "#6EF1BB", "#34D399", "#10B981", "#059669", "#047857", "#065F46", "#064E3B"],
-    pink: ["#FCE7F3", "#FBCFE8", "#F9A8D4", "#F472B6", "#EC4899", "#DB2777", "#BE185D", "#9D174D", "#831843", "#500724"],
-    teal: ["#CCFBF1", "#99F6E4", "#5EEAD4", "#2DD4BF", "#14B8A6", "#0D9488", "#0F766E", "#115E59", "#134E4A", "#042F2E"],
+    purple: [
+      "#F6F4FD",
+      "#E9D5FF",
+      "#D1AAFF",
+      "#B97FFF",
+      "#A155FF",
+      "#8F03A0",
+      "#7A0288",
+      "#650270",
+      "#500158",
+      "#3B0140",
+    ],
+    blue: [
+      "#EBF5FF",
+      "#DBEAFE",
+      "#BFDBFE",
+      "#93C5FD",
+      "#60A5FA",
+      "#4F9BED",
+      "#2563EB",
+      "#1D4ED8",
+      "#1E40AF",
+      "#200F8A",
+    ],
+    green: [
+      "#D1FAE5",
+      "#A7F3D0",
+      "#6EE7B7",
+      "#6EF1BB",
+      "#34D399",
+      "#10B981",
+      "#059669",
+      "#047857",
+      "#065F46",
+      "#064E3B",
+    ],
+    pink: [
+      "#FCE7F3",
+      "#FBCFE8",
+      "#F9A8D4",
+      "#F472B6",
+      "#EC4899",
+      "#DB2777",
+      "#BE185D",
+      "#9D174D",
+      "#831843",
+      "#500724",
+    ],
+    teal: [
+      "#CCFBF1",
+      "#99F6E4",
+      "#5EEAD4",
+      "#2DD4BF",
+      "#14B8A6",
+      "#0D9488",
+      "#0F766E",
+      "#115E59",
+      "#134E4A",
+      "#042F2E",
+    ],
 
     // Chart color palette using brand colors
     chart: {
-      primary: "#4F39F6",      // brand-purple
-      secondary: "#6EF1BB",    // secondary green
-      tertiary: "#4F9BED",     // brand-blue
-      quaternary: "#BD05DD",   // accent purple
-      quinary: "#24EDFF",      // cyan
-      senary: "#F9A8D4",       // pink
+      primary: "#4F39F6", // brand-purple
+      secondary: "#6EF1BB", // secondary green
+      tertiary: "#4F9BED", // brand-blue
+      quaternary: "#BD05DD", // accent purple
+      quinary: "#24EDFF", // cyan
+      senary: "#F9A8D4", // pink
     },
   },
   fonts: {
@@ -60,14 +115,14 @@ const customTheme = {
     monospace: "monospace",
   },
   fontSizes: [
-    "0.875rem",  // 14px
-    "1rem",      // 16px
-    "1.125rem",  // 18px
-    "1.25rem",   // 20px
-    "1.5rem",    // 24px
-    "2rem",      // 32px
-    "2.5rem",    // 40px
-    "3rem",      // 48px
+    "0.875rem", // 14px
+    "1rem", // 16px
+    "1.125rem", // 18px
+    "1.25rem", // 20px
+    "1.5rem", // 24px
+    "2rem", // 32px
+    "2.5rem", // 40px
+    "3rem", // 48px
   ],
   fontWeights: {
     body: 400,
@@ -173,7 +228,11 @@ export const AIChatSection = () => {
 
   // Handle mobile repositioning on expansion
   useEffect(() => {
-    if (isExpanded && typeof window !== "undefined" && window.innerWidth < 768) {
+    if (
+      isExpanded &&
+      typeof window !== "undefined" &&
+      window.innerWidth < 768
+    ) {
       const performScroll = () => {
         if (chatContainerRef.current) {
           const offset = 60;
@@ -231,31 +290,40 @@ export const AIChatSection = () => {
       try {
         setMessages((prev) => [
           ...prev,
-          { role: "assistant", content: "", source: "thesys" }
+          { role: "assistant", content: "", source: "thesys" },
         ]);
 
         // Sanitize messages to only include supported fields
-        const validMessages = messages.map(({ role, content }) => ({ role, content }));
-        const validUserMessage = { role: "user" as const, content: userMessage.content };
+        const validMessages = messages.map(({ role, content }) => ({
+          role,
+          content,
+        }));
+        const validUserMessage = {
+          role: "user" as const,
+          content: userMessage.content,
+        };
 
         const payload = {
           messages: [
             { role: "system", content: TERA_DEMO_SYSTEM_PROMPT },
             ...validMessages,
-            validUserMessage
+            validUserMessage,
           ],
           stream: true,
-          model: "c1-exp/openai/gpt-4.1/v-20250617"
+          model: "c1-exp/openai/gpt-4.1/v-20250617",
         };
 
-        const response = await fetch("https://api.thesys.dev/v1/embed/chat/completions", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-            "Authorization": `Bearer ${process.env.NEXT_PUBLIC_THESYS_API_KEY}`,
+        const response = await fetch(
+          "https://api.thesys.dev/v1/embed/chat/completions",
+          {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+              Authorization: `Bearer ${process.env.NEXT_PUBLIC_THESYS_API_KEY}`,
+            },
+            body: JSON.stringify(payload),
           },
-          body: JSON.stringify(payload),
-        });
+        );
 
         if (!response.ok) {
           const errorText = await response.text();
@@ -305,7 +373,6 @@ export const AIChatSection = () => {
             }
           }
         }
-
       } catch (error) {
         console.error("TheSys Error", error);
         // Fallback or error handling? For now just log.
@@ -340,7 +407,10 @@ export const AIChatSection = () => {
       }
 
       // Create assistant message placeholder
-      setMessages((prev) => [...prev, { role: "assistant", content: "", source: "legacy" }]);
+      setMessages((prev) => [
+        ...prev,
+        { role: "assistant", content: "", source: "legacy" },
+      ]);
 
       let accumulatedContent = "";
 
@@ -367,7 +437,7 @@ export const AIChatSection = () => {
                   newMessages[newMessages.length - 1] = {
                     role: "assistant",
                     content: accumulatedContent,
-                    source: "legacy"
+                    source: "legacy",
                   };
                   return newMessages;
                 });
@@ -519,28 +589,34 @@ export const AIChatSection = () => {
                     onScroll={handleScroll}
                     className="overflow-y-auto pl-0 pr-6 py-6 lg:p-6 space-y-4 bg-white md:h-[calc(100vh-21rem)] h-[calc(100vh-18rem)]"
                   >
-
                     {messages.map((message, index) => (
                       <div
                         key={index}
-                        className={`flex ${message.role === "user"
-                          ? "justify-end"
-                          : "justify-start"
-                          }`}
+                        className={`flex ${
+                          message.role === "user"
+                            ? "justify-end"
+                            : "justify-start"
+                        }`}
                       >
                         <div
-                          className={`max-w-[100%] lg:max-w-[80%] rounded-2xl px-5 py-3 ${message.role === "user"
-                            ? "bg-brand-purple text-white"
-                            : "bg-white text-zinc-900"
-                            }`}
+                          className={`max-w-[100%] lg:max-w-[80%] rounded-2xl px-5 py-3 ${
+                            message.role === "user"
+                              ? "bg-brand-purple text-white"
+                              : "bg-white text-zinc-900"
+                          }`}
                         >
                           {message.role === "assistant" ? (
-                            message.source === "thesys" && message.c1Response && message.c1Response.trim().length > 10 ? (
+                            message.source === "thesys" &&
+                            message.c1Response &&
+                            message.c1Response.trim().length > 10 ? (
                               <div className="mobile-thesys-font-fix">
                                 <ThemeProvider theme={customTheme}>
                                   <C1Component
                                     c1Response={message.c1Response}
-                                    isStreaming={isStreaming && index === messages.length - 1}
+                                    isStreaming={
+                                      isStreaming &&
+                                      index === messages.length - 1
+                                    }
                                   />
                                 </ThemeProvider>
                               </div>
@@ -555,7 +631,6 @@ export const AIChatSection = () => {
                             </p>
                           )}
                         </div>
-
                       </div>
                     ))}
 
@@ -582,7 +657,7 @@ export const AIChatSection = () => {
                   {isLimitReached && (
                     <div className="mx-6 mb-4 p-6 bg-usage-limit-gradient rounded-3xl flex flex-col sm:flex-row items-center justify-between gap-4">
                       <div className="flex flex-col gap-0.5 text-center sm:text-left">
-                        <h4 className="text-zinc-950 font-bold text-lg leading-tight text-zinc-950">
+                        <h4 className="text-zinc-950 font-bold text-lg leading-tight">
                           Free usage limit reached
                         </h4>
                       </div>
@@ -590,6 +665,14 @@ export const AIChatSection = () => {
                         <Link
                           href="/demo"
                           className="px-10 py-3.5 bg-brand-purple-button text-white rounded-full font-bold hover:opacity-90 transition-all shadow-md"
+                          onClick={() => {
+                            window.dataLayer = window.dataLayer || [];
+                            window.dataLayer.push({
+                              event: "cta_click",
+                              cta_text: "Book a demo",
+                              cta_location: "chat_section",
+                            });
+                          }}
                         >
                           Book a demo
                         </Link>
@@ -656,7 +739,6 @@ export const AIChatSection = () => {
                         secure draft.
                       </p>
                     </div>
-
                   </div>
                 </motion.div>
               )}

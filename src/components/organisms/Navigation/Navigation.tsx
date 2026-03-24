@@ -88,7 +88,17 @@ export const Navigation = ({ className }: NavigationProps) => {
           ))}
 
           <div className="flex items-center gap-4 xl:gap-6">
-            <Link href="https://mentera-app.vercel.app/login">
+            <Link
+              href="https://mentera-app.vercel.app/login"
+              onClick={() => {
+                window.dataLayer = window.dataLayer || [];
+                window.dataLayer.push({
+                  event: "cta_click",
+                  cta_text: "Log In",
+                  cta_location: "navbar",
+                });
+              }}
+            >
               <Button
                 variant="outline"
                 className="border border-purple text-purple px-4 xl:px-6 py-2 xl:py-3 rounded-full text-sm xl:text-base font-bold hover:bg-purple/5 transition-colors"
@@ -96,7 +106,17 @@ export const Navigation = ({ className }: NavigationProps) => {
                 Log In
               </Button>
             </Link>
-            <Link href="/demo">
+            <Link
+              href="/demo"
+              onClick={() => {
+                window.dataLayer = window.dataLayer || [];
+                window.dataLayer.push({
+                  event: "cta_click",
+                  cta_text: "Book a Demo",
+                  cta_location: "navbar",
+                });
+              }}
+            >
               <Button
                 variant="primary"
                 className="bg-purple text-white px-4 xl:px-6 py-2 xl:py-3 rounded-full text-sm xl:text-base font-bold hover:bg-purple/90 transition-colors"
@@ -190,6 +210,15 @@ export const Navigation = ({ className }: NavigationProps) => {
                     <Link
                       href="https://mentera-app.vercel.app/login"
                       className="w-full"
+                      onClick={() => {
+                        window.dataLayer = window.dataLayer || [];
+                        window.dataLayer.push({
+                          event: "cta_click",
+                          cta_text: "Log In",
+                          cta_location: "navbar_mobile",
+                        });
+                        handleNavLinkClick();
+                      }}
                     >
                       <Button
                         variant="outline"
@@ -199,7 +228,19 @@ export const Navigation = ({ className }: NavigationProps) => {
                         Log In
                       </Button>
                     </Link>
-                    <Link href="/demo" className="w-full">
+                    <Link
+                      href="/demo"
+                      className="w-full"
+                      onClick={() => {
+                        window.dataLayer = window.dataLayer || [];
+                        window.dataLayer.push({
+                          event: "cta_click",
+                          cta_text: "Book a Demo",
+                          cta_location: "navbar_mobile",
+                        });
+                        handleNavLinkClick();
+                      }}
+                    >
                       <Button
                         variant="primary"
                         className="bg-purple text-white rounded-full font-bold w-full"

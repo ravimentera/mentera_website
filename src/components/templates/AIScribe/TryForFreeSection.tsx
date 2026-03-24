@@ -31,6 +31,14 @@ export const TryForFreeSection = () => {
                 size="md"
                 showArrow
                 className="rounded-full"
+                onClick={() => {
+                  window.dataLayer = window.dataLayer || [];
+                  window.dataLayer.push({
+                    event: "cta_click",
+                    cta_text: "Get a Demo",
+                    cta_location: "ai_scribe_try_for_free",
+                  });
+                }}
               >
                 Get a Demo
               </Button>
