@@ -3,7 +3,6 @@ import { Navigation } from "@/components/organisms/Navigation";
 import "@crayonai/react-ui/styles/index.css";
 import { Analytics } from "@vercel/analytics/react";
 import { Metadata } from "next";
-import Script from "next/script";
 import "./globals.css";
 
 import { headers } from "next/headers";
@@ -120,18 +119,14 @@ export default function RootLayout({
   return (
     <html lang="en">
       <head>
-        {/* Pre-initialize dataLayer for GTM/gtag */}
-        <Script
-          id="gtm-init"
-          strategy="beforeInteractive"
-          dangerouslySetInnerHTML={{
-            __html: `
-              window.dataLayer = window.dataLayer || [];
-              function gtag(){dataLayer.push(arguments);}
-              gtag('js', new Date());
-            `,
-          }}
-        />
+        {/* Google Tag Manager - only in production */}
+        {process.env.NEXT_PUBLIC_GTM_ID && (
+          <script
+            dangerouslySetInnerHTML={{
+              __html: `(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start': new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0], j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src= 'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f); })(window,document,'script','dataLayer','${process.env.NEXT_PUBLIC_GTM_ID}');`,
+            }}
+          />
+        )}
 
         <link rel="manifest" href="/manifest.json" />
         <link href="https://fonts.cdnfonts.com/css/satoshi" rel="stylesheet" />
@@ -225,20 +220,17 @@ export default function RootLayout({
         suppressHydrationWarning
         className="min-h-screen flex flex-col antialiased tw-bg-white text-gray-900 bg-transparent overflow-x-hidden font-satoshi"
       >
-        {/* Google Tag Manager */}
-        <Script
-          id="gtm-script"
-          strategy="afterInteractive"
-          src="https://www.googletagmanager.com/gtm.js?id=GTM-KF73KMBK"
-        />
-        <noscript>
-          <iframe
-            src="https://www.googletagmanager.com/ns.html?id=GTM-KF73KMBK"
-            height="0"
-            width="0"
-            style={{ display: "none", visibility: "hidden" }}
-          />
-        </noscript>
+        {/* Google Tag Manager (noscript) - only in production */}
+        {process.env.NEXT_PUBLIC_GTM_ID && (
+          <noscript>
+            <iframe
+              src={`https://www.googletagmanager.com/ns.html?id=${process.env.NEXT_PUBLIC_GTM_ID}`}
+              height="0"
+              width="0"
+              style={{ display: "none", visibility: "hidden" }}
+            />
+          </noscript>
+        )}
 
         {/* Particle Background */}
         <ParticleBackground />

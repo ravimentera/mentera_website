@@ -14,7 +14,7 @@ Mentera website (**mentera.ai**) is the **public-facing marketing and SEO websit
 - **Styling**: Tailwind CSS + `tailwind-merge` + `clsx`
 - **Animations**: Framer Motion (reusable variants in `lib/animations.ts`)
 - **CMS**: Contentful (blog posts, dynamic content)
-- **Analytics**: Google Tag Manager (GTM-KF73KMBK) + Vercel Analytics
+- **Analytics**: Google Tag Manager (via NEXT_PUBLIC_GTM_ID) + Vercel Analytics
 - **Lead Capture**: Pipedrive CRM integration (`lib/pipedrive.ts`)
 - **Font**: Satoshi (loaded via CDN)
 - **Deployment**: Vercel
@@ -185,6 +185,9 @@ PIPEDRIVE_API_TOKEN=          # Pipedrive CRM API token
 
 # AI Features
 THESYS_API_KEY=               # Thesys AI chat widget API key
+
+# Analytics
+NEXT_PUBLIC_GTM_ID=           # Google Tag Manager Container ID
 ```
 
 ---
