@@ -51,6 +51,14 @@ export const AIScribeHeroSection = () => {
                   size="md"
                   showArrow
                   className="rounded-full font-bold px-7 py-3 text-[15px] sm:w-auto"
+                  onClick={() => {
+                    window.dataLayer = window.dataLayer || [];
+                    window.dataLayer.push({
+                      event: "cta_click",
+                      cta_text: "Get a Demo",
+                      cta_location: "ai_scribe_hero",
+                    });
+                  }}
                 >
                   Get a Demo
                 </Button>

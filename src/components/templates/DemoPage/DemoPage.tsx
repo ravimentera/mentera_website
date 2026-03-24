@@ -188,6 +188,11 @@ export const DemoPage = () => {
       );
 
       if (response.ok) {
+        window.dataLayer = window.dataLayer || [];
+        window.dataLayer.push({
+          event: "demo_request",
+          form_location: "demo_page",
+        });
         setSubmitStatus("success");
         setSubmitMessage(
           "Thank you! We'll be in touch shortly to schedule your demo.",

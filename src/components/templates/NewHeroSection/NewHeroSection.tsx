@@ -38,6 +38,14 @@ export const NewHeroSection = () => {
                   size="md"
                   showArrow
                   className="rounded-full font-bold"
+                  onClick={() => {
+                    window.dataLayer = window.dataLayer || [];
+                    window.dataLayer.push({
+                      event: "cta_click",
+                      cta_text: "Get a Demo",
+                      cta_location: "hero",
+                    });
+                  }}
                 >
                   Get a Demo
                 </Button>

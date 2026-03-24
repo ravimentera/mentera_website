@@ -15,6 +15,14 @@ export const Footer = () => {
             <Link
               href="/demo"
               className="bg-white text-purple px-8 py-4 rounded-full font-bold hover:bg-white/90 transition-colors inline-flex items-center gap-2"
+              onClick={() => {
+                window.dataLayer = window.dataLayer || [];
+                window.dataLayer.push({
+                  event: "cta_click",
+                  cta_text: "Get a Demo",
+                  cta_location: "footer",
+                });
+              }}
             >
               Get a Demo
               <svg

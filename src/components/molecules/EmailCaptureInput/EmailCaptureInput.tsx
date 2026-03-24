@@ -47,6 +47,11 @@ export const EmailCaptureInput: React.FC<EmailCaptureInputProps> = ({
       const result = await response.json();
 
       if (result.success) {
+        window.dataLayer = window.dataLayer || [];
+        window.dataLayer.push({
+          event: "email_capture",
+          form_location: "email_capture_input",
+        });
         setSuccess(true);
         if (onSubmit) {
           onSubmit(email);
@@ -73,7 +78,7 @@ export const EmailCaptureInput: React.FC<EmailCaptureInputProps> = ({
       variant === "light"
         ? "bg-transparent placeholder-text-secondary text-gray-900 border-primary focus:ring-primary/20"
         : "bg-transparent placeholder-white/50 text-white border-white focus:ring-white/20",
-    [variant]
+    [variant],
   );
 
   const buttonStyles = useMemo(
@@ -81,7 +86,7 @@ export const EmailCaptureInput: React.FC<EmailCaptureInputProps> = ({
       variant === "light"
         ? "bg-primary hover:bg-primary/90 text-white"
         : "bg-white hover:bg-gray-100 text-purple",
-    [variant]
+    [variant],
   );
 
   return (

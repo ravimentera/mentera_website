@@ -233,15 +233,13 @@ const integrations: Integration[] = [
   },
   {
     name: "Dropbox",
-    description:
-      "Cloud storage and file sync platform for team collaboration.",
+    description: "Cloud storage and file sync platform for team collaboration.",
     image: "/app-logos/app-dropbox.png",
     category: "File Storage",
   },
   {
     name: "Google Drive",
-    description:
-      "Cloud file storage and document collaboration platform.",
+    description: "Cloud file storage and document collaboration platform.",
     image: "/app-logos/app-google-drive.png",
     category: "File Storage",
   },
@@ -313,10 +311,10 @@ export const IntegrationsPage = () => {
     () => [
       "All",
       ...Array.from(
-        new Set(integrations.map((item) => getGroupedCategory(item.category)))
+        new Set(integrations.map((item) => getGroupedCategory(item.category))),
       ),
     ],
-    []
+    [],
   );
 
   const filteredIntegrations = useMemo(() => {
@@ -328,7 +326,9 @@ export const IntegrationsPage = () => {
         integration.name.toLowerCase().includes(normalizedQuery) ||
         integration.description.toLowerCase().includes(normalizedQuery) ||
         integration.category.toLowerCase().includes(normalizedQuery) ||
-        getGroupedCategory(integration.category).toLowerCase().includes(normalizedQuery);
+        getGroupedCategory(integration.category)
+          .toLowerCase()
+          .includes(normalizedQuery);
 
       const matchesCategory =
         selectedCategory === "All" ||
@@ -444,6 +444,11 @@ export const IntegrationsPage = () => {
       );
 
       if (response.ok) {
+        window.dataLayer = window.dataLayer || [];
+        window.dataLayer.push({
+          event: "demo_request",
+          form_location: "integration_request_form",
+        });
         setRequestSubmitStatus("success");
         setRequestSubmitMessage(
           "Thanks! We received your integration request.",
@@ -532,7 +537,7 @@ export const IntegrationsPage = () => {
                     type="button"
                     onClick={() =>
                       setSelectedCategory((currentCategory) =>
-                        currentCategory === category ? "All" : category
+                        currentCategory === category ? "All" : category,
                       )
                     }
                     className={`whitespace-nowrap rounded-full border px-4 py-2 text-sm font-medium transition ${
@@ -572,7 +577,7 @@ export const IntegrationsPage = () => {
                       e.currentTarget.style.display = "none";
                       e.currentTarget.parentElement!.classList.add(
                         "bg-gray-200",
-                        "rounded-lg"
+                        "rounded-lg",
                       );
                     }}
                   />
@@ -617,7 +622,11 @@ export const IntegrationsPage = () => {
                 stroke="currentColor"
                 strokeWidth={2}
               >
-                <path strokeLinecap="round" strokeLinejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  d="M17 8l4 4m0 0l-4 4m4-4H3"
+                />
               </svg>
             </span>
           </button>
@@ -648,8 +657,18 @@ export const IntegrationsPage = () => {
                 className="absolute top-4 right-4 text-zinc-400 hover:text-zinc-700 transition-colors"
                 aria-label="Close"
               >
-                <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-                  <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
+                <svg
+                  className="w-6 h-6"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                  strokeWidth={2}
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    d="M6 18L18 6M6 6l12 12"
+                  />
                 </svg>
               </button>
 
@@ -657,7 +676,8 @@ export const IntegrationsPage = () => {
                 Don&apos;t see your integration?
               </h2>
               <p className="mt-3 text-zinc-600 text-center">
-                Tell us what tool you want connected and our team will follow up.
+                Tell us what tool you want connected and our team will follow
+                up.
               </p>
 
               <form
