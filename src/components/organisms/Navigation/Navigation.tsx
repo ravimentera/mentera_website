@@ -2,10 +2,11 @@
 
 import { Button } from "@/components/atoms/Button/Button";
 import { cn } from "@/lib/utils";
-import { AnimatePresence, motion } from "framer-motion";
+import { AnimatePresence, m } from "framer-motion";
+import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
 interface NavigationProps {
   className?: string;
@@ -20,18 +21,7 @@ const NAV_LINKS = [
 
 export const Navigation = ({ className }: NavigationProps) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [scrolled, setScrolled] = useState(false);
   const pathname = usePathname();
-
-  // Handle scroll effect
-  useEffect(() => {
-    const handleScroll = () => {
-      setScrolled(window.scrollY > 0);
-    };
-
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
 
   // Close mobile menu when clicking a navigation link
   const handleNavLinkClick = () => {
@@ -68,10 +58,13 @@ export const Navigation = ({ className }: NavigationProps) => {
       <div className="px-4 sm:px-6 md:px-12 lg:px-24 flex items-center justify-between h-14 sm:h-16 md:h-20 lg:h-24 bg-white shadow-nav">
         {/* Logo */}
         <Link href="/" className="z-50 relative">
-          <img
+          <Image
             src="/flogo.svg"
             alt="Mentera Logo"
+            width={150}
+            height={48}
             className="h-8 sm:h-10 md:h-11 lg:h-12"
+            style={{ width: "auto" }}
           />
         </Link>
 
@@ -158,7 +151,7 @@ export const Navigation = ({ className }: NavigationProps) => {
           {isMenuOpen && (
             <>
               {/* Backdrop */}
-              <motion.div
+              <m.div
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 exit={{ opacity: 0 }}
@@ -167,7 +160,7 @@ export const Navigation = ({ className }: NavigationProps) => {
                 onClick={() => setIsMenuOpen(false)}
               />
               {/* Menu Panel */}
-              <motion.div
+              <m.div
                 initial={{ opacity: 0, x: "100%" }}
                 animate={{ opacity: 1, x: 0 }}
                 exit={{ opacity: 0, x: "100%" }}
@@ -251,7 +244,7 @@ export const Navigation = ({ className }: NavigationProps) => {
                     </Link>
                   </div>
                 </nav>
-              </motion.div>
+              </m.div>
             </>
           )}
         </AnimatePresence>

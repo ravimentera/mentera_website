@@ -1,12 +1,34 @@
+import { ClientProviders } from "@/components/ClientProviders";
 import { ParticleBackground } from "@/components/atoms/ParticleBackground/ParticleBackground";
 import { Navigation } from "@/components/organisms/Navigation";
-import "@crayonai/react-ui/styles/index.css";
 import { Analytics } from "@vercel/analytics/react";
 import { Metadata } from "next";
+import { headers } from "next/headers";
+import localFont from "next/font/local";
 import Script from "next/script";
 import "./globals.css";
 
-import { headers } from "next/headers";
+const satoshi = localFont({
+  src: [
+    {
+      path: "../fonts/Satoshi-Regular.woff",
+      weight: "400",
+      style: "normal",
+    },
+    {
+      path: "../fonts/Satoshi-Medium.woff",
+      weight: "500",
+      style: "normal",
+    },
+    {
+      path: "../fonts/Satoshi-Bold.woff",
+      weight: "700",
+      style: "normal",
+    },
+  ],
+  variable: "--font-satoshi",
+  display: "swap",
+});
 
 export async function generateMetadata(): Promise<Metadata> {
   const headersList = headers();
@@ -118,28 +140,23 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en">
+    <html lang="en" className={satoshi.variable}>
       <head>
-        {/* Pre-initialize dataLayer for GTM/gtag */}
-        <Script
-          id="gtm-init"
-          strategy="beforeInteractive"
-          dangerouslySetInnerHTML={{
-            __html: `
-              window.dataLayer = window.dataLayer || [];
-              function gtag(){dataLayer.push(arguments);}
-              gtag('js', new Date());
-            `,
-          }}
-        />
-
         <link rel="manifest" href="/manifest.json" />
-        <link href="https://fonts.cdnfonts.com/css/satoshi" rel="stylesheet" />
         <link
           rel="alternate"
           type="application/rss+xml"
           title="Mentera.ai RSS Feed"
           href="/feed.xml"
+        />
+        <link
+          rel="preload"
+          href="/videos/orb-poster.jpg"
+          as="image"
+        />
+        <link
+          rel="dns-prefetch"
+          href="https://www.googletagmanager.com"
         />
         {/* Structured data for better SEO */}
         <script
@@ -225,10 +242,10 @@ export default function RootLayout({
         suppressHydrationWarning
         className="min-h-screen flex flex-col antialiased tw-bg-white text-gray-900 bg-transparent overflow-x-hidden font-satoshi"
       >
-        {/* Google Tag Manager */}
+        {/* Google Tag Manager — deferred to reduce TBT */}
         <Script
           id="gtm-script"
-          strategy="afterInteractive"
+          strategy="lazyOnload"
           src="https://www.googletagmanager.com/gtm.js?id=GTM-KF73KMBK"
         />
         <noscript>
@@ -240,14 +257,16 @@ export default function RootLayout({
           />
         </noscript>
 
-        {/* Particle Background */}
-        <ParticleBackground />
+        <ClientProviders>
+          {/* Particle Background */}
+          <ParticleBackground />
 
-        <Navigation />
+          <Navigation />
 
-        {/* Main Content */}
-        {children}
-        <Analytics />
+          {/* Main Content */}
+          {children}
+          <Analytics />
+        </ClientProviders>
       </body>
     </html>
   );

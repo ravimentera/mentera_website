@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import Link from "next/link";
 
 export const Footer = () => {
@@ -40,24 +41,31 @@ export const Footer = () => {
 
         {/* Middle Section: Compliance Badges and Navigation Links */}
         <div className="flex flex-col md:flex-row justify-between items-center mb-6 sm:mb-8 gap-4 sm:gap-6">
-          <img
+          <Image
             src="/logos/mentera-light.svg"
             alt="Mentera logo"
-            className="h-9 mb-2 sm:mb-0 sm:h-8 md:h-9 w-auto"
+            width={120}
+            height={36}
+            className="h-9 mb-2 sm:mb-0 sm:h-8 md:h-9"
+            style={{ width: "auto" }}
           />
           {/* Compliance Badges */}
           <div className="flex gap-6 md:gap-8 items-center">
             {/* HIPAA Badge */}
-            <img
+            <Image
               src="/logos/hippa.svg"
               alt="HIPAA Compliant"
-              className="h-7 sm:h-8 md:h-9 aspect-[110/37] w-auto"
+              width={110}
+              height={37}
+              className="h-7 sm:h-8 md:h-9 w-auto"
             />
             {/* GDPR Badge */}
-            <img
+            <Image
               src="/logos/gdpr.svg"
               alt="GDPR Compliant"
-              className="h-7 sm:h-8 md:h-9 aspect-[115/36] w-auto"
+              width={115}
+              height={36}
+              className="h-7 sm:h-8 md:h-9 w-auto"
             />
           </div>
 

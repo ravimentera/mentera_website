@@ -6,7 +6,8 @@ import {
   transitions,
   viewportConfig,
 } from "@/lib/animations";
-import { motion } from "framer-motion";
+import { m } from "framer-motion";
+import Image from "next/image";
 import { memo, useMemo } from "react";
 
 // App logos mapping - all logos from /public/app-logos folder
@@ -75,7 +76,7 @@ export const IntegrationsSection = memo(() => {
       <div className="max-w-8xl mx-auto px-2 sm:px-4 md:px-6">
         <div className="grid lg:grid-cols-2 gap-8 sm:gap-12 md:gap-16 items-center">
           {/* Left Side - Text Content */}
-          <motion.div
+          <m.div
             initial="hidden"
             whileInView="visible"
             viewport={viewportConfig.once}
@@ -93,10 +94,10 @@ export const IntegrationsSection = memo(() => {
             <p className="text-sm sm:text-base text-gray-400 font-medium text-center sm:text-left">
               If we don't have a current integration, we will build it.
             </p>
-          </motion.div>
+          </m.div>
 
           {/* Right Side - Animated Logo Rows with Faded Overlays */}
-          <motion.div
+          <m.div
             initial="hidden"
             whileInView="visible"
             viewport={viewportConfig.once}
@@ -116,9 +117,11 @@ export const IntegrationsSection = memo(() => {
                       key={`row1-${index}`}
                       className="flex-shrink-0 bg-white rounded-xl p-3 h-[4rem] w-[4rem] flex items-center justify-center shadow-integration-card hover:border-purple-300 hover:shadow-lg transition-all"
                     >
-                      <img
+                      <Image
                         src={`/app-logos/${app.image}`}
                         alt={app.name}
+                        width={42}
+                        height={42}
                         className="w-[2.625rem] h-[2.625rem] object-contain"
                       />
                     </div>
@@ -137,9 +140,11 @@ export const IntegrationsSection = memo(() => {
                       key={`row2-${index}`}
                       className="flex-shrink-0 bg-white rounded-xl p-3 h-[4rem] w-[4rem] flex items-center justify-center shadow-[0px_0px_9.73px_0px_#DDDFFF] hover:border-purple-300 hover:shadow-lg transition-all"
                     >
-                      <img
+                      <Image
                         src={`/app-logos/${app.image}`}
                         alt={app.name}
+                        width={42}
+                        height={42}
                         className="w-[2.625rem] h-[2.625rem] object-contain"
                       />
                     </div>
@@ -158,9 +163,11 @@ export const IntegrationsSection = memo(() => {
                       key={`row3-${index}`}
                       className="flex-shrink-0 bg-white rounded-xl p-3 h-[4rem] w-[4rem] flex items-center justify-center shadow-[0px_0px_9.73px_0px_#DDDFFF] hover:border-purple-300 hover:shadow-lg transition-all"
                     >
-                      <img
+                      <Image
                         src={`/app-logos/${app.image}`}
                         alt={app.name}
+                        width={42}
+                        height={42}
                         className="w-[2.625rem] h-[2.625rem] object-contain"
                       />
                     </div>
@@ -168,7 +175,7 @@ export const IntegrationsSection = memo(() => {
                 </div>
               </div>
             </div>
-          </motion.div>
+          </m.div>
         </div>
       </div>
     </section>

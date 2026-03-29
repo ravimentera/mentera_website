@@ -2,14 +2,14 @@
 
 import { Button } from "@/components/atoms/Button/Button";
 import { fadeInUp, transitions } from "@/lib/animations";
-import { motion } from "framer-motion";
+import { m } from "framer-motion";
 import Link from "next/link";
 
 export const TryForFreeSection = () => {
   return (
     <section className="relative w-full pb-6 sm:p-12">
       <div className="max-w-8xl mx-auto px-6 sm:px-8 md:px-12 lg:px-0">
-        <motion.div
+        <m.div
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true }}
@@ -44,7 +44,7 @@ export const TryForFreeSection = () => {
               </Button>
             </Link>
           </div>
-        </motion.div>
+        </m.div>
       </div>
     </section>
   );

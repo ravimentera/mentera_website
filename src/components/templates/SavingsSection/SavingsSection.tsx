@@ -1,7 +1,7 @@
 "use client";
 
 import { fadeInUp, transitions, viewportConfig } from "@/lib/animations";
-import { motion, useInView } from "framer-motion";
+import { m, useInView } from "framer-motion";
 import { memo, useEffect, useRef, useState } from "react";
 
 // Moved outside component to avoid recreation on each render
@@ -110,7 +110,7 @@ export const SavingsSection = memo(() => {
     <section className="relative w-full py-12 sm:py-16 md:py-20">
       <div className="max-w-8xl mx-auto px-4 sm:px-6 md:px-12 lg:px-24">
         <div className="max-w-8xl mx-auto items-center flex flex-col lg:flex-row justify-between gap-8 lg:gap-0">
-          <motion.div
+          <m.div
             initial="hidden"
             whileInView="visible"
             viewport={viewportConfig.once}
@@ -126,11 +126,11 @@ export const SavingsSection = memo(() => {
               efficient? That margin becomes the difference between maintaining
               pace and pulling ahead.
             </p>
-          </motion.div>
+          </m.div>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6 w-full lg:w-auto">
             {stats.map((stat, index) => (
-              <motion.div
+              <m.div
                 key={`stat-${stat.value}-${index}`}
                 initial="hidden"
                 whileInView="visible"
@@ -145,7 +145,7 @@ export const SavingsSection = memo(() => {
                     {stat.description}
                   </p>
                 </div>
-              </motion.div>
+              </m.div>
             ))}
           </div>
         </div>

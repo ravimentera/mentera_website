@@ -1,7 +1,8 @@
 "use client";
 
 import { Footer } from "@/components/organisms/Footer/Footer";
-import { motion } from "framer-motion";
+import { m } from "framer-motion";
+import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
 
@@ -35,15 +36,15 @@ export const BlogPage = ({ posts }: BlogPageProps) => {
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 sm:py-16 md:py-20">
         {/* Header */}
         <div className="text-center mb-12 sm:mb-16">
-          <motion.h1
+          <m.h1
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
             className="text-4xl sm:text-5xl md:text-6xl font-medium text-zinc-900 mb-6"
           >
             Welcome to Mentera's Blogs
-          </motion.h1>
-          <motion.p
+          </m.h1>
+          <m.p
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.1 }}
@@ -51,10 +52,10 @@ export const BlogPage = ({ posts }: BlogPageProps) => {
           >
             Stories, insights, and updates from the team shaping the future of
             patient care.
-          </motion.p>
+          </m.p>
 
           {/* Filters - Hidden for now */}
-          {/* <motion.div
+          {/* <m.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.2 }}
@@ -73,7 +74,7 @@ export const BlogPage = ({ posts }: BlogPageProps) => {
                 {category}
               </button>
             ))}
-          </motion.div> */}
+          </m.div> */}
         </div>
 
         {/* Blog Grid */}
@@ -84,7 +85,7 @@ export const BlogPage = ({ posts }: BlogPageProps) => {
               key={post.id}
               className="block group"
             >
-              <motion.div
+              <m.div
                 layout
                 initial={{ opacity: 0, scale: 0.95 }}
                 animate={{ opacity: 1, scale: 1 }}
@@ -93,10 +94,12 @@ export const BlogPage = ({ posts }: BlogPageProps) => {
               >
                 {/* Image */}
                 <div className="aspect-blog relative overflow-hidden rounded-xl bg-gray-100 mb-4">
-                  <img
+                  <Image
                     src={post.image}
                     alt={post.title}
-                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                    fill
+                    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                    className="object-cover group-hover:scale-105 transition-transform duration-500"
                   />
                 </div>
 
@@ -129,7 +132,7 @@ export const BlogPage = ({ posts }: BlogPageProps) => {
                     <span>By {post.author}</span> */}
                   </div>
                 </div>
-              </motion.div>
+              </m.div>
             </Link>
           ))}
         </div>

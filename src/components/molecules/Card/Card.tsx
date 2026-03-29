@@ -2,7 +2,7 @@
 
 import { cn } from "@/lib/utils";
 import { fadeInUp, transitions, viewportConfig } from "@/lib/animations";
-import { HTMLMotionProps, motion } from "framer-motion";
+import { HTMLMotionProps, m } from "framer-motion";
 import React, { memo, useMemo } from "react";
 
 interface CardProps
@@ -31,7 +31,7 @@ export const Card = memo(({
   const variantClass = useMemo(() => variantStyles[variant], [variant]);
 
   return (
-    <motion.div
+    <m.div
       initial="hidden"
       whileInView="visible"
       viewport={viewportConfig.onceWithMargin}
@@ -46,7 +46,7 @@ export const Card = memo(({
       {...props}
     >
       {children}
-    </motion.div>
+    </m.div>
   );
 });
 

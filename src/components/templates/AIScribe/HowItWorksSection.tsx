@@ -2,7 +2,8 @@
 
 import { Button } from "@/components/atoms/Button/Button";
 import { fadeInUp, transitions } from "@/lib/animations";
-import { motion } from "framer-motion";
+import { m } from "framer-motion";
+import Image from "next/image";
 import Link from "next/link";
 
 // Steps configuration
@@ -74,7 +75,7 @@ export const HowItWorksSection = () => {
     <section className="relative w-full py-16 ">
       <div className="max-w-8xl mx-auto px-6 sm:px-8 md:px-12 lg:px-24">
         {/* Section Header */}
-        <motion.div
+        <m.div
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true }}
@@ -88,7 +89,7 @@ export const HowItWorksSection = () => {
           <p className="text-lg sm:text-xl text-zinc-950 opacity-80 max-w-2xl mx-auto">
             Save hours of charting with just a few clicks
           </p>
-        </motion.div>
+        </m.div>
 
         {/* Bento Grid */}
         <div className="space-y-7">
@@ -96,7 +97,7 @@ export const HowItWorksSection = () => {
           {rows.slice(0, 2).map((rowSteps, rowIndex) => (
             <div key={rowIndex} className="grid lg:grid-cols-5 gap-7">
               {rowSteps.map((stepConfig, stepIndex) => (
-                <motion.div
+                <m.div
                   key={stepConfig.step}
                   initial="hidden"
                   whileInView="visible"
@@ -129,19 +130,23 @@ export const HowItWorksSection = () => {
                   {/* Step Image */}
                   <div className="mt-auto">
                     {/* Mobile Image */}
-                    <img
+                    <Image
                       src={stepConfig.mobileImage}
                       alt={stepConfig.imageAlt}
+                      width={800}
+                      height={500}
                       className={`w-full h-auto object-contain rounded-xl lg:hidden ${stepConfig.imageHeight}`}
                     />
                     {/* Desktop Image */}
-                    <img
+                    <Image
                       src={stepConfig.image}
                       alt={stepConfig.imageAlt}
+                      width={800}
+                      height={500}
                       className={`w-full h-auto object-contain rounded-xl hidden lg:block ${stepConfig.imageHeight}`}
                     />
                   </div>
-                </motion.div>
+                </m.div>
               ))}
             </div>
           ))}
@@ -149,7 +154,7 @@ export const HowItWorksSection = () => {
           {/* Row 3: Step 5 & CTA */}
           <div className="grid lg:grid-cols-5 gap-7">
             {/* Step 5 */}
-            <motion.div
+            <m.div
               initial="hidden"
               whileInView="visible"
               viewport={{ once: true }}
@@ -178,22 +183,26 @@ export const HowItWorksSection = () => {
               {/* Step Image */}
               <div className="my-12">
                 {/* Mobile Image */}
-                <img
+                <Image
                   src={STEPS[4].mobileImage}
                   alt={STEPS[4].imageAlt}
+                  width={800}
+                  height={500}
                   className={`w-full object-contain rounded-xl lg:hidden !h-96`}
                 />
                 {/* Desktop Image */}
-                <img
+                <Image
                   src={STEPS[4].image}
                   alt={STEPS[4].imageAlt}
+                  width={800}
+                  height={500}
                   className={`w-full object-contain rounded-xl hidden lg:block ${STEPS[4].imageHeight}`}
                 />
               </div>
-            </motion.div>
+            </m.div>
 
             {/* CTA Card */}
-            <motion.div
+            <m.div
               initial="hidden"
               whileInView="visible"
               viewport={{ once: true }}
@@ -226,7 +235,7 @@ export const HowItWorksSection = () => {
                   Get a Demo
                 </Button>
               </Link>
-            </motion.div>
+            </m.div>
           </div>
         </div>
       </div>

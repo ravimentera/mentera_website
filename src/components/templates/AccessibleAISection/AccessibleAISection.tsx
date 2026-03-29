@@ -1,9 +1,18 @@
 "use client";
 
 import { Button } from "@/components/atoms/Button/Button";
-import { CustomParticleBackground } from "@/components/atoms/CustomParticleBackground";
+import dynamic from "next/dynamic";
+
+const CustomParticleBackground = dynamic(
+  () =>
+    import("@/components/atoms/CustomParticleBackground/CustomParticleBackground").then(
+      (mod) => ({ default: mod.CustomParticleBackground })
+    ),
+  { ssr: false }
+);
 import { useScreenSize } from "@/hooks/useScreenSize";
-import { motion } from "framer-motion";
+import { m } from "framer-motion";
+import Image from "next/image";
 import { useEffect, useState } from "react";
 
 export const AccessibleAISection = () => {
@@ -78,7 +87,7 @@ export const AccessibleAISection = () => {
     <section className="relative w-full bg-transparent px-4 sm:px-6 md:px-12 lg:px-24">
       {/* Header Section */}
       <div className="max-w-8xl mx-auto px-2 sm:px-4 md:px-6 lg:px-24 pt-12 sm:pt-16 md:pt-20">
-        <motion.div
+        <m.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
@@ -96,7 +105,7 @@ export const AccessibleAISection = () => {
           </div>
 
           <div className="flex flex-row items-center flex-wrap justify-center gap-3 sm:gap-3 md:gap-4 max-w-full mx-auto mb-8 sm:mb-10 md:mb-14">
-            <motion.div
+            <m.div
               animate={{
                 scale: activeTab === "instant" ? 1.05 : 1,
               }}
@@ -113,8 +122,8 @@ export const AccessibleAISection = () => {
               >
                 Instant Answers
               </Button>
-            </motion.div>
-            <motion.div
+            </m.div>
+            <m.div
               animate={{
                 scale: activeTab === "faster" ? 1.05 : 1,
               }}
@@ -131,8 +140,8 @@ export const AccessibleAISection = () => {
               >
                 Work Faster
               </Button>
-            </motion.div>
-            <motion.div
+            </m.div>
+            <m.div
               animate={{
                 scale: activeTab === "customers" ? 1.05 : 1,
               }}
@@ -151,9 +160,9 @@ export const AccessibleAISection = () => {
               >
                 Handle More Customers
               </Button>
-            </motion.div>
+            </m.div>
           </div>
-        </motion.div>
+        </m.div>
       </div>
 
       {/* Dynamic Content Section */}
@@ -184,7 +193,7 @@ export const AccessibleAISection = () => {
         <div
           className={`max-w-8xl mx-auto relative overflow-hidden transition-all duration-500 ease-in-out ${tabContent[activeTab].height} min-h-[20rem] sm:min-h-[25rem] md:min-h-[28rem] lg:min-h-0 rounded-b-3xl`}
         >
-          <motion.div
+          <m.div
             key={activeTab}
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
@@ -192,7 +201,7 @@ export const AccessibleAISection = () => {
             className="relative flex flex-col lg:flex-row h-full gap-6 md:gap-18 justify-between"
           >
             {/* Content Section */}
-            <motion.div
+            <m.div
               initial={{
                 opacity: 0,
                 x: isEvenSlide ? 100 : -100,
@@ -212,7 +221,7 @@ export const AccessibleAISection = () => {
               </p>
               <ul className="space-y-2 sm:space-y-3">
                 {tabContent[activeTab].features.map((feature, index) => (
-                  <motion.li
+                  <m.li
                     key={index}
                     initial={{ opacity: 0, x: isEvenSlide ? 20 : -20 }}
                     animate={{ opacity: 1, x: 0 }}
@@ -239,13 +248,13 @@ export const AccessibleAISection = () => {
                     <span className="text-sm sm:text-base md:text-lg text-zinc-900">
                       {feature}
                     </span>
-                  </motion.li>
+                  </m.li>
                 ))}
               </ul>
-            </motion.div>
+            </m.div>
 
             {/* Image Section */}
-            <motion.div
+            <m.div
               initial={{ opacity: 0, y: isDesktop ? 100 : 0 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, ease: "easeOut", delay: 0.2 }}
@@ -257,15 +266,19 @@ export const AccessibleAISection = () => {
                   <div className="backdrop-blur-sm rounded-[calc(2rem-4px)] h-full w-full"></div>
                 </div>
                 <div className="relative z-10 overflow-hidden">
-                  <img
+                  <Image
                     src={tabContent[activeTab].image}
                     alt={tabContent[activeTab].title}
-                    className="w-auto h-auto max-w-full max-h-full object-contain mx-auto"
+                    width={800}
+                    height={600}
+                    sizes="(max-width: 768px) 90vw, (max-width: 1024px) 60vw, 50vw"
+                    className="max-w-full max-h-full object-contain mx-auto"
+                    style={{ width: "auto", height: "auto" }}
                   />
                 </div>
               </div>
-            </motion.div>
-          </motion.div>
+            </m.div>
+          </m.div>
           {/* Bottom gradient fade to white - placed after content to ensure it's on top */}
           <div className="absolute bottom-0 left-0 right-0 h-20 bg-gradient-to-t from-white to-transparent z-30 pointer-events-none overflow-hidden rounded-b-3xl"></div>
         </div>

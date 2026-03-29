@@ -2,7 +2,8 @@
 
 import { Button } from "@/components/atoms/Button/Button";
 import { fadeInRight, fadeInUp, transitions } from "@/lib/animations";
-import { motion } from "framer-motion";
+import { m } from "framer-motion";
+import Image from "next/image";
 import Link from "next/link";
 
 export const AIScribeHeroSection = () => {
@@ -20,7 +21,7 @@ export const AIScribeHeroSection = () => {
       <div className="max-w-8xl relative z-10 w-full mx-auto px-6 sm:px-6 md:px-12 lg:px-24 lg:pr-0 py-8 sm:py-12 md:py-16">
         <div className="grid lg:grid-cols-12 gap-8 lg:gap-8 items-center">
           {/* Left Column - Text Content */}
-          <motion.div
+          <m.div
             initial="hidden"
             animate="visible"
             variants={fadeInUp}
@@ -64,10 +65,10 @@ export const AIScribeHeroSection = () => {
                 </Button>
               </Link>
             </div>
-          </motion.div>
+          </m.div>
 
           {/* Right Column - Hero Image */}
-          <motion.div
+          <m.div
             initial="hidden"
             animate="visible"
             variants={fadeInRight}
@@ -76,19 +77,24 @@ export const AIScribeHeroSection = () => {
           >
             <div className="relative w-full max-w-2xl lg:max-w-none mx-auto">
               {/* Mobile Image */}
-              <img
+              <Image
                 src="/images/ai-scribe/m-hero.png"
                 alt="AI Scribe Interface"
+                width={800}
+                height={600}
                 className="w-full h-auto lg:hidden"
               />
               {/* Desktop Image */}
-              <img
+              <Image
                 src="/images/ai-scribe/hero.png"
                 alt="AI Scribe Interface"
+                width={800}
+                height={600}
                 className="w-full h-auto hidden lg:block"
+                priority
               />
             </div>
-          </motion.div>
+          </m.div>
         </div>
       </div>
     </section>

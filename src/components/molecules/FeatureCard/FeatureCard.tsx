@@ -2,7 +2,7 @@
 
 import { cn } from "@/lib/utils";
 import { fadeInUp, transitions, viewportConfig } from "@/lib/animations";
-import { motion } from "framer-motion";
+import { m } from "framer-motion";
 import React, { memo } from "react";
 
 interface FeatureCardProps {
@@ -23,7 +23,7 @@ export const FeatureCard = memo(({
   delay = 0,
 }: FeatureCardProps) => {
   return (
-    <motion.div
+    <m.div
       initial="hidden"
       whileInView="visible"
       viewport={viewportConfig.onceWithMargin}
@@ -46,7 +46,7 @@ export const FeatureCard = memo(({
         {title}
       </h3>
       <p className="text-gray-600 font-outfit">{description}</p>
-    </motion.div>
+    </m.div>
   );
 });
 

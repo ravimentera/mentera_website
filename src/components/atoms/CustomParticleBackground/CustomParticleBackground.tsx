@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useRef } from "react";
 
 interface ParticleConfig {
   color: string;
@@ -24,12 +24,10 @@ interface CustomParticleBackgroundProps {
   className?: string;
 }
 
-// Note: Colors are defined as hex strings for use in inline styles
-// These correspond to Tailwind config colors: secondary, purple-500, teal-200, purple-particleAlt, etc.
 const defaultParticles: ParticleConfig[] = [
-  // Top section particles
+  // Top section
   {
-    color: "#6EF1BB", // secondary.DEFAULT
+    color: "#6EF1BB",
     opacity: 0.2,
     size: 691,
     blur: 108,
@@ -37,23 +35,7 @@ const defaultParticles: ParticleConfig[] = [
     transform: { x: 0, y: -0.3 },
   },
   {
-    color: "#8F03A0", // purple-500
-    opacity: 0.05,
-    size: 691,
-    blur: 108,
-    position: { top: "24.3125rem", right: "0" },
-    transform: { x: 0.24, y: -0.15 },
-  },
-  {
-    color: "#abeed2", // teal-200
-    opacity: 0.1,
-    size: 691,
-    blur: 100,
-    position: { top: "31.125rem", left: "33.5625rem" },
-    transform: { x: -0.18, y: -0.24 },
-  },
-  {
-    color: "#bc5ac7", // purple-particleAlt
+    color: "#bc5ac7",
     opacity: 0.2,
     size: 500,
     blur: 108,
@@ -61,7 +43,7 @@ const defaultParticles: ParticleConfig[] = [
     transform: { x: 0.12, y: -0.27 },
   },
   {
-    color: "#6EF1BB", // secondary.DEFAULT
+    color: "#6EF1BB",
     opacity: 0.25,
     size: 500,
     blur: 108,
@@ -69,25 +51,16 @@ const defaultParticles: ParticleConfig[] = [
     transform: { x: -0.21, y: -0.18 },
   },
   {
-    color: "#a1f1d0", // teal-300
-    opacity: 0.15,
-    size: 600,
-    blur: 120,
-    position: { top: "50rem", left: "6.25rem" },
-    transform: { x: 0.27, y: 0.12 },
-  },
-  {
-    color: "#aa3db6", // purple-particleAlt2
+    color: "#aa3db6",
     opacity: 0.15,
     size: 400,
     blur: 90,
     position: { top: "9.375rem", left: "12.5rem" },
     transform: { x: -0.24, y: 0.21 },
   },
-
-  // Middle section particles (for scrolling)
+  // Middle section
   {
-    color: "#6EF1BB", // secondary.DEFAULT
+    color: "#6EF1BB",
     opacity: 0.18,
     size: 650,
     blur: 110,
@@ -95,33 +68,16 @@ const defaultParticles: ParticleConfig[] = [
     transform: { x: -0.15, y: 0.2 },
   },
   {
-    color: "#8F03A0", // purple-500
-    opacity: 0.08,
-    size: 550,
-    blur: 95,
-    position: { top: "90rem", left: "15rem" },
-    transform: { x: 0.18, y: -0.22 },
-  },
-  {
-    color: "#abeed2", // teal-200
+    color: "#abeed2",
     opacity: 0.12,
     size: 600,
     blur: 105,
     position: { top: "110rem", right: "20rem" },
     transform: { x: -0.2, y: 0.15 },
   },
+  // Lower section
   {
-    color: "#bc5ac7", // purple-particleAlt
-    opacity: 0.15,
-    size: 480,
-    blur: 100,
-    position: { top: "130rem", left: "5rem" },
-    transform: { x: 0.22, y: -0.18 },
-  },
-
-  // Lower section particles
-  {
-    color: "#a1f1d0", // teal-300
+    color: "#a1f1d0",
     opacity: 0.2,
     size: 700,
     blur: 115,
@@ -129,28 +85,12 @@ const defaultParticles: ParticleConfig[] = [
     transform: { x: -0.25, y: 0.12 },
   },
   {
-    color: "#6EF1BB", // secondary.DEFAULT
-    opacity: 0.16,
-    size: 520,
-    blur: 98,
-    position: { top: "170rem", left: "10rem" },
-    transform: { x: 0.19, y: -0.16 },
-  },
-  {
-    color: "#8F03A0", // purple-500
+    color: "#8F03A0",
     opacity: 0.1,
     size: 580,
     blur: 102,
     position: { top: "190rem", right: "15rem" },
     transform: { x: -0.17, y: 0.19 },
-  },
-  {
-    color: "#aa3db6", // purple-particleAlt2
-    opacity: 0.14,
-    size: 450,
-    blur: 92,
-    position: { top: "210rem", left: "20rem" },
-    transform: { x: 0.21, y: -0.14 },
   },
 ];
 
@@ -158,42 +98,39 @@ export const CustomParticleBackground = ({
   particles = defaultParticles,
   className = "fixed inset-0 -z-10",
 }: CustomParticleBackgroundProps) => {
-  const [scrollY, setScrollY] = useState(0);
-  const requestRef = useRef<number>();
-  const previousTimeRef = useRef<number>();
+  const containerRef = useRef<HTMLDivElement>(null);
+  const particleRefs = useRef<(HTMLDivElement | null)[]>([]);
+
+  const applyTransforms = useCallback(
+    (scrollY: number) => {
+      particles.forEach((particle, index) => {
+        const el = particleRefs.current[index];
+        if (!el) return;
+        const tx = scrollY * particle.transform.x;
+        const ty = scrollY * particle.transform.y;
+        const flip = index % 3 === 0 ? " scale(-1, 1)" : "";
+        el.style.transform = `translate3d(${tx}px, ${ty}px, 0)${flip}`;
+      });
+    },
+    [particles]
+  );
 
   useEffect(() => {
     let ticking = false;
-    const scrollListener = () => {
+    const onScroll = () => {
       if (!ticking) {
-        window.requestAnimationFrame(() => {
-          const newScrollY = window.scrollY;
-          // Only update if change is significant (throttle updates)
-          if (Math.abs(newScrollY - scrollY) > 5) {
-            setScrollY(newScrollY);
-          }
+        requestAnimationFrame(() => {
+          applyTransforms(window.scrollY);
           ticking = false;
         });
         ticking = true;
       }
     };
 
-    window.addEventListener("scroll", scrollListener, { passive: true });
-    return () => window.removeEventListener("scroll", scrollListener);
-  }, [scrollY]);
-
-  const animate = (time: number) => {
-    if (previousTimeRef.current !== undefined) {
-      // Animation logic here if needed
-    }
-    previousTimeRef.current = time;
-    requestRef.current = requestAnimationFrame(animate);
-  };
-
-  useEffect(() => {
-    requestRef.current = requestAnimationFrame(animate);
-    return () => cancelAnimationFrame(requestRef.current!);
-  }, []);
+    window.addEventListener("scroll", onScroll, { passive: true });
+    applyTransforms(window.scrollY);
+    return () => window.removeEventListener("scroll", onScroll);
+  }, [applyTransforms]);
 
   const getPositionStyles = (position: ParticleConfig["position"]) => {
     const styles: Record<string, string> = {};
@@ -205,10 +142,16 @@ export const CustomParticleBackground = ({
   };
 
   return (
-    <div className={`${className} overflow-hidden pointer-events-none`}>
+    <div
+      ref={containerRef}
+      className={`${className} overflow-hidden pointer-events-none`}
+    >
       {particles.map((particle, index) => (
         <div
           key={index}
+          ref={(el) => {
+            particleRefs.current[index] = el;
+          }}
           className="absolute rounded-full will-change-transform"
           style={{
             width: `${particle.size}px`,
@@ -216,9 +159,6 @@ export const CustomParticleBackground = ({
             background: `linear-gradient(to left, ${particle.color}, transparent)`,
             opacity: particle.opacity,
             filter: `blur(${particle.blur}px)`,
-            transform: `translate3d(${scrollY * particle.transform.x}px, ${
-              scrollY * particle.transform.y
-            }px, 0) ${index % 3 === 0 ? "scale(-1, 1)" : ""}`,
             ...getPositionStyles(particle.position),
           }}
         />

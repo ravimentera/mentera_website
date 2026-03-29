@@ -1,7 +1,8 @@
 "use client";
 
 import { fadeInUp, transitions } from "@/lib/animations";
-import { motion } from "framer-motion";
+import { m } from "framer-motion";
+import Image from "next/image";
 
 export const BenefitsSection = () => {
   const benefits = [
@@ -35,7 +36,7 @@ export const BenefitsSection = () => {
     <section className="relative w-full py-16 md:py-24">
       <div className="max-w-8xl mx-auto px-6 sm:px-8 md:px-12 lg:px-24">
         {/* Section Header */}
-        <motion.div
+        <m.div
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true }}
@@ -46,12 +47,12 @@ export const BenefitsSection = () => {
           <h2 className="text-3xl sm:text-4xl md:text-5xl font-medium text-zinc-950 mb-0 md:mb-4">
             Why choose AI scribe for clinical documentation?
           </h2>
-        </motion.div>
+        </m.div>
 
         {/* Benefits Grid */}
         <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-0 md:gap-8">
           {benefits.map((benefit, index) => (
-            <motion.div
+            <m.div
               key={index}
               initial="hidden"
               whileInView="visible"
@@ -60,15 +61,17 @@ export const BenefitsSection = () => {
               transition={{ ...transitions.default, delay: index * 0.1 }}
               className="p-6 md:p-8 flex flex-col items-center text-center"
             >
-              <img
+              <Image
                 src={benefit.icon}
                 alt=""
-                className="h-24 md:h-36 object-contain"
+                width={144}
+                height={144}
+                className="h-24 md:h-36 object-contain w-auto"
               />
               <h3 className="text-base md:text-lg font-medium text-zinc-950 leading-relaxed">
                 {benefit.title}
               </h3>
-            </motion.div>
+            </m.div>
           ))}
         </div>
       </div>

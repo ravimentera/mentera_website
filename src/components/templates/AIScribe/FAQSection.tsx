@@ -1,7 +1,7 @@
 "use client";
 
 import { fadeInUp, transitions } from "@/lib/animations";
-import { AnimatePresence, motion } from "framer-motion";
+import { AnimatePresence, m } from "framer-motion";
 import { useState } from "react";
 
 export const FAQSection = () => {
@@ -46,7 +46,7 @@ export const FAQSection = () => {
         <div className="bg-[#3428DF0F] rounded-[2rem] lg:rounded-4xl p-6 md:p-12 lg:p-16">
           <div className="grid lg:grid-cols-12 gap-12 lg:gap-16">
             {/* Left Column - Title */}
-            <motion.div
+            <m.div
               initial="hidden"
               whileInView="visible"
               viewport={{ once: true }}
@@ -57,13 +57,13 @@ export const FAQSection = () => {
               <h2 className="text-3xl sm:text-4xl md:text-5xl font-medium text-zinc-950 sticky top-24">
                 FAQs
               </h2>
-            </motion.div>
+            </m.div>
 
             {/* Right Column - FAQ Accordion */}
             <div className="lg:col-span-9">
               {faqs.map((faq, index) => (
                 <div key={index}>
-                  <motion.div
+                  <m.div
                     initial="hidden"
                     whileInView="visible"
                     viewport={{ once: true }}
@@ -107,7 +107,7 @@ export const FAQSection = () => {
 
                     <AnimatePresence>
                       {openIndex === index && (
-                        <motion.div
+                        <m.div
                           initial={{ height: 0, opacity: 0 }}
                           animate={{ height: "auto", opacity: 1 }}
                           exit={{ height: 0, opacity: 0 }}
@@ -119,10 +119,10 @@ export const FAQSection = () => {
                               {faq.answer}
                             </p>
                           </div>
-                        </motion.div>
+                        </m.div>
                       )}
                     </AnimatePresence>
-                  </motion.div>
+                  </m.div>
 
                   {/* Divider - show for all except last item */}
                   {index < faqs.length - 1 && (

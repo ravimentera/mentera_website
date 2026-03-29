@@ -1,7 +1,7 @@
 "use client";
 
 import { cn } from "@/lib/utils";
-import { motion } from "framer-motion";
+import { m } from "framer-motion";
 import React from "react";
 
 interface GradientTextProps {
@@ -20,7 +20,7 @@ export const GradientText = ({
   enableShine = true,
 }: GradientTextProps) => {
   return (
-    <motion.span
+    <m.span
       className={cn(
         "relative inline-block bg-clip-text text-transparent",
         `bg-gradient-to-r ${gradientFrom} ${gradientTo}`,
@@ -41,6 +41,6 @@ export const GradientText = ({
                     pointer-events-none"
         />
       )}
-    </motion.span>
+    </m.span>
   );
 };

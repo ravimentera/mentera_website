@@ -1,7 +1,7 @@
 "use client";
 
 import { fadeInUp, transitions, viewportConfig } from "@/lib/animations";
-import { motion } from "framer-motion";
+import { m } from "framer-motion";
 import { memo, useCallback } from "react";
 
 const features = [
@@ -137,7 +137,7 @@ export const ReimagineWorkSection = memo(() => {
   return (
     <section className="relative w-full py-12 sm:py-16 md:py-20">
       <div className="max-w-8xl mx-auto px-4 sm:px-6 md:px-12 lg:px-24 py-12 sm:py-16 md:py-20">
-        <motion.div
+        <m.div
           initial="hidden"
           whileInView="visible"
           viewport={viewportConfig.once}
@@ -148,11 +148,11 @@ export const ReimagineWorkSection = memo(() => {
           <span className="text-2xl sm:text-3xl md:text-4xl lg:text-4.5xl font-medium text-zinc-950 max-w-full sm:max-w-[28rem] mx-auto px-4">
             Reimagine your everyday work with AI
           </span>
-        </motion.div>
+        </m.div>
 
         <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8 max-w-8xl mx-auto">
           {features.map((feature, index) => (
-            <motion.div
+            <m.div
               key={`feature-${feature.title}-${index}`}
               initial="hidden"
               whileInView="visible"
@@ -187,7 +187,7 @@ export const ReimagineWorkSection = memo(() => {
                   ))}
                 </ul>
               </div>
-            </motion.div>
+            </m.div>
           ))}
         </div>
       </div>

@@ -7,7 +7,8 @@ import {
   Options,
 } from "@contentful/rich-text-react-renderer";
 import { Document, INLINES } from "@contentful/rich-text-types";
-import { motion } from "framer-motion";
+import { m } from "framer-motion";
+import Image from "next/image";
 import Link from "next/link";
 
 // Helper to ensure URLs have proper protocol
@@ -120,7 +121,7 @@ export const BlogDetailsPage = ({
                 key={relatedPost.id}
                 className="block group"
               >
-                <motion.div
+                <m.div
                   initial={{ opacity: 0, y: 20 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
@@ -128,10 +129,12 @@ export const BlogDetailsPage = ({
                   className="bg-white rounded-2xl border border-gray-200 p-4 hover:shadow-lg transition-shadow duration-300 flex flex-col h-full"
                 >
                   <div className="aspect-blog relative overflow-hidden rounded-xl bg-gray-100 mb-4">
-                    <img
+                    <Image
                       src={relatedPost.image}
                       alt={relatedPost.title}
-                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                      fill
+                      sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                      className="object-cover group-hover:scale-105 transition-transform duration-500"
                     />
                   </div>
 
@@ -161,7 +164,7 @@ export const BlogDetailsPage = ({
                       <span>By {relatedPost.author}</span> */}
                     </div>
                   </div>
-                </motion.div>
+                </m.div>
               </Link>
             ))}
           </div>

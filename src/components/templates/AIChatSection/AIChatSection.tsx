@@ -1,12 +1,48 @@
 "use client";
 
-import { C1Component, ThemeProvider } from "@thesysai/genui-sdk";
-import { AnimatePresence, motion } from "framer-motion";
+import { AnimatePresence, m } from "framer-motion";
+import Image from "next/image";
 import Link from "next/link";
-import { useEffect, useRef, useState } from "react";
-import ReactMarkdown from "react-markdown";
+import {
+  lazy,
+  Suspense,
+  useEffect,
+  useRef,
+  useState,
+  type ComponentType,
+} from "react";
 
 import { TERA_DEMO_SYSTEM_PROMPT } from "@/data/system-prompt";
+
+let crayonCssLoaded = false;
+function ensureCrayonCss() {
+  if (crayonCssLoaded) return;
+  crayonCssLoaded = true;
+  // @ts-expect-error CSS module dynamic import
+  import("@crayonai/react-ui/styles/index.css");
+}
+
+const LazyReactMarkdown = lazy(() =>
+  import("react-markdown").then((mod) => ({ default: mod.default }))
+);
+
+const LazyC1Component = lazy(() =>
+  import("@thesysai/genui-sdk").then((mod) => ({
+    default: mod.C1Component as ComponentType<{
+      c1Response: string;
+      isStreaming: boolean;
+    }>,
+  }))
+);
+
+const LazyThemeProvider = lazy(() =>
+  import("@thesysai/genui-sdk").then((mod) => ({
+    default: mod.ThemeProvider as ComponentType<{
+      theme: Record<string, unknown>;
+      children: React.ReactNode;
+    }>,
+  }))
+);
 
 interface Message {
   role: "user" | "assistant";
@@ -276,6 +312,8 @@ export const AIChatSection = () => {
     const textToSend = messageText || inputValue;
     if (!textToSend.trim() || isStreaming) return;
 
+    ensureCrayonCss();
+
     // Add user message
     const userMessage: Message = { role: "user", content: textToSend };
     setMessages((prev) => [...prev, userMessage]);
@@ -492,7 +530,7 @@ export const AIChatSection = () => {
       <section className="relative w-full py-16 sm:py-20 md:py-12 ">
         <div className="max-w-9xl mx-auto px-6 sm:px-8 md:px-12 lg:px-24">
           {/* Header content omitted for brevity or keep as is */}
-          <motion.div
+          <m.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
@@ -505,10 +543,10 @@ export const AIChatSection = () => {
             <p className="text-lg sm:text-xl text-zinc-600 max-w-2xl mx-auto">
               Try real examples and explore how AI fits into your daily work.
             </p>
-          </motion.div>
+          </m.div>
 
           {/* Chat Interface */}
-          <motion.div
+          <m.div
             layout
             ref={chatContainerRef}
             className="relative max-w-4xl mx-auto"
@@ -517,7 +555,7 @@ export const AIChatSection = () => {
             <AnimatePresence mode="wait">
               {!isExpanded ? (
                 // Collapsed State
-                <motion.div
+                <m.div
                   key="collapsed"
                   initial={{ opacity: 0 }}
                   animate={{ opacity: 1 }}
@@ -551,9 +589,11 @@ export const AIChatSection = () => {
                         disabled={isLimitReached || !inputValue.trim()}
                         className="absolute right-4 bottom-4 w-10 h-10 flex items-center justify-center rounded-full hover:shadow-lg transition-shadow disabled:opacity-50 disabled:cursor-not-allowed"
                       >
-                        <img
+                        <Image
                           src="/logos/send-button-blue.svg"
-                          alt="Microsoft Teams"
+                          alt="Send message"
+                          width={40}
+                          height={40}
                           className="w-full h-full object-contain"
                         />
                       </button>
@@ -572,10 +612,10 @@ export const AIChatSection = () => {
                       </button>
                     ))}
                   </div>
-                </motion.div>
+                </m.div>
               ) : (
                 // Expanded State
-                <motion.div
+                <m.div
                   key="expanded"
                   initial={{ opacity: 0, height: 0 }}
                   animate={{ opacity: 1, height: "auto" }}
@@ -609,21 +649,37 @@ export const AIChatSection = () => {
                             message.source === "thesys" &&
                             message.c1Response &&
                             message.c1Response.trim().length > 10 ? (
-                              <div className="mobile-thesys-font-fix">
-                                <ThemeProvider theme={customTheme}>
-                                  <C1Component
-                                    c1Response={message.c1Response}
-                                    isStreaming={
-                                      isStreaming &&
-                                      index === messages.length - 1
-                                    }
-                                  />
-                                </ThemeProvider>
-                              </div>
+                              <Suspense
+                                fallback={
+                                  <p className="text-sm text-zinc-500 animate-pulse">
+                                    Loading...
+                                  </p>
+                                }
+                              >
+                                <div className="mobile-thesys-font-fix">
+                                  <LazyThemeProvider theme={customTheme}>
+                                    <LazyC1Component
+                                      c1Response={message.c1Response}
+                                      isStreaming={
+                                        isStreaming &&
+                                        index === messages.length - 1
+                                      }
+                                    />
+                                  </LazyThemeProvider>
+                                </div>
+                              </Suspense>
                             ) : message.content ? (
-                              <div className="prose prose-sm max-w-none prose-p:leading-relaxed prose-headings:mb-2 prose-ul:list-disc prose-ul:ml-4">
-                                <ReactMarkdown>{message.content}</ReactMarkdown>
-                              </div>
+                              <Suspense
+                                fallback={
+                                  <p className="text-sm">{message.content}</p>
+                                }
+                              >
+                                <div className="prose prose-sm max-w-none prose-p:leading-relaxed prose-headings:mb-2 prose-ul:list-disc prose-ul:ml-4">
+                                  <LazyReactMarkdown>
+                                    {message.content}
+                                  </LazyReactMarkdown>
+                                </div>
+                              </Suspense>
                             ) : null
                           ) : (
                             <p className="text-sm leading-relaxed whitespace-pre-wrap">
@@ -708,9 +764,11 @@ export const AIChatSection = () => {
                         }
                         className="absolute right-4 bottom-4 w-10 h-10 flex items-center justify-center rounded-full hover:shadow-lg transition-shadow disabled:opacity-50 disabled:cursor-not-allowed"
                       >
-                        <img
+                        <Image
                           src="/logos/send-button-blue.svg"
-                          alt="Microsoft Teams"
+                          alt="Send message"
+                          width={40}
+                          height={40}
                           className="w-full h-full object-contain"
                         />
                       </button>
@@ -740,10 +798,10 @@ export const AIChatSection = () => {
                       </p>
                     </div>
                   </div>
-                </motion.div>
+                </m.div>
               )}
             </AnimatePresence>
-          </motion.div>
+          </m.div>
         </div>
       </section>
     </>

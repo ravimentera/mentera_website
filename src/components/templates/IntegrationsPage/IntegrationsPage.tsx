@@ -3,7 +3,8 @@
 import { Button } from "@/components/atoms/Button/Button";
 import { FormInput } from "@/components/atoms/FormInput/FormInput";
 import { Footer } from "@/components/organisms/Footer/Footer";
-import { motion } from "framer-motion";
+import { m } from "framer-motion";
+import Image from "next/image";
 import { useMemo, useState } from "react";
 
 type Integration = {
@@ -483,7 +484,7 @@ export const IntegrationsPage = () => {
       </div>
 
       <div className="relative z-10 max-w-7xl mx-auto px-6 sm:px-8 md:px-12 lg:px-24 py-12 sm:py-16 md:py-20">
-        <motion.div
+        <m.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
@@ -556,12 +557,12 @@ export const IntegrationsPage = () => {
               integrations
             </p>
           </div>
-        </motion.div>
+        </m.div>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
           {filteredIntegrations.length > 0 ? (
             filteredIntegrations.map((integration, index) => (
-              <motion.div
+              <m.div
                 key={integration.name}
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
@@ -569,17 +570,12 @@ export const IntegrationsPage = () => {
                 className="bg-white border border-gray-200 rounded-2xl p-6 shadow-sm hover:shadow-md transition-shadow flex flex-col items-start h-full"
               >
                 <div className="mb-6 w-12 h-12 relative flex-shrink-0">
-                  <img
+                  <Image
                     src={integration.image}
                     alt={integration.name}
+                    width={48}
+                    height={48}
                     className="w-full h-full object-contain object-left rounded-lg"
-                    onError={(e) => {
-                      e.currentTarget.style.display = "none";
-                      e.currentTarget.parentElement!.classList.add(
-                        "bg-gray-200",
-                        "rounded-lg",
-                      );
-                    }}
                   />
                 </div>
                 <h3 className="text-xl font-medium text-zinc-900 mb-3">
@@ -591,7 +587,7 @@ export const IntegrationsPage = () => {
                 <p className="text-base text-text-primary leading-relaxed">
                   {integration.description}
                 </p>
-              </motion.div>
+              </m.div>
             ))
           ) : (
             <div className="col-span-full rounded-2xl border border-dashed border-zinc-300 bg-white/80 p-8 text-center">
@@ -642,7 +638,7 @@ export const IntegrationsPage = () => {
               }
             }}
           >
-            <motion.div
+            <m.div
               initial={{ opacity: 0, scale: 0.95, y: 10 }}
               animate={{ opacity: 1, scale: 1, y: 0 }}
               transition={{ duration: 0.2 }}
@@ -730,7 +726,7 @@ export const IntegrationsPage = () => {
                   </Button>
                 </div>
               </form>
-            </motion.div>
+            </m.div>
           </div>
         )}
       </div>
